@@ -1,0 +1,71 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   c_maths.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2014/12/15 14:35:08 by jpirsch           #+#    #+#             */
+/*   Updated: 2016/03/05 15:45:29 by fjanoty          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef C_MATHS_H
+# define C_MATHS_H
+# include "libft.h"
+# include <math.h>
+# define TRIGO_FACT	3
+# define TRIGO_ACCURACY (TRIGO_FACT * 360)
+
+# define MIN(A, B) ((A) < (B) ? (A) : (B))
+# define MAX(A, B) ((A) < (B) ? (B) : (A))
+
+typedef struct	s_matrix
+{
+	double		*m;
+	int			x;
+	int			y;
+}				t_matrix;
+
+typedef struct	s_roots
+{
+	double		x1;
+	double		x2;
+	double		x3;
+	double		x4;
+	int			is_real;
+}				t_roots;
+
+typedef struct	s_coefs
+{
+	double		a;
+	double		b;
+	double		c;
+	double		d;
+	double		e;
+}				t_coefs;
+
+t_matrix		*matrix_init(int x, int y);
+void			matrix_display(t_matrix *a);
+t_matrix		*matrix_add(t_matrix *a, t_matrix *b);
+t_matrix		*matrix_product(t_matrix *a, t_matrix *b);
+t_matrix		*matrix_scalar_product(t_matrix *a, double d);
+double			matrix_det(t_matrix *a);
+t_matrix		*matrix_transpose(t_matrix *a, t_matrix *b);
+
+t_matrix		*matric_copy(t_matrix *src);
+void			free_matrix(t_matrix *mat);
+
+double			ft_cos(double deg);
+double			ft_sin(double deg);
+
+t_roots			eq_solve_2nd(t_coefs coefs);
+t_roots			eq_solve_3rd(t_coefs coefs);
+t_roots			eq_solve_4th(t_coefs coefs);
+
+t_matrix		*set_rotate(double thetx, double thety, double thetz);
+t_matrix		*set_translate(double dx, double dy, double dz);
+t_matrix		*set_scale(double sx, double sy, double sz);
+
+t_matrix		*vector_product(t_matrix *a, t_matrix *b);
+#endif
