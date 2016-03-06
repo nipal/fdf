@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/29 02:21:11 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/03/05 15:45:30 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/06 07:42:20 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,19 @@
 
 # define X 0
 # define Y 1
+# define Z 2
+
+# define BEG_X 0
+# define END_X 1
+# define DELTA_Y 2
+# define BEG_Y 3
+
+# define X 0
+# define Y1 1
+# define Y2 2
+
+# define BEG_Z 0
+# define DELTA_Z 1
 
 typedef struct			s_key
 {
@@ -85,7 +98,7 @@ int						loop_hook(t_env *e);
 /*
 ** mlx_env
 */
-void					px_to_img(t_env *e, int x, int y, t_matrix *color);
+void					px_to_img(t_env *e, int x, int y, int color);
 void					print_state(t_env *e);
 
 //	Fonction preparant l'env et qui lance le loop hook

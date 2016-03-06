@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/15 14:35:08 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/03/05 15:45:29 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/06 07:42:21 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ double			matrix_det(t_matrix *a);
 t_matrix		*matrix_transpose(t_matrix *a, t_matrix *b);
 
 t_matrix		*matric_copy(t_matrix *src);
-void			free_matrix(t_matrix *mat);
+int				free_matrix(t_matrix *mat);
 
 double			ft_cos(double deg);
 double			ft_sin(double deg);

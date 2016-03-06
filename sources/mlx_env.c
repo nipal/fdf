@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/10 04:08:06 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/03/05 15:45:28 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/06 07:42:20 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,12 @@
 #include "libft.h"
 #include "fdf.h"
 
-void	px_to_img(t_env *e, int x, int y, t_matrix *color)
+void	px_to_img(t_env *e, int x, int y, int color)
 {
-	e->data[y * e->size_line + x * 4 + 2] = (int)color->m[R];
-	e->data[y * e->size_line + x * 4 + 1] = (int)color->m[G];
-	e->data[y * e->size_line + x * 4] = (int)color->m[B];
+	(void)color;
+	e->data[y * e->size_line + x * 4 + 2] = 255;//color & 0x00FF0000 >> 16;
+	e->data[y * e->size_line + x * 4 + 1] = 255;//0x0000FF00 >> 8;
+	e->data[y * e->size_line + x * 4] = 255;//0x0000FF;
 }
 
 void	string_put(char *s1, char *s2, t_env *e, int y)

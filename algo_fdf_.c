@@ -6,7 +6,7 @@
 /*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/04 11:15:38 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/03/05 02:23:32 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/06 05:52:21 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,3 +48,7 @@ generateur de forme sur oint libre
 affichage menu:
 				-pos (cam)
 
+-definir une couleur e fonction de z (de la scene)
+-bloquer l;impression de pixel qui ne sont pas dans le champ
+-finaliser l'implementaion des couleur
+-implementer l'impression de quadrialetre

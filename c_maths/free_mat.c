@@ -6,13 +6,13 @@
 /*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/05 12:48:14 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/03/05 12:50:42 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/06 06:34:33 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "c_maths.h"
 
-void			free_matrix(t_matrix *mat)
+int				free_matrix(t_matrix *mat)
 {
 	if (mat)
 	{
@@ -20,4 +20,5 @@ void			free_matrix(t_matrix *mat)
 			free(mat->m);
 		free(mat);
 	}
+	return (1);
 }
