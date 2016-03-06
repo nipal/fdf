@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/29 02:21:11 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/03/06 07:42:20 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/06 09:19:42 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # define END_X 1
 # define DELTA_Y 2
 # define BEG_Y 3
+# define MAX_Y 4
 
 # define X 0
 # define Y1 1
