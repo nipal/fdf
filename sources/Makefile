@@ -6,7 +6,7 @@
 #    By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/05 01:32:20 by jpirsch           #+#    #+#              #
-#    Updated: 2016/03/05 11:59:44 by fjanoty          ###   ########.fr        #
+#    Updated: 2016/03/07 04:18:10 by fjanoty          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,8 @@ SRC		= 	main.c \
 		 	drawline.c \
 			coord.c
 OBJ		= $(SRC:.c=.o)
+
+FLAGS = -Wall -Wextra -Werror
 
 all: $(NAME)
 

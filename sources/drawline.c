@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/30 14:38:59 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/03/06 09:19:41 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/07 05:29:56 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,37 +55,43 @@ int		set_color(double z)
 	
 	z = (z < 0) ? 0: z;
 	z = (z > 255) ? 255: z;
-	color = 255 << 16 | (int)z << 8 | (int)z;
+	color = 255 >> 16 | (int)z >> 8 | (int)z;
 	return (color);
 }
 
 void	draw_vertical_line(t_env *e, t_matrix *pos, int beg_z, double delta_z)
 {
 	int	i;
+	int	y;
 
+	(void)delta_z;
 	i = 0;
 	if (!(pos->m[Y2] - pos->m[Y1]))
 		pos->m[Y2]++;
 	if (pos->m[Y2] > pos->m[Y1])
-	{
-//		while (pos->m[Y1] <= pos->m[Y2] && pos->m[Y1] <= pos->m[MAX_Y])
-		while (pos->m[Y1] <= pos->m[Y2])
+		while (pos->m[Y1] < pos->m[Y2])
 		{
-			px_to_img(e, pos->m[X], pos->m[Y1], beg_z + set_color(i * delta_z));
+			y = pos->m[Y1];
+			if (pos->m[Y1] > pos->m[MAX_Y])
+				y = pos->m[MAX_Y];
+			if (pos->m[Y1] < pos->m[MIN_Y])
+				y = pos->m[MIN_Y];
+			px_to_img(e, pos->m[X], y, beg_z);
 			pos->m[Y1]++;
 			i++;
 		}
-	}
 	else
-	{
-//		while (pos->m[Y1] >= pos->m[Y2] && pos->m[Y1] >= pos->m[MAX_Y])
-		while (pos->m[Y1] >= pos->m[Y2])
+		while (pos->m[Y1] > pos->m[Y2])
 		{
-			px_to_img(e, pos->m[X], pos->m[Y1], beg_z + set_color(i * delta_z));
+			y = pos->m[Y1];
+			if (pos->m[Y1] < pos->m[MIN_Y])
+				y = pos->m[MIN_Y];
+			if (pos->m[Y1] > pos->m[MAX_Y])
+				y = pos->m[MAX_Y];
+			px_to_img(e, pos->m[X], y, beg_z);
 			pos->m[Y1]--;
 			i++;
 		}
-	}
 }
 
 int		draw_limit(t_env *e, t_matrix *pt1, t_matrix *pt2)
@@ -93,13 +99,15 @@ int		draw_limit(t_env *e, t_matrix *pt1, t_matrix *pt2)
 	t_matrix	*pt;
 	double		delta_z;
 
-	if (!(pt = matrix_init(3, 1)))
+	if (!(pt = matrix_init(6, 1)))
 		return (0);
 	pt->m[X] = pt1->m[X];
 	pt->m[Y1] = pt1->m[Y];
 	pt->m[Y2] = pt2->m[Y];
+	pt->m[MAX_Y] = MAX(pt1->m[Y], pt2->m[Y]);
+	pt->m[MIN_Y] = MIN(pt1->m[Y], pt2->m[Y]);
 	delta_z = (pt2->m[Z] - pt1->m[Z]) / (pt2->m[Y] - pt1->m[Y]);
-	draw_vertical_line(e, pt, pt1->m[Z], delta_z);
+	draw_vertical_line(e, pt, 0x00FFFFFF, delta_z);
 	free_matrix(pt);
 	return (0);
 }
@@ -132,35 +140,37 @@ void	draw_line(t_env *e, t_matrix *pt1, t_matrix *pt2)
 	t_matrix	*v;
 	t_matrix	*pt;
 	t_matrix	*c;
-	int			ok;
 
 	if ((!(pt1->m[X] - pt2->m[X]) && draw_limit(e, pt1, pt2))
-		|| !(pt = matrix_init(5, 1))
+		|| !(pt = matrix_init(6, 1))
 		|| (!(v = matrix_init(4, 1)) && free_matrix(pt))
 		|| (!(c = matrix_init(2, 1)) && free_matrix(pt) && free_matrix(v)))
 		return ;
-	pt->m[MAX_Y] = pt2->m[Y];
-	i = -1;
-	ok = 1;
+	pt->m[MAX_Y] = MAX(pt1->m[Y], pt2->m[Y]);
+	pt->m[MIN_Y] = MIN(pt1->m[Y], pt2->m[Y]);
+	i = (pt1->m[X] > pt2->m[X]) ? 0 : -1;
 	define_var(v, c, pt1, pt2);
-	if (pt2->m[X] > pt1->m[X])
+	px_to_img(e, pt->m[X], pt->m[BEG_Y], 0x00FFFFFF);
+	if (pt2->m[X] >= pt1->m[X])
 		while (v->m[BEG_X] + ++i <= v->m[END_X])
 		{
-			px_to_img(e, pt2->m[X], pt2->m[Y], 0);
 			pt->m[X] = i + v->m[BEG_X];
 			pt->m[Y1] = v->m[BEG_Y] + i * v->m[DELTA_Y]; 
 			pt->m[Y2] = v->m[BEG_Y] + (i + 1) * v->m[DELTA_Y]; 
-			draw_vertical_line(e, pt, c->m[BEG_Z], c->m[DELTA_Z] / (v->m[DELTA_Y]));
+			draw_vertical_line(e, pt, 0xFF0000, c->m[DELTA_Z] / (v->m[DELTA_Y]));
+			px_to_img(e, pt2->m[X], pt2->m[Y], 0x00FFFFFF);
+			px_to_img(e, pt1->m[X], pt1->m[Y], 0x00FFFFFF);
 			c->m[BEG_Z] += c->m[DELTA_Z];
 		}
-	else if (pt2->m[X] < pt1->m[X])
+	else if (pt2->m[X] <= pt1->m[X])
 		while (v->m[BEG_X] + --i >= v->m[END_X])
 		{
-			px_to_img(e, pt2->m[X], pt2->m[Y], 0);
 			pt->m[X] = i + v->m[BEG_X];
 			pt->m[Y1] = v->m[BEG_Y] + i * v->m[DELTA_Y]; 
 			pt->m[Y2] = v->m[BEG_Y] + (i + 1) * v->m[DELTA_Y]; 
-			draw_vertical_line(e, pt, c->m[BEG_Z], c->m[DELTA_Z] / (v->m[DELTA_Y]));
+			draw_vertical_line(e, pt, 0x00FF00, c->m[DELTA_Z] / (v->m[DELTA_Y]));
+			px_to_img(e, pt2->m[X], pt2->m[Y], 0x00FFFFFF);
+			px_to_img(e, pt1->m[X], pt1->m[Y], 0x0FFFFFFF);
 			c->m[BEG_Z] += c->m[DELTA_Z];
 		}
 	free_matrix(pt);
@@ -227,12 +237,12 @@ void	draw_point(t_env *e)
 	}
 	*/
 //	static	int	i = 0;
-
+	int			size = 300;
 	t_matrix	*pt1;
 	t_matrix	*pt2;
 	t_matrix	*pt3;
 	t_matrix	*color;
-	static	int	rot;
+	static	int	rot = 300;
 //	t_matrix	*rot;
 	/*
 	static	double		ang_x = 0;
@@ -253,13 +263,13 @@ void	draw_point(t_env *e)
 	pt1->m[Y] = 300;
 	pt1->m[Z] = 255;
 	
-	pt2 = sqr_rotate(rot, 50);
+	pt2 = sqr_rotate(rot, size);
 	pt3 = matrix_add(pt1, pt2); 
 
-	pt3->m[Z] = 200;
+	pt3->m[Z] = 50;
 
 	draw_line(e, pt1, pt3);
-	rot += 1;
+	rot += 3;
 
 //	usleep(250000);
 

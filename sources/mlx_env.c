@@ -6,20 +6,25 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/10 04:08:06 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/03/06 07:42:20 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/07 04:31:56 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <mlx.h>
 #include "libft.h"
 #include "fdf.h"
+#include <stdio.h>
 
 void	px_to_img(t_env *e, int x, int y, int color)
 {
-	(void)color;
-	e->data[y * e->size_line + x * 4 + 2] = 255;//color & 0x00FF0000 >> 16;
-	e->data[y * e->size_line + x * 4 + 1] = 255;//0x0000FF00 >> 8;
-	e->data[y * e->size_line + x * 4] = 255;//0x0000FF;
+//	(void)color;
+//	printf("color:%0x\n", color);
+//	printf("	r:%0x\n", (color & 0x00FF0000) >> 16);
+//	printf("	v:%0x\n", (color & 0x0000FF00) >> 8);
+//	printf("	b:%0x\n", (color & 0x000000FF) );
+	e->data[y * e->size_line + x * 4 + 2] = (color & 0x00FF0000) >> 16;
+	e->data[y * e->size_line + x * 4 + 1] = (color & 0x0000FF00) >> 8;
+	e->data[y * e->size_line + x * 4] = (color & 0x000000FF);
 }
 
 void	string_put(char *s1, char *s2, t_env *e, int y)
