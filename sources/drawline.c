@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/30 14:38:59 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/03/08 05:23:04 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/08 06:20:17 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,24 +194,31 @@ void	draw_line(t_env *e, t_matrix *pt1, t_matrix *pt2)
 
 void	draw_line2(t_env *e, t_matrix *mat_line)
 {
-	int		i;
-	int		size
-	double	x;
-	double	y;
+	int			i;
+	int			size
+	t_matrix	*diff;
+	t_matrix	*org;
+	t_matrix	*print;
 
-	i = 0;
+	if (!(mat_line)
+		|| !(diff = matrix_init(6, 1))
+		|| (!(org = matrix_init(6, 1)) && (matrix_free(diff))))
+		return ;
+	i = -1;
+	ft_memmove(org->m, mat_line->m);
+	ft_memmove(diff->m, mat_line->m + 6);
 	size = (int)(mat_line->m[NORME] + 0.5);
-	x = mat_line();
-	while (i < size)
+	while (++i < size)
 	{
-
+		print = matrix_add(org, diff); 
+		//	ici on met le put px_to_img qui fontionent bien avec un vetcor(6, 1) 
+		matrix_free(org);
+		org = print;
 		i++;
 	}
-	//	On a la norme du vecteur difference entre le pt1 et le pt2
-	//	On a le vecteur differentiel de position et de couleur
-	//
-	//	On a plus qu'a faire une jolie boucle;
-	//	Il faudrait gerer une multiplication avec pointeur et une sans
+	matrix_free(org);
+	matrix_free(diff);
+	matrix_free(print);
 }
 
 t_matrix	*init_mat_line(t_matrix *pt1, t_matrix *pt2

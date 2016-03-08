@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/15 14:35:08 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/03/08 04:41:38 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/08 06:01:08 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ double			matrix_norme(t_matrix *a);
 t_matrix		*vector_product(t_matrix *a, t_matrix *b);
 t_matrix		*matrix_dot_product(t_matrix *a, t_matrix *b);
 
-t_matrix		*matric_copy(t_matrix *src);
+t_matrix		*matrix_copy(t_matrix *src);
 int				free_matrix(t_matrix *mat);
 
 double			ft_cos(double deg);

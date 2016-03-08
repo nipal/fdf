@@ -6,13 +6,13 @@
 /*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/05 09:25:33 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/03/05 09:38:55 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/08 06:01:45 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "c_maths.h"
 
-t_matrix	*matric_copy(t_matrix *src)
+t_matrix	*matrix_copy(t_matrix *src)
 {
 	t_matrix	*copy;
 	int			i;
