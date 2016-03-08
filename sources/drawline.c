@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/30 14:38:59 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/03/08 10:14:37 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/08 13:49:56 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -285,11 +285,14 @@ t_matrix	*sqr_rotate(int x, int size)
 	return (pt);
 }
 
-void	draw_point(t_env *e)
+void	test_new_px(t_env *e)
 {
-	/*
+	//*
 	int	i;
 	int	j;
+	t_matrix	*test;
+
+	test = matrix_init(6,1);
 
 	i = 100;
 	while (i < 120)
@@ -297,12 +300,31 @@ void	draw_point(t_env *e)
 		j = 100;
 		while (j < 120)
 		{
-//			px_to_img(e, i, j);
+			test->m[X] = i; 
+			test->m[X] = j; 
+			test->m[Z] = 0; 
+
+			test->m[3] = 50 + i; 
+			test->m[4] = 50 + j; 
+			test->m[5] = 50 - i + j; 
+
+			vectpx_to_img(e, test);
 			j++;
 		}
 		i++;
 	}
-	*/
+//	*/
+}
+
+
+void	draw_point(t_env *e)
+{
+	test_new_px(e);
+}
+
+void	draw_point_old(t_env *e)
+{
+
 //	static	int	i = 0;
 	int			size = 50;
 	t_matrix	*pt1;
@@ -324,8 +346,8 @@ void	draw_point(t_env *e)
 	if (!(pt1 = matrix_init(4, 1))
 		|| !(color = matrix_init(3, 1))
 		|| !(color2 = matrix_init(3, 1))
-		|| !(pt4 = matrix_init(4, 1))
-		|| !(pt5 = matrix_init(4, 1)))
+		|| !(pt4 = matrix_init(5, 1))
+		|| !(pt5 = matrix_init(5, 1)))
 		return ;
 
 	color->m[R] = e->r;
@@ -340,13 +362,12 @@ void	draw_point(t_env *e)
 	pt1->m[X] = 300;
 	pt1->m[Y] = 300;
 	pt1->m[Z] = 255;
-	
 	pt2 = sqr_rotate(rot, size);
 	pt3 = matrix_add(pt1, pt2); 
 	pt3->m[Z] = 0;
 
 	mat_line = init_mat_line(pt1, pt2, color, color2);
-	draw_line2(e, mat_line);
+//	draw_line2(e, mat_line);
 //	draw_line(e, pt3, pt1);
 
 	pt4->m[X] = 300;
@@ -381,3 +402,41 @@ void	draw_point(t_env *e)
 	free(pt5);
 //	free(color);
 }
+
+
+/*
+ void	px_to_img(t_env *e, int x, int y, int color)
+{
+//	(void)color;
+//	printf("color:%0x\n", color);
+//	printf("	r:%0x\n", (color & 0x00FF0000) >> 16);
+//	printf("	v:%0x\n", (color & 0x0000FF00) >> 8);
+//	printf("	b:%0x\n", (color & 0x000000FF) );
+	y = 100;
+	e->data[y * e->size_line + x * 4 + 2] = (color & 0x00FF0000) >> 16;
+	e->data[y * e->size_line + x * 4 + 1] = (color & 0x0000FF00) >> 8;
+	e->data[y * e->size_line + x * 4] = (color & 0x000000FF);
+	dprintf(1, "x:%d y:%d  color:%d\n", x, y, color);
+}
+
+void	vectpx_to_img(t_env *e, t_matrix *pos_color)
+{
+	int	x;
+	int	y;
+	int	r;
+	int	g;
+	int	b;
+
+	x = (int) pos_color->m[0];
+	y = (int) pos_color->m[1];
+	r = (int) pos_color->m[3];
+	g = (int) pos_color->m[4];
+	b = (int) pos_color->m[5];
+	y = 100;
+	e->data[y * e->size_line + x * 4 + 2] = 255;
+	e->data[y * e->size_line + x * 4 + 1] = 255;
+	e->data[y * e->size_line + x * 4] = 255;
+	dprintf(1, "x:%d y:%d  r:%d v:%d b:%d\n", x, y, r, g, b);
+}
+
+ * */
