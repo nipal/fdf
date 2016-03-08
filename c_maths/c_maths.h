@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/15 14:35:08 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/03/08 07:54:48 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/08 16:45:55 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define C_MATHS_H
 # include "libft.h"
 # include <math.h>
+# include <stdio.h>
 # define TRIGO_FACT	3
 # define TRIGO_ACCURACY (TRIGO_FACT * 360)
 
@@ -60,6 +61,8 @@ double			matrix_dot_product(t_matrix *a, t_matrix *b);
 t_matrix		*matrix_copy(t_matrix *src);
 int				free_matrix(t_matrix *mat);
 int				matrix_free(t_matrix *mat);
+void			matrix_print(t_matrix *mat);
+void			matrix_print2(t_matrix *mat, int x, int y);
 
 double			ft_cos(double deg);
 double			ft_sin(double deg);

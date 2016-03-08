@@ -6,7 +6,7 @@
 #    By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/09/13 19:48:58 by jpirsch           #+#    #+#              #
-#    Updated: 2016/03/08 03:16:41 by fjanoty          ###   ########.fr        #
+#    Updated: 2016/03/08 16:42:32 by fjanoty          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ SRC		=	matrix_init.c \
 			set_translate.c \
 			vector_product.c \
 			matrix_copy.c \
+			matrix_print.c \
 			free_mat.c \
 			set_scale.c
 FLAGS		= -Wall -Wextra -Werror

@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/30 14:38:59 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/03/08 15:05:05 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/08 18:22:45 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,6 +199,7 @@ void	draw_line2(t_env *e, t_matrix *mat_line)
 	t_matrix	*diff;
 	t_matrix	*org;
 	t_matrix	*print;
+static int debug = 0;
 
 dprintf(1, "non\n");
 	if (!(mat_line)
@@ -213,15 +214,16 @@ dprintf(1, "move1\n");
 dprintf(1, "move2\n");
 dprintf(1, "adr:%ld\n", (long)mat_line->m);
 	size = (int)(mat_line->m[NORME] + 0.5);
-	while (++i < size)
+	while (++i < size - 1)
 	{
-dprintf(1, "move3\n");
+dprintf(1, "move3:%d debug%d len:%d\n", i, debug, size);
 		print = matrix_add(org, diff); 
 		vectpx_to_img(e, print);
 		matrix_free(org);
 		org = print;
 		i++;
 	}
+	debug++;
 	matrix_free(org);
 	matrix_free(diff);
 	matrix_free(print);
@@ -248,7 +250,10 @@ t_matrix	*init_mat_line(t_matrix *pt1, t_matrix *pt2
 		return (NULL);
 	dprintf(1, "ouiiiiiiiiii\n");
 	diff->m[Z] = 0;
-	norme = sqrt(matrix_dot_product(diff, diff)); 
+	norme = matrix_dot_product(diff, diff);
+	dprintf(1, "carrer:%f\n", norme);
+	norme = sqrt(norme);
+	dprintf(1, "norme:%f [%d]\n", norme, NORME);
 	mat_line->m[NORME] = norme;
 	diff = matrix_scalar_product(diff, 1 / norme);
 	ft_memmove(mat_line->m, pt1->m, sizeof(double) * 3);
@@ -391,12 +396,13 @@ void	draw_point(t_env *e)
 	if (!(mat_line = init_mat_line(pt1, pt2, color, color2)))
 			dprintf(1, "All is well\n");
 	dprintf(1, "c'est moi\n");
-	int k = 0;
-	while (k < 12)
-	{
-		dprintf(1, "[%d]=%f\n", k, mat_line->m[k]);
-		k++;
-	}
+	matrix_print(mat_line);
+//	int k = 0;
+//	while (k < 12)
+//	{
+//		dprintf(1, "[%d]=%f\n", k, mat_line->m[k]);
+//		k++;
+//	}
 dprintf(1, "seg befor it was cool\n");
 	draw_line2(e, mat_line);
 dprintf(1, "this will never hpened\n");

@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/10 04:08:06 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/03/08 14:00:19 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/08 16:30:55 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	px_to_img(t_env *e, int x, int y, int color)
 	e->data[y * e->size_line + x * 4 + 2] = (color & 0x00FF0000) >> 16;
 	e->data[y * e->size_line + x * 4 + 1] = (color & 0x0000FF00) >> 8;
 	e->data[y * e->size_line + x * 4] = (color & 0x000000FF);
-	dprintf(1, "x:%d y:%d  color:%d\n", x, y, color);
+//	dprintf(1, "x:%d y:%d  color:%d\n", x, y, color);
 }
 
 void	vectpx_to_img(t_env *e, t_matrix *pos_color)
@@ -45,7 +45,7 @@ void	vectpx_to_img(t_env *e, t_matrix *pos_color)
 	e->data[y * e->size_line + x * 4 + 2] = r;
 	e->data[y * e->size_line + x * 4 + 1] = g;
 	e->data[y * e->size_line + x * 4] = b;
-	dprintf(1, "x:%d y:%d  r:%d v:%d b:%d ilne:%d\n", x, y, r, g, b, e->size_line);
+//	dprintf(1, "x:%d y:%d  r:%d v:%d b:%d ilne:%d\n", x, y, r, g, b, e->size_line);
 }
 
 void	string_put(char *s1, char *s2, t_env *e, int y)
