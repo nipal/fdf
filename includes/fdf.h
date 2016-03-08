@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/29 02:21:11 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/03/08 03:43:20 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/08 06:54:25 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ int						loop_hook(t_env *e);
 ** mlx_env
 */
 void					px_to_img(t_env *e, int x, int y, int color);
+void					vectpx_to_img(t_env *e, t_matrix *pos_color);
 void					print_state(t_env *e);
 
 //	Fonction preparant l'env et qui lance le loop hook

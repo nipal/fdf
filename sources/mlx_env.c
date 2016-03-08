@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/10 04:08:06 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/03/07 04:31:56 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/08 07:06:20 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,24 @@ void	px_to_img(t_env *e, int x, int y, int color)
 	e->data[y * e->size_line + x * 4 + 2] = (color & 0x00FF0000) >> 16;
 	e->data[y * e->size_line + x * 4 + 1] = (color & 0x0000FF00) >> 8;
 	e->data[y * e->size_line + x * 4] = (color & 0x000000FF);
+}
+
+void	vectpx_to_img(t_env *e, t_matrix *pos_color)
+{
+	int	x;
+	int	y;
+	int	r;
+	int	g;
+	int	b;
+
+	x = (int) pos_color->m[0];
+	y = (int) pos_color->m[1];
+	r = (int) pos_color->m[3];
+	g = (int) pos_color->m[4];
+	b = (int) pos_color->m[5];
+	e->data[y * e->size_line + x * 4 + 2] = r;
+	e->data[y * e->size_line + x * 4 + 1] = g;
+	e->data[y * e->size_line + x * 4] = b;
 }
 
 void	string_put(char *s1, char *s2, t_env *e, int y)

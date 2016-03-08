@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/30 14:38:59 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/03/08 06:20:17 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/08 07:30:41 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,23 +195,23 @@ void	draw_line(t_env *e, t_matrix *pt1, t_matrix *pt2)
 void	draw_line2(t_env *e, t_matrix *mat_line)
 {
 	int			i;
-	int			size
+	int			size;
 	t_matrix	*diff;
 	t_matrix	*org;
 	t_matrix	*print;
 
 	if (!(mat_line)
 		|| !(diff = matrix_init(6, 1))
-		|| (!(org = matrix_init(6, 1)) && (matrix_free(diff))))
+		|| (!(org = matrix_init(6, 1)) && matrix_free(diff)))
 		return ;
 	i = -1;
-	ft_memmove(org->m, mat_line->m);
-	ft_memmove(diff->m, mat_line->m + 6);
+	ft_memmove(org->m, mat_line->m, sizeof(double) * 6);
+	ft_memmove(diff->m, mat_line->m + 6, sizeof(double) * 6);
 	size = (int)(mat_line->m[NORME] + 0.5);
 	while (++i < size)
 	{
 		print = matrix_add(org, diff); 
-		//	ici on met le put px_to_img qui fontionent bien avec un vetcor(6, 1) 
+		vectpx_to_img(e, print);
 		matrix_free(org);
 		org = print;
 		i++;
@@ -228,9 +228,9 @@ t_matrix	*init_mat_line(t_matrix *pt1, t_matrix *pt2
 	t_matrix	*diff;
 	double		norme;
 
-	if (!(mat_line = matrix_init(13, 1)
+	if (!(mat_line = matrix_init(13, 1))
 		|| !pt1 || !pt2 || !c1 || !c2
-		|| (!(diff = matrix_sub(pt1, pt2) && free_matrix(mat_line)))))
+		|| (!(diff = matrix_sub(pt1, pt2) && free_matrix(mat_line))))
 		return (NULL);
 	diff->m[Z] = 0;
 	norme = sqrt(matrix_dot_product(diff, diff)); 
@@ -240,7 +240,7 @@ t_matrix	*init_mat_line(t_matrix *pt1, t_matrix *pt2
 	ft_memmove(mat_line->m + 3, c1->m, sizeof(double) * 3);
 	ft_memmove(mat_line->m + 6, diff->m, sizeof(double) * 3);
 	free_matrix(diff);
-	if ((!(diff = matrix_scalar_product(matrix_sub(c1, c2), 1 / norme)
+	if ((!(matrix_scalar_product(diff = matrix_sub(c1, c2), 1 / norme)
 		&& free_matrix(mat_line))))
 		return (NULL);
 	ft_memmove(mat_line->m + 9, diff->m, sizeof(double) * 3);
@@ -310,7 +310,9 @@ void	draw_point(t_env *e)
 	t_matrix	*pt3;
 	t_matrix	*pt4;
 	t_matrix	*pt5;
+	t_matrix	*mat_line;
 	t_matrix	*color;
+	t_matrix	*color2;
 	static	int	rot = 0;
 //	t_matrix	*rot;
 	/*
@@ -321,6 +323,7 @@ void	draw_point(t_env *e)
 	
 	if (!(pt1 = matrix_init(4, 1))
 		|| !(color = matrix_init(3, 1))
+		|| !(color2 = matrix_init(3, 1))
 		|| !(pt4 = matrix_init(4, 1))
 		|| !(pt5 = matrix_init(4, 1)))
 		return ;
@@ -328,7 +331,11 @@ void	draw_point(t_env *e)
 	color->m[R] = e->r;
 	color->m[G] = e->g;
 	color->m[B] = e->b;
-	free_matrix(color);
+
+	color2->m[R] = 0;
+	color2->m[G] = 0;
+	color2->m[B] = 0;
+
 
 	pt1->m[X] = 300;
 	pt1->m[Y] = 300;
@@ -338,7 +345,9 @@ void	draw_point(t_env *e)
 	pt3 = matrix_add(pt1, pt2); 
 	pt3->m[Z] = 0;
 
-	draw_line(e, pt3, pt1);
+	mat_line = init_mat_line(pt1, pt2, color, color2);
+	draw_line2(e, mat_line);
+//	draw_line(e, pt3, pt1);
 
 	pt4->m[X] = 300;
 	pt4->m[Y] = 500;
