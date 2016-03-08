@@ -1,18 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   matrix_dot_product.c                               :+:      :+:    :+:   */
+/*   matrix_sub.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/09/14 00:25:54 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/03/08 02:22:01 by fjanoty          ###   ########.fr       */
+/*   Created: 2016/03/08 02:19:40 by fjanoty           #+#    #+#             */
+/*   Updated: 2016/03/08 02:21:56 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "c_maths.h"
-
-t_matrix	*matrix_add(t_matrix *a, t_matrix *b)
+t_matrix	*matrix_sub(t_matrix *mat1, t_matrix *mat_2)
 {
 	t_matrix	*c;
 	int		i;
@@ -31,10 +29,9 @@ t_matrix	*matrix_add(t_matrix *a, t_matrix *b)
 		j = 0;
 		while (j < c->y)
 		{
-			c->m[i + j * c->x] = a->m[i + j * c->x] + b->m[i + j * c->x];
+			c->m[i + j * c->x] = a->m[i + j * c->x] - b->m[i + j * c->x];
 			j++;
 		}
 		i++;
 	}
-	return (c);
 }

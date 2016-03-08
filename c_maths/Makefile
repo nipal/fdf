@@ -6,7 +6,7 @@
 #    By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/09/13 19:48:58 by jpirsch           #+#    #+#              #
-#    Updated: 2016/03/05 12:51:16 by fjanoty          ###   ########.fr        #
+#    Updated: 2016/03/08 03:16:41 by fjanoty          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,8 +14,10 @@ NAME		=	libc_maths.a
 SRC		=	matrix_init.c \
 			matrix_display.c \
 			matrix_add.c \
+			matrix_sub.c \
 			matrix_product.c \
 			matrix_scalar_product.c \
+			matrix_dot_product.c \
 			matrix_det.c \
 			matrix_inverse.c \
 			matrix_transpose.c \

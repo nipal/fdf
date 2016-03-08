@@ -3,38 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   matrix_dot_product.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/09/14 00:25:54 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/03/08 02:22:01 by fjanoty          ###   ########.fr       */
+/*   Created: 2016/03/08 02:36:17 by fjanoty           #+#    #+#             */
+/*   Updated: 2016/03/08 03:15:22 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "c_maths.h"
+#include "c_math.h"
 
-t_matrix	*matrix_add(t_matrix *a, t_matrix *b)
+double	matrix_dot_product(t_matrix *a, t_matrix *b)
 {
-	t_matrix	*c;
+	double	sum;
 	int		i;
-	int		j;
+	int		size;
 
-	if (!a || !b)
-		return (NULL);
 	if (a->x != b->x || a->y != b->y)
-		return (NULL);
-	c = matrix_init(a->x, a->y);
-	c->x = a->x;
-	c->y = a->y;
-	i = 0;
-	while (i < c->x)
+		return (0);
+	sum = 0;
+	size = a->x * a->y;
+	while (i < size)
 	{
-		j = 0;
-		while (j < c->y)
-		{
-			c->m[i + j * c->x] = a->m[i + j * c->x] + b->m[i + j * c->x];
-			j++;
-		}
+		sum += a->[i] * b->[i];
 		i++;
 	}
-	return (c);
+	return (sum);
 }

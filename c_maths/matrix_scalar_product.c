@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/09/14 00:25:54 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/03/02 00:29:36 by jpirsch          ###   ########.fr       */
+/*   Updated: 2016/03/08 04:03:45 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,16 @@
 t_matrix	*matrix_scalar_product(t_matrix *a, double d)
 {
 	int		i;
-	int		j;
-	t_matrix	*b;
+	int		size;
 
-	if (!a || !d)
+	if (!a)
 		return (NULL);
-	if (!(b = matrix_init(a->x, a->y)))
-		return (NULL);
-	j = -1;
-	while (++j < b->y)
+	i = 0;
+	size = a->x * a->y;
+	while (i < size)
 	{
-		i = -1;
-		while (++i < b->x)
-				b->m[i + j * b->x] += a->m[i + j * a->x] * d;
+		a->m[i] *= d;
+		i++;
 	}
-	return (b);
+	return (a);
 }

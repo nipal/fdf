@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/15 14:35:08 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/03/06 07:42:21 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/08 04:41:38 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,14 @@ typedef struct	s_coefs
 t_matrix		*matrix_init(int x, int y);
 void			matrix_display(t_matrix *a);
 t_matrix		*matrix_add(t_matrix *a, t_matrix *b);
+t_matrix		*matrix_sub(t_matrix *a, t_matrix *b);
 t_matrix		*matrix_product(t_matrix *a, t_matrix *b);
 t_matrix		*matrix_scalar_product(t_matrix *a, double d);
 double			matrix_det(t_matrix *a);
 t_matrix		*matrix_transpose(t_matrix *a, t_matrix *b);
+double			matrix_norme(t_matrix *a);
+t_matrix		*vector_product(t_matrix *a, t_matrix *b);
+t_matrix		*matrix_dot_product(t_matrix *a, t_matrix *b);
 
 t_matrix		*matric_copy(t_matrix *src);
 int				free_matrix(t_matrix *mat);
@@ -67,5 +71,4 @@ t_matrix		*set_rotate(double thetx, double thety, double thetz);
 t_matrix		*set_translate(double dx, double dy, double dz);
 t_matrix		*set_scale(double sx, double sy, double sz);
 
-t_matrix		*vector_product(t_matrix *a, t_matrix *b);
 #endif

@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/30 14:38:59 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/03/07 20:42:40 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/08 05:23:04 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int		set_color(double z)
 	return (color);
 }
 
-void	draw_vertical_line(t_env *e, t_matrix *pos, int beg_z, double delta_z)
+void	draw_vertical_line(t_env *e, t_matrix *pos, double beg_z, double delta_z)
 {
 	int	i;
 	int	y;
@@ -68,6 +68,7 @@ void	draw_vertical_line(t_env *e, t_matrix *pos, int beg_z, double delta_z)
 	i = 0;
 	if (!(pos->m[Y2] - pos->m[Y1]))
 		pos->m[Y2]++;
+	dprintf(1, "beg_z:%f delta_z:%f\n", beg_z, delta_z);
 	if (pos->m[Y2] > pos->m[Y1])
 		while (pos->m[Y1] < pos->m[Y2])
 		{
@@ -107,6 +108,7 @@ int		draw_limit(t_env *e, t_matrix *pt1, t_matrix *pt2)
 	pt->m[MAX_Y] = MAX(pt1->m[Y], pt2->m[Y]);
 	pt->m[MIN_Y] = MIN(pt1->m[Y], pt2->m[Y]);
 	delta_z = (pt2->m[Z] - pt1->m[Z]) / (pt2->m[Y] - pt1->m[Y]);
+	dprintf(1, "diffz:%f diffy:%f dz:%f\n", (pt2->m[Z] - pt1->m[Z]), (pt2->m[Y] - pt1->m[Y]) , delta_z);
 //	draw_vertical_line(e, pt, c->m[BEG_Z], c->m[DELTA_Z] / (v->m[DELTA_Y]));
 	draw_vertical_line(e, pt, pt1->m[Z], delta_z);
 	free_matrix(pt);
@@ -133,8 +135,12 @@ void	define_var(t_matrix *var, t_matrix *color, t_matrix *pt1, t_matrix *pt2)
 		color->m[BEG_Z] = pt2->m[Z];
 		color->m[DELTA_Z] = (pt1->m[Z] - pt2->m[Z]) / (pt1->m[X] - pt2->m[X]);
 	}
+	if (var->m[DELTA_Z] < 0)
+		var->m[DELTA_Z] *= -1;
 	if (var->m[DELTA_Y] == 0)
 		var->m[DELTA_Y] = 1;
+	if ((pt1->m[X] - pt2->m[X]) == 0)
+		var->m[DELTA_Z] = -1;
 }
 
 void	draw_line(t_env *e, t_matrix *pt1, t_matrix *pt2)
@@ -173,11 +179,12 @@ void	draw_line(t_env *e, t_matrix *pt1, t_matrix *pt2)
 			pt->m[Y1] = v->m[BEG_Y] + i * v->m[DELTA_Y]; 
 			pt->m[Y2] = v->m[BEG_Y] + (i + 1) * v->m[DELTA_Y]; 
 //			printf("beg_z:%f  felta_z:%f\n", c->m[BEG_Z], c->m[DELTA_Z]);
-			draw_vertical_line(e, pt, c->m[BEG_Z], (c->m[DELTA_Z]) / (v->m[DELTA_Y]));
+			draw_vertical_line(e, pt, -c->m[BEG_Z], (c->m[DELTA_Z]) / (v->m[DELTA_Y]));
 			px_to_img(e, pt2->m[X], pt2->m[Y], 0x00FFFFFF);
 			px_to_img(e, pt1->m[X], pt1->m[Y], 0x0FFFFFFF);
 			c->m[BEG_Z] += c->m[DELTA_Z];
 		}
+	usleep(100000);
 	free_matrix(pt);
 	free_matrix(c);
 	free_matrix(v);
@@ -185,6 +192,54 @@ void	draw_line(t_env *e, t_matrix *pt1, t_matrix *pt2)
 
 
 
+void	draw_line2(t_env *e, t_matrix *mat_line)
+{
+	int		i;
+	int		size
+	double	x;
+	double	y;
+
+	i = 0;
+	size = (int)(mat_line->m[NORME] + 0.5);
+	x = mat_line();
+	while (i < size)
+	{
+
+		i++;
+	}
+	//	On a la norme du vecteur difference entre le pt1 et le pt2
+	//	On a le vecteur differentiel de position et de couleur
+	//
+	//	On a plus qu'a faire une jolie boucle;
+	//	Il faudrait gerer une multiplication avec pointeur et une sans
+}
+
+t_matrix	*init_mat_line(t_matrix *pt1, t_matrix *pt2
+			, t_matrix *c1, t_matrix *c2)
+{
+	t_matrix	*mat_line;
+	t_matrix	*diff;
+	double		norme;
+
+	if (!(mat_line = matrix_init(13, 1)
+		|| !pt1 || !pt2 || !c1 || !c2
+		|| (!(diff = matrix_sub(pt1, pt2) && free_matrix(mat_line)))))
+		return (NULL);
+	diff->m[Z] = 0;
+	norme = sqrt(matrix_dot_product(diff, diff)); 
+	mat_line->m[NORME] = norme;
+	diff = matrix_scalar_product(diff, 1 / norme);
+	ft_memmove(mat_line->m, pt1->m, sizeof(double) * 3);
+	ft_memmove(mat_line->m + 3, c1->m, sizeof(double) * 3);
+	ft_memmove(mat_line->m + 6, diff->m, sizeof(double) * 3);
+	free_matrix(diff);
+	if ((!(diff = matrix_scalar_product(matrix_sub(c1, c2), 1 / norme)
+		&& free_matrix(mat_line))))
+		return (NULL);
+	ft_memmove(mat_line->m + 9, diff->m, sizeof(double) * 3);
+	free_matrix(diff);
+	return (mat_line);
+}
 
 t_matrix	*sqr_rotate(int x, int size)
 {
@@ -242,12 +297,14 @@ void	draw_point(t_env *e)
 	}
 	*/
 //	static	int	i = 0;
-	int			size = 300;
+	int			size = 50;
 	t_matrix	*pt1;
 	t_matrix	*pt2;
 	t_matrix	*pt3;
+	t_matrix	*pt4;
+	t_matrix	*pt5;
 	t_matrix	*color;
-	static	int	rot = 300;
+	static	int	rot = 0;
 //	t_matrix	*rot;
 	/*
 	static	double		ang_x = 0;
@@ -256,7 +313,9 @@ void	draw_point(t_env *e)
 	*/
 	
 	if (!(pt1 = matrix_init(4, 1))
-		|| !(color = matrix_init(3, 1)))
+		|| !(color = matrix_init(3, 1))
+		|| !(pt4 = matrix_init(4, 1))
+		|| !(pt5 = matrix_init(4, 1)))
 		return ;
 
 	color->m[R] = e->r;
@@ -270,12 +329,29 @@ void	draw_point(t_env *e)
 	
 	pt2 = sqr_rotate(rot, size);
 	pt3 = matrix_add(pt1, pt2); 
+	pt3->m[Z] = 0;
 
-	pt3->m[Z] = 50;
+	draw_line(e, pt3, pt1);
 
-	draw_line(e, pt1, pt3);
-	rot += 3;
+	pt4->m[X] = 300;
+	pt4->m[Y] = 500;
+	pt4->m[Z] = 255;
 
+	pt5->m[X] = 300;
+	pt5->m[Y] = 600;
+	pt5->m[Z] = 0;
+//	draw_line(e, pt4, pt5);
+
+	pt4->m[X] = 350;
+	pt4->m[Y] = 500;
+
+	pt5->m[X] = 400;
+	pt5->m[Y] = 700;
+//	draw_line(e, pt5, pt4);
+
+	rot += 1;
+
+	
 //	usleep(250000);
 
 	mlx_put_image_to_window(e->mlx, e->win, e->img, 0, 0);
@@ -285,5 +361,7 @@ void	draw_point(t_env *e)
 	free(pt1);
 	free(pt2);
 	free(pt3);
+	free(pt4);
+	free(pt5);
 //	free(color);
 }

@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/29 02:21:11 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/03/07 04:11:53 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/08 03:43:20 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,20 @@
 
 # define BEG_Z 0
 # define DELTA_Z 1
+
+# define X1 0
+# define Y1 1
+# define Z1 2
+# define DX 3
+# define DY 4
+# define DZ 5
+# define R1 6
+# define G1 7
+# define B1 8
+# define DR 9
+# define DG 10
+# define DB 11
+# define NORME 12
 
 typedef struct			s_key
 {
