@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/30 14:38:59 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/03/08 07:30:41 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/08 10:14:37 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -230,7 +230,7 @@ t_matrix	*init_mat_line(t_matrix *pt1, t_matrix *pt2
 
 	if (!(mat_line = matrix_init(13, 1))
 		|| !pt1 || !pt2 || !c1 || !c2
-		|| (!(diff = matrix_sub(pt1, pt2) && free_matrix(mat_line))))
+		|| (!(diff = matrix_sub(pt1, pt2)) && free_matrix(mat_line)))
 		return (NULL);
 	diff->m[Z] = 0;
 	norme = sqrt(matrix_dot_product(diff, diff)); 
