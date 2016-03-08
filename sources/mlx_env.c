@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/10 04:08:06 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/03/08 13:49:55 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/08 14:00:19 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,20 +37,15 @@ void	vectpx_to_img(t_env *e, t_matrix *pos_color)
 	int	g;
 	int	b;
 
-	px_to_img(e, 10, 10, 0x00FFFFFF);
-
-
 	x = (int) pos_color->m[0];
 	y = (int) pos_color->m[1];
 	r = (int) pos_color->m[3];
 	g = (int) pos_color->m[4];
 	b = (int) pos_color->m[5];
-	y = 100;
-	e->data[y * e->size_line + x * 4 + 2] = 255;
-	e->data[y * e->size_line + x * 4 + 1] = 255;
-	e->data[y * e->size_line + x * 4] = 255;
-	if (e)
-		dprintf(1, "x:%d y:%d  r:%d v:%d b:%d ilne:%d\n", x, y, r, g, b, e->size_line);
+	e->data[y * e->size_line + x * 4 + 2] = r;
+	e->data[y * e->size_line + x * 4 + 1] = g;
+	e->data[y * e->size_line + x * 4] = b;
+	dprintf(1, "x:%d y:%d  r:%d v:%d b:%d ilne:%d\n", x, y, r, g, b, e->size_line);
 }
 
 void	string_put(char *s1, char *s2, t_env *e, int y)

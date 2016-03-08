@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/30 14:38:59 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/03/08 13:49:56 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/08 14:00:49 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -294,19 +294,19 @@ void	test_new_px(t_env *e)
 
 	test = matrix_init(6,1);
 
-	i = 100;
+	i = 0;
 	while (i < 120)
 	{
-		j = 100;
+		j = 0;
 		while (j < 120)
 		{
-			test->m[X] = i; 
-			test->m[X] = j; 
-			test->m[Z] = 0; 
+			test->m[X] = 100 +i; 
+			test->m[Y] = 50 +j; 
+			test->m[Z] = 100; 
 
-			test->m[3] = 50 + i; 
-			test->m[4] = 50 + j; 
-			test->m[5] = 50 - i + j; 
+			test->m[3] = 100 + i; 
+			test->m[4] = 100 + j; 
+			test->m[5] = 150 - i + j; 
 
 			vectpx_to_img(e, test);
 			j++;
@@ -320,6 +320,11 @@ void	test_new_px(t_env *e)
 void	draw_point(t_env *e)
 {
 	test_new_px(e);
+
+	mlx_put_image_to_window(e->mlx, e->win, e->img, 0, 0);
+	print_state(e);
+	mlx_do_sync(e->mlx);
+
 }
 
 void	draw_point_old(t_env *e)
