@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/30 14:38:59 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/03/08 14:00:49 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/08 15:05:05 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,16 +200,22 @@ void	draw_line2(t_env *e, t_matrix *mat_line)
 	t_matrix	*org;
 	t_matrix	*print;
 
+dprintf(1, "non\n");
 	if (!(mat_line)
 		|| !(diff = matrix_init(6, 1))
 		|| (!(org = matrix_init(6, 1)) && matrix_free(diff)))
 		return ;
+dprintf(1, "oui\n");
 	i = -1;
 	ft_memmove(org->m, mat_line->m, sizeof(double) * 6);
+dprintf(1, "move1\n");
 	ft_memmove(diff->m, mat_line->m + 6, sizeof(double) * 6);
+dprintf(1, "move2\n");
+dprintf(1, "adr:%ld\n", (long)mat_line->m);
 	size = (int)(mat_line->m[NORME] + 0.5);
 	while (++i < size)
 	{
+dprintf(1, "move3\n");
 		print = matrix_add(org, diff); 
 		vectpx_to_img(e, print);
 		matrix_free(org);
@@ -228,10 +234,19 @@ t_matrix	*init_mat_line(t_matrix *pt1, t_matrix *pt2
 	t_matrix	*diff;
 	double		norme;
 
-	if (!(mat_line = matrix_init(13, 1))
+	if (pt1)
+		dprintf(1, "pt1\n");
+	if (pt2)
+		dprintf(1, "pt2\n");
+	if (c1)
+		dprintf(1, "c1\n");
+	if (c2)
+		dprintf(1, "c2\n");
+	if (!(mat_line = matrix_init(14, 1))
 		|| !pt1 || !pt2 || !c1 || !c2
 		|| (!(diff = matrix_sub(pt1, pt2)) && free_matrix(mat_line)))
 		return (NULL);
+	dprintf(1, "ouiiiiiiiiii\n");
 	diff->m[Z] = 0;
 	norme = sqrt(matrix_dot_product(diff, diff)); 
 	mat_line->m[NORME] = norme;
@@ -240,9 +255,7 @@ t_matrix	*init_mat_line(t_matrix *pt1, t_matrix *pt2
 	ft_memmove(mat_line->m + 3, c1->m, sizeof(double) * 3);
 	ft_memmove(mat_line->m + 6, diff->m, sizeof(double) * 3);
 	free_matrix(diff);
-	if ((!(matrix_scalar_product(diff = matrix_sub(c1, c2), 1 / norme)
-		&& free_matrix(mat_line))))
-		return (NULL);
+	matrix_scalar_product(diff = matrix_sub(c1, c2), 1 / norme);
 	ft_memmove(mat_line->m + 9, diff->m, sizeof(double) * 3);
 	free_matrix(diff);
 	return (mat_line);
@@ -317,7 +330,7 @@ void	test_new_px(t_env *e)
 }
 
 
-void	draw_point(t_env *e)
+void	draw_pointi_new(t_env *e)
 {
 	test_new_px(e);
 
@@ -327,7 +340,7 @@ void	draw_point(t_env *e)
 
 }
 
-void	draw_point_old(t_env *e)
+void	draw_point(t_env *e)
 {
 
 //	static	int	i = 0;
@@ -359,20 +372,34 @@ void	draw_point_old(t_env *e)
 	color->m[G] = e->g;
 	color->m[B] = e->b;
 
+
 	color2->m[R] = 0;
 	color2->m[G] = 0;
 	color2->m[B] = 0;
 
-
 	pt1->m[X] = 300;
 	pt1->m[Y] = 300;
 	pt1->m[Z] = 255;
+
+
 	pt2 = sqr_rotate(rot, size);
 	pt3 = matrix_add(pt1, pt2); 
+
 	pt3->m[Z] = 0;
 
-	mat_line = init_mat_line(pt1, pt2, color, color2);
-//	draw_line2(e, mat_line);
+	dprintf(1, "c'est lui\n");
+	if (!(mat_line = init_mat_line(pt1, pt2, color, color2)))
+			dprintf(1, "All is well\n");
+	dprintf(1, "c'est moi\n");
+	int k = 0;
+	while (k < 12)
+	{
+		dprintf(1, "[%d]=%f\n", k, mat_line->m[k]);
+		k++;
+	}
+dprintf(1, "seg befor it was cool\n");
+	draw_line2(e, mat_line);
+dprintf(1, "this will never hpened\n");
 //	draw_line(e, pt3, pt1);
 
 	pt4->m[X] = 300;
@@ -405,7 +432,8 @@ void	draw_point_old(t_env *e)
 	free(pt3);
 	free(pt4);
 	free(pt5);
-//	free(color);
+	free(color);
+	free(color2);
 }
 
 
