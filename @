@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/15 14:35:08 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/03/09 22:16:10 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/09 21:46:27 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,6 @@ double			ft_sin(double deg);
 t_roots			eq_solve_2nd(t_coefs coefs);
 t_roots			eq_solve_3rd(t_coefs coefs);
 t_roots			eq_solve_4th(t_coefs coefs);
-
-void			matrix_put_in(double a, double b, double c, double d);
-t_matrix		*matrix_buffer(t_matrix *mat);
 
 t_matrix		*set_rotate(double thetx, double thety, double thetz);
 t_matrix		*set_translate(double dx, double dy, double dz);

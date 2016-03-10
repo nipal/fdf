@@ -6,7 +6,7 @@
 #    By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/09/13 19:48:58 by jpirsch           #+#    #+#              #
-#    Updated: 2016/03/08 16:42:32 by fjanoty          ###   ########.fr        #
+#    Updated: 2016/03/09 22:16:01 by fjanoty          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,8 @@ SRC		=	matrix_init.c \
 			matrix_det.c \
 			matrix_inverse.c \
 			matrix_transpose.c \
+			matrix_buffer.c \
+			matrix_put_in.c \
 			eq_solve_2nd.c \
 			eq_solve_3rd.c \
 			eq_solve_4th.c \
@@ -28,7 +30,6 @@ SRC		=	matrix_init.c \
 			set_translate.c \
 			vector_product.c \
 			matrix_copy.c \
-			matrix_print.c \
 			free_mat.c \
 			set_scale.c
 FLAGS		= -Wall -Wextra -Werror

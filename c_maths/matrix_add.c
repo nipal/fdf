@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/09/14 00:25:54 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/03/08 10:30:25 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/10 01:41:07 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ t_matrix	*matrix_add(t_matrix *a, t_matrix *b)
 		return (NULL);
 	if (a->x != b->x || a->y != b->y)
 		return (NULL);
-	c = matrix_init(a->x, a->y);
+	if ((!(c = matrix_init(a->x, a->y))))
+		return (NULL);
 	c->x = a->x;
 	c->y = a->y;
 	size = c->x * c->y;

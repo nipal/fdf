@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/09/14 00:25:54 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/03/03 05:38:45 by jpirsch          ###   ########.fr       */
+/*   Updated: 2016/03/09 22:17:48 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,14 +62,19 @@ t_matrix	*set_rotate(double thetx, double thety, double thetz)
 	t_matrix	*rz;
 	t_matrix	*r;
 
-	r = matrix_init(4, 4);
 	rx = init_xrot_matrix(thetx);
 	ry = init_yrot_matrix(thety);
 	rz = init_zrot_matrix(thetz);
 	r = matrix_product(rx, ry);
-	free(rx);
+	matrix_free(&rx);
 	free(ry);
+	ry = r;
 	r = matrix_product(r, rz);
-	free(rz);
+	matrix_free(&ry);
+	matrix_free(&rz);
 	return (r);
 }
+/*
+ *	supression des leaks potentiel sur avec matrix_free
+ *	et le remlloc de matrix product 
+ * */
