@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/10 04:08:06 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/03/09 16:13:43 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/11 10:52:24 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,12 @@ void	vectpx_to_img(t_env *e, t_matrix *pos_color)
 
 	x = (int) pos_color->m[0] + 0.5;
 	y = (int) pos_color->m[1] + 0.5;
+	if ( x < 0 || x > e->size_line / 8 || y < 0 || y > 990)
+	{
+//		dprintf(1, "x_max:%d y_max:%d\n", e->size_line / 8, 990);
+//		dprintf(1, "out of window x:%d y:%d\n", x, y);
+		return ;
+	}
 	r = (int) pos_color->m[3] + 0.5;
 	g = (int) pos_color->m[4] + 0.5;
 	b = (int) pos_color->m[5] + 0.5;

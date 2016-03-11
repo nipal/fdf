@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/30 14:38:59 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/03/11 07:06:45 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/10 09:38:07 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,7 +183,7 @@ t_matrix	*sqr_rotate(int rot, int x, int y, int size)
 void	draw_point(t_env *e)
 {
 
-	int			size = 1000;
+	int			size = 250;
 	t_matrix	*pt1;
 	t_matrix	*pt2;
 	t_matrix	*pt3;
@@ -316,8 +316,8 @@ void	draw_point(t_env *e)
 	write(1, "\n\n", 2);
 */
 
-	rot += 4 * size - 7;
-	angle += 7 ;
+	rot += 4 * size - 3;
+	angle += 5 ;
 
 	
 //	usleep(250000);

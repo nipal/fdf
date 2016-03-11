@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/15 14:35:08 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/03/09 22:16:10 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/11 10:52:33 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void			matrix_display(t_matrix *a);
 t_matrix		*matrix_add(t_matrix *a, t_matrix *b);
 t_matrix		*matrix_sub(t_matrix *a, t_matrix *b);
 t_matrix		*matrix_product(t_matrix *a, t_matrix *b);
+void			*vector_product_in(t_matrix *a, t_matrix *b, t_matrix *result)
 t_matrix		*matrix_scalar_product(t_matrix *a, double d);
 double			matrix_det(t_matrix *a);
 t_matrix		*matrix_transpose(t_matrix *a, t_matrix *b);
@@ -69,8 +70,9 @@ t_roots			eq_solve_2nd(t_coefs coefs);
 t_roots			eq_solve_3rd(t_coefs coefs);
 t_roots			eq_solve_4th(t_coefs coefs);
 
-void			matrix_put_in(double a, double b, double c, double d);
 t_matrix		*matrix_buffer(t_matrix *mat);
+void			matrix_put_in(double a, double b, double c, double d);
+t_matrix		*matrix_put_in_new(double a, double b, double c, double d);
 
 t_matrix		*set_rotate(double thetx, double thety, double thetz);
 t_matrix		*set_translate(double dx, double dy, double dz);

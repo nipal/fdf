@@ -6,12 +6,13 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/29 02:21:11 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/03/08 14:16:32 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/11 10:52:23 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
+
 # include "c_maths.h"
 
 # define R 0
@@ -100,6 +101,25 @@ typedef struct			s_point
 	int					z;
 	unsigned int		color;
 }						t_point;
+
+//*
+# define BL 0
+# define BR 1
+# define TL 2
+# define TR 3
+
+# define L 0 
+# define B 1
+# define R 2
+# define T 3
+typedef	struct			s_cam
+{
+	t_matrix			*pos;
+	t_matrix			**corner;
+	t_matrix			**nrm_face;
+	t_matrix			*transpose;
+}						t_cam;
+//*/
 
 /*
 ** hook
