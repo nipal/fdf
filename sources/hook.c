@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/09 12:17:52 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/03/05 07:19:23 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/12 04:22:39 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ int		loop_hook(t_env *e)
 	(e->key.g == 1) ? e->g += 20 : (void)e->key.echap;
 	(e->key.b == 1) ? e->b += 20 : (void)e->key.echap;
 	ft_bzero(e->data, e->size_line * 900);
+	ft_bzero(e->z_buffer, SIZE_X * SIZE_Y);
 	draw_point(e);
 	return (1);
 }

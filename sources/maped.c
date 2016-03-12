@@ -6,12 +6,12 @@
 /*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 08:33:48 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/03/11 05:35:55 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/12 11:30:54 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#inclue "c_maths:.h"
+#include "c_maths.h"
 
 t_matrix	***get_map(double *z_max, double *z_min)
 {
@@ -23,6 +23,7 @@ t_matrix	***get_map(double *z_max, double *z_min)
 //	double		z_max;
 //	double		z_min;
 
+//	dprintf(1, "D\n");
 	int			tab1[10][10]		=	{{1, 0, 0, -1, -1, 0, 1, 1, 0, 0},
 										{-1, 0, 0, 0, 1, 0, 0, 0, 0, 0},
 										{-1, 1, 0, 0, -1, 1, 0, 0, 0, 1},
@@ -33,6 +34,7 @@ t_matrix	***get_map(double *z_max, double *z_min)
 										{0, 0, 0, 0, 1, 0, -1, 0, 0, 0},
 										{-1, -1, 0, 1, -1, 0, 1, 0, 0, 1},
 										{0, 0, 1, -1, 0, -1, 0, 0, 0, 0}};
+	(void)tab1;
 
 	int			tab2[10][10]	=	{{-6, -67, -61, -38, 9, -16, -16, 32, 56, 16 },
 									{27, -63, 23, -56, 63, 10, 33, -9, -55, 69},
@@ -56,15 +58,16 @@ t_matrix	***get_map(double *z_max, double *z_min)
 			return (NULL);
 		while (i < x)
 		{
-			if (!(map_mat[j][i] = init_matrix(4, 1)))
+			if (!(map_mat[j][i] = matrix_init(4, 1)))
 				return (NULL);
-			*z_max = MAX(map2[j][i], *z_max);
-			*z_min = MIN(map2[j][i], *z_min);
+			*z_max = MAX(tab2[j][i], *z_max);
+			*z_min = MIN(tab2[j][i], *z_min);
 			matrix_buffer(map_mat[j][i]);
 			matrix_put_in(i, j, tab2[j][i], 1);
 			i++;
 		}
 		j++;
 	}
+//	dprintf(1, "F\n");
 	return (map_mat);
 }

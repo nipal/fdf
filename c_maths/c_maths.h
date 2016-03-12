@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/15 14:35:08 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/03/11 10:52:33 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/12 11:31:01 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,17 @@ t_matrix		*matrix_init(int x, int y);
 void			matrix_display(t_matrix *a);
 t_matrix		*matrix_add(t_matrix *a, t_matrix *b);
 t_matrix		*matrix_sub(t_matrix *a, t_matrix *b);
+void			matrix_sub_in(t_matrix *a, t_matrix *b, t_matrix *c);
 t_matrix		*matrix_product(t_matrix *a, t_matrix *b);
-void			*vector_product_in(t_matrix *a, t_matrix *b, t_matrix *result)
+void			matrix_product_in(t_matrix *a, t_matrix *b, t_matrix *c);
+void			vector_product_in(t_matrix *a, t_matrix *b, t_matrix *result);
 t_matrix		*matrix_scalar_product(t_matrix *a, double d);
 double			matrix_det(t_matrix *a);
 t_matrix		*matrix_transpose(t_matrix *a, t_matrix *b);
 double			matrix_norme(t_matrix *a);
 t_matrix		*vector_product(t_matrix *a, t_matrix *b);
+t_matrix		*vector_product_s(t_matrix *a, t_matrix *b, int x, int y);
+void			vector_product_in(t_matrix *a, t_matrix *b, t_matrix *result);
 double			matrix_dot_product(t_matrix *a, t_matrix *b);
 
 t_matrix		*matrix_copy(t_matrix *src);

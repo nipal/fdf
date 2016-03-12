@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/29 02:21:11 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/03/11 10:52:23 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/12 11:30:49 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,16 @@ typedef struct			s_key
 	int					b;
 }						t_key;
 
+# define SIZE_X 900
+# define SIZE_Y 1440
+# define PRINT_DIAG 1
 typedef struct			s_env
 {
 	void				*mlx;
 	void				*win;
 	void				*img;
 	char				*data;
+	double				*z_buffer;
 	int					size_line;
 	int					depth;
 	int					endian;
@@ -92,6 +96,8 @@ typedef struct			s_env
 	unsigned char		g;
 	unsigned char		b;
 	t_key				key;
+	int					size_map_x;
+	int					size_map_y;
 }						t_env;
 
 typedef struct			s_point
@@ -103,21 +109,23 @@ typedef struct			s_point
 }						t_point;
 
 //*
-# define BL 0
-# define BR 1
-# define TL 2
-# define TR 3
+# define TOP_LEFT 0
+# define BOTOM_LEFT 1
+# define BOTOM_RIGHT 2
+# define TOP_RIGHT 3
+//# define MM 4
 
-# define L 0 
-# define B 1
-# define R 2
-# define T 3
+# define LEFT 0 
+# define BOTOM 1
+# define RIGHT 2
+# define TOP 3
 typedef	struct			s_cam
 {
-	t_matrix			*pos;
 	t_matrix			**corner;
-	t_matrix			**nrm_face;
-	t_matrix			*transpose;
+	t_matrix			**normal;
+	t_matrix			*pos;
+	t_matrix			*dir;
+	t_matrix			*rot;
 }						t_cam;
 //*/
 
@@ -144,6 +152,14 @@ void					env(int **map);
 ** coord
 */
 
+/*
+ **	cam
+ **/
+t_cam	*init_cam(double fov_y, double fov_x, int size_x, int size_y);
+/*
+ ** print_map	
+ * */
+void	print_map(t_env *e, t_cam *cam, t_matrix ***map);
 
 /*
 ** draw
@@ -155,4 +171,8 @@ void					draw_point(t_env *e);
 */
 int						**parse(int fd);
 
+
+t_matrix	***get_map(double *z_max, double *z_min);
+void	draw_line(t_env *e, t_matrix *mat_line);
+t_matrix	*init_mat_line(t_matrix *pt1, t_matrix *pt2, t_matrix *c1, t_matrix *c2);
 #endif

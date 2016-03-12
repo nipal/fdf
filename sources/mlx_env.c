@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/10 04:08:06 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/03/11 10:52:24 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/12 11:30:55 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	vectpx_to_img(t_env *e, t_matrix *pos_color)
 	e->data[y * e->size_line + x * 4 + 2] = r;
 	e->data[y * e->size_line + x * 4 + 1] = g;
 	e->data[y * e->size_line + x * 4] = b;
-//	dprintf(1, "x:%d y:%d  r:%d v:%d b:%d ilne:%d\n", x, y, r, g, b, e->size_line);
+	dprintf(1, "x:%d y:%d  r:%d v:%d b:%d ilne:%d\n", x, y, r, g, b, e->size_line);
 }
 
 void	string_put(char *s1, char *s2, t_env *e, int y)
@@ -94,9 +94,12 @@ void	env(int **map)
 	e.map = map;
 	if (!(e.mlx = mlx_init()))
 		return ;
-	e.win = mlx_new_window(e.mlx, 1440, 900, "sandwich");
-	e.img = mlx_new_image(e.mlx, 1440, 900);
+	e.win = mlx_new_window(e.mlx, SIZE_Y, SIZE_X, "sandwich");
+	e.img = mlx_new_image(e.mlx, SIZE_Y, SIZE_X);
 	e.data = mlx_get_data_addr(e.img, &e.depth, &e.size_line, &e.endian);
+	e.z_buffer = (double*)malloc(sizeof(double) * SIZE_X * SIZE_Y);
+	e.size_map_x = 10;	
+	e.size_map_y = 10;	
 	e.proj = 0;
 	e.scale = 2.5;
 	e.cte1 = 0.6;
