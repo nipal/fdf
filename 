@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/30 14:38:59 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/03/10 09:38:07 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/13 10:20:52 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,8 +182,23 @@ t_matrix	*sqr_rotate(int rot, int x, int y, int size)
 
 void	draw_point(t_env *e)
 {
+	// On veux juste tracer la map
+	double	z_max;
+	double	z_min;
 
-	int			size = 250;
+	t_matrix ***map = get_map(&z_max, &z_min);
+	dprintf(1, "map:%ld\n", (long)map);
+	dprintf(1, "*map\n", (long)*map );
+	dprintf(1, "**map\n", (long)**map);
+	dprintf(1, "***map\n", (long)***map);
+//	t_cam	*cam = init_cam(60, 60, 10, 10);
+//	print_map(e, cam, map);
+}
+
+void	draw_point_old(t_env *e)
+{
+
+	int			size = 199;
 	t_matrix	*pt1;
 	t_matrix	*pt2;
 	t_matrix	*pt3;
@@ -271,38 +286,37 @@ void	draw_point(t_env *e)
 
 //	ft_putstr("\n\n	le caca c'est trop delicieux\n");
 
+/*	
 	if (!(mat_line = init_mat_line(pt4, pt5, color3, color2)))
  		dprintf(1, "All is well 1\n");
 	draw_triangle(e, mat_line, pt1, color);
 	if (!(mat_line = init_mat_line(pt4, pt1, color3, color)))
  		dprintf(1, "All is well 1\n");
 	draw_triangle(e, mat_line, pt5, color2);
+//*/
 
+//*
 
-/*	
-//	if (!(mat_line = init_mat_line(pt1, pt3, color, color2)))
-//		dprintf(1, "\n\nAll is well 2\n");
-//		dprintf(1, "\n\nAll is well 2\n");
-//	draw_line(e, mat_line);
+	if (!(mat_line = init_mat_line(pt4, pt5, color2, color3)))
+		dprintf(1, "\n\nAll is well 2\n");
+	draw_line(e, mat_line);
 
 
 	matrix_free(&mat_line);
-	if (!(mat_line = init_mat_line(pt1, pt4, color, color3)))
-//	if (!(mat_line = init_mat_line(pt4, pt1, color, color3)))
+	if (!(mat_line = init_mat_line(pt4, pt1, color2, color)))
 		dprintf(1, "All is well 3\n");
 	draw_line(e, (mat_line));
 	//draw_line(e, mat_line);
 
 	matrix_free(&mat_line);
-	if (!(mat_line = init_mat_line(pt1, pt5, color, color2)))
+	if (!(mat_line = init_mat_line(pt1, pt5, color, color3)))
 		dprintf(1, "All is well 3\n");
 	draw_line(e, (mat_line));
-//	draw_line(e, mat_line);
-//		dprintf(1, "All is well 3\n");
-*/
+	draw_line(e, mat_line);
+//*/
 
 
-
+	
 
 
 
@@ -316,8 +330,8 @@ void	draw_point(t_env *e)
 	write(1, "\n\n", 2);
 */
 
-	rot += 4 * size - 3;
-	angle += 5 ;
+	rot += 4 * size - 2;
+	angle += 1 ;
 
 	
 //	usleep(250000);

@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/30 14:38:59 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/03/12 12:54:09 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/13 11:58:01 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,10 +185,20 @@ void	draw_point(t_env *e)
 	// On veux juste tracer la map
 	double	z_max;
 	double	z_min;
+//(void)e;
 
 	t_matrix ***map = get_map(&z_max, &z_min);
-	t_cam	*cam = init_cam(60, 60, 10, 10);
-	print_map(e, cam, map);
+	(void)map;
+//	dprintf(1, "map:%ld\n", (long)map);
+//	dprintf(1, "*map:%ld\n", (long)*map );
+//	dprintf(1, "**map:%ld\n", (long)**map);
+//map;
+	t_cam	*cam = init_cam(90.0/360.0 * M_PI , 60.0/360.0 *M_PI, 10, 10);
+
+//	dprintf(1, "cam:%ld\n", (long)cam);
+//		print_map(e, cam, map);
+	(void)cam;
+	(void)e;
 }
 
 void	draw_point_old(t_env *e)

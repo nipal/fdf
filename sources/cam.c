@@ -6,11 +6,74 @@
 /*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 09:32:11 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/03/12 12:54:08 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/13 11:57:57 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+void	describe_cam(t_cam *cam)
+{
+	int	i;
+
+	if (!cam)
+	{
+		dprintf(1, "		NO CAAAAAAMM!!!\n");
+	}
+	dprintf(1, "Corner\n");
+	if (cam->corner)
+	{
+		i = 0;
+		while (i < 4)
+		{
+
+			dprintf(1, " corner[%i]", i);
+			if (cam)
+				matrix_display(cam->corner[i]);
+			else
+				dprintf(1, "NO corner[%d]\n", i);
+			i++;
+		}
+	}
+	else
+		dprintf(1, "	NO CORNER TAB\n");
+
+	dprintf(1, "normal\n");
+	if (cam->normal)
+	{
+		i = 0;
+		while (i < 4)
+		{
+			dprintf(1, " normal[%i]", i);
+			if (cam)
+				matrix_display(cam->normal[i]);
+			else
+				dprintf(1, "	NO normal[%d]\n", i);
+			i++;
+		}
+	}
+	else
+		dprintf(1, "	NO NORMAL TAB\n");
+
+	dprintf(1, "pos\n");
+	if (cam->pos)
+		matrix_display(cam->pos);
+	else
+		dprintf(1, "	NO POS\n");
+
+	dprintf(1, "dir\n");
+	if (cam->dir)
+		matrix_display(cam->dir);
+	else
+		dprintf(1, "	NO DIR\n");
+
+	dprintf(1, "rot\n");
+	if (cam->rot)
+		matrix_display(cam->rot);
+	else
+		dprintf(1, "	NO ROT\n");
+//	sleep(10);
+}
 
 void	set_windir(t_matrix **corner, double fov_x, double fov_y)
 {
@@ -23,8 +86,8 @@ void	set_windir(t_matrix **corner, double fov_x, double fov_y)
 	if (fov_y <= 0 || fov_y >= 180 || fov_y > 180 || fov_y < 0
 		|| !corner || !*corner) 
 		return ;
-	dx_cam = tan(fov_x / 2);
-	dy_cam = tan(fov_y / 2);
+	dx_cam = tan(fov_x);
+	dy_cam = tan(fov_y);
 	i = 0;
 	while (i < 4 && corner[i])
 	{
@@ -40,14 +103,28 @@ void	set_normal(t_matrix **normal, t_matrix **corner)
 {
 	int	i;
 
-	if (normal && corner && corner[0])
+	if (!(normal))
+		dprintf(1 , "NO normal \n");
+	else if (!(*normal))
+		dprintf(1 , "NO *naormal \n");
+	if (!(corner))
+		dprintf(1 , "NO  corner\n");
+	else if (!(*corner))
+		dprintf(1 , "NO *corner \n");
+	else if (!(corner[0]))
+		dprintf(1 , "NO corner[0] \n");
+	if (!normal || !corner || !corner[0])
+	{
+		dprintf(1, "ERROR INPUT !!!\n");
 		return ;
+	}
 	i = 0;
-	while (i < 4 && corner[i + 1] && normal[i])
+	while (i < 4 && corner[(i + 1) % 4])
 	{
 		vector_product_in(corner[i], corner[(i + 1) % 4], normal[i]);
 		i++;
 	}
+	dprintf(1, "	#####end normal i:%d#####\n", i);
 }
 
 int		malloc_cam_tab(t_cam *cam)
@@ -89,6 +166,9 @@ t_cam	*init_cam(double fov_y, double fov_x, int size_x, int size_y)
 	dx_cam = tan(fov_x / 2);
 	dy_cam = tan(fov_y / 2);
 	c->pos->m[Z] = -MAX(((size_y * marge) / dy_cam), (size_x * marge) / dx_cam);
+	dprintf(1, "YES I AM\n");
+	describe_cam(c);
+	dprintf(1, "YES I AM2\n");
 	return (c);
 }
 

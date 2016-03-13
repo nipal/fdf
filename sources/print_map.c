@@ -6,7 +6,7 @@
 /*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/12 03:54:36 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/03/12 12:54:08 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/13 11:58:06 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,19 +57,26 @@ void	get_point(t_matrix ***map, t_matrix **point, int i, int j)
 		dprintf(1, "	HE IS ALIVE\n");
 */
 //	dprintf(1, "OUI\n");
-	point[0] = (i < 10 && j < 10) ? map[j][i] : NULL;
+	if (!(point[0] = (i < 10 && j < 10) ? map[j][i] : NULL))
+		dprintf(1, "1=>no pt[%d][%d]\n", j, i);
 //	dprintf(1, "OUI\n");
-	point[1] = (i < 9 && j < 10) ? map[j][i + 1] : NULL;
+	if (!(point[1] = (i < 9 && j < 10) ? map[j][i + 1] : NULL))
+		dprintf(1, "2=>no pt[%d][%d]\n", j, i+1);
 //	dprintf(1, "OUI\n");
-	point[2] = (j < 9 && i < 10) ? map[j + 1][i] : NULL;
+	if (!(point[2] = (j < 9 && i < 10) ? map[j + 1][i] : NULL))
+		dprintf(1, "3=>no pt[%d][%d]\n", j+1, i);
 //	dprintf(1, "OUI\n");
-	point[3] = (j < 9 && i < 9) ? map[j + 1][i + 1] : NULL;
+	if (!(point[3] = (j < 9 && i < 9) ? map[j + 1][i + 1] : NULL))
+		dprintf(1, "4=>no pt[%d][%d]\n", j+1, i+1);
 //	dprintf(1, "OUI\n");
 	k = 0;
 	while (k < 4)
 	{
 //	dprintf(1, "NON\n");
-		define_color(point[k], point[k + 4]);
+		if (point[k])
+			define_color(point[k], point[k + 4]);
+		else
+			point[k] = NULL;
 		k++;
 	}
 //	dprintf(1, "OOO\n");
