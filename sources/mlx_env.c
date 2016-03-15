@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/10 04:08:06 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/03/15 09:18:07 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/15 10:52:22 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ void	print_state(t_env *e)
 void	env(int **map)
 {
 	t_env	e;
+	t_cam	*cam;
 
 	e.map = map;
 	if (!(e.mlx = mlx_init()))
@@ -114,6 +115,11 @@ void	env(int **map)
 	e.g = 0;
 	e.b = 0;
 	e.speed = 0;
+	dprintf(1, "ouiii\n");
+	if (!(cam = init_cam(60.0/360.0 * M_PI , 60.0/360.0 * M_PI, &e)))
+		return ;
+	e.cam = cam;
+	dprintf(1, "ouiii\n");
 	init_t_key(&e.key);
 	mlx_hook(e.win, 2, 1, key_press, &e);
 	mlx_hook(e.win, 3, 2, key_release, &e);

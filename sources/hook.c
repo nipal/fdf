@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/09 12:17:52 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/03/15 09:20:44 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/15 11:07:48 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,8 @@ int		key_press(int keycode, t_env *e)
 int		key_release(int keycode, t_env *e)
 {
 	ft_putnbr(keycode);
-	(keycode == 78) ? e->key.speed_down = 0 : (void)keycode;
-	(keycode == 69) ? e->key.speed_up = 0 : (void)keycode;
+	(keycode == 27) ? e->key.speed_down = 0 : (void)keycode;
+	(keycode == 24) ? e->key.speed_up = 0 : (void)keycode;
 	(keycode == 0) ? e->key.rot_z2 = 0 : (void)keycode;
 	(keycode == 1) ? e->key.rot_x1 = 0 : (void)keycode;
 	(keycode == 2) ? e->key.rot_z1 = 0 : (void)keycode;
@@ -163,6 +163,7 @@ int		loop_hook(t_env *e)
 	(e->key.b == 1) ? e->b += 20 : (void)e->key.echap;
 	(e->key.speed_up == 1) ? e->speed += increm_dir_cam(e) : (void)e;
 	(e->key.speed_down == 1) ? e->speed -= increm_dir_cam(e) : (void)e;
+	dprintf(1, "speed%f\n", e->speed);
 	ft_bzero(e->data, e->size_line * 990);
 	ft_bzero(e->z_buffer, SIZE_X * SIZE_Y);
 	draw_point(e);

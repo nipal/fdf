@@ -6,7 +6,7 @@
 /*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/12 03:54:36 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/03/15 05:58:40 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/15 11:05:36 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int		is_visible(t_matrix **corner, t_matrix *pt)
 
 	if (pt->m[Z] < 0)
 	{
-		dprintf(1, "is out minus\n");
+//		dprintf(1, "is out minus\n");
 		return 0;
 	}
 	while (i < 4)
@@ -199,7 +199,9 @@ void	iso_proj(t_cam *cam, t_matrix *rot, t_matrix *pt)
 	(void)rot;
 	pt->m[X] = (x);
 	pt->m[Y] = (y);
-	/*
+
+
+	//*
 	matrix_display(pt);
 	write(1, ".\n", 2);
 	pt = matrix_product(rot, pt);
@@ -207,7 +209,9 @@ void	iso_proj(t_cam *cam, t_matrix *rot, t_matrix *pt)
 	write(1, ".\n", 2);
 	matrix_display(pt);
 	write(1, "\n\n\n", 3);
-	*/
+//	*/
+
+
 //	pt = matrix_product(rot, pt);
 //	matrix_display(rot);
 	
@@ -298,14 +302,14 @@ void	adapt_point(t_cam *c, t_matrix ***pt, int size_x, int size_y)
 	pt[j][i]->m[Y] = y;
 	pt[j][i]->m[Z] = z;
 
-
+/*
 	(pt[j][i]) = matrix_product(rot, pt[j][i]);
 
 	z = pt[j][i]->m[Z] - (1 * c->pos->m[Z]);
 	x = ((pt[j][i]->m[X] - (1 * c->pos->m[X])));
 	y = ((pt[j][i]->m[Y] - (1 * c->pos->m[Y])));
 
-
+*/
 
 	x *= SIZE_Y / (2 * z);
 	y *= SIZE_X / (2 * z);
@@ -332,9 +336,9 @@ void	adapt_point(t_cam *c, t_matrix ***pt, int size_x, int size_y)
 
 			if (pt[j][i]->m[Z] - c->pos->m[Z]< 0)
 			{
-				dprintf(1, "	is out i:%d	j:%d\n", i, j);
-				matrix_display(pt[j][i]);
-				write(1, "\n\n", 2);
+		//		dprintf(1, "	is out i:%d	j:%d\n", i, j);
+		//		matrix_display(pt[j][i]);
+		//		write(1, "\n\n", 2);
 			}
 			i++;
 		}
@@ -407,6 +411,8 @@ void	print_map(t_env *e, t_cam *cam, t_matrix ***map)
 			get_point(map, point, i, j);
 //	dprintf(1, "voulou\n");
 //	dprintf(1, "voulou\n");
+			if (i == 9 && j == 9)
+				matrix_display(map[j][i]);
 			draw_link(e, cam, point);
 	//		if (i >= 8 && j == 9)
 	//			dprintf(1, "end\n");
