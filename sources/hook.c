@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/09 12:17:52 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/03/12 04:22:39 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/15 04:13:55 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,23 @@ void	init_t_key(t_key *key)
 	key->r = 0;
 	key->g = 0;
 	key->b = 0;
+	key->rot_z1 = 0;
+	key->rot_z2 = 0;
+	key->rot_x1 = 0;
+	key->rot_x2 = 0;
+	key->rot_y1 = 0;
+	key->rot_y2 = 0;
 }
 
 int		key_press(int keycode, t_env *e)
 {
+	(keycode == 0) ? e->key.rot_z2 = 1 : (void)keycode;
+	(keycode == 1) ? e->key.rot_x1 = 1 : (void)keycode;
+	(keycode == 2) ? e->key.rot_z1 = 1 : (void)keycode;
+	(keycode == 12) ? e->key.rot_y2 = 1 : (void)keycode;
+	(keycode == 13) ? e->key.rot_x2 = 1 : (void)keycode;
+	(keycode == 14) ? e->key.rot_y1 = 1 : (void)keycode;
+	(keycode == 53) ? e->key.echap = 1 : (void)keycode;
 	(keycode == 53) ? e->key.echap = 1 : (void)keycode;
 	(keycode == 125) ? e->key.decal_down = 1 : (void)keycode;
 	(keycode == 126) ? e->key.decal_up = 1 : (void)keycode;
@@ -59,6 +72,13 @@ int		key_press(int keycode, t_env *e)
 
 int		key_release(int keycode, t_env *e)
 {
+	ft_putnbr(keycode);
+	(keycode == 0) ? e->key.rot_z2 = 0 : (void)keycode;
+	(keycode == 1) ? e->key.rot_x1 = 0 : (void)keycode;
+	(keycode == 2) ? e->key.rot_z1 = 0 : (void)keycode;
+	(keycode == 12) ? e->key.rot_y2 = 0 : (void)keycode;
+	(keycode == 13) ? e->key.rot_x2 = 0 : (void)keycode;
+	(keycode == 14) ? e->key.rot_y1 = 0 : (void)keycode;
 	(keycode == 53) ? e->key.echap = 0 : (void)keycode;
 	(keycode == 125) ? e->key.decal_down = 0 : (void)keycode;
 	(keycode == 126) ? e->key.decal_up = 0 : (void)keycode;
@@ -81,6 +101,16 @@ int		key_release(int keycode, t_env *e)
 
 int		loop_hook(t_env *e)
 {
+	double	increm;
+	
+	increm = 0.03;
+//	dprintf(1, "x:%f y:%f x:%f\n", e->rot_x, e->rot_y, e->rot_z);
+	(e->key.rot_z2 == 1) ? e->rot_z -= increm : (void)e;
+	(e->key.rot_x2 == 1) ? e->rot_x -= increm : (void)e;
+	(e->key.rot_z1 == 1) ? e->rot_z += increm : (void)e;
+	(e->key.rot_y2 == 1) ? e->rot_y -= increm : (void)e;
+	(e->key.rot_x1 == 1) ? e->rot_x += increm : (void)e;
+	(e->key.rot_y1 == 1) ? e->rot_y += increm : (void)e;
 	(e->key.echap == 1) ? exit(0) : (void)e->key.echap;
 	(e->key.decal_down == 1) ? e->decaly -= e->zoom / 2 : (void)e->key.echap;
 	(e->key.decal_up == 1) ? e->decaly += e->zoom / 2 : (void)e->key.echap;
@@ -98,7 +128,7 @@ int		loop_hook(t_env *e)
 	(e->key.r == 1) ? e->r += 20 : (void)e->key.echap;
 	(e->key.g == 1) ? e->g += 20 : (void)e->key.echap;
 	(e->key.b == 1) ? e->b += 20 : (void)e->key.echap;
-	ft_bzero(e->data, e->size_line * 900);
+	ft_bzero(e->data, e->size_line * 990);
 	ft_bzero(e->z_buffer, SIZE_X * SIZE_Y);
 	draw_point(e);
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/29 02:21:11 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/03/12 11:30:49 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/15 00:15:10 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,17 @@ typedef struct			s_key
 	int					r;
 	int					g;
 	int					b;
+	int					rot_x1;
+	int					rot_y1;
+	int					rot_z1;
+	int					rot_x2;
+	int					rot_y2;
+	int					rot_z2;
 }						t_key;
 
-# define SIZE_X 900
 # define SIZE_Y 1440
-# define PRINT_DIAG 1
+# define SIZE_X 990
+# define PRINT_DIAG 0
 typedef struct			s_env
 {
 	void				*mlx;
@@ -83,6 +89,8 @@ typedef struct			s_env
 	char				*data;
 	double				*z_buffer;
 	int					size_line;
+	int					ecr_x;
+	int					ecr_y;
 	int					depth;
 	int					endian;
 	int					**map;
@@ -98,6 +106,9 @@ typedef struct			s_env
 	t_key				key;
 	int					size_map_x;
 	int					size_map_y;
+	double				rot_x;
+	double				rot_y;
+	double				rot_z;
 }						t_env;
 
 typedef struct			s_point
@@ -155,7 +166,7 @@ void					env(int **map);
 /*
  **	cam
  **/
-t_cam	*init_cam(double fov_y, double fov_x, int size_x, int size_y);
+t_cam	*init_cam(double fov_y, double fov_x, t_env *e);
 /*
  ** print_map	
  * */

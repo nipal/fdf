@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/30 14:38:59 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/03/13 11:58:01 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/15 00:13:19 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,32 @@ void	draw_line(t_env *e, t_matrix *mat_line)
 t_matrix	*init_mat_line(t_matrix *pt1, t_matrix *pt2
 			, t_matrix *c1, t_matrix *c2)
 {
+//	dprintf(1, "SIR! \n");
 	t_matrix	*mat_line;
 	t_matrix	*diff;
 	double		norme;
 
+
+	mat_line = NULL;
+	diff = NULL;
 	if (!(mat_line = matrix_init(14, 1))
 		|| !pt1 || !pt2 || !c1 || !c2
 		|| (!(diff = matrix_sub(pt2, pt1)) && free_matrix(mat_line)))
+	{
+		if (!(mat_line))
+			dprintf(1, "no mat_line\n");
+		if (!(pt1))
+			dprintf(1, "no pt1\n");
+		if (!(pt2))
+			dprintf(1, "no pt2\n");
+		if (!(c1))
+			dprintf(1, "no c1\n");
+		if (!(c2))
+			dprintf(1, "no c2\n");
+		if (!(diff))
+			dprintf(1, "no diff\n");
 		return (NULL);
+	}
 	diff->m[Z] = 0;
 	norme = matrix_dot_product(diff, diff);
 	norme = sqrt(norme);
@@ -67,6 +85,7 @@ t_matrix	*init_mat_line(t_matrix *pt1, t_matrix *pt2
 	matrix_scalar_product(diff = matrix_sub(c2, c1), 1 / norme);
 	ft_memmove(mat_line->m + 9, diff->m, sizeof(double) * 3);
 	free_matrix(diff);
+//	dprintf(1, "Yes SIR!\n");
 	return (mat_line);
 }
 
@@ -193,12 +212,15 @@ void	draw_point(t_env *e)
 //	dprintf(1, "*map:%ld\n", (long)*map );
 //	dprintf(1, "**map:%ld\n", (long)**map);
 //map;
-	t_cam	*cam = init_cam(90.0/360.0 * M_PI , 60.0/360.0 *M_PI, 10, 10);
+	t_cam	*cam = init_cam(90.0/360.0 * M_PI , 60.0/360.0 *M_PI, e);
 
-//	dprintf(1, "cam:%ld\n", (long)cam);
-//		print_map(e, cam, map);
-	(void)cam;
-	(void)e;
+	print_map(e, cam, map);
+//	(void)cam;
+//	(void)e;
+
+	mlx_put_image_to_window(e->mlx, e->win, e->img, 0, 0);
+	print_state(e);
+	mlx_do_sync(e->mlx);
 }
 
 void	draw_point_old(t_env *e)

@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/10 04:08:06 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/03/12 11:30:55 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/15 04:09:29 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,11 @@ void	vectpx_to_img(t_env *e, t_matrix *pos_color)
 	int	g;
 	int	b;
 
-	x = (int) pos_color->m[0] + 0.5;
-	y = (int) pos_color->m[1] + 0.5;
-	if ( x < 0 || x > e->size_line / 8 || y < 0 || y > 990)
+	x = (int) pos_color->m[0];
+	y = (int) pos_color->m[1];
+	if ( x < 0 || x >= e->size_line / 4 || y < 0 || y >= 990)
 	{
-//		dprintf(1, "x_max:%d y_max:%d\n", e->size_line / 8, 990);
+//		dprintf(1, "x_max:%d y_max:%d\n", e->size_line  / 4, 990);
 //		dprintf(1, "out of window x:%d y:%d\n", x, y);
 		return ;
 	}
@@ -51,7 +51,7 @@ void	vectpx_to_img(t_env *e, t_matrix *pos_color)
 	e->data[y * e->size_line + x * 4 + 2] = r;
 	e->data[y * e->size_line + x * 4 + 1] = g;
 	e->data[y * e->size_line + x * 4] = b;
-	dprintf(1, "x:%d y:%d  r:%d v:%d b:%d ilne:%d\n", x, y, r, g, b, e->size_line);
+//	dprintf(1, "======= YEAHHHH BABY  ====== x:%d y:%d  r:%d v:%d b:%d ilne:%d\n", x, y, r, g, b, e->size_line);
 }
 
 void	string_put(char *s1, char *s2, t_env *e, int y)
@@ -100,6 +100,8 @@ void	env(int **map)
 	e.z_buffer = (double*)malloc(sizeof(double) * SIZE_X * SIZE_Y);
 	e.size_map_x = 10;	
 	e.size_map_y = 10;	
+	e.ecr_x = SIZE_X;
+	e.ecr_y = SIZE_Y;
 	e.proj = 0;
 	e.scale = 2.5;
 	e.cte1 = 0.6;

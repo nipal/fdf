@@ -6,7 +6,7 @@
 /*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/12 03:54:36 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/03/13 11:58:06 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/15 04:21:11 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,40 +34,30 @@ void	define_color(t_matrix *point, t_matrix *color)
 {
 	if (point && color)
 	{
-		color->m[R] = 10 * point->m[X] + 100;
-		color->m[G] = 10 * point->m[Y] + 100;
-		color->m[B] = 10 * point->m[Z] + 100;
+		color->m[R] = 100;
+		color->m[G] = 100;
+		color->m[B] = 128 - 2 * point->m[Z];
 	}
+	else
+		;//dprintf(1, "							NO COLOR SET\n");
 }
 
 void	get_point(t_matrix ***map, t_matrix **point, int i, int j)
 {
 	int	k;
 
-/*
-	if (!map)
-		dprintf(1, "no map1\n");
-	else if (!*map)
-		dprintf(1, "no map2\n");
-	else if (!**map)
-		dprintf(1, "no map3\n");
-	if (!map || !*map || !**map)
-		return;
-	else
-		dprintf(1, "	HE IS ALIVE\n");
-*/
 //	dprintf(1, "OUI\n");
-	if (!(point[0] = (i < 10 && j < 10) ? map[j][i] : NULL))
-		dprintf(1, "1=>no pt[%d][%d]\n", j, i);
+	if (!(point[0] = (i < 10 && j < 10) ? matrix_copy(map[j][i]) : NULL))
+		;//dprintf(1, "0=>no pt[%d][%d]\n", j, i);
 //	dprintf(1, "OUI\n");
-	if (!(point[1] = (i < 9 && j < 10) ? map[j][i + 1] : NULL))
-		dprintf(1, "2=>no pt[%d][%d]\n", j, i+1);
+	if (!(point[1] = (i < 9 && j < 10) ? matrix_copy(map[j][i + 1]) : NULL))
+		;//dprintf(1, "1=>no pt[%d][%d]\n", j, i+1);
 //	dprintf(1, "OUI\n");
-	if (!(point[2] = (j < 9 && i < 10) ? map[j + 1][i] : NULL))
-		dprintf(1, "3=>no pt[%d][%d]\n", j+1, i);
+	if (!(point[2] = (j < 9 && i < 10) ? matrix_copy(map[j + 1][i]) : NULL))
+		;//dprintf(1, "2=>no pt[%d][%d]\n", j+1, i);
 //	dprintf(1, "OUI\n");
-	if (!(point[3] = (j < 9 && i < 9) ? map[j + 1][i + 1] : NULL))
-		dprintf(1, "4=>no pt[%d][%d]\n", j+1, i+1);
+	if (!(point[3] = (j < 9 && i < 9) ? matrix_copy(map[j + 1][i + 1]) : NULL))
+		;//dprintf(1, "3=>no pt[%d][%d]\n", j+1, i+1);
 //	dprintf(1, "OUI\n");
 	k = 0;
 	while (k < 4)
@@ -79,56 +69,275 @@ void	get_point(t_matrix ***map, t_matrix **point, int i, int j)
 			point[k] = NULL;
 		k++;
 	}
-//	dprintf(1, "OOO\n");
+	//dprintf(1, "OOO\n");
 }
 
-void	draw_link(t_env *e, t_matrix **pt)
+void	draw_link(t_env *e, t_cam *cam, t_matrix **pt)
 {
-	if (pt[0])
+	if (pt[0] && pt[0]->m[Z] > 0)
 	{
-		if (pt[1])
+//		matrix_display(pt[0]);
+		if (pt[1] && pt[1]->m[Z] > 0)
+		{
+//			matrix_display(pt[1]);
 			draw_line(e, init_mat_line(pt[0], pt[1], pt[4], pt[5]));
+		}
 		else
-			dprintf(1, "draw_link no 1\n");
-		if (pt[2])
+		;//	dprintf(1, "draw_link no 1\n");
+		if (pt[2] && pt[2]->m[Z] > 0)
+		{
+//			matrix_display(pt[2]);
 			draw_line(e, init_mat_line(pt[0], pt[2], pt[4], pt[6]));
+		}
 		else
-			dprintf(1, "draw_link no 2\n");
-		if (pt[3])
+		;//	dprintf(1, "draw_link no 2\n");
+		if (pt[3] && pt[3]->m[Z] > 0)
+		{
+//			matrix_display(pt[3]);
 			draw_line(e, init_mat_line(pt[0], pt[3], pt[4], pt[7]));
+		}
 		else
-			dprintf(1, "draw_link no 3\n");
+		;//	dprintf(1, "draw_link no 3\n");
 	}
 	else
-		dprintf(1, "draw_link no 0\n");
+	;//	dprintf(1, "draw_link no 0\n");
 }
 
-void	adapt_point(t_cam *c, t_matrix **pt)
+//*
+void	iso_proj(t_cam *cam, t_matrix *rot, t_matrix *pt)
+{
+	double	mult;
+	double	dx;
+	double	dy;
+
+	double	x, y;
+
+	(void)x;
+	(void)y;
+	t_matrix	*o;
+	t_matrix	*hrz;
+	t_matrix	*vert;
+	rot  = set_rotate(cam->rot->m[X], cam->rot->m[Y], cam->rot->m[Z]);
+	/*
+	double	x_max;
+	double	y_min;
+	double	y_max;
+	*/
+(void)dx;
+(void)dy;
+(void)mult;
+(void)pt;
+(void)cam;
+(void)hrz;
+(void)vert;
+
+/*
+ 
+	pt->m[X] = cam->pos->m[X];
+	pt->m[Y] = cam->pos->m[Y];
+	pt->m[X] *= (SIZE_Y / (2 * mult));
+	pt->m[Y] *= (SIZE_Y / (2 * mult));
+	
+
+	pt->m[X] += SIZE_Y / 2;
+	pt->m[Y] += SIZE_X / 2;
+
+	(void)rot;
+
+ *
+ * */
+
+//	pt = matrix_product(rot, pt);
+//	pt = matrix_product(rot, pt);
+	mult = pt->m[Z] - cam->pos->m[Z];
+	dx = (mult * (cam->corner[2]->m[X] - cam->corner[1]->m[X]));
+	dy = (mult * (cam->corner[0]->m[Y] - cam->corner[1]->m[Y]));
+
+	o = matrix_scalar_product_new(cam->corner[1], 1);	
+//	x = ((pt->m[X]) - (o->m[X]));
+//	y = ((pt->m[Y]) - (o->m[Y]));
+//	x = x / mult;
+//	y = y / mult;
+//	x = (x / dx) * SIZE_Y;
+//	y = (y / dy) * SIZE_X;
+	x = ((pt->m[X] - cam->pos->m[X]) / mult) * SIZE_Y / 2;
+	y = ((pt->m[Y] - cam->pos->m[Y]) / mult) * SIZE_X / 2;
+	(void)rot;
+	pt->m[X] = (x);
+	pt->m[Y] = (y);
+	/*
+	matrix_display(pt);
+	write(1, ".\n", 2);
+	pt = matrix_product(rot, pt);
+	matrix_display(rot);
+	write(1, ".\n", 2);
+	matrix_display(pt);
+	write(1, "\n\n\n", 3);
+	*/
+//	pt = matrix_product(rot, pt);
+//	matrix_display(rot);
+	
+//	pt->m[X] += SIZE_Y / 2;
+//	pt->m[Y] += SIZE_X / 2;
+
+//	matrix_product_in(rot, pt, pt);
+//	pt->m[X] -= (cam->pos->m[X] + (cam->corner[1]->m[X] * mult));
+//	pt->m[Y] -= (cam->pos->m[Y] + (cam->corner[1]->m[Y] * mult));
+
+//	pt->m[X] += o->m[X];
+//	pt->m[Y] += o->m[Y];
+//	matrix_add_in(o, cam->pos, o);
+	o = matrix_add(o, cam->pos);
+
+//	hrz = matrix_sub(cam->corner[2], cam->corner[1]);	
+//	hrz = matrix_scalar_product(, mult);
+//	vert = matrix_sub(cam->corner[0], cam->corner[1]);	
+//	vert = matrix_scalar_product(y, mult);
+
+//	0 = matrix_initcam->corner[1]
+//	pt->m[Y] -= ;
+//	pt->m[Z] -= ;
+	/*
+	mult = pt->m[Z];
+	dx = SIZE_Y / ((cam->corner[2]->m[X] - cam->corner[1]->m[X]) * mult);
+	dy = SIZE_X / ((cam->corner[0]->m[Y] - cam->corner[1]->m[Y]) * mult);
+	pt->m[X] = (pt->m[X] - cam->corner[1]->m[X]) * dx;
+	pt->m[Y] = (pt->m[Y] - cam->corner[1]->m[Y]) * dy;
+	//	le vecteur (BD-BG)
+	//	le vecteur (HG-BG)
+*/
+}
+//*/
+
+void	adapt_point(t_cam *c, t_matrix ***pt, int size_x, int size_y)
 {
 	int					i;
+	int					j;
 	static	t_matrix	*tmp = NULL;
 	t_matrix			*rot;
 
+
+	double	x, y, z, mult;
+	x = 1;
+	y = 1;
+	z = 1;
+	mult = 0;
 	if (!c)
 		dprintf(1, "adapt_point no c\n");
 	if (!pt)
 		dprintf(1, "adapt_point no pt \n");
 	if (!*pt)
 		dprintf(1, "adapt_point no pt*\n");
-	if (!c || (!tmp && (tmp = matrix_init(4, 1)))
-		|| !(rot = set_rotate(c->rot->m[X], c->rot->m[Y], c->rot->m[Z])))
+	if ((!tmp && (tmp = matrix_init(1, 4)))
+		|| !(rot = set_rotate(c->rot->m[X] * x, c->rot->m[Y] * y,  c->rot->m[Z] * z)))
 		return ;
-	i = 0;
-	while (i < 4)
+
+	j = 0;
+	while (j < size_y)
 	{
-		matrix_sub_in(pt[i], c->pos, tmp);
-		matrix_product_in(tmp, rot, pt[i]);
-		
-		//	on divise le point par la distance, et on le multiplie par la resolution
-		//	on change de base ==> isometrique
-		//	on test si dans l'ecran, on proportionne ===> conique
+		i = 0;
+		while (i < size_x)
+		{
+			//	la il faudrait soustraire la pose de la cam
+//			matrix_sub_in(c->pos, pt[j][i], pt[j][i]);
+		//	pt[j][i]->m[X] -= c->pos->m[X];
+	//		pt[j][i]->m[Y] -= c->pos->m[Y];
+//			pt[j][i]->m[Z] -= c->pos->m[Z];
+//
+//			(pt[j][i]) = matrix_product(rot, pt[j][i]);
+
+//*	
+
+
+//	(pt[j][i]) = matrix_product(rot, pt[j][i]);
+
+//	(pt[j][i]) = matrix_product(rot, pt[j][i]);
+
+
+	z = pt[j][i]->m[Z] - (1 * c->pos->m[Z]);
+	x = ((pt[j][i]->m[X] - (1 * c->pos->m[X])));
+	y = ((pt[j][i]->m[Y] - (1 * c->pos->m[Y])));
+
+
+
+	pt[j][i]->m[X] = x;
+	pt[j][i]->m[Y] = y;
+	pt[j][i]->m[Z] = z;
+
+
+	(pt[j][i]) = matrix_product(rot, pt[j][i]);
+
+	z = pt[j][i]->m[Z] - (1 * c->pos->m[Z]);
+	x = ((pt[j][i]->m[X] - (1 * c->pos->m[X])));
+	y = ((pt[j][i]->m[Y] - (1 * c->pos->m[Y])));
+
+
+
+	x *= SIZE_Y / (2 * z);
+	y *= SIZE_X / (2 * z);
+
+
+	pt[j][i]->m[X] = x;
+	pt[j][i]->m[Y] = y;
+	pt[j][i]->m[Z] = z;
+
+
+
+//	pt[j][i]->m[X] = x;
+//	pt[j][i]->m[Y] = y;
+//	pt[j][i]->m[Z] = mult;
+
+
+//	(pt[j][i]) = matrix_product(rot, pt[j][i]);
+
+//*/
+//			iso_proj(c, rot, pt[j][i]);
+
+			pt[j][i]->m[X] += SIZE_Y / 2;
+			pt[j][i]->m[Y] += SIZE_X / 2;
+
+			if (pt[j][i]->m[Z] - c->pos->m[Z]< 0)
+			{
+				dprintf(1, "	is out i:%d	j:%d\n", i, j);
+				matrix_display(pt[j][i]);
+				write(1, "\n\n", 2);
+			}
+			i++;
+		}
+		j++;
+	}	
+}
+
+void	free_point(t_matrix ***pt, int size_x, int size_y)
+{
+	int					i;
+	int					j;
+
+	j = 0;
+	while (j < size_y)
+	{
+		i = 0;
+		while (i < size_x)
+		{
+			matrix_free(pt[j] + i);
+			i++;
+		}
+		j++;
+	}	
+}
+
+int		init_color(t_matrix **point)
+{
+	int	i;
+
+	i = 4;
+	while (i < 8)
+	{
+		if (!(point[i] = matrix_init(1, 4)))
+			return (0);
 		i++;
 	}
+	return (1);
 }
 
 void	print_map(t_env *e, t_cam *cam, t_matrix ***map)
@@ -139,34 +348,42 @@ void	print_map(t_env *e, t_cam *cam, t_matrix ***map)
 //	static	t_matrix	**color = NULL;
 
 	if (!cam)
-		dprintf(1, "print_map	cam\n");
+		dprintf(1, "print_map	no cam\n");
 	if (!map)
-		dprintf(1, "print_map	map\n");
+		dprintf(1, "print_map	no map\n");
 	if (!*map)
-		dprintf(1, "print_map	*map\n");
+		dprintf(1, "print_map	no *map\n");
 	if (!**map)
-		dprintf(1, "print_map	**map\n");
+		dprintf(1, "print_map	no **map\n");
 
+	adapt_point(cam, map, e->size_map_x, e->size_map_y);
 	j = 0;
-	if ((!point && !(point = (t_matrix**)malloc(sizeof(t_matrix*) * 8))))
+	if ((!point && (!(point = (t_matrix**)malloc(sizeof(t_matrix*) * 8))
+		|| !init_color(point))))
 		return ;
-	while (j < 10)
+	while (j < e->size_map_y)
 	{
 		i = 0;
-		while (i < 10)
+		while (i < e->size_map_x)
 		{
-//			matrix_display(map[j][i]);
+		//	matrix_display(map[j][i]);
 //			dprintf(1, "i: %d	j:%d\n", i, j);
+		//	if (i >= 8 && j == 9)
+//				dprintf(1, "i:%d j:%d\n", i, j);
 			get_point(map, point, i, j);
 //	dprintf(1, "voulou\n");
-			adapt_point(cam, point);
 //	dprintf(1, "voulou\n");
 			draw_link(e, point);
+	//		if (i >= 8 && j == 9)
+	//			dprintf(1, "end\n");
+//(void)e;
 //	dprintf(1, "voulou\n");
 			i++;
 		}
 		j++;
 	}
+	free_point(map, e->size_map_x, e->size_map_y);
+
 }
 
 //	void	draw_line(t_env *e, t_matrix *mat_line)
