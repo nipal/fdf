@@ -6,7 +6,7 @@
 /*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 09:32:11 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/03/15 00:26:37 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/15 09:18:05 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,11 +146,13 @@ int		malloc_cam_tab(t_cam *cam)
 
 t_cam	*init_cam(double fov_y, double fov_x, t_env *e)
 {
-	t_cam	*c;
-	double	marge;
-	double	dx_cam;
-	double	dy_cam;
-	static	double	increm = 0;
+	t_cam		*c;
+	double		marge;
+	double		dx_cam;
+	double		dy_cam;
+//	t_matrix	*dir;
+//	t_matrix	*dir;
+//	static	double	increm = 0;
 
 	c = (t_cam*) malloc(sizeof(t_cam));
 	if ((!c || fov_y <= 0 || fov_y >= 180 || fov_y > 180 || fov_y < 0 
@@ -164,15 +166,20 @@ t_cam	*init_cam(double fov_y, double fov_x, t_env *e)
 	marge = 1.5;
 	dx_cam = tan(fov_x / 2);
 	dy_cam = tan(fov_y / 2);
-	c->pos->m[Z] = - 170 - MAX(((e->size_map_y * marge) / dy_cam), (e->size_map_x * marge) / dx_cam);
-	c->pos->m[X] = 10;
-	c->pos->m[Y] = 10;
+//	dir = matrix_product(rot, c->dir);
+	dir = matrix_scalar_product(dir, 0.01 * e->speed);
+	c->pos->m[Z] = 170 - MAX(((e->size_map_y * marge) / dy_cam), (e->size_map_x * marge) / dx_cam);
+	c->pos->m[X] = 50;
+	c->pos->m[Y] = 50;
+
 	set_windir(c->corner, fov_x, fov_y);
 	set_normal(c->normal, c->corner);
+	matrix_free(&rot);
+	matrix_free(&dir);
 //	dprintf(1, "YES I AM\n");
 //	describe_cam(c);
 //	dprintf(1, "YES I AM2\n");
-	increm += 0.03;
+//	increm += 0.03;
 	return (c);
 }
 

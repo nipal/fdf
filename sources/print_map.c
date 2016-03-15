@@ -6,7 +6,7 @@
 /*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/12 03:54:36 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/03/15 04:21:11 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/15 05:58:40 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,43 @@ void	get_point(t_matrix ***map, t_matrix **point, int i, int j)
 	//dprintf(1, "OOO\n");
 }
 
+int		is_visible(t_matrix **corner, t_matrix *pt)
+{
+	int		i;
+	double	result;
+
+	i = 0;
+
+	if (pt->m[Z] < 0)
+	{
+		dprintf(1, "is out minus\n");
+		return 0;
+	}
+	while (i < 4)
+	{
+
+		if ((result = matrix_dot_product(corner[i], pt)) == 0)
+		{
+//			dprintf(1, "is out :%d\n", i);
+//		dprintf(1, "i%d\n", i);
+//		matrix_display(pt);
+//		matrix_display(corner[i]);
+//		dprintf(1, "result:%f\n", result);
+
+			return (0);;
+		}
+//		dprintf(1, "i%d\n", i);
+//		matrix_display(pt);
+//		matrix_display(corner[i]);
+//		dprintf(1, "result:%f\n", result);
+		i++;
+	}
+	return (1);
+}
+
 void	draw_link(t_env *e, t_cam *cam, t_matrix **pt)
 {
-	if (pt[0] && pt[0]->m[Z] > 0)
+	if (pt[0] && is_visible(cam->corner, pt[0]))
 	{
 //		matrix_display(pt[0]);
 		if (pt[1] && pt[1]->m[Z] > 0)
@@ -293,8 +327,8 @@ void	adapt_point(t_cam *c, t_matrix ***pt, int size_x, int size_y)
 //*/
 //			iso_proj(c, rot, pt[j][i]);
 
-			pt[j][i]->m[X] += SIZE_Y / 2;
-			pt[j][i]->m[Y] += SIZE_X / 2;
+//			pt[j][i]->m[X] += SIZE_Y / 2;
+//			pt[j][i]->m[Y] += SIZE_X / 2;
 
 			if (pt[j][i]->m[Z] - c->pos->m[Z]< 0)
 			{
@@ -373,7 +407,7 @@ void	print_map(t_env *e, t_cam *cam, t_matrix ***map)
 			get_point(map, point, i, j);
 //	dprintf(1, "voulou\n");
 //	dprintf(1, "voulou\n");
-			draw_link(e, point);
+			draw_link(e, cam, point);
 	//		if (i >= 8 && j == 9)
 	//			dprintf(1, "end\n");
 //(void)e;

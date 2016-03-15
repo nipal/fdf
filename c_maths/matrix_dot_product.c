@@ -6,7 +6,7 @@
 /*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/08 02:36:17 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/03/08 10:31:55 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/15 09:18:24 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ double	matrix_dot_product(t_matrix *a, t_matrix *b)
 	int		i;
 	int		size;
 
-	if (a->x != b->x || a->y != b->y)
+	if (a->x * a->y != b->y * b->x)
 		return (0);
 	i = 0;
 	sum = 0;

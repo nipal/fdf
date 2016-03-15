@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/30 14:38:59 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/03/15 00:13:19 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/15 09:18:15 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,9 +212,9 @@ void	draw_point(t_env *e)
 //	dprintf(1, "*map:%ld\n", (long)*map );
 //	dprintf(1, "**map:%ld\n", (long)**map);
 //map;
-	t_cam	*cam = init_cam(90.0/360.0 * M_PI , 60.0/360.0 *M_PI, e);
+//	t_cam	*cam = init_cam(60.0/360.0 * M_PI , 60.0/360.0 * M_PI, e);
 
-	print_map(e, cam, map);
+	print_map(e, e->cam, map);
 //	(void)cam;
 //	(void)e;
 

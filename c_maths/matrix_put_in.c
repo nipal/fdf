@@ -6,7 +6,7 @@
 /*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/09 20:07:17 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/03/11 10:52:34 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/15 09:18:22 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_matrix	*matrix_put_in_new(double a, double b, double c, double d)
 {
 	t_matrix	*mat;
 
-	if (!(mat = matrix_init(4, 1)))
+	if (!(mat = matrix_init(1, 4)))
 		return (NULL);
 	mat->m[0] = a;
 	mat->m[1] = b;

@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/10 04:08:06 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/03/15 04:09:29 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/15 09:18:07 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ void	vectpx_to_img(t_env *e, t_matrix *pos_color)
 
 	x = (int) pos_color->m[0];
 	y = (int) pos_color->m[1];
+	x += SIZE_Y / 2;
+	y += SIZE_X / 2;
 	if ( x < 0 || x >= e->size_line / 4 || y < 0 || y >= 990)
 	{
 //		dprintf(1, "x_max:%d y_max:%d\n", e->size_line  / 4, 990);
@@ -111,6 +113,7 @@ void	env(int **map)
 	e.r = 255;
 	e.g = 0;
 	e.b = 0;
+	e.speed = 0;
 	init_t_key(&e.key);
 	mlx_hook(e.win, 2, 1, key_press, &e);
 	mlx_hook(e.win, 3, 2, key_release, &e);

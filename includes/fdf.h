@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/29 02:21:11 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/03/15 00:15:10 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/15 09:18:03 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,32 @@ typedef struct			s_key
 	int					rot_x2;
 	int					rot_y2;
 	int					rot_z2;
+	int					speed_up;
+	int					speed_down;
 }						t_key;
+
+
+//*
+# define TOP_LEFT 0
+# define BOTOM_LEFT 1
+# define BOTOM_RIGHT 2
+# define TOP_RIGHT 3
+//# define MM 4
+
+# define LEFT 0 
+# define BOTOM 1
+# define RIGHT 2
+# define TOP 3
+typedef	struct			s_cam
+{
+	t_matrix			**corner;
+	t_matrix			**normal;
+	t_matrix			*pos;
+	t_matrix			*dir;
+	t_matrix			*rot;
+}						t_cam;
+//*/
+
 
 # define SIZE_Y 1440
 # define SIZE_X 990
@@ -109,6 +134,8 @@ typedef struct			s_env
 	double				rot_x;
 	double				rot_y;
 	double				rot_z;
+	double				speed;
+	t_cam				*cam;
 }						t_env;
 
 typedef struct			s_point
@@ -119,26 +146,6 @@ typedef struct			s_point
 	unsigned int		color;
 }						t_point;
 
-//*
-# define TOP_LEFT 0
-# define BOTOM_LEFT 1
-# define BOTOM_RIGHT 2
-# define TOP_RIGHT 3
-//# define MM 4
-
-# define LEFT 0 
-# define BOTOM 1
-# define RIGHT 2
-# define TOP 3
-typedef	struct			s_cam
-{
-	t_matrix			**corner;
-	t_matrix			**normal;
-	t_matrix			*pos;
-	t_matrix			*dir;
-	t_matrix			*rot;
-}						t_cam;
-//*/
 
 /*
 ** hook
