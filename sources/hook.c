@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/09 12:17:52 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/03/15 09:18:09 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/15 09:20:44 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ int		increm_dir_cam(t_env *e)
 	t_matrix	*dir;
 
 	if(!(rot = set_rotate(e->rot_x, e->rot_y, e->rot_z))
-		|| dir = mtrix_put_in_new(0, 0, 1, 0))
+		|| (dir = matrix_put_in_new(0, 0, 1, 0)))
 		return (0);
 	dir = matrix_product(rot, dir);
 	matrix_scalar_product(dir, 0.01 * e->speed);

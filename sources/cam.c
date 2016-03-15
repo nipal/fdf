@@ -6,7 +6,7 @@
 /*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 09:32:11 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/03/15 09:18:05 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/15 09:20:20 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,15 +167,15 @@ t_cam	*init_cam(double fov_y, double fov_x, t_env *e)
 	dx_cam = tan(fov_x / 2);
 	dy_cam = tan(fov_y / 2);
 //	dir = matrix_product(rot, c->dir);
-	dir = matrix_scalar_product(dir, 0.01 * e->speed);
+//	dir = matrix_scalar_product(dir, 0.01 * e->speed);
 	c->pos->m[Z] = 170 - MAX(((e->size_map_y * marge) / dy_cam), (e->size_map_x * marge) / dx_cam);
 	c->pos->m[X] = 50;
 	c->pos->m[Y] = 50;
 
 	set_windir(c->corner, fov_x, fov_y);
 	set_normal(c->normal, c->corner);
-	matrix_free(&rot);
-	matrix_free(&dir);
+//	matrix_free(&rot);
+//	matrix_free(&dir);
 //	dprintf(1, "YES I AM\n");
 //	describe_cam(c);
 //	dprintf(1, "YES I AM2\n");
