@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/09 12:17:52 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/03/15 04:13:55 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/16 01:17:04 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,12 +105,12 @@ int		loop_hook(t_env *e)
 	
 	increm = 0.03;
 //	dprintf(1, "x:%f y:%f x:%f\n", e->rot_x, e->rot_y, e->rot_z);
-	(e->key.rot_z2 == 1) ? e->rot_z -= increm : (void)e;
-	(e->key.rot_x2 == 1) ? e->rot_x -= increm : (void)e;
-	(e->key.rot_z1 == 1) ? e->rot_z += increm : (void)e;
-	(e->key.rot_y2 == 1) ? e->rot_y -= increm : (void)e;
-	(e->key.rot_x1 == 1) ? e->rot_x += increm : (void)e;
-	(e->key.rot_y1 == 1) ? e->rot_y += increm : (void)e;
+	(e->key.rot_z2 == 1) ? e->cam->rot->m[Z] -= increm : (void)e;
+	(e->key.rot_x2 == 1) ? e->cam->rot->m[X] -= increm : (void)e;
+	(e->key.rot_z1 == 1) ? e->cam->rot->m[Z] += increm : (void)e;
+	(e->key.rot_y2 == 1) ? e->cam->rot->m[Y] -= increm : (void)e;
+	(e->key.rot_x1 == 1) ? e->cam->rot->m[X] += increm : (void)e;
+	(e->key.rot_y1 == 1) ? e->cam->rot->m[Y] += increm : (void)e;
 	(e->key.echap == 1) ? exit(0) : (void)e->key.echap;
 	(e->key.decal_down == 1) ? e->decaly -= e->zoom / 2 : (void)e->key.echap;
 	(e->key.decal_up == 1) ? e->decaly += e->zoom / 2 : (void)e->key.echap;

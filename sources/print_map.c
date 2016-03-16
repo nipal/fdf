@@ -6,7 +6,7 @@
 /*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/12 03:54:36 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/03/15 04:21:11 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/15 11:24:00 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ void	get_point(t_matrix ***map, t_matrix **point, int i, int j)
 
 void	draw_link(t_env *e, t_cam *cam, t_matrix **pt)
 {
+	(void)cam;
 	if (pt[0] && pt[0]->m[Z] > 0)
 	{
 //		matrix_display(pt[0]);
@@ -373,7 +374,7 @@ void	print_map(t_env *e, t_cam *cam, t_matrix ***map)
 			get_point(map, point, i, j);
 //	dprintf(1, "voulou\n");
 //	dprintf(1, "voulou\n");
-			draw_link(e, point);
+			draw_link(e, cam, point);
 	//		if (i >= 8 && j == 9)
 	//			dprintf(1, "end\n");
 //(void)e;
