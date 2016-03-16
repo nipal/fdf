@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/10 04:08:06 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/03/16 01:11:46 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/16 02:37:53 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ void	env(int **map)
 	e.rot_x = 0;
 	e.rot_y = 0;
 	e.rot_z = 0;
+	e.speed = 0;
 	e.cam = init_cam(60.0/360.0 * M_PI , 60.0/360.0 *M_PI, &e);
 	init_t_key(&e.key);
 	mlx_hook(e.win, 2, 1, key_press, &e);

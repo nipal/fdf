@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/30 14:38:59 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/03/16 00:54:04 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/16 02:12:41 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,8 +105,8 @@ t_matrix	*init_mat_line2(t_matrix *pt_color, t_matrix *pt3, t_matrix *c3)
 		dprintf(1, "	c3\n");
 	if (!(mat_line = matrix_init(14, 1))
 		|| !pt_color || !pt3 || !c3
-		|| !(pt_inter = matrix_init(4, 1))
-		|| !(color_inter = matrix_init(4, 1)))
+		|| !(pt_inter = matrix_init(1, 4))
+		|| !(color_inter = matrix_init(1, 4)))
 		return (NULL);
 	ft_memmove(pt_inter->m, pt_color->m, sizeof(double) * 3);
 	if (!(diff = matrix_sub(pt_inter, pt3)) && free_matrix(mat_line))
@@ -167,7 +167,7 @@ t_matrix	*sqr_rotate(int rot, int x, int y, int size)
 	int			b;
 	int			val;
 
-	if (!(pt = matrix_init(4, 1)))
+	if (!(pt = matrix_init(1, 4)))
 		return (NULL);
 	a = rot % size == rot % (size * 2);
 	b = rot % (size * 2) == rot % (size * 4);
@@ -247,13 +247,13 @@ void	draw_point_old(t_env *e)
 	
 //dprintf(1, "\n\nAll is well 2\n");
 	
-	if (!(pt1 = matrix_init(4, 1))
-		|| !(color = matrix_init(4, 1))
-		|| !(color2 = matrix_init(4, 1))
-		|| !(color3 = matrix_init(4, 1))
-		|| !(pt2 = matrix_init(4, 1))
-		|| !(pt4 = matrix_init(4, 1))
-		|| !(pt5 = matrix_init(4, 1))
+	if (!(pt1 = matrix_init(1, 4))
+		|| !(color = matrix_init(1, 4))
+		|| !(color2 = matrix_init(1, 4))
+		|| !(color3 = matrix_init(1, 4))
+		|| !(pt2 = matrix_init(1, 4))
+		|| !(pt4 = matrix_init(1, 4))
+		|| !(pt5 = matrix_init(1, 4))
 //		|| !(rotate2 = set_rotate(M_PI * (angle / 360), 0, 0))
 		|| !(rotate = set_rotate(M_PI * (angle / 360), 0, 0)))
 		return ;

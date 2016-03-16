@@ -6,7 +6,7 @@
 /*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 09:32:11 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/03/15 00:26:37 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/16 02:22:54 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,8 +136,8 @@ int		malloc_cam_tab(t_cam *cam)
 		return 0;
 	while (i < 4)
 	{
-		if (!(cam->corner[i] = matrix_init(4, 1))
-			|| !(cam->normal[i] = matrix_init(4, 1)))
+		if (!(cam->corner[i] = matrix_init(1, 4))
+			|| !(cam->normal[i] = matrix_init(1, 4)))
 			return 0;
 		i++;
 	}
