@@ -6,7 +6,7 @@
 /*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 09:32:11 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/03/16 02:22:54 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/16 21:05:45 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,9 +164,9 @@ t_cam	*init_cam(double fov_y, double fov_x, t_env *e)
 	marge = 1.5;
 	dx_cam = tan(fov_x / 2);
 	dy_cam = tan(fov_y / 2);
-	c->pos->m[Z] = - 170 - MAX(((e->size_map_y * marge) / dy_cam), (e->size_map_x * marge) / dx_cam);
-	c->pos->m[X] = 10;
-	c->pos->m[Y] = 10;
+//	c->pos->m[Z] = - 170 - MAX(((e->size_map_y * marge) / dy_cam), (e->size_map_x * marge) / dx_cam);
+//	c->pos->m[X] = 100;
+//	c->pos->m[Y] = 100;
 	set_windir(c->corner, fov_x, fov_y);
 	set_normal(c->normal, c->corner);
 //	dprintf(1, "YES I AM\n");
@@ -175,6 +175,8 @@ t_cam	*init_cam(double fov_y, double fov_x, t_env *e)
 	increm += 0.03;
 	return (c);
 }
+
+
 
 /*
 void	rot_cam(t_cam *cam, t_matrix *rot)

@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/30 14:38:59 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/03/16 02:12:41 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/19 01:19:03 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,7 +206,7 @@ void	draw_point(t_env *e)
 	double	z_min;
 //(void)e;
 
-	t_matrix ***map = get_map(&z_max, &z_min);
+	t_matrix ***map = get_map(e, &z_max, &z_min);
 	(void)map;
 //	dprintf(1, "map:%ld\n", (long)map);
 //	dprintf(1, "*map:%ld\n", (long)*map );

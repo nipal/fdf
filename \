@@ -6,14 +6,13 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/09 12:17:52 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/03/19 01:19:12 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/16 12:57:15 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <mlx.h>
 #include "libft.h"
 #include "fdf.h"
-#include "c_maths.h"
 
 void	init_t_key(t_key *key)
 {
@@ -112,25 +111,19 @@ int		incr_pos(t_env *e)
 	t_matrix	*dir;
 
 	rot = NULL;
-	dir = NULL;
-	if (!(rot = set_rotate(e->cam->rot->m[X], e->cam->rot->m[Y], e->cam->rot->m[Z]))
-		|| !(dir = matrix_init(1, 4)))
+	if (!(rot = set_rotate(e->rot_x, e->rot_y, e->rot_z))
+		|| !(dir = matrix_put_int_new(0.0, 0.0, 1.0, 1.0)))
 		{dprintf(1, "FAILE ICREM POS");return (0);}
 	matrix_product_in(rot, e->cam->dir, dir);
-	matrix_scalar_product(dir, 0.1 * e->speed);
-
-//	matrix_display(e->cam->pos);
- 	e->cam->pos->m[X] += dir->m[X];
+	matrix_scalar_product(dir, 1 * e->speed);
+	matrix_display(e->cam->pos);
+	e->cam->pos->m[X] += dir->m[X];
 	e->cam->pos->m[Y] += dir->m[Y];
 	e->cam->pos->m[Z] += dir->m[Z];
-//	matrix_display(e->cam->pos);
-//	matrix_display(rot);
-//	dprintf(1, ":\n");
-//	matrix_display(e->cam->rot);
-//	matrix_display(dir);
-//	dprintf(1, "\n\n");
-//	dprintf(1, "\n\n");
-//	dprintf(1, "\n\n");
+	matrix_display(e->cam->pos);
+	dprintf(1, ":\n");
+	matrix_display(dir);
+	dprintf(1, "\n\n");
 	matrix_free(&rot);
 	matrix_free(&dir);
 	return (1);
@@ -145,7 +138,7 @@ int		loop_hook(t_env *e)
 	(e->key.speed_up == 1) ? e->speed += 1: 0;
 	(e->key.speed_down == 1) ? e->speed -= 1: 0;
 	(e->key.rot_z2 == 1) ? e->cam->rot->m[Z] -= increm : 0;
-	(e->key.rot_x2 == 1) ? e->cam->rot->m[X] -= increm * 0.5 : 0;
+	(e->key.rot_x2 == 1) ? e->cam->rot->m[X] -= increm : 0;
 	(e->key.rot_z1 == 1) ? e->cam->rot->m[Z] += increm : 0;
 	(e->key.rot_y2 == 1) ? e->cam->rot->m[Y] -= increm : 0;
 	(e->key.rot_x1 == 1) ? e->cam->rot->m[X] += increm : 0;

@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/29 02:21:11 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/03/19 01:19:26 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/18 11:14:48 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 
 
 # define COEF 2
-# define SIZE 3
 
 # define R 0
 # define G 1
@@ -184,7 +183,6 @@ int						loop_hook(t_env *e);
 */
 void					px_to_img(t_env *e, int x, int y, int color);
 void					vectpx_to_img(t_env *e, t_matrix *pos_color);
-void					pix_to_img(t_env *e, t_matrix *pos, t_matrix *color);
 void					print_state(t_env *e);
 
 //	Fonction preparant l'env et qui lance le loop hook

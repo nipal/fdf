@@ -53,4 +53,10 @@ affichage menu:
 -finaliser l'implementaion des couleur
 -implementer l'impression de quadrialetre
 
+interface:
+
+	alpitude:
+	inclinometre:
+	repere3d:
+
 

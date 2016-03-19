@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/10 04:08:06 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/03/16 02:37:53 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/19 01:19:04 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,53 @@ void	px_to_img(t_env *e, int x, int y, int color)
 //	dprintf(1, "x:%d y:%d  color:%d\n", x, y, color);
 }
 
-void	vectpx_to_img(t_env *e, t_matrix *pos_color)
+void	vectpx_to_img2(t_env *e, t_matrix *pos, t_matrix *color)
+{
+	int	x;
+	int	y;
+	int	r;
+	int	g;
+	int	b;
+
+	x = (int) pos_color->m[0];
+	y = (int) pos_color->m[1];
+	if ( x < 0 || x >= e->ecr_x || y < 0 || y >= e->ecr_y)
+	{
+//		dprintf(1, "x_max:%d y_max:%d\n", e->size_line  / 4, 990);
+//		dprintf(1, "out of window x:%d y:%d\n", x, y);
+		return ;
+	}
+	r = (int) pos_color->m[3] + 0.5;
+	g = (int) pos_color->m[4] + 0.5;
+	b = (int) pos_color->m[5] + 0.5;
+	e->data[y * e->size_line + x * 4 + 2] = r;
+	e->data[y * e->size_line + x * 4 + 1] = g;
+	e->data[y * e->size_line + x * 4] = b;
+//	dprintf(1, "======= YEAHHHH BABY  ====== x:%d y:%d  r:%d v:%d b:%d ilne:%d\n", x, y, r, g, b, e->size_line);
+}
+
+void	pix_to_mg(t_env *e, t_matrix *pos, t_matrix *color)
+{
+	int	x;
+	int	y;
+
+	x = (int) pos->m[X];
+	y = (int) pos->m[Y];
+	if ( x < 0 || x >= e->ecr_x || y < 0 || y >= e->ecr_y)
+	{
+//		dprintf(1, "x_max:%d y_max:%d\n", e->size_line  / 4, 990);
+//		dprintf(1, "out of window x:%d y:%d\n", x, y);
+		return ;
+	}
+	e->data[y * e->size_line + x * 4 + 2] = (int)color->m[R];
+	e->data[y * e->size_line + x * 4 + 1] = (int)color->m[V];
+	e->data[y * e->size_line + x * 4] = (int)color->m[B];
+	matrix_free(&pos);
+	matrix_free(&color);
+//	dprintf(1, "======= YEAHHHH BABY  ====== x:%d y:%d  r:%d v:%d b:%d ilne:%d\n", x, y, r, g, b, e->size_line);
+}
+
+void	px_toimg(t_env *e, t_matrix *pos_color)
 {
 	int	x;
 	int	y;
@@ -68,14 +114,19 @@ void	print_state(t_env *e)
 {
 	char	*str;
 
-	string_put("Zoom : ", ft_itoa(e->zoom), e, 50);
+	string_put("speed : ", ft_itoa(e->speed), e, 50);
+	string_put("rot_x : ", ft_itoa(e->cam->rot->m[X]), e, 70);
+	string_put("rot_y : ", ft_itoa(e->cam->rot->m[Y]), e, 90);
+	string_put("rot_z : ", ft_itoa(e->cam->rot->m[Z]), e, 110);
+	/*
 	(e->proj == 0) ? str = ft_strdup("isometric") : (void)e->proj;
 	(e->proj == 1) ? str = ft_strdup("parallel") : (void)e->proj;
 	(e->proj == 2) ? str = ft_strdup("conic") : (void)e->proj;
-	string_put("Projection : ", str, e, 60);
-	ft_strdel(&str);
-	string_put("Offset X : ", ft_itoa(e->decalx), e, 70);
-	string_put("Offset Y : ", ft_itoa(e->decaly), e, 80);
+	*/
+//	string_put("Projection : ", str, e, 60);
+//	ft_strdel(&str);
+	string_put("Offset X : ", ft_itoa(e->decalx), e, 130);
+	string_put("Offset Y : ", ft_itoa(e->decaly), e, 150);
 	str = ft_strnew(20);
 	str = ft_strcat(str, " R = ");
 	str = ft_strcat(str, ft_itoa((int)e->r));
@@ -83,7 +134,7 @@ void	print_state(t_env *e)
 	str = ft_strcat(str, ft_itoa((int)e->g));
 	str = ft_strcat(str, " B = ");
 	str = ft_strcat(str, ft_itoa((int)e->b));
-	string_put(str, "", e, 90);
+	string_put(str, "", e, 170);
 	ft_strdel(&str);
 }
 
@@ -98,8 +149,8 @@ void	env(int **map)
 	e.img = mlx_new_image(e.mlx, SIZE_X, SIZE_Y);
 	e.data = mlx_get_data_addr(e.img, &e.depth, &e.size_line, &e.endian);
 	e.z_buffer = (double*)malloc(sizeof(double) * SIZE_X * SIZE_Y);
-	e.size_map_x = 10;	
-	e.size_map_y = 10;	
+	e.size_map_x = 11;	
+	e.size_map_y = 19;	
 	e.ecr_x = SIZE_X;
 	e.ecr_y = SIZE_Y;
 	e.proj = 0;
