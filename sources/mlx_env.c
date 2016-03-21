@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/10 04:08:06 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/03/19 01:19:04 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/21 04:02:33 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	px_to_img(t_env *e, int x, int y, int color)
 //	dprintf(1, "x:%d y:%d  color:%d\n", x, y, color);
 }
 
+/*
 void	vectpx_to_img2(t_env *e, t_matrix *pos, t_matrix *color)
 {
 	int	x;
@@ -53,8 +54,10 @@ void	vectpx_to_img2(t_env *e, t_matrix *pos, t_matrix *color)
 	e->data[y * e->size_line + x * 4] = b;
 //	dprintf(1, "======= YEAHHHH BABY  ====== x:%d y:%d  r:%d v:%d b:%d ilne:%d\n", x, y, r, g, b, e->size_line);
 }
+*/
 
-void	pix_to_mg(t_env *e, t_matrix *pos, t_matrix *color)
+
+void	pix_to_img(t_env *e, t_matrix *pos, t_matrix *color)
 {
 	int	x;
 	int	y;
@@ -68,14 +71,14 @@ void	pix_to_mg(t_env *e, t_matrix *pos, t_matrix *color)
 		return ;
 	}
 	e->data[y * e->size_line + x * 4 + 2] = (int)color->m[R];
-	e->data[y * e->size_line + x * 4 + 1] = (int)color->m[V];
+	e->data[y * e->size_line + x * 4 + 1] = (int)color->m[G];
 	e->data[y * e->size_line + x * 4] = (int)color->m[B];
 	matrix_free(&pos);
 	matrix_free(&color);
 //	dprintf(1, "======= YEAHHHH BABY  ====== x:%d y:%d  r:%d v:%d b:%d ilne:%d\n", x, y, r, g, b, e->size_line);
 }
 
-void	px_toimg(t_env *e, t_matrix *pos_color)
+void	vectpx_to_img(t_env *e, t_matrix *pos_color)
 {
 	int	x;
 	int	y;
@@ -168,6 +171,8 @@ void	env(int **map)
 	e.speed = 0;
 	e.cam = init_cam(60.0/360.0 * M_PI , 60.0/360.0 *M_PI, &e);
 	init_t_key(&e.key);
+	line_x(&e, 0, 0, 0);
+	line_y(&e, 0, 0, 0);
 	mlx_hook(e.win, 2, 1, key_press, &e);
 	mlx_hook(e.win, 3, 2, key_release, &e);
 	mlx_loop_hook(e.mlx, loop_hook, &e);

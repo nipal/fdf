@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/30 14:38:59 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/03/19 01:19:03 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/21 10:47:33 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,7 +199,7 @@ t_matrix	*sqr_rotate(int rot, int x, int y, int size)
 
 
 
-void	draw_point(t_env *e)
+void	draw_point_new(t_env *e)
 {
 	// On veux juste tracer la map
 	double	z_max;
@@ -223,7 +223,7 @@ void	draw_point(t_env *e)
 	mlx_do_sync(e->mlx);
 }
 
-void	draw_point_old(t_env *e)
+void	draw_point(t_env *e)
 {
 
 	int			size = 199;
@@ -259,6 +259,7 @@ void	draw_point_old(t_env *e)
 		return ;
 //	dprintf(1, "ang:%f", angle);
 
+dprintf(1, "yop1\n");
 
 	matrix_buffer(color);
 	matrix_put_in(0, 0, e->b, 1);
@@ -324,6 +325,21 @@ void	draw_point_old(t_env *e)
 //*/
 
 //*
+dprintf(1, "yop1\n");
+	print_line(pt4, pt5, color2, color3);
+usleep(100000);
+dprintf(1, "yop2\n");
+	print_line(pt4, pt1, color2, color);
+usleep(100000);
+dprintf(1, "yop3\n");
+	print_line(pt1, pt5, color, color3);
+dprintf(1, "yop4\n");
+//*/
+
+
+
+
+/*
 
 	if (!(mat_line = init_mat_line(pt4, pt5, color2, color3)))
 		dprintf(1, "\n\nAll is well 2\n");

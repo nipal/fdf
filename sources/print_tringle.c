@@ -6,7 +6,7 @@
 /*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/17 21:53:24 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/03/19 00:08:44 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/20 18:20:31 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@ void	swap_pt_color(t_matrix **pt, t_matrix **color, int a, int b)
 	color[b] = tmp;
 }
 
+/*
+ *	les point sont ranger par ordre croissant
+ *	selon les x ou le y
+ * */
 void	sort_pt(int	horzontal, t_matrix **pt, t_matrix **color)
 {
 	if (horizontal)
@@ -43,7 +47,6 @@ void	sort_pt(int	horzontal, t_matrix **pt, t_matrix **color)
 }
 
 
-
 t_matrix	*define_eqx(t_matrix *pt1, t_matrix *pt2)
 {
 	t_matrix	*new;
@@ -52,10 +55,48 @@ t_matrix	*define_eqx(t_matrix *pt1, t_matrix *pt2)
 		return (NULL);
 	new->m[X] = pt1->m[X];
 	new->m[Y] = pt1->m[Y];
-	new->m[COEF] = (pt2->m[Y] - pt1->m[Y]) / (pt2->m[X] - pt1->m[X]);
-	new->m[3] = ;
+	new->m[COEF] = ABS((pt2->m[Y] - pt1->m[Y]) / (pt2->m[X] - pt1->m[X]));
+	new->m[3] = pt2->m[X] - pt1->m[X];
 	return (new);
 }
+
+t_matrix	*define_eqy(t_matrix *pt1, t_matrix *pt2)
+{
+	t_matrix	*new;
+
+	if (!(new = matrix_init(1, 4)))
+		return (NULL);
+	new->m[X] = pt1->m[X];
+	new->m[Y] = pt1->m[Y];
+	new->m[COEF] = ABS((pt2->m[X] - pt1->m[X]) / (pt2->m[Y] - pt1->m[Y]));
+	new->m[3] = pt2->m[Y] - pt1->m[Y];
+	return (new);
+}
+
+t_matrix	**lst_eq(int is_horizontal, t_matrix **pt, t_matrix **color)
+{
+	t_matrix 	**eq;
+	t_matrix	*t_b;
+	t_matrix	*t_m;
+	t_matrix	*m_b;
+	
+	if (!(eq = (t_matrix**)malloc(sizeof(t_matrix*) * 4)))
+		return (NULL);
+	if (!(is_horizontal))
+	{
+		t_b = define_eqx(pt[0], pt[2]);
+		t_m = define_eqx(pt[0], pt[1]);
+		m_b = define_eqx(pt[1], pt[2]);
+		//	si faut redefinir une equation avec la position initiale du truc au milieu
+	}
+	return (eq);
+}
+
+/*
+ **	la on recupere la equation des bon ruc et on les stoque la ou il faut
+ **	pour de finir les equation on a besoin de (dx, dy), des point trier
+ * */
+
 
 void	print_triangle(t_env *e, t_matrix **pt, t_matrix **color)
 {
@@ -63,6 +104,7 @@ void	print_triangle(t_env *e, t_matrix **pt, t_matrix **color)
 	double	dy;
 	double	max;
 	double	min;
+	t_matrix	**eq;
 
 	max = MAX(pt[0]->m[X], pt[1]->m[X]);
 	max = MAX(pt[2]->m[X], max);
@@ -74,7 +116,8 @@ void	print_triangle(t_env *e, t_matrix **pt, t_matrix **color)
 	min = MIN(pt[0]->m[Y], pt[1]->m[Y]);
 	min = MIN(pt[2]->m[Y], min);
 	dy = max - min;
-	sort_pt(dx >= dy, pt, color);		
+	sort_pt(dx >= dy, pt, color);
+	eq = 
 	
 	//	la il faut calculer les quatre equation de droite
 	//	
