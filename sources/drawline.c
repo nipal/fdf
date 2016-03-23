@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/30 14:38:59 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/03/22 18:47:12 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/23 11:58:59 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -227,17 +227,23 @@ void	draw_point(t_env *e)
 {
 	t_matrix	*pt1;
 	t_matrix	*pt2;
+	t_matrix	*pt3;
 	t_matrix	*c1;
 	t_matrix	*c2;
+	t_matrix	*c3;
+	int			size = 100;
 	static	int	rot = 0;
 
 	pt1 = matrix_put_in_new(500, 500, 100, 1);
-	pt2 = sqr_rotate(++rot, pt1->m[X], pt1->m[Y], 100);
+	pt2 = sqr_rotate(rot, pt1->m[X], pt1->m[Y], size);
+	pt3 = sqr_rotate(2 * rot++ + size, pt1->m[X], pt1->m[Y], size);
 	c1 = matrix_put_in_new(255, 0, 0, 1);
-//	c2 = matrix_put_in_new(255, 255, 255, 1);
 	c2 = matrix_put_in_new(0, 255, 0, 1);
+	c3 = matrix_put_in_new(0, 0, 255, 1);
 
 	print_line(pt1, c1, pt2, c2);
+	print_line(pt2, c2, pt3, c3);
+	print_line(pt3, c3, pt1, c1);
 
 
 	mlx_put_image_to_window(e->mlx, e->win, e->img, 0, 0);
@@ -245,7 +251,9 @@ void	draw_point(t_env *e)
 	mlx_do_sync(e->mlx);
 	matrix_free(&pt1);
 	matrix_free(&pt2);
+	matrix_free(&pt3);
 	matrix_free(&c1);
 	matrix_free(&c2);
-//	sleep(1000);
+	matrix_free(&c3);
+//	usleep(100000);
 }
