@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/29 02:21:11 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/03/21 02:18:34 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/24 03:32:02 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -219,4 +219,5 @@ t_matrix	*init_mat_line(t_matrix *pt1, t_matrix *pt2, t_matrix *c1, t_matrix *c2
 void	print_line(t_matrix *pt1, t_matrix *c1,  t_matrix *pt2, t_matrix *c2);
 void	line_x(t_env *e, t_matrix *eq, t_matrix *c1, t_matrix *diff_c);
 void	line_y(t_env *e, t_matrix *eq, t_matrix *c1, t_matrix *diff_c);
+t_matrix	**tab_matrix(t_matrix *pt1, t_matrix *pt2, t_matrix *pt3);
 #endif

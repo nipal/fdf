@@ -6,7 +6,7 @@
 #    By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/05 01:32:20 by jpirsch           #+#    #+#              #
-#    Updated: 2016/03/21 02:17:54 by fjanoty          ###   ########.fr        #
+#    Updated: 2016/03/24 03:20:30 by fjanoty          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SRC		= 	main.c \
 			print_map.c \
 			cam.c \
 			print_line.c \
+			print_triangle.c \
 			coord.c
 
 OBJ		= $(SRC:.c=.o)

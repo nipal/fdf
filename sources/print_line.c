@@ -6,7 +6,7 @@
 /*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/17 21:53:38 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/03/23 11:58:59 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/24 08:46:39 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void	print_line(t_matrix *pt1, t_matrix *c1,  t_matrix *pt2, t_matrix *c2)
 		eq->m[SIZE] = diff->m[X];
 		eq->m[COEF] = (diff->m[X] < 0) ? diff->m[Y] / -diff->m[X] : diff->m[Y] / diff->m[X];
 		(diff->m[X] < 0) ? matrix_scalar_product(diff_color, 1.0 / -eq->m[SIZE])
-		: matrix_scalar_product(diff_color, 1.0 / eq->m[SIZE]) ; 
+						 : matrix_scalar_product(diff_color, 1.0 / eq->m[SIZE]); 
 		line_x(0, eq, matrix_copy(c1), diff_color);
 	}
 	else
@@ -101,8 +101,8 @@ void	print_line(t_matrix *pt1, t_matrix *c1,  t_matrix *pt2, t_matrix *c2)
 		eq->m[SIZE] = diff->m[Y];
 		eq->m[COEF] = (diff->m[Y] < 0) ? diff->m[X] / -diff->m[Y] : diff->m[X] / diff->m[Y];
 		(diff->m[Y] < 0) ? matrix_scalar_product(diff_color, 1.0 / -eq->m[SIZE])
-		: matrix_scalar_product(diff_color, 1.0 / eq->m[SIZE]) ; 
+						 : matrix_scalar_product(diff_color, 1.0 / eq->m[SIZE]); 
 		line_y(0, eq, matrix_copy(c1), diff_color);
 	}
-	matrix_free(&diff);
+	//matrix_free(&diff);
 }

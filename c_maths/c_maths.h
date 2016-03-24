@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/15 14:35:08 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/03/16 04:56:59 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/24 03:20:36 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,10 @@
 # define TRIGO_FACT	3
 # define TRIGO_ACCURACY (TRIGO_FACT * 360)
 
+//*
 # define MIN(A, B) ((A) < (B) ? (A) : (B))
 # define MAX(A, B) ((A) < (B) ? (B) : (A))
-
+//*/
 typedef struct	s_matrix
 {
 	double		*m;
@@ -83,5 +84,7 @@ t_matrix		*matrix_put_in_new(double a, double b, double c, double d);
 t_matrix		*set_rotate(double thetx, double thety, double thetz);
 t_matrix		*set_translate(double dx, double dy, double dz);
 t_matrix		*set_scale(double sx, double sy, double sz);
+
+void	print_line(t_matrix *pt1, t_matrix *c1,  t_matrix *pt2, t_matrix *c2);
 
 #endif
