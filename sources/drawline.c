@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/30 14:38:59 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/03/24 08:57:33 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/24 11:32:24 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -233,20 +233,28 @@ void	draw_point(t_env *e)
 	t_matrix	*c1;
 	t_matrix	*c2;
 	t_matrix	*c3;
+	t_matrix	**pt;
+	t_matrix	**cl;
 //	t_matrix	**tab;
-	int			size = 150;
+	int			size = 500;
 	static	int	rot = 0;
 
 	pt1 = matrix_put_in_new(500, 500, 100, 1);
 	pt2 = sqr_rotate(rot, pt1->m[X], pt1->m[Y], size);
-	pt3 = sqr_rotate(15 * rot++ + size, pt1->m[X], pt1->m[Y], size);
-	c1 = matrix_put_in_new(255, 0, 0, 1);
-	c2 = matrix_put_in_new(0, 255, 0, 1);
-	c3 = matrix_put_in_new(0, 0, 255, 1);
+	pt3 = sqr_rotate(rot++ + size, pt1->m[X], pt1->m[Y], size);
+	c1 = matrix_put_in_new(130, 0, 170, 1);
+	c2 = matrix_put_in_new(0, 0, 0, 1);
+	c3 = matrix_put_in_new(0, 0, 0, 1);
 
-	print_triangle(0, tab_matrix(pt1, pt2, pt3), tab_matrix(c1, c2, c3));
-	print_triangle(0, tab_matrix(pt2, pt1, pt3), 0);
-	print_triangle(0, tab_matrix(pt1, pt3, pt2), 0);
+	pt = tab_matrix(pt1, pt2, pt3);
+//	dprintf(1, "oui\n");
+//	dprintf(1, "c1:%ld\n", (long)c1);
+//	dprintf(1, "c2:%ld\n", (long)c2);
+//	dprintf(1, "c3:%ld\n", (long)c3);
+	cl = tab_matrix(c1, c2, c3);
+	print_triangle(0, pt, cl);
+//	print_triangle(0, tab_matrix(pt2, pt1, pt3), 0);
+//	print_triangle(0, tab_matrix(pt1, pt3, pt2), 0);
 
 	print_line(pt1, c1, pt2, c2);
 	print_line(pt2, c2, pt3, c3);

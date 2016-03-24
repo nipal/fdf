@@ -6,7 +6,7 @@
 /*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/17 21:53:24 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/03/24 08:45:44 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/24 11:25:54 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -271,10 +271,10 @@ double	maximum(double a, double b, double c, double d)
 {
 	double	max;
 
-	max = MAX(a, b);
-	max = MAX(max, c);
-	max = MAX(max, d);
-	return (max);
+	max = MAX(ABS(a), ABS(b));
+	max = MAX(max, ABS(c));
+	max = MAX(max, ABS(d));
+	return (max + 10);
 }
 
 t_matrix	**tab_matrix(t_matrix *pt1, t_matrix *pt2, t_matrix *pt3)
@@ -321,32 +321,21 @@ void	print_triangle(t_env *e, t_matrix **pt, t_matrix **cl)
 	eq_p1 = matrix_put_in_new(pt[0]->m[X], pt[0]->m[Y], pt[0]->m[Z], 0);
 	eq_p2 = matrix_put_in_new(pt[0]->m[X], pt[0]->m[Y], pt[0]->m[Z], 0);
 
-dprintf(1, "ouoijkjn\n");
 //*
-dprintf(1, "cl:%ld\n", (long)cl);
-matrix_display(cl[2]);
-matrix_display(cl[1]);
-matrix_display(cl[0]);
 	diff_c1 = matrix_sub(cl[1], cl[0]);
-dprintf(1, "2\n");
 	diff_c2 = matrix_sub(cl[2], cl[0]);
-dprintf(1, "3\n");
 	matrix_scalar_product(diff_c1, 1 / size);
-dprintf(1, "4\n");
 	matrix_scalar_product(diff_c2, 1 / size);
-dprintf(1, "5\n");
 	eq_c1 = matrix_put_in_new(cl[0]->m[R], cl[0]->m[G], cl[0]->m[B], 0);
-dprintf(1, "6\n");
 	eq_c2 = matrix_put_in_new(cl[0]->m[R], cl[0]->m[G], cl[0]->m[B], 0);
-dprintf(1, "7\n");
 //*/
 
 	i = 0;
 	while (i < size)
 	{
-dprintf(1, "i%d\n", i);
-//		print_line(eq_p1, eq_c1, eq_p2, eq_c2);
-		print_line(eq_p1, color, eq_p2, color);
+//dprintf(1, "i%d\n", i);
+		print_line(eq_p1, eq_c1, eq_p2, eq_c2);
+//		print_line(eq_p1, color, eq_p2, color);
 
 		matrix_add_in(eq_p1, diff_p1, eq_p1);
 		matrix_add_in(eq_p2, diff_p2, eq_p2);
@@ -354,7 +343,7 @@ dprintf(1, "i%d\n", i);
 		eq_c1 = matrix_add(eq_c1, diff_c1);
 		eq_c2 = matrix_add(eq_c2, diff_c2);
 
-		matrix_add_in(eq_c2, diff_c2, eq_c2);
+	//	matrix_add_in(eq_c2, diff_c2, eq_c2);
 		i++;
 	}
 //	sleep(20);
