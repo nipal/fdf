@@ -36,8 +36,8 @@ void	define_color(t_matrix *point, t_matrix *color)
 			color->m[B] = 0;
 		}
 	}
-	else
-		;//dprintf(1, "							NO COLOR SET\n");
+//	else
+//		;//dprintf(1, "							NO COLOR SET\n");
 }
 
 void	get_point(t_matrix ***map, t_matrix **point, int i, int j)
@@ -45,17 +45,17 @@ void	get_point(t_matrix ***map, t_matrix **point, int i, int j)
 	int	k;
 
 //	dprintf(1, "OUI\n");
-	if (!(point[0] = (i < 10 && j < 10) ? matrix_copy(map[j][i]) : NULL))
-		;//dprintf(1, "0=>no pt[%d][%d]\n", j, i);
+//	if (!(point[0] = (i < 10 && j < 10) ? matrix_copy(map[j][i]) : NULL))
+//		;//dprintf(1, "0=>no pt[%d][%d]\n", j, i);
 //	dprintf(1, "OUI\n");
-	if (!(point[1] = (i < 9 && j < 10) ? matrix_copy(map[j][i + 1]) : NULL))
-		;//dprintf(1, "1=>no pt[%d][%d]\n", j, i+1);
+//	if (!(point[1] = (i < 9 && j < 10) ? matrix_copy(map[j][i + 1]) : NULL))
+//		;//dprintf(1, "1=>no pt[%d][%d]\n", j, i+1);
 //	dprintf(1, "OUI\n");
-	if (!(point[2] = (j < 9 && i < 10) ? matrix_copy(map[j + 1][i]) : NULL))
-		;//dprintf(1, "2=>no pt[%d][%d]\n", j+1, i);
+//	if (!(point[2] = (j < 9 && i < 10) ? matrix_copy(map[j + 1][i]) : NULL))
+//		;//dprintf(1, "2=>no pt[%d][%d]\n", j+1, i);
 //	dprintf(1, "OUI\n");
-	if (!(point[3] = (j < 9 && i < 9) ? matrix_copy(map[j + 1][i + 1]) : NULL))
-		;//dprintf(1, "3=>no pt[%d][%d]\n", j+1, i+1);
+//	if (!(point[3] = (j < 9 && i < 9) ? matrix_copy(map[j + 1][i + 1]) : NULL))
+//		;//dprintf(1, "3=>no pt[%d][%d]\n", j+1, i+1);
 //	dprintf(1, "OUI\n");
 	k = 0;
 	while (k < 4)
@@ -97,8 +97,8 @@ void	draw_link(t_env *e, t_cam *cam, t_matrix **pt)
 			if (one || two)
 				draw_line(e, init_mat_line(pt[0], pt[1], pt[4], pt[5]));
 		}
-		else
-		;//	dprintf(1, "draw_link no 1\n");
+//		else
+//		;//	dprintf(1, "draw_link no 1\n");
 		if (pt[2])
 		{
 			two = (is_inside(e, pt[2])) ? 1 : 0 ;
@@ -106,8 +106,8 @@ void	draw_link(t_env *e, t_cam *cam, t_matrix **pt)
 			if (one || two)
 				draw_line(e, init_mat_line(pt[0], pt[2], pt[4], pt[6]));
 		}
-		else
-		;//	dprintf(1, "draw_link no 2\n");
+//		else
+//		;//	dprintf(1, "draw_link no 2\n");
 		if (pt[3] && PRINT_DIAG)
 		{
 			two = (is_inside(e, pt[3])) ? 1 : 0 ;
@@ -115,11 +115,11 @@ void	draw_link(t_env *e, t_cam *cam, t_matrix **pt)
 			if (one || two)
 				draw_line(e, init_mat_line(pt[0], pt[3], pt[4], pt[7]));
 		}
-		else
-		;//	dprintf(1, "draw_link no 3\n");
+//		else
+//		;//	dprintf(1, "draw_link no 3\n");
 	}
-	else
-	;//	dprintf(1, "draw_link no 0\n");
+//	else
+//	;//	dprintf(1, "draw_link no 0\n");
 }
 
 
@@ -136,6 +136,7 @@ void	adapt_point(t_cam *c, t_matrix ***pt, int size_x, int size_y)
 	y = 1;
 	z = 1;
 	mult = 1;
+	(void)mult;
 	if (!c)
 		dprintf(1, "adapt_point no c\n");
 	if (!pt)

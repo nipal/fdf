@@ -31,12 +31,12 @@ FLAGS = -Wall -Wextra -Werror
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	gcc -o $(NAME) $(FLAGS) $(OBJ) -L ../libft/ -lft -L ../minilibx/ \
+	gcc -o $(NAME) $(FLAGS) $(OBJ) -L ../libft/ -lft \
 		-L ../c_maths -lc_maths \
-		-lmlx -framework OpenGL -framework AppKit
+		-L /usr/lib/ -lmlx -lm -lX11 -lXext
 
 $(OBJ):
-	gcc -c $(FLAGS) $(SRC) -I ../includes -I ../c_maths
+	gcc -c $(FLAGS) $(SRC) -I ../includes -I ../c_maths# -I /usr/includes/
 
 clean:
 	rm -f $(OBJ)

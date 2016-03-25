@@ -307,6 +307,7 @@ void	print_triangle(t_env *e, t_matrix **pt, t_matrix **cl)
 	double		size;
 	int			i;
 
+(void)color;
 	diff_c1 = NULL;
 	diff_c2 = NULL;
 	(void)cl;

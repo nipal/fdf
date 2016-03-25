@@ -152,6 +152,9 @@ t_cam	*init_cam(double fov_y, double fov_x, t_env *e)
 	double	dy_cam;
 	static	double	increm = 0;
 
+(void)dx_cam;
+(void)dy_cam;
+(void)marge;
 	c = (t_cam*) malloc(sizeof(t_cam));
 	if ((!c || fov_y <= 0 || fov_y >= 180 || fov_y > 180 || fov_y < 0 
 		|| !(c->dir = matrix_put_in_new(0, 0, 1, 1))

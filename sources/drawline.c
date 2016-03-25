@@ -27,6 +27,7 @@ void	draw_line(t_env *e, t_matrix *mat_line)
 	t_matrix	*org;
 	t_matrix	*print;
 
+(void)e;
 	if (!(mat_line)
 		|| !(diff = matrix_init(6, 1))
 		|| (!(org = matrix_init(6, 1)) && matrix_free(&diff)))
@@ -61,19 +62,19 @@ t_matrix	*init_mat_line(t_matrix *pt1, t_matrix *pt2
 		|| !pt1 || !pt2 || !c1 || !c2
 		|| (!(diff = matrix_sub(pt2, pt1)) && free_matrix(mat_line)))
 	{
-		if (!(mat_line))
-			;//dprintf(1, "no mat_line\n");
-		if (!(pt1))
-			;//dprintf(1, "no pt1\n");
-		if (!(pt2))
-			;//dprintf(1, "no pt2\n");
-		if (!(c1))
-			;//dprintf(1, "no c1\n");
-		if (!(c2))
-			;//dprintf(1, "no c2\n");
-		if (!(diff))
-			;//dprintf(1, "no diff\n");
-		return (NULL);
+//		if (!(mat_line))
+//			;//dprintf(1, "no mat_line\n");
+//		if (!(pt1))
+//			;//dprintf(1, "no pt1\n");
+//		if (!(pt2))
+//			;//dprintf(1, "no pt2\n");
+//		if (!(c1))
+//			;//dprintf(1, "no c1\n");
+//		if (!(c2))
+//			;//dprintf(1, "no c2\n");
+//		if (!(diff))
+//			;//dprintf(1, "no diff\n");
+//		return (NULL);
 	}
 	diff->m[Z] = 0;
 	norme = matrix_dot_product(diff, diff);
@@ -99,12 +100,12 @@ t_matrix	*init_mat_line2(t_matrix *pt_color, t_matrix *pt3, t_matrix *c3)
 	t_matrix	*diff;
 	double		norme;
 
-	if (!(pt_color))
-		;//dprintf(1, "	pt_color\n");
-	if (!(pt3))
-		;//dprintf(1, "	pt3\n");
-	if (!(c3))
-		;//dprintf(1, "	c3\n");
+//	if (!(pt_color))
+//		;//dprintf(1, "	pt_color\n");
+//	if (!(pt3))
+//		;//dprintf(1, "	pt3\n");
+//	if (!(c3))
+//		;//dprintf(1, "	c3\n");
 	if (!(mat_line = matrix_init(14, 1))
 		|| !pt_color || !pt3 || !c3
 		|| !(pt_inter = matrix_init(1, 4))
@@ -138,6 +139,10 @@ void	draw_triangle(t_env *e, t_matrix *mat_line, t_matrix *pt3, t_matrix *c3)
 	t_matrix	*org;
 	t_matrix	*print;
 	t_matrix	*mat_line2;
+	(void)mat_line2;
+	(void)pt3;
+	(void)c3;
+	(void)e;
 
 	if (!(mat_line)
 		|| !(diff = matrix_init(6, 1))
@@ -150,11 +155,11 @@ void	draw_triangle(t_env *e, t_matrix *mat_line, t_matrix *pt3, t_matrix *c3)
 	while (++i < size)
 	{
 		print = matrix_add(org, diff); 
-		if (!(mat_line2 = init_mat_line2(print, pt3, c3)))
-		{
-			;//dprintf(1, "Yapa\n");
-		}
-		draw_line(e, mat_line2);
+//		if (!(mat_line2 = init_mat_line2(print, pt3, c3)))
+//		{
+//			;//dprintf(1, "Yapa\n");
+//		}
+//		draw_line(e, mat_line2);
 		matrix_free(&org);
 		org = print;
 	}
