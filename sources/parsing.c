@@ -4,6 +4,7 @@
 on resoi un file descriptor et on en retir
 */
 
+//	le caca c'est la vie
 
 t_list	*get_file(int fd)
 {
