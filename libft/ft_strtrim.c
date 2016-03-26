@@ -3,77 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/11 04:29:57 by jpirsch           #+#    #+#             */
-/*   Updated: 2015/01/10 04:35:45 by jpirsch          ###   ########.fr       */
+/*   Created: 2015/11/04 18:24:51 by fjanoty           #+#    #+#             */
+/*   Updated: 2015/11/05 00:11:36 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static char	*ft_strcleaner(const char *s, size_t startblanks, size_t endblanks)
+char	*ft_strtrim(char const *s)
 {
-	char	*str;
-	size_t	size;
+	char	*copy;
 	size_t	i;
 
+	while (*s == ' ' || *s == '\t' || *s == '\n')
+		s++;
 	i = 0;
-	str = ft_strdup((char*)s);
-	if (!startblanks && !endblanks)
-		return (str);
-	else
-		size = ft_strlen((char *)s) - startblanks - endblanks + 1;
-	if (!(str = ft_strnew(size + 1)))
-		return (NULL);
-	while (*s == ' ' || *s == '\n' || *s == '\t')
-		s++;
-	while (*s && i < size - 1)
-	{
-		str[i] = *s;
-		s++;
+	while (s[i])
 		i++;
-	}
-	str[i] = '\0';
-	return (str);
-}
-
-static char	*ft_countblanks(const char *s, size_t loops, size_t slen)
-{
-	size_t	startblanks;
-	size_t	endblanks;
-
-	startblanks = 0;
-	endblanks = 0;
-	while (*s)
-	{
-		while (loops == 0 && (*s == ' ' || *s == '\n' || *s == '\t'))
-		{
-			s++;
-			startblanks++;
-		}
-		if (*s != ' ' && *s != '\n' && *s != '\t')
-		{
-			loops = 1;
-			endblanks = 0;
-			s++;
-		}
-		while (*s == ' ' || *s == '\n' || *s == '\t')
-		{
-			endblanks++;
-			s++;
-		}
-	}
-	return (ft_strcleaner(s - slen, startblanks, endblanks));
-}
-
-char		*ft_strtrim(const char *s)
-{
-	char	*str;
-
-	if (!s)
+	while (i > 0 && (s[i - 1] == ' ' || s[i - 1] == '\t' || s[i - 1] == '\n'))
+		i--;
+	if (i == 0)
 		return (NULL);
-	if (!(str = ft_countblanks(s, 0, ft_strlen((char*)s))))
+	copy = ft_strnew(i);
+	if (!copy)
 		return (NULL);
-	return (str);
+	copy = ft_strncpy(copy, s, i);
+	copy[i] = '\0';
+	return (copy);
 }

@@ -206,9 +206,8 @@ t_matrix	*sqr_rotate(int rot, int x, int y, int size)
 
 
 
-void	draw_point_new(t_env *e)
+void	draw_point(t_env *e)
 {
-	// On veux juste tracer la map
 	double	z_max;
 	double	z_min;
 //(void)e;
@@ -230,7 +229,7 @@ void	draw_point_new(t_env *e)
 	mlx_do_sync(e->mlx);
 }
 
-void	draw_point(t_env *e)
+void	draw_point_test(t_env *e)
 {
 	t_matrix	*pt1;
 	t_matrix	*pt2;

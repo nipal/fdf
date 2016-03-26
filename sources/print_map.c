@@ -95,7 +95,8 @@ void	draw_link(t_env *e, t_cam *cam, t_matrix **pt)
 			two = (is_inside(e, pt[1])) ? 1 : 0 ;
 //			matrix_display(pt[1]);
 			if (one || two)
-				draw_line(e, init_mat_line(pt[0], pt[1], pt[4], pt[5]));
+		//		draw_line(e, init_mat_line(pt[0], pt[1], pt[4], pt[5]));
+				print_line(pt[0], pt[4], pt[1], pt[5]);
 		}
 //		else
 //		;//	dprintf(1, "draw_link no 1\n");
@@ -104,7 +105,8 @@ void	draw_link(t_env *e, t_cam *cam, t_matrix **pt)
 			two = (is_inside(e, pt[2])) ? 1 : 0 ;
 //			matrix_display(pt[2]);
 			if (one || two)
-				draw_line(e, init_mat_line(pt[0], pt[2], pt[4], pt[6]));
+		//		draw_line(e, init_mat_line(pt[0], pt[2], pt[4], pt[6]));
+				print_line(pt[0], pt[4], pt[1], pt[6]);
 		}
 //		else
 //		;//	dprintf(1, "draw_link no 2\n");
@@ -113,7 +115,8 @@ void	draw_link(t_env *e, t_cam *cam, t_matrix **pt)
 			two = (is_inside(e, pt[3])) ? 1 : 0 ;
 //			matrix_display(pt[3]);
 			if (one || two)
-				draw_line(e, init_mat_line(pt[0], pt[3], pt[4], pt[7]));
+		//		draw_line(e, init_mat_line(pt[0], pt[3], pt[4], pt[7]));
+				print_line(pt[0], pt[4], pt[3], pt[7]);
 		}
 //		else
 //		;//	dprintf(1, "draw_link no 3\n");

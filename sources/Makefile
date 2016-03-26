@@ -12,7 +12,6 @@
 
 NAME	=	../fdf
 SRC		= 	main.c \
-			get_next_line.c \
 	 		parse.c \
 			mlx_env.c \
 			hook.c \

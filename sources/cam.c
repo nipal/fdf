@@ -159,7 +159,7 @@ t_cam	*init_cam(double fov_y, double fov_x, t_env *e)
 	if ((!c || fov_y <= 0 || fov_y >= 180 || fov_y > 180 || fov_y < 0 
 		|| !(c->dir = matrix_put_in_new(0, 0, 1, 1))
 		|| !(c->rot = matrix_put_in_new(e->rot_x, e->rot_y, e->rot_z, 1))
-		|| !(c->pos = matrix_put_in_new(0, 0, 0, 1))
+		|| !(c->pos = matrix_put_in_new(0, 0, -500, 1))
 		|| !(c->corner = (t_matrix**)malloc(sizeof(t_cam*) * 4))
 		|| !(c->normal = (t_matrix**)malloc(sizeof(t_cam*) * 4)))
 		|| !(malloc_cam_tab(c)))

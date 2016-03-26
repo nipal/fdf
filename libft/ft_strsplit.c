@@ -3,53 +3,78 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsplit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/11 07:56:07 by jpirsch           #+#    #+#             */
-/*   Updated: 2015/01/10 04:54:26 by jpirsch          ###   ########.fr       */
+/*   Created: 2015/11/04 18:24:51 by fjanoty           #+#    #+#             */
+/*   Updated: 2016/01/19 23:22:02 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static char			**ft_filltab(const char *s, char c, size_t n, char **strtab)
+static char	**ft_strsplitclean(char **split, char *copy, size_t nmot)
 {
-	size_t size;
-	size_t i;
+	size_t	i;
 
-	size = 0;
 	i = 0;
-	while (i <= n)
+	while (i < nmot)
 	{
-		if ((size = ft_strchr_len(s, c)) == 0)
-			size = ft_strlen((char*)s);
-		strtab[i] = ft_strsub(s, 0, size);
-		s = s + size + 1;
+		split[i] = ft_strdup(split[i]);
 		i++;
 	}
-	free(strtab);
-	return (strtab);
+	split[i] = NULL;
+	free(copy);
+	return (split);
 }
 
-char				**ft_strsplit(const char *s, char c)
+static char	**ft_strsplitcpy(char *copy, char c, size_t j, size_t i)
 {
-	char	**strtab;
-	size_t	n;
+	char	**split;
 
-	if (!s || !c)
+	split = (char **)malloc(sizeof(char *) * (j + 1));
+	if (!split)
 		return (NULL);
-	n = ft_countwords(s, c);
-	if (!(strtab = ft_tabmalloc(n + 1, ft_strlen((char*)s))))
-		return (NULL);
-	if (!n)
-		strtab[0] = NULL;
-	else
+	j = 0;
+	while (copy[i])
 	{
-		s = ft_strtrim_char(s, c);
-		if (n == 1)
-			strtab[0] = ft_strdup((char*)s);
-		else
-			strtab = ft_filltab(s, c, n, strtab);
+		split[j] = &(copy[i]);
+		while (copy[i] != c && copy[i])
+			i++;
+		if (!copy[i])
+			return (ft_strsplitclean(split, copy, j + 1));
+		copy[i] = '\0';
+		i++;
+		j++;
+		while (copy[i] == c)
+			i++;
 	}
-	return (strtab);
+	split[j] = NULL;
+	return (split);
+}
+
+char		**ft_strsplit(char const *s, char c)
+{
+	char	*copy;
+	size_t	i;
+	size_t	j;
+
+	while (*s == c)
+		s++;
+	copy = ft_strdup(s);
+	i = ft_strlen(copy);
+	while (i && copy[i - 1] == c)
+		i--;
+	copy[i] = '\0';
+	j = 1;
+	while (i > 0)
+	{
+		if (copy[i] == c)
+		{
+			j++;
+			while (copy[i] == c)
+				i--;
+		}
+		i--;
+	}
+	return (ft_strsplitcpy(copy, c, j, i));
 }
