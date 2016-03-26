@@ -6,14 +6,14 @@
 #    By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/05 01:32:20 by jpirsch           #+#    #+#              #
-#    Updated: 2016/03/24 03:20:30 by fjanoty          ###   ########.fr        #
+#    Updated: 2016/03/26 17:42:09 by fjanoty          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	../fdf
 SRC		= 	main.c \
 			get_next_line.c \
-	 		parse.c \
+	 		parsing.c \
 			mlx_env.c \
 			hook.c \
 		 	drawline.c \

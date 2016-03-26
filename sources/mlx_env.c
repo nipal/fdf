@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/10 04:08:06 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/03/24 20:32:59 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/26 17:47:01 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,14 +140,18 @@ void	print_state(t_env *e)
 	ft_strdel(&str);
 }
 
-void	env(int **map)
+int		**init_map(t_env *e, int fd)
+{
+	return (get_number(get_str(get_file(fd)), &(e->nb_line), &(e->size_line)));
+}
+
+void	env(int fd)
 {
 	t_env	e;
 
-	e.map = map;
-	if (!(e.mlx = mlx_init()))
+	if (!(e.mlx = mlx_init()) || !(e->map = init_map(&e, fd)))
 		return ;
-	e.win = mlx_new_window(e.mlx, SIZE_X, SIZE_Y, "sandwich");
+	e.win = mlx_new_window(e.mlx, SIZE_X, SIZE_Y, "La Netre-fre du SwagySwag");
 	e.img = mlx_new_image(e.mlx, SIZE_X, SIZE_Y);
 	e.data = mlx_get_data_addr(e.img, &e.depth, &e.size_line, &e.endian);
 	e.z_buffer = (double*)malloc(sizeof(double) * SIZE_X * SIZE_Y);

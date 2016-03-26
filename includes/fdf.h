@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/29 02:21:11 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/03/24 03:32:02 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/26 17:46:31 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 /*
  **	mat_line
  **/
-
+# define SIZE_BUFF 256
 
 # define COEF 2
 # define SIZE 3
@@ -151,8 +151,10 @@ typedef struct			s_env
 	unsigned char		g;
 	unsigned char		b;
 	t_key				key;
-	int					size_map_x;
-	int					size_map_y;
+	int					map_x;
+	int					map_y;
+	double				max_z;
+	double				min_z;
 	double				rot_x;
 	double				rot_y;
 	double				rot_z;
@@ -188,7 +190,7 @@ void					pix_to_img(t_env *e, t_matrix *pos, t_matrix *color);
 void					print_state(t_env *e);
 
 //	Fonction preparant l'env et qui lance le loop hook
-void					env(int **map);
+void					env(int fd);
 /*
 ** coord
 */
@@ -208,9 +210,19 @@ void	print_map(t_env *e, t_cam *cam, t_matrix ***map);
 //fonctions de dessin (putline, put map of vect)
 void					draw_point(t_env *e);
 /*
-** parse
+** parsing
+**	int						**parse(int fd);
 */
-int						**parse(int fd);
+
+//int						**parse(int fd);
+t_list	*get_file(int fd);
+char	*get_str(t_list *lst);
+int		get_tabsize(char **tab);
+int		free_charab(char **tab);
+int		*fill_line(char **char_line, int size_line);
+int		**get_number(char *str, int *size_line, int *nb_line);
+t_matrix	***get_matrix_map(t_env *e);
+
 
 
 t_matrix	***get_map(t_env *e, double *z_max, double *z_min);

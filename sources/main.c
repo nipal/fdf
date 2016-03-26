@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/26 07:31:16 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/03/06 09:19:42 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/26 17:39:46 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,10 @@
 #include "libft.h"
 #include "fdf.h"
 
-int		check_map(int fd)
-{
-	char	buf[1000001];
-	int		ret;
-
-	ret = 0;
-	if (fd == -1)
-		return (0);
-	if ((ret = read(fd, buf, 1000000)))
-		buf[ret] = '\0';
-	if (buf[ret - 1] != '\n')
-		return (0);
-	if (buf[ret - 1] == '\n' && buf[ret - 2] == '\n')
-		return (0);
-	return (1);
-}
 
 int		main(int ac, char **av)
 {
 	int		fd;
-	int		**map;
 
 	if (ac == 2)
 		fd = open(av[1], O_RDONLY);
@@ -50,8 +33,7 @@ int		main(int ac, char **av)
 			else
 				fd = open("maps/42.fdf", O_RDONLY);
 			if (fd > 0)
-				if ((map = parse(fd)))
-					env(map);
+				env(fd);
 		}
 		else
 			ft_putendl_fd("No \\n or more than 2 \\n at the end of file", 2);
