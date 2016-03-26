@@ -6,11 +6,13 @@
 /*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/12 03:54:36 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/03/19 01:19:11 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/25 02:37:44 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+void	print_triangle(t_env *e, t_matrix **pt, t_matrix **cl);
 
 void	define_color(t_matrix *point, t_matrix *color)
 {
@@ -72,10 +74,18 @@ void	get_point(t_matrix ***map, t_matrix **point, int i, int j)
 
 int	is_inside(t_env *e, t_matrix *pt)
 {
+	double	coef = 1500;
 //	if (e)
 //		return (1);
-	if (pt->m[Z] < 0 || pt->m[Y] < 0 || pt->m[X] < 0
-		|| pt->m[X] >= e->ecr_x || pt->m[Y] >= e->ecr_y)
+
+	/*
+	if (pt->m[Z] < 0 || pt->m[X] < -e->ecr_x / 2 || pt->m[Y] < -e->ecr_y / 2
+		|| pt->m[X] > e->ecr_x / 2 || pt->m[Y] > e->ecr_y / 2)
+		return (0);
+	*/
+(void)e;
+	if (pt->m[Z] < 0 || pt->m[X] < -coef || pt->m[Y] < -coef
+		|| pt->m[X] > coef || pt->m[Y] > coef)
 		return (0);
 	return (1);
 }
@@ -89,11 +99,9 @@ void	draw_link(t_env *e, t_cam *cam, t_matrix **pt)
 	if (pt[0])
 	{
 		one = (is_inside(e, pt[0])) ? 1 : 0 ;
-//		matrix_display(pt[0]);
 		if (pt[1])
 		{
 			two = (is_inside(e, pt[1])) ? 1 : 0 ;
-//			matrix_display(pt[1]);
 			if (one || two)
 				draw_line(e, init_mat_line(pt[0], pt[1], pt[4], pt[5]));
 		}
@@ -102,16 +110,16 @@ void	draw_link(t_env *e, t_cam *cam, t_matrix **pt)
 		if (pt[2])
 		{
 			two = (is_inside(e, pt[2])) ? 1 : 0 ;
-//			matrix_display(pt[2]);
 			if (one || two)
-				draw_line(e, init_mat_line(pt[0], pt[2], pt[4], pt[6]));
+			{
+				print_line(pt[0], pt[4], pt[2], pt[6]);
+			}
 		}
 		else
 		;//	dprintf(1, "draw_link no 2\n");
-		if (pt[3] && PRINT_DIAG)
+		if (pt[3])
 		{
 			two = (is_inside(e, pt[3])) ? 1 : 0 ;
-//			matrix_display(pt[3]);
 			if (one || two)
 				draw_line(e, init_mat_line(pt[0], pt[3], pt[4], pt[7]));
 		}
@@ -122,6 +130,72 @@ void	draw_link(t_env *e, t_cam *cam, t_matrix **pt)
 	;//	dprintf(1, "draw_link no 0\n");
 }
 
+
+
+/*
+ *	On veux imprimer deux triangle
+ * */
+//	one = (is_inside(e, pt[0])) ? 1 : 0 ;
+void	draw_face(t_env *e, t_matrix **pts)
+{
+	t_matrix	**pt;
+	t_matrix	**cl;
+
+//	pt = NULL;
+//	cl = NULL;
+		if (pts[0] && pts[1] && pts[2] 
+			&& ((is_inside(e, pts[0]))
+			&& (is_inside(e, pts[1]))
+			&& (is_inside(e, pts[2]))))
+		{
+			pt = tab_matrix(pts[0], pts[1], pts[2]);
+			cl = tab_matrix(pts[4], pts[5], pts[6]);
+			print_triangle(e, pt, cl);
+		}
+
+		if (pts[1] && pts[2] && pts[3] 
+			&& ((is_inside(e, pts[1]))
+			&& (is_inside(e, pts[2]))
+			&& (is_inside(e, pts[3]))))
+		{
+			pt = tab_matrix(pts[1], pts[2], pts[3]);
+			cl = tab_matrix(pts[5], pts[6], pts[7]);
+			print_triangle(e, pt, cl);
+		}
+
+
+		if (pts[2] && pts[3] && pts[0] 
+			&& ((is_inside(e, pts[2]))
+			&& (is_inside(e, pts[3]))
+			&& (is_inside(e, pts[0]))))
+		{
+			pt = tab_matrix(pts[2], pts[3], pts[0]);
+			cl = tab_matrix(pts[6], pts[7], pts[4]);
+			print_triangle(e, pt, cl);
+		}
+
+		if (pts[3] && pts[0] && pts[1] 
+			&& ((is_inside(e, pts[3]))
+			&& (is_inside(e, pts[0]))
+			&& (is_inside(e, pts[1]))))
+		{
+			pt = tab_matrix(pts[3], pts[0], pts[1]);
+			cl = tab_matrix(pts[7], pts[4], pts[5]);
+			print_triangle(e, pt, cl);
+		}
+
+/*
+		if (pts[1] && pts[2] && pts[3] 
+			&& ((is_inside(e, pts[1]))
+			&& (is_inside(e, pts[2]))
+			&& (is_inside(e, pts[3]))))
+		{
+			pt = tab_matrix(pts[1], pts[2], pts[3]);
+			cl = tab_matrix(pts[5], pts[6], pts[7]);
+			print_triangle(e, pt, cl);
+		}
+		*/
+}
 
 void	adapt_point(t_cam *c, t_matrix ***pt, int size_x, int size_y)
 {
@@ -235,13 +309,18 @@ void	print_map(t_env *e, t_cam *cam, t_matrix ***map)
 		i = 0;
 		while (i < e->size_map_x)
 		{
+			dprintf(1, "i:%d j:%d I:%d, J:%d\n", i, j, e->size_map_y, e->size_map_x);
 			get_point(map, point, i, j);
+			dprintf(1, "i:%d j:%d I:%d, J:%d\n", i, j, e->size_map_y, e->size_map_x);
 			draw_link(e, e->cam, point);
+		//	draw_face(e, point);
+//			draw_link(e, e->cam, point);
+			dprintf(1, "i:%d j:%d I:%d, J:%d\n", i, j, e->size_map_y, e->size_map_x);
 			i++;
 		}
 		j++;
 	}
-	free_point(map, e->size_map_x, e->size_map_y);
+//	free_point(map, e->size_map_x, e->size_map_y);
 
 }
 

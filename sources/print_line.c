@@ -6,7 +6,7 @@
 /*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/17 21:53:38 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/03/24 08:46:39 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/25 01:38:53 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	line_x(t_env *env, t_matrix *eq, t_matrix *c1, t_matrix *diff_c)
 		}
 		return ;
 	}
-	while (--i > eq->m[SIZE])
+	while (--i > -eq->m[SIZE])
 	{
 		pt1->m[X] = eq->m[X] + i;
 		pt1->m[Y] = eq->m[Y] - (i * eq->m[COEF]);
@@ -69,7 +69,7 @@ void	line_y(t_env *env, t_matrix *eq, t_matrix *c1, t_matrix *diff_c)
 		}
 		return ;
 	}
-	while (--i > eq->m[SIZE])
+	while (--i > -eq->m[SIZE])
 	{
 		pt1->m[X] = eq->m[X] - (i * eq->m[COEF]);
 		pt1->m[Y] = eq->m[Y] + i;

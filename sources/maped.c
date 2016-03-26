@@ -6,7 +6,7 @@
 /*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 08:33:48 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/03/19 01:19:12 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/25 01:38:53 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,9 +115,9 @@ int	tab2[11][19] =		{{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 			*z_max = MAX(tab2[j][i], *z_max);
 			*z_min = MIN(tab2[j][i], *z_min);
 			matrix_buffer(map_mat[j][i]);
-			matrix_put_in((i - 5) * 30, (tab2[j][i] * e->zoom * 0.01), (j - 5) * 30, 1);
+			matrix_put_in((i - 5) * 30, (j - 5) * 30, (tab2[j][i] * e->zoom * 0.01), 1);
 			matrix_buffer(map_mat[j + y][i]);
-			matrix_put_in((i - 5) * 30, (tab2[j][i] * e->zoom * 1), (j - 5) * 30, 1);
+			matrix_put_in((i - 5) * 30, (j - 5) * 30, (tab2[j][i] * e->zoom * 1), 1);
 			i++;
 		}
 		j++;

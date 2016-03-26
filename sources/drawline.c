@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/30 14:38:59 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/03/24 11:32:24 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/25 01:38:54 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,7 +201,7 @@ t_matrix	*sqr_rotate(int rot, int x, int y, int size)
 
 
 
-void	draw_point_new(t_env *e)
+void	draw_point(t_env *e)
 {
 	// On veux juste tracer la map
 	double	z_max;
@@ -225,7 +225,7 @@ void	draw_point_new(t_env *e)
 	mlx_do_sync(e->mlx);
 }
 
-void	draw_point(t_env *e)
+void	draw_pointi_old(t_env *e)
 {
 	t_matrix	*pt1;
 	t_matrix	*pt2;
@@ -246,13 +246,13 @@ void	draw_point(t_env *e)
 	c2 = matrix_put_in_new(0, 0, 0, 1);
 	c3 = matrix_put_in_new(0, 0, 0, 1);
 
-	pt = tab_matrix(pt1, pt2, pt3);
 //	dprintf(1, "oui\n");
 //	dprintf(1, "c1:%ld\n", (long)c1);
 //	dprintf(1, "c2:%ld\n", (long)c2);
 //	dprintf(1, "c3:%ld\n", (long)c3);
+	pt = tab_matrix(pt1, pt2, pt3);
 	cl = tab_matrix(c1, c2, c3);
-	print_triangle(0, pt, cl);
+	print_triangle(e, pt, cl);
 //	print_triangle(0, tab_matrix(pt2, pt1, pt3), 0);
 //	print_triangle(0, tab_matrix(pt1, pt3, pt2), 0);
 

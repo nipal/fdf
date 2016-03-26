@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/10 04:08:06 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/03/22 19:54:32 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/24 20:32:59 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	pix_to_img(t_env *e, t_matrix *pos, t_matrix *color)
 void	vectpx_to_img(t_env *e, t_matrix *pos_color)
 {
 	;//dprintf(2, "\n\n\n\n\n\n*********************************3\n");
-	sleep(10);
+//	sleep(10);
 	int	x;
 	int	y;
 	int	r;
