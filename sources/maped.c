@@ -6,7 +6,7 @@
 /*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 08:33:48 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/03/26 17:47:05 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/26 21:27:06 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ t_matrix	***get_map(t_env *e, double *z_max, double *z_min)
 
 //	dprintf(1, "D\n");
 //
-	double	min;
+	////double	min;
 
 /*
 	int			tab2[10][10]		=	{{-100, 0, 0,-0,-0, 0, 0, 0, 0, 0},

@@ -14,7 +14,7 @@ t_list	*get_file(int fd)
 
 	begin = NULL;
 	while ((ret = read(fd, buff, SIZE_BUFF)) > 0)
-		ft_lstadd_back(&begin, ft_lstnew(buff, ret));
+		ft_lstadd_end(&begin, ft_lstnew(buff, ret));
 	return (begin);
 }
 
@@ -27,7 +27,7 @@ char	*get_str(t_list *lst)
 	if (!lst)
 		return (NULL);
 	i = 0;
-	size = ft_lstsize(begin);
+	size = ft_lstsize(lst);
 	if (!(str = ft_strnew(SIZE_BUFF * size)))
 		return (NULL);
 	while (i < size)
@@ -51,7 +51,7 @@ int		get_tabsize(char **tab)
 	return (size);
 }
 
-int		free_charab(char **tab)
+int		free_chartab(char **tab)
 {
 	int i;
 
@@ -78,12 +78,12 @@ int		*fill_line(char **char_line, int size_line)
 	while (i < size_line)
 	{
 		int_line[i] = ft_atoi(char_line[i]);
-		i++:
+		i++;
 	}
 	return (int_line);
 }
 
-int		**get_number(char *str, int *size_line, int *nb_line)
+int		**get_number(char *str, int *nb_line, int *size_line)
 {
 	char	**line;
 	char	**tmp;
@@ -92,8 +92,8 @@ int		**get_number(char *str, int *size_line, int *nb_line)
 
 	if (!size_line || !nb_line || !(line = ft_strsplit(str, '\n')))
 		return (NULL);
-	*nb_line = get_tab_size(line);
-	if (!(map = (int**) malloc(sizeof(int*) * size)))
+	*nb_line = get_tabsize(line);
+	if (!(map = (int**) malloc(sizeof(int*) * *nb_line)))
 		return (NULL);
 	if (!(tmp = ft_strsplit(line[0], ' '))) 
 		return (NULL);
@@ -104,7 +104,7 @@ int		**get_number(char *str, int *size_line, int *nb_line)
 	{
 		if (!(tmp = ft_strsplit(line[j], ' '))
 				|| (get_tabsize(tmp) != *size_line && free_chartab(tmp))
-				|| !(map[j] = fill_line(tmp)))
+				|| !(map[j] = fill_line(tmp, *size_line)))
 			return (NULL);
 		free_chartab(tmp);
 	}
@@ -127,21 +127,21 @@ void		define_color(t_env *e, t_matrix*** map, int nbl, int min)
 	coefz = 255.0 / (e->max_z - e->min_z);
 	coefy = 255.0 / e->map_x;
 	coefx = 255.0 / e->map_y;
-	j = e->nb_line;
+	j = e->map_y;
 	while (j < e->map_y)
 	{
 		if (!(map[j] = (t_matrix**)malloc(sizeof(t_matrix*) * e->map_x)))
-			return (NULL);
+			return ;
 		i = 0;
 		while (i < e->map_x)
 		{
-			if (!(map[j][i] = matrix_put_in_new(coefx * map[j - nbl][i]->m[x]
+			if (!(map[j][i] = matrix_put_in_new(coefx * map[j - nbl][i]->m[X]
 				, coefy * map[j - nbl][i]->m[Y]
-				, coefz * (map[j - nbl][i]->m[Z] - e->min_z), 1)))
-				return (NULL);
+				, coefz * (map[j - nbl][i]->m[Z] - min), 1)))
+				return ;
 			i++;
 		}
-		j++:
+		j++;
 	}
 }
 
@@ -171,6 +171,6 @@ t_matrix	***get_matrix_map(t_env *e)
 			e->min_z = (e->min_z > e->map[j][i]) ? e->map[j][i]: e->min_z;
 		}
 	}
-	define_color(e, map, e->nb_line, e->min_z);
+	define_color(e, map, e->map_y, e->min_z);
 	return (map);
 }

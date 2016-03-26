@@ -3,56 +3,48 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/11 10:46:38 by jpirsch           #+#    #+#             */
-/*   Updated: 2015/01/10 04:35:00 by jpirsch          ###   ########.fr       */
+/*   Created: 2015/11/04 18:24:51 by fjanoty           #+#    #+#             */
+/*   Updated: 2016/01/19 20:19:07 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*reverse(char *s)
+static char	*ft_nbrchar(char *nbr, int n, int i)
 {
-	int		i;
-	int		j;
-	char	c;
-
-	i = 0;
-	j = ft_strlen(s) - 1;
-	while (i < j)
+	while (n)
 	{
-		c = s[i];
-		s[i] = s[j];
-		s[j] = c;
-		i++;
-		j--;
+		nbr[i] = '0' - (n % 10);
+		n = n / 10;
+		i--;
 	}
-	return (s);
+	return (nbr);
 }
 
-char	*ft_itoa(int n)
+char		*ft_itoa(int n)
 {
+	int		m;
 	int		i;
-	int		sign;
-	char	*s;
+	char	*nbr;
 
-	s = ft_strnew(11);
-	ft_bzero(s, 11);
-	if (n == -2147483648)
-		return (ft_strcpy(s, "-2147483648"));
-	if (n == 0)
-		return (ft_strcpy(s, "0"));
-	if ((sign = n) < 0)
-		n = -n;
-	i = 0;
-	while (n > 0)
+	i = -1;
+	m = n;
+	while (m)
 	{
-		s[i++] = n % 10 + '0';
-		n /= 10;
+		m = m / 10;
+		i++;
 	}
-	if (sign < 0)
-		s[i++] = '-';
-	s[i] = '\0';
-	return (reverse(s));
+	if (n <= 0)
+		i++;
+	nbr = ft_strnew(i + 2);
+	nbr[i + 1] = '\0';
+	if (n < 0)
+		nbr[0] = '-';
+	if (n > 0)
+		n = -n;
+	if (!n)
+		nbr[0] = '0';
+	return (ft_nbrchar(nbr, n, i));
 }

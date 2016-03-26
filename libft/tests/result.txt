@@ -1,0 +1,1754 @@
+
+Begin unit test : [34mft_memset[0m
+After : "{{{{our" , "{{{{our" [32m[Success][0m
+End unit test : [32m[Success][0m
+
+Begin unit test : [34mft_bzero[0m
+Test [32m[Success][0m
+End unit test : [32m[Success][0m
+
+Begin unit test : [34mft_memcpy[0m
+Test [32m[Success][0m
+End unit test : [32m[Success][0m
+
+Begin unit test : [34mft_memccpy[0m
+Test [31m[Fail][0m
+End unit test : [31m[Fail][0m
+
+Begin unit test : [34mft_memmove[0m
+Test : "onjour tout le monde" and "bonjour tout le monde" (20) { "bonjour tout le mond" - "bonjour tout le mondde" } [32m[Success][0m
+End unit test : [32m[Success][0m
+
+Begin unit test : [34mft_memchr[0m
+Test [32m[Success][0m
+Test [32m[Success][0m
+End unit test : [32m[Success][0m
+
+Begin unit test : [34mft_memcmp[0m
+Test : { 7 - 7 } [32m[Success][0m
+Test : { 7 - 7 } [32m[Success][0m
+End unit test : [32m[Success][0m
+
+Begin unit test : [34mft_strlen[0m
+Test : "hello world !" [32m[Success][0m
+Test : "" [32m[Success][0m
+End unit test : [32m[Success][0m
+
+Begin unit test : [34mft_strdup[0m
+Test : "Hello world !" [31m[Fail][0m
+Test : "" [32m[Success][0m
+End unit test : [31m[Fail][0m
+
+Begin unit test : [34mft_strcpy[0m
+Test : "Bonjour" [32m[Success][0m
+Test : "" [31m[Fail][0m
+End unit test : [31m[Fail][0m
+
+Begin unit test : [34mft_strncpy[0m
+Test [32m[Success][0m
+Test [32m[Success][0m
+Test [32m[Success][0m
+End unit test : [32m[Success][0m
+
+Begin unit test : [34mft_strcat[0m
+Test : { "Hello" } [31m[Fail][0m
+Test : { "Helloworld !" } [32m[Success][0m
+Test : { "Helloworld !" } [32m[Success][0m
+End unit test : [31m[Fail][0m
+
+Begin unit test : [34mft_strncat[0m
+Test : { "Hello" } [32m[Success][0m
+Test : { "Hello world !" } [32m[Success][0m
+Test : { "Hello world !" } [32m[Success][0m
+End unit test : [32m[Success][0m
+
+Begin unit test : [34mft_strlcat[0m
+Test : { "Hello" - "Hello" }  [32m[Success][0m
+Test : { "Hello world !" - "Hello world !" }  [32m[Success][0m
+Test : { "Hello world !" - "Hello world !" }  [32m[Success][0m
+Test : { "Hello world !" - "Hello world !" }  [32m[Success][0m
+Test : { "Hello world ! ergnwerignwergn wekrgnwmerngwerngqoi weqfewnfqkowenf qknergkwertngk mfkwerfkwner kgnw" - "Hello world ! ergnwerignwergn wekrgnwmerngwerngqoi weqfewnfqkowenf qknergkwertngk mfkwerfkwner kgnw" }  [32m[Success][0m
+End unit test : [32m[Success][0m
+
+Begin unit test : [34mft_strchr[0m
+Test : "Hello world !" { 0x10ef81cf6 - 0x10ef81cf6 } [32m[Success][0m
+Test : "Hello world !" { 0x10ef81cf7 - 0x10ef81cf7 } [32m[Success][0m
+Test : "Hello world !" { 0x10ef81cea - 0x10ef81cea } [32m[Success][0m
+Test : "Hello world !" { 0x0 - 0x0 } [32m[Success][0m
+End unit test : [32m[Success][0m
+
+Begin unit test : [34mft_strrchr[0m
+Test : "Hello world !" { 0x10ef81cf6 - 0x10ef81cea } [31m[Fail][0m
+Test : "Hello world !" { 0x10ef81cf6 - 0x10ef81cf1 } [31m[Fail][0m
+Test : "Hello world !" { 0x10ef81cf7 - 0x10ef81cf7 } [32m[Success][0m
+Test : "Hello world !" { 0x10ef81cf5 - 0x10ef81cf6 } [31m[Fail][0m
+End unit test : [31m[Fail][0m
+
+Begin unit test : [34mft_strstr[0m
+Test : Compare "Welcome !" and "come" { 0x10ef81f63 - 0x10ef81f63 } [32m[Success][0m
+Test : Compare "Bonjour" and "Bonjour " { 0x0 - 0x0 } [32m[Success][0m
+Test : Compare "bonjour" and "" { 0x10ef81b8e - 0x10ef81b8e } [32m[Success][0m
+Test : Compare "bonjour" and "r" { 0x10ef81b94 - 0x10ef81b94 } [32m[Success][0m
+End unit test : [32m[Success][0m
+
+Begin unit test : [34mft_strnstr[0m
+Test : Compare "tvaaabcd" and "aabc" (4) { 0x10ef82005 - 0x0 } [31m[Fail][0m
+Test : Compare "tvaaabcd" and "aabc" (8) { 0x10ef82005 - 0x10ef82005 } [32m[Success][0m
+Test : Compare "" and "" (5) { 0x10ef81df8 - 0x10ef81df8 } [32m[Success][0m
+Test : Compare "" and "e" (1) { 0x0 - 0x0 } [32m[Success][0m
+Test : Compare "Bonjour" and "Bonjour" (7) { 0x10ef81b86 - 0x10ef81b86 } [32m[Success][0m
+Test : Compare "Bonjour" and "bonjour" (7) { 0x0 - 0x0 } [32m[Success][0m
+End unit test : [31m[Fail][0m
+
+Begin unit test : [34mft_strcmp[0m
+Compare "test" and "testing" { -105 , -105 } [32m[Success][0m
+Compare "cba" and "abc" { 2 , 2 } [32m[Success][0m
+Compare "bonjour" and "" { 98 , 98 } [32m[Success][0m
+Compare "hello" and "hello" { 0 , 0 } [32m[Success][0m
+Compare "" and "" { 0 , 0 } [32m[Success][0m
+End unit test : [32m[Success][0m
+
+Begin unit test : [34mft_strncmp[0m
+Test : Compare "Zelcome" and "Welcome" (1) { 3 - 3 } [32m[Success][0m
+Test : Compare "Welcome" and "welcome" (7) { -32 - -32 } [32m[Success][0m
+Test : Compare "Hello" and "" (6) { 72 - 72 } [32m[Success][0m
+Test : Compare "" and "" (0) { 0 - 0 } [32m[Success][0m
+Test : Compare "bonjour" and "bonjour" (7) { 0 - 0 } [32m[Success][0m
+Test : Compare "bonjour" and "bonjour" (8) { 0 - 0 } [32m[Success][0m
+Test : Compare "bonjour" and "bonjour" (100) { 0 - 0 } [32m[Success][0m
+Test : Compare "cba" and "abc" (2) { 2 - 2 } [32m[Success][0m
+End unit test : [32m[Success][0m
+
+Begin unit test : [34mft_atoi[0m
+Test : "125" { 125 - 125 } [32m[Success][0m
+Test : "0" { 0 - 0 } [32m[Success][0m
+Test : "2000000" { 2000000 - 2000000 } [32m[Success][0m
+Test : "-458" { -458 - -458 } [32m[Success][0m
+Test : "+123" { 123 - 123 } [32m[Success][0m
+Test : "154abcd" { 154 - 154 } [32m[Success][0m
+Test : "rwer" { 0 - 0 } [32m[Success][0m
+Test : "" { 0 - 0 } [32m[Success][0m
+End unit test : [32m[Success][0m
+
+Begin unit test : [34mft_isalpha[0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test : 	 { 0 - 0 } [32m[Success][0m
+Test : 
+ { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :   { 0 - 0 } [32m[Success][0m
+Test : ! { 0 - 0 } [32m[Success][0m
+Test : " { 0 - 0 } [32m[Success][0m
+Test : # { 0 - 0 } [32m[Success][0m
+Test : $ { 0 - 0 } [32m[Success][0m
+Test : % { 0 - 0 } [32m[Success][0m
+Test : & { 0 - 0 } [32m[Success][0m
+Test : ' { 0 - 0 } [32m[Success][0m
+Test : ( { 0 - 0 } [32m[Success][0m
+Test : ) { 0 - 0 } [32m[Success][0m
+Test : * { 0 - 0 } [32m[Success][0m
+Test : + { 0 - 0 } [32m[Success][0m
+Test : , { 0 - 0 } [32m[Success][0m
+Test : - { 0 - 0 } [32m[Success][0m
+Test : . { 0 - 0 } [32m[Success][0m
+Test : / { 0 - 0 } [32m[Success][0m
+Test : 0 { 0 - 0 } [32m[Success][0m
+Test : 1 { 0 - 0 } [32m[Success][0m
+Test : 2 { 0 - 0 } [32m[Success][0m
+Test : 3 { 0 - 0 } [32m[Success][0m
+Test : 4 { 0 - 0 } [32m[Success][0m
+Test : 5 { 0 - 0 } [32m[Success][0m
+Test : 6 { 0 - 0 } [32m[Success][0m
+Test : 7 { 0 - 0 } [32m[Success][0m
+Test : 8 { 0 - 0 } [32m[Success][0m
+Test : 9 { 0 - 0 } [32m[Success][0m
+Test : : { 0 - 0 } [32m[Success][0m
+Test : ; { 0 - 0 } [32m[Success][0m
+Test : < { 0 - 0 } [32m[Success][0m
+Test : = { 0 - 0 } [32m[Success][0m
+Test : > { 0 - 0 } [32m[Success][0m
+Test : ? { 0 - 0 } [32m[Success][0m
+Test : @ { 0 - 0 } [32m[Success][0m
+Test : A { 1 - 1 } [32m[Success][0m
+Test : B { 1 - 1 } [32m[Success][0m
+Test : C { 1 - 1 } [32m[Success][0m
+Test : D { 1 - 1 } [32m[Success][0m
+Test : E { 1 - 1 } [32m[Success][0m
+Test : F { 1 - 1 } [32m[Success][0m
+Test : G { 1 - 1 } [32m[Success][0m
+Test : H { 1 - 1 } [32m[Success][0m
+Test : I { 1 - 1 } [32m[Success][0m
+Test : J { 1 - 1 } [32m[Success][0m
+Test : K { 1 - 1 } [32m[Success][0m
+Test : L { 1 - 1 } [32m[Success][0m
+Test : M { 1 - 1 } [32m[Success][0m
+Test : N { 1 - 1 } [32m[Success][0m
+Test : O { 1 - 1 } [32m[Success][0m
+Test : P { 1 - 1 } [32m[Success][0m
+Test : Q { 1 - 1 } [32m[Success][0m
+Test : R { 1 - 1 } [32m[Success][0m
+Test : S { 1 - 1 } [32m[Success][0m
+Test : T { 1 - 1 } [32m[Success][0m
+Test : U { 1 - 1 } [32m[Success][0m
+Test : V { 1 - 1 } [32m[Success][0m
+Test : W { 1 - 1 } [32m[Success][0m
+Test : X { 1 - 1 } [32m[Success][0m
+Test : Y { 1 - 1 } [32m[Success][0m
+Test : Z { 1 - 1 } [32m[Success][0m
+Test : [ { 0 - 0 } [32m[Success][0m
+Test : \ { 0 - 0 } [32m[Success][0m
+Test : ] { 0 - 0 } [32m[Success][0m
+Test : ^ { 0 - 0 } [32m[Success][0m
+Test : _ { 0 - 0 } [32m[Success][0m
+Test : ` { 0 - 0 } [32m[Success][0m
+Test : a { 1 - 1 } [32m[Success][0m
+Test : b { 1 - 1 } [32m[Success][0m
+Test : c { 1 - 1 } [32m[Success][0m
+Test : d { 1 - 1 } [32m[Success][0m
+Test : e { 1 - 1 } [32m[Success][0m
+Test : f { 1 - 1 } [32m[Success][0m
+Test : g { 1 - 1 } [32m[Success][0m
+Test : h { 1 - 1 } [32m[Success][0m
+Test : i { 1 - 1 } [32m[Success][0m
+Test : j { 1 - 1 } [32m[Success][0m
+Test : k { 1 - 1 } [32m[Success][0m
+Test : l { 1 - 1 } [32m[Success][0m
+Test : m { 1 - 1 } [32m[Success][0m
+Test : n { 1 - 1 } [32m[Success][0m
+Test : o { 1 - 1 } [32m[Success][0m
+Test : p { 1 - 1 } [32m[Success][0m
+Test : q { 1 - 1 } [32m[Success][0m
+Test : r { 1 - 1 } [32m[Success][0m
+Test : s { 1 - 1 } [32m[Success][0m
+Test : t { 1 - 1 } [32m[Success][0m
+Test : u { 1 - 1 } [32m[Success][0m
+Test : v { 1 - 1 } [32m[Success][0m
+Test : w { 1 - 1 } [32m[Success][0m
+Test : x { 1 - 1 } [32m[Success][0m
+Test : y { 1 - 1 } [32m[Success][0m
+Test : z { 1 - 1 } [32m[Success][0m
+Test : { { 0 - 0 } [32m[Success][0m
+Test : | { 0 - 0 } [32m[Success][0m
+Test : } { 0 - 0 } [32m[Success][0m
+Test : ~ { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test : Ä { 0 - 0 } [32m[Success][0m
+Test : Å { 0 - 0 } [32m[Success][0m
+Test : Ç { 0 - 0 } [32m[Success][0m
+Test : É { 0 - 0 } [32m[Success][0m
+Test : Ñ { 0 - 0 } [32m[Success][0m
+Test : Ö { 0 - 0 } [32m[Success][0m
+Test : Ü { 0 - 0 } [32m[Success][0m
+Test : á { 0 - 0 } [32m[Success][0m
+Test : à { 0 - 0 } [32m[Success][0m
+Test : â { 0 - 0 } [32m[Success][0m
+Test : ä { 0 - 0 } [32m[Success][0m
+Test : ã { 0 - 0 } [32m[Success][0m
+Test : å { 0 - 0 } [32m[Success][0m
+Test : ç { 0 - 0 } [32m[Success][0m
+Test : é { 0 - 0 } [32m[Success][0m
+Test : è { 0 - 0 } [32m[Success][0m
+Test : ê { 0 - 0 } [32m[Success][0m
+Test : ë { 0 - 0 } [32m[Success][0m
+Test : í { 0 - 0 } [32m[Success][0m
+Test : ì { 0 - 0 } [32m[Success][0m
+Test : î { 0 - 0 } [32m[Success][0m
+Test : ï { 0 - 0 } [32m[Success][0m
+Test : ñ { 0 - 0 } [32m[Success][0m
+Test : ó { 0 - 0 } [32m[Success][0m
+Test : ò { 0 - 0 } [32m[Success][0m
+Test : ô { 0 - 0 } [32m[Success][0m
+Test : ö { 0 - 0 } [32m[Success][0m
+Test : õ { 0 - 0 } [32m[Success][0m
+Test : ú { 0 - 0 } [32m[Success][0m
+Test : ù { 0 - 0 } [32m[Success][0m
+Test : û { 0 - 0 } [32m[Success][0m
+Test : ü { 0 - 0 } [32m[Success][0m
+Test : † { 0 - 0 } [32m[Success][0m
+Test : ° { 0 - 0 } [32m[Success][0m
+Test : ¢ { 0 - 0 } [32m[Success][0m
+Test : £ { 0 - 0 } [32m[Success][0m
+Test : § { 0 - 0 } [32m[Success][0m
+Test : • { 0 - 0 } [32m[Success][0m
+Test : ¶ { 0 - 0 } [32m[Success][0m
+Test : ß { 0 - 0 } [32m[Success][0m
+Test : ® { 0 - 0 } [32m[Success][0m
+Test : © { 0 - 0 } [32m[Success][0m
+Test : ™ { 0 - 0 } [32m[Success][0m
+Test : ´ { 0 - 0 } [32m[Success][0m
+Test : ¨ { 0 - 0 } [32m[Success][0m
+Test : ≠ { 0 - 0 } [32m[Success][0m
+Test : Æ { 0 - 0 } [32m[Success][0m
+Test : Ø { 0 - 0 } [32m[Success][0m
+Test : ∞ { 0 - 0 } [32m[Success][0m
+Test : ± { 0 - 0 } [32m[Success][0m
+Test : ≤ { 0 - 0 } [32m[Success][0m
+Test : ≥ { 0 - 0 } [32m[Success][0m
+Test : ¥ { 0 - 0 } [32m[Success][0m
+Test : µ { 0 - 0 } [32m[Success][0m
+Test : ∂ { 0 - 0 } [32m[Success][0m
+Test : ∑ { 0 - 0 } [32m[Success][0m
+Test : ∏ { 0 - 0 } [32m[Success][0m
+Test : π { 0 - 0 } [32m[Success][0m
+Test : ∫ { 0 - 0 } [32m[Success][0m
+Test : ª { 0 - 0 } [32m[Success][0m
+Test : º { 0 - 0 } [32m[Success][0m
+Test : Ω { 0 - 0 } [32m[Success][0m
+Test : æ { 0 - 0 } [32m[Success][0m
+Test : ø { 0 - 0 } [32m[Success][0m
+Test : ¿ { 0 - 0 } [32m[Success][0m
+Test : ¡ { 0 - 0 } [32m[Success][0m
+Test : ¬ { 0 - 0 } [32m[Success][0m
+Test : √ { 0 - 0 } [32m[Success][0m
+Test : ƒ { 0 - 0 } [32m[Success][0m
+Test : ≈ { 0 - 0 } [32m[Success][0m
+Test : ∆ { 0 - 0 } [32m[Success][0m
+Test : « { 0 - 0 } [32m[Success][0m
+Test : » { 0 - 0 } [32m[Success][0m
+Test : … { 0 - 0 } [32m[Success][0m
+Test :   { 0 - 0 } [32m[Success][0m
+Test : À { 0 - 0 } [32m[Success][0m
+Test : Ã { 0 - 0 } [32m[Success][0m
+Test : Õ { 0 - 0 } [32m[Success][0m
+Test : Œ { 0 - 0 } [32m[Success][0m
+Test : œ { 0 - 0 } [32m[Success][0m
+Test : – { 0 - 0 } [32m[Success][0m
+Test : — { 0 - 0 } [32m[Success][0m
+Test : “ { 0 - 0 } [32m[Success][0m
+Test : ” { 0 - 0 } [32m[Success][0m
+Test : ‘ { 0 - 0 } [32m[Success][0m
+Test : ’ { 0 - 0 } [32m[Success][0m
+Test : ÷ { 0 - 0 } [32m[Success][0m
+Test : ◊ { 0 - 0 } [32m[Success][0m
+Test : ÿ { 0 - 0 } [32m[Success][0m
+Test : Ÿ { 0 - 0 } [32m[Success][0m
+Test : ⁄ { 0 - 0 } [32m[Success][0m
+Test : € { 0 - 0 } [32m[Success][0m
+Test : ‹ { 0 - 0 } [32m[Success][0m
+Test : › { 0 - 0 } [32m[Success][0m
+Test : ﬁ { 0 - 0 } [32m[Success][0m
+Test : ﬂ { 0 - 0 } [32m[Success][0m
+Test : ‡ { 0 - 0 } [32m[Success][0m
+Test : · { 0 - 0 } [32m[Success][0m
+Test : ‚ { 0 - 0 } [32m[Success][0m
+Test : „ { 0 - 0 } [32m[Success][0m
+Test : ‰ { 0 - 0 } [32m[Success][0m
+Test : Â { 0 - 0 } [32m[Success][0m
+Test : Ê { 0 - 0 } [32m[Success][0m
+Test : Á { 0 - 0 } [32m[Success][0m
+Test : Ë { 0 - 0 } [32m[Success][0m
+Test : È { 0 - 0 } [32m[Success][0m
+Test : Í { 0 - 0 } [32m[Success][0m
+Test : Î { 0 - 0 } [32m[Success][0m
+Test : Ï { 0 - 0 } [32m[Success][0m
+Test : Ì { 0 - 0 } [32m[Success][0m
+Test : Ó { 0 - 0 } [32m[Success][0m
+Test : Ô { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test : Ò { 0 - 0 } [32m[Success][0m
+Test : Ú { 0 - 0 } [32m[Success][0m
+Test : Û { 0 - 0 } [32m[Success][0m
+Test : Ù { 0 - 0 } [32m[Success][0m
+Test : ı { 0 - 0 } [32m[Success][0m
+Test : ˆ { 0 - 0 } [32m[Success][0m
+Test : ˜ { 0 - 0 } [32m[Success][0m
+Test : ¯ { 0 - 0 } [32m[Success][0m
+Test : ˘ { 0 - 0 } [32m[Success][0m
+Test : ˙ { 0 - 0 } [32m[Success][0m
+Test : ˚ { 0 - 0 } [32m[Success][0m
+Test : ¸ { 0 - 0 } [32m[Success][0m
+Test : ˝ { 0 - 0 } [32m[Success][0m
+Test : ˛ { 0 - 0 } [32m[Success][0m
+Test : ˇ { 0 - 0 } [32m[Success][0m
+End unit test : [32m[Success][0m
+
+Begin unit test : [34mft_isdigit[0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test : 	 { 0 - 0 } [32m[Success][0m
+Test : 
+ { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :   { 0 - 0 } [32m[Success][0m
+Test : ! { 0 - 0 } [32m[Success][0m
+Test : " { 0 - 0 } [32m[Success][0m
+Test : # { 0 - 0 } [32m[Success][0m
+Test : $ { 0 - 0 } [32m[Success][0m
+Test : % { 0 - 0 } [32m[Success][0m
+Test : & { 0 - 0 } [32m[Success][0m
+Test : ' { 0 - 0 } [32m[Success][0m
+Test : ( { 0 - 0 } [32m[Success][0m
+Test : ) { 0 - 0 } [32m[Success][0m
+Test : * { 0 - 0 } [32m[Success][0m
+Test : + { 0 - 0 } [32m[Success][0m
+Test : , { 0 - 0 } [32m[Success][0m
+Test : - { 0 - 0 } [32m[Success][0m
+Test : . { 0 - 0 } [32m[Success][0m
+Test : / { 0 - 0 } [32m[Success][0m
+Test : 0 { 1 - 1 } [32m[Success][0m
+Test : 1 { 1 - 1 } [32m[Success][0m
+Test : 2 { 1 - 1 } [32m[Success][0m
+Test : 3 { 1 - 1 } [32m[Success][0m
+Test : 4 { 1 - 1 } [32m[Success][0m
+Test : 5 { 1 - 1 } [32m[Success][0m
+Test : 6 { 1 - 1 } [32m[Success][0m
+Test : 7 { 1 - 1 } [32m[Success][0m
+Test : 8 { 1 - 1 } [32m[Success][0m
+Test : 9 { 1 - 1 } [32m[Success][0m
+Test : : { 0 - 0 } [32m[Success][0m
+Test : ; { 0 - 0 } [32m[Success][0m
+Test : < { 0 - 0 } [32m[Success][0m
+Test : = { 0 - 0 } [32m[Success][0m
+Test : > { 0 - 0 } [32m[Success][0m
+Test : ? { 0 - 0 } [32m[Success][0m
+Test : @ { 0 - 0 } [32m[Success][0m
+Test : A { 0 - 0 } [32m[Success][0m
+Test : B { 0 - 0 } [32m[Success][0m
+Test : C { 0 - 0 } [32m[Success][0m
+Test : D { 0 - 0 } [32m[Success][0m
+Test : E { 0 - 0 } [32m[Success][0m
+Test : F { 0 - 0 } [32m[Success][0m
+Test : G { 0 - 0 } [32m[Success][0m
+Test : H { 0 - 0 } [32m[Success][0m
+Test : I { 0 - 0 } [32m[Success][0m
+Test : J { 0 - 0 } [32m[Success][0m
+Test : K { 0 - 0 } [32m[Success][0m
+Test : L { 0 - 0 } [32m[Success][0m
+Test : M { 0 - 0 } [32m[Success][0m
+Test : N { 0 - 0 } [32m[Success][0m
+Test : O { 0 - 0 } [32m[Success][0m
+Test : P { 0 - 0 } [32m[Success][0m
+Test : Q { 0 - 0 } [32m[Success][0m
+Test : R { 0 - 0 } [32m[Success][0m
+Test : S { 0 - 0 } [32m[Success][0m
+Test : T { 0 - 0 } [32m[Success][0m
+Test : U { 0 - 0 } [32m[Success][0m
+Test : V { 0 - 0 } [32m[Success][0m
+Test : W { 0 - 0 } [32m[Success][0m
+Test : X { 0 - 0 } [32m[Success][0m
+Test : Y { 0 - 0 } [32m[Success][0m
+Test : Z { 0 - 0 } [32m[Success][0m
+Test : [ { 0 - 0 } [32m[Success][0m
+Test : \ { 0 - 0 } [32m[Success][0m
+Test : ] { 0 - 0 } [32m[Success][0m
+Test : ^ { 0 - 0 } [32m[Success][0m
+Test : _ { 0 - 0 } [32m[Success][0m
+Test : ` { 0 - 0 } [32m[Success][0m
+Test : a { 0 - 0 } [32m[Success][0m
+Test : b { 0 - 0 } [32m[Success][0m
+Test : c { 0 - 0 } [32m[Success][0m
+Test : d { 0 - 0 } [32m[Success][0m
+Test : e { 0 - 0 } [32m[Success][0m
+Test : f { 0 - 0 } [32m[Success][0m
+Test : g { 0 - 0 } [32m[Success][0m
+Test : h { 0 - 0 } [32m[Success][0m
+Test : i { 0 - 0 } [32m[Success][0m
+Test : j { 0 - 0 } [32m[Success][0m
+Test : k { 0 - 0 } [32m[Success][0m
+Test : l { 0 - 0 } [32m[Success][0m
+Test : m { 0 - 0 } [32m[Success][0m
+Test : n { 0 - 0 } [32m[Success][0m
+Test : o { 0 - 0 } [32m[Success][0m
+Test : p { 0 - 0 } [32m[Success][0m
+Test : q { 0 - 0 } [32m[Success][0m
+Test : r { 0 - 0 } [32m[Success][0m
+Test : s { 0 - 0 } [32m[Success][0m
+Test : t { 0 - 0 } [32m[Success][0m
+Test : u { 0 - 0 } [32m[Success][0m
+Test : v { 0 - 0 } [32m[Success][0m
+Test : w { 0 - 0 } [32m[Success][0m
+Test : x { 0 - 0 } [32m[Success][0m
+Test : y { 0 - 0 } [32m[Success][0m
+Test : z { 0 - 0 } [32m[Success][0m
+Test : { { 0 - 0 } [32m[Success][0m
+Test : | { 0 - 0 } [32m[Success][0m
+Test : } { 0 - 0 } [32m[Success][0m
+Test : ~ { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test : Ä { 0 - 0 } [32m[Success][0m
+Test : Å { 0 - 0 } [32m[Success][0m
+Test : Ç { 0 - 0 } [32m[Success][0m
+Test : É { 0 - 0 } [32m[Success][0m
+Test : Ñ { 0 - 0 } [32m[Success][0m
+Test : Ö { 0 - 0 } [32m[Success][0m
+Test : Ü { 0 - 0 } [32m[Success][0m
+Test : á { 0 - 0 } [32m[Success][0m
+Test : à { 0 - 0 } [32m[Success][0m
+Test : â { 0 - 0 } [32m[Success][0m
+Test : ä { 0 - 0 } [32m[Success][0m
+Test : ã { 0 - 0 } [32m[Success][0m
+Test : å { 0 - 0 } [32m[Success][0m
+Test : ç { 0 - 0 } [32m[Success][0m
+Test : é { 0 - 0 } [32m[Success][0m
+Test : è { 0 - 0 } [32m[Success][0m
+Test : ê { 0 - 0 } [32m[Success][0m
+Test : ë { 0 - 0 } [32m[Success][0m
+Test : í { 0 - 0 } [32m[Success][0m
+Test : ì { 0 - 0 } [32m[Success][0m
+Test : î { 0 - 0 } [32m[Success][0m
+Test : ï { 0 - 0 } [32m[Success][0m
+Test : ñ { 0 - 0 } [32m[Success][0m
+Test : ó { 0 - 0 } [32m[Success][0m
+Test : ò { 0 - 0 } [32m[Success][0m
+Test : ô { 0 - 0 } [32m[Success][0m
+Test : ö { 0 - 0 } [32m[Success][0m
+Test : õ { 0 - 0 } [32m[Success][0m
+Test : ú { 0 - 0 } [32m[Success][0m
+Test : ù { 0 - 0 } [32m[Success][0m
+Test : û { 0 - 0 } [32m[Success][0m
+Test : ü { 0 - 0 } [32m[Success][0m
+Test : † { 0 - 0 } [32m[Success][0m
+Test : ° { 0 - 0 } [32m[Success][0m
+Test : ¢ { 0 - 0 } [32m[Success][0m
+Test : £ { 0 - 0 } [32m[Success][0m
+Test : § { 0 - 0 } [32m[Success][0m
+Test : • { 0 - 0 } [32m[Success][0m
+Test : ¶ { 0 - 0 } [32m[Success][0m
+Test : ß { 0 - 0 } [32m[Success][0m
+Test : ® { 0 - 0 } [32m[Success][0m
+Test : © { 0 - 0 } [32m[Success][0m
+Test : ™ { 0 - 0 } [32m[Success][0m
+Test : ´ { 0 - 0 } [32m[Success][0m
+Test : ¨ { 0 - 0 } [32m[Success][0m
+Test : ≠ { 0 - 0 } [32m[Success][0m
+Test : Æ { 0 - 0 } [32m[Success][0m
+Test : Ø { 0 - 0 } [32m[Success][0m
+Test : ∞ { 0 - 0 } [32m[Success][0m
+Test : ± { 0 - 0 } [32m[Success][0m
+Test : ≤ { 0 - 0 } [32m[Success][0m
+Test : ≥ { 0 - 0 } [32m[Success][0m
+Test : ¥ { 0 - 0 } [32m[Success][0m
+Test : µ { 0 - 0 } [32m[Success][0m
+Test : ∂ { 0 - 0 } [32m[Success][0m
+Test : ∑ { 0 - 0 } [32m[Success][0m
+Test : ∏ { 0 - 0 } [32m[Success][0m
+Test : π { 0 - 0 } [32m[Success][0m
+Test : ∫ { 0 - 0 } [32m[Success][0m
+Test : ª { 0 - 0 } [32m[Success][0m
+Test : º { 0 - 0 } [32m[Success][0m
+Test : Ω { 0 - 0 } [32m[Success][0m
+Test : æ { 0 - 0 } [32m[Success][0m
+Test : ø { 0 - 0 } [32m[Success][0m
+Test : ¿ { 0 - 0 } [32m[Success][0m
+Test : ¡ { 0 - 0 } [32m[Success][0m
+Test : ¬ { 0 - 0 } [32m[Success][0m
+Test : √ { 0 - 0 } [32m[Success][0m
+Test : ƒ { 0 - 0 } [32m[Success][0m
+Test : ≈ { 0 - 0 } [32m[Success][0m
+Test : ∆ { 0 - 0 } [32m[Success][0m
+Test : « { 0 - 0 } [32m[Success][0m
+Test : » { 0 - 0 } [32m[Success][0m
+Test : … { 0 - 0 } [32m[Success][0m
+Test :   { 0 - 0 } [32m[Success][0m
+Test : À { 0 - 0 } [32m[Success][0m
+Test : Ã { 0 - 0 } [32m[Success][0m
+Test : Õ { 0 - 0 } [32m[Success][0m
+Test : Œ { 0 - 0 } [32m[Success][0m
+Test : œ { 0 - 0 } [32m[Success][0m
+Test : – { 0 - 0 } [32m[Success][0m
+Test : — { 0 - 0 } [32m[Success][0m
+Test : “ { 0 - 0 } [32m[Success][0m
+Test : ” { 0 - 0 } [32m[Success][0m
+Test : ‘ { 0 - 0 } [32m[Success][0m
+Test : ’ { 0 - 0 } [32m[Success][0m
+Test : ÷ { 0 - 0 } [32m[Success][0m
+Test : ◊ { 0 - 0 } [32m[Success][0m
+Test : ÿ { 0 - 0 } [32m[Success][0m
+Test : Ÿ { 0 - 0 } [32m[Success][0m
+Test : ⁄ { 0 - 0 } [32m[Success][0m
+Test : € { 0 - 0 } [32m[Success][0m
+Test : ‹ { 0 - 0 } [32m[Success][0m
+Test : › { 0 - 0 } [32m[Success][0m
+Test : ﬁ { 0 - 0 } [32m[Success][0m
+Test : ﬂ { 0 - 0 } [32m[Success][0m
+Test : ‡ { 0 - 0 } [32m[Success][0m
+Test : · { 0 - 0 } [32m[Success][0m
+Test : ‚ { 0 - 0 } [32m[Success][0m
+Test : „ { 0 - 0 } [32m[Success][0m
+Test : ‰ { 0 - 0 } [32m[Success][0m
+Test : Â { 0 - 0 } [32m[Success][0m
+Test : Ê { 0 - 0 } [32m[Success][0m
+Test : Á { 0 - 0 } [32m[Success][0m
+Test : Ë { 0 - 0 } [32m[Success][0m
+Test : È { 0 - 0 } [32m[Success][0m
+Test : Í { 0 - 0 } [32m[Success][0m
+Test : Î { 0 - 0 } [32m[Success][0m
+Test : Ï { 0 - 0 } [32m[Success][0m
+Test : Ì { 0 - 0 } [32m[Success][0m
+Test : Ó { 0 - 0 } [32m[Success][0m
+Test : Ô { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test : Ò { 0 - 0 } [32m[Success][0m
+Test : Ú { 0 - 0 } [32m[Success][0m
+Test : Û { 0 - 0 } [32m[Success][0m
+Test : Ù { 0 - 0 } [32m[Success][0m
+Test : ı { 0 - 0 } [32m[Success][0m
+Test : ˆ { 0 - 0 } [32m[Success][0m
+Test : ˜ { 0 - 0 } [32m[Success][0m
+Test : ¯ { 0 - 0 } [32m[Success][0m
+Test : ˘ { 0 - 0 } [32m[Success][0m
+Test : ˙ { 0 - 0 } [32m[Success][0m
+Test : ˚ { 0 - 0 } [32m[Success][0m
+Test : ¸ { 0 - 0 } [32m[Success][0m
+Test : ˝ { 0 - 0 } [32m[Success][0m
+Test : ˛ { 0 - 0 } [32m[Success][0m
+Test : ˇ { 0 - 0 } [32m[Success][0m
+End unit test : [32m[Success][0m
+
+Begin unit test : [34mft_isalnum[0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test : 	 { 0 - 0 } [32m[Success][0m
+Test : 
+ { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :   { 0 - 0 } [32m[Success][0m
+Test : ! { 0 - 0 } [32m[Success][0m
+Test : " { 0 - 0 } [32m[Success][0m
+Test : # { 0 - 0 } [32m[Success][0m
+Test : $ { 0 - 0 } [32m[Success][0m
+Test : % { 0 - 0 } [32m[Success][0m
+Test : & { 0 - 0 } [32m[Success][0m
+Test : ' { 0 - 0 } [32m[Success][0m
+Test : ( { 0 - 0 } [32m[Success][0m
+Test : ) { 0 - 0 } [32m[Success][0m
+Test : * { 0 - 0 } [32m[Success][0m
+Test : + { 0 - 0 } [32m[Success][0m
+Test : , { 0 - 0 } [32m[Success][0m
+Test : - { 0 - 0 } [32m[Success][0m
+Test : . { 0 - 0 } [32m[Success][0m
+Test : / { 0 - 0 } [32m[Success][0m
+Test : 0 { 1 - 1 } [32m[Success][0m
+Test : 1 { 1 - 1 } [32m[Success][0m
+Test : 2 { 1 - 1 } [32m[Success][0m
+Test : 3 { 1 - 1 } [32m[Success][0m
+Test : 4 { 1 - 1 } [32m[Success][0m
+Test : 5 { 1 - 1 } [32m[Success][0m
+Test : 6 { 1 - 1 } [32m[Success][0m
+Test : 7 { 1 - 1 } [32m[Success][0m
+Test : 8 { 1 - 1 } [32m[Success][0m
+Test : 9 { 1 - 1 } [32m[Success][0m
+Test : : { 0 - 0 } [32m[Success][0m
+Test : ; { 0 - 0 } [32m[Success][0m
+Test : < { 0 - 0 } [32m[Success][0m
+Test : = { 0 - 0 } [32m[Success][0m
+Test : > { 0 - 0 } [32m[Success][0m
+Test : ? { 0 - 0 } [32m[Success][0m
+Test : @ { 0 - 0 } [32m[Success][0m
+Test : A { 1 - 1 } [32m[Success][0m
+Test : B { 1 - 1 } [32m[Success][0m
+Test : C { 1 - 1 } [32m[Success][0m
+Test : D { 1 - 1 } [32m[Success][0m
+Test : E { 1 - 1 } [32m[Success][0m
+Test : F { 1 - 1 } [32m[Success][0m
+Test : G { 1 - 1 } [32m[Success][0m
+Test : H { 1 - 1 } [32m[Success][0m
+Test : I { 1 - 1 } [32m[Success][0m
+Test : J { 1 - 1 } [32m[Success][0m
+Test : K { 1 - 1 } [32m[Success][0m
+Test : L { 1 - 1 } [32m[Success][0m
+Test : M { 1 - 1 } [32m[Success][0m
+Test : N { 1 - 1 } [32m[Success][0m
+Test : O { 1 - 1 } [32m[Success][0m
+Test : P { 1 - 1 } [32m[Success][0m
+Test : Q { 1 - 1 } [32m[Success][0m
+Test : R { 1 - 1 } [32m[Success][0m
+Test : S { 1 - 1 } [32m[Success][0m
+Test : T { 1 - 1 } [32m[Success][0m
+Test : U { 1 - 1 } [32m[Success][0m
+Test : V { 1 - 1 } [32m[Success][0m
+Test : W { 1 - 1 } [32m[Success][0m
+Test : X { 1 - 1 } [32m[Success][0m
+Test : Y { 1 - 1 } [32m[Success][0m
+Test : Z { 1 - 1 } [32m[Success][0m
+Test : [ { 0 - 0 } [32m[Success][0m
+Test : \ { 0 - 0 } [32m[Success][0m
+Test : ] { 0 - 0 } [32m[Success][0m
+Test : ^ { 0 - 0 } [32m[Success][0m
+Test : _ { 0 - 0 } [32m[Success][0m
+Test : ` { 0 - 0 } [32m[Success][0m
+Test : a { 1 - 1 } [32m[Success][0m
+Test : b { 1 - 1 } [32m[Success][0m
+Test : c { 1 - 1 } [32m[Success][0m
+Test : d { 1 - 1 } [32m[Success][0m
+Test : e { 1 - 1 } [32m[Success][0m
+Test : f { 1 - 1 } [32m[Success][0m
+Test : g { 1 - 1 } [32m[Success][0m
+Test : h { 1 - 1 } [32m[Success][0m
+Test : i { 1 - 1 } [32m[Success][0m
+Test : j { 1 - 1 } [32m[Success][0m
+Test : k { 1 - 1 } [32m[Success][0m
+Test : l { 1 - 1 } [32m[Success][0m
+Test : m { 1 - 1 } [32m[Success][0m
+Test : n { 1 - 1 } [32m[Success][0m
+Test : o { 1 - 1 } [32m[Success][0m
+Test : p { 1 - 1 } [32m[Success][0m
+Test : q { 1 - 1 } [32m[Success][0m
+Test : r { 1 - 1 } [32m[Success][0m
+Test : s { 1 - 1 } [32m[Success][0m
+Test : t { 1 - 1 } [32m[Success][0m
+Test : u { 1 - 1 } [32m[Success][0m
+Test : v { 1 - 1 } [32m[Success][0m
+Test : w { 1 - 1 } [32m[Success][0m
+Test : x { 1 - 1 } [32m[Success][0m
+Test : y { 1 - 1 } [32m[Success][0m
+Test : z { 1 - 1 } [32m[Success][0m
+Test : { { 0 - 0 } [32m[Success][0m
+Test : | { 0 - 0 } [32m[Success][0m
+Test : } { 0 - 0 } [32m[Success][0m
+Test : ~ { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test : Ä { 0 - 0 } [32m[Success][0m
+Test : Å { 0 - 0 } [32m[Success][0m
+Test : Ç { 0 - 0 } [32m[Success][0m
+Test : É { 0 - 0 } [32m[Success][0m
+Test : Ñ { 0 - 0 } [32m[Success][0m
+Test : Ö { 0 - 0 } [32m[Success][0m
+Test : Ü { 0 - 0 } [32m[Success][0m
+Test : á { 0 - 0 } [32m[Success][0m
+Test : à { 0 - 0 } [32m[Success][0m
+Test : â { 0 - 0 } [32m[Success][0m
+Test : ä { 0 - 0 } [32m[Success][0m
+Test : ã { 0 - 0 } [32m[Success][0m
+Test : å { 0 - 0 } [32m[Success][0m
+Test : ç { 0 - 0 } [32m[Success][0m
+Test : é { 0 - 0 } [32m[Success][0m
+Test : è { 0 - 0 } [32m[Success][0m
+Test : ê { 0 - 0 } [32m[Success][0m
+Test : ë { 0 - 0 } [32m[Success][0m
+Test : í { 0 - 0 } [32m[Success][0m
+Test : ì { 0 - 0 } [32m[Success][0m
+Test : î { 0 - 0 } [32m[Success][0m
+Test : ï { 0 - 0 } [32m[Success][0m
+Test : ñ { 0 - 0 } [32m[Success][0m
+Test : ó { 0 - 0 } [32m[Success][0m
+Test : ò { 0 - 0 } [32m[Success][0m
+Test : ô { 0 - 0 } [32m[Success][0m
+Test : ö { 0 - 0 } [32m[Success][0m
+Test : õ { 0 - 0 } [32m[Success][0m
+Test : ú { 0 - 0 } [32m[Success][0m
+Test : ù { 0 - 0 } [32m[Success][0m
+Test : û { 0 - 0 } [32m[Success][0m
+Test : ü { 0 - 0 } [32m[Success][0m
+Test : † { 0 - 0 } [32m[Success][0m
+Test : ° { 0 - 0 } [32m[Success][0m
+Test : ¢ { 0 - 0 } [32m[Success][0m
+Test : £ { 0 - 0 } [32m[Success][0m
+Test : § { 0 - 0 } [32m[Success][0m
+Test : • { 0 - 0 } [32m[Success][0m
+Test : ¶ { 0 - 0 } [32m[Success][0m
+Test : ß { 0 - 0 } [32m[Success][0m
+Test : ® { 0 - 0 } [32m[Success][0m
+Test : © { 0 - 0 } [32m[Success][0m
+Test : ™ { 0 - 0 } [32m[Success][0m
+Test : ´ { 0 - 0 } [32m[Success][0m
+Test : ¨ { 0 - 0 } [32m[Success][0m
+Test : ≠ { 0 - 0 } [32m[Success][0m
+Test : Æ { 0 - 0 } [32m[Success][0m
+Test : Ø { 0 - 0 } [32m[Success][0m
+Test : ∞ { 0 - 0 } [32m[Success][0m
+Test : ± { 0 - 0 } [32m[Success][0m
+Test : ≤ { 0 - 0 } [32m[Success][0m
+Test : ≥ { 0 - 0 } [32m[Success][0m
+Test : ¥ { 0 - 0 } [32m[Success][0m
+Test : µ { 0 - 0 } [32m[Success][0m
+Test : ∂ { 0 - 0 } [32m[Success][0m
+Test : ∑ { 0 - 0 } [32m[Success][0m
+Test : ∏ { 0 - 0 } [32m[Success][0m
+Test : π { 0 - 0 } [32m[Success][0m
+Test : ∫ { 0 - 0 } [32m[Success][0m
+Test : ª { 0 - 0 } [32m[Success][0m
+Test : º { 0 - 0 } [32m[Success][0m
+Test : Ω { 0 - 0 } [32m[Success][0m
+Test : æ { 0 - 0 } [32m[Success][0m
+Test : ø { 0 - 0 } [32m[Success][0m
+Test : ¿ { 0 - 0 } [32m[Success][0m
+Test : ¡ { 0 - 0 } [32m[Success][0m
+Test : ¬ { 0 - 0 } [32m[Success][0m
+Test : √ { 0 - 0 } [32m[Success][0m
+Test : ƒ { 0 - 0 } [32m[Success][0m
+Test : ≈ { 0 - 0 } [32m[Success][0m
+Test : ∆ { 0 - 0 } [32m[Success][0m
+Test : « { 0 - 0 } [32m[Success][0m
+Test : » { 0 - 0 } [32m[Success][0m
+Test : … { 0 - 0 } [32m[Success][0m
+Test :   { 0 - 0 } [32m[Success][0m
+Test : À { 0 - 0 } [32m[Success][0m
+Test : Ã { 0 - 0 } [32m[Success][0m
+Test : Õ { 0 - 0 } [32m[Success][0m
+Test : Œ { 0 - 0 } [32m[Success][0m
+Test : œ { 0 - 0 } [32m[Success][0m
+Test : – { 0 - 0 } [32m[Success][0m
+Test : — { 0 - 0 } [32m[Success][0m
+Test : “ { 0 - 0 } [32m[Success][0m
+Test : ” { 0 - 0 } [32m[Success][0m
+Test : ‘ { 0 - 0 } [32m[Success][0m
+Test : ’ { 0 - 0 } [32m[Success][0m
+Test : ÷ { 0 - 0 } [32m[Success][0m
+Test : ◊ { 0 - 0 } [32m[Success][0m
+Test : ÿ { 0 - 0 } [32m[Success][0m
+Test : Ÿ { 0 - 0 } [32m[Success][0m
+Test : ⁄ { 0 - 0 } [32m[Success][0m
+Test : € { 0 - 0 } [32m[Success][0m
+Test : ‹ { 0 - 0 } [32m[Success][0m
+Test : › { 0 - 0 } [32m[Success][0m
+Test : ﬁ { 0 - 0 } [32m[Success][0m
+Test : ﬂ { 0 - 0 } [32m[Success][0m
+Test : ‡ { 0 - 0 } [32m[Success][0m
+Test : · { 0 - 0 } [32m[Success][0m
+Test : ‚ { 0 - 0 } [32m[Success][0m
+Test : „ { 0 - 0 } [32m[Success][0m
+Test : ‰ { 0 - 0 } [32m[Success][0m
+Test : Â { 0 - 0 } [32m[Success][0m
+Test : Ê { 0 - 0 } [32m[Success][0m
+Test : Á { 0 - 0 } [32m[Success][0m
+Test : Ë { 0 - 0 } [32m[Success][0m
+Test : È { 0 - 0 } [32m[Success][0m
+Test : Í { 0 - 0 } [32m[Success][0m
+Test : Î { 0 - 0 } [32m[Success][0m
+Test : Ï { 0 - 0 } [32m[Success][0m
+Test : Ì { 0 - 0 } [32m[Success][0m
+Test : Ó { 0 - 0 } [32m[Success][0m
+Test : Ô { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test : Ò { 0 - 0 } [32m[Success][0m
+Test : Ú { 0 - 0 } [32m[Success][0m
+Test : Û { 0 - 0 } [32m[Success][0m
+Test : Ù { 0 - 0 } [32m[Success][0m
+Test : ı { 0 - 0 } [32m[Success][0m
+Test : ˆ { 0 - 0 } [32m[Success][0m
+Test : ˜ { 0 - 0 } [32m[Success][0m
+Test : ¯ { 0 - 0 } [32m[Success][0m
+Test : ˘ { 0 - 0 } [32m[Success][0m
+Test : ˙ { 0 - 0 } [32m[Success][0m
+Test : ˚ { 0 - 0 } [32m[Success][0m
+Test : ¸ { 0 - 0 } [32m[Success][0m
+Test : ˝ { 0 - 0 } [32m[Success][0m
+Test : ˛ { 0 - 0 } [32m[Success][0m
+Test : ˇ { 0 - 0 } [32m[Success][0m
+End unit test : [32m[Success][0m
+
+Begin unit test : [34mft_isascii[0m
+Test :  { 1 - 1 } [32m[Success][0m
+Test :  { 1 - 1 } [32m[Success][0m
+Test :  { 1 - 1 } [32m[Success][0m
+Test :  { 1 - 1 } [32m[Success][0m
+Test :  { 1 - 1 } [32m[Success][0m
+Test :  { 1 - 1 } [32m[Success][0m
+Test :  { 1 - 1 } [32m[Success][0m
+Test :  { 1 - 1 } [32m[Success][0m
+Test : 	 { 1 - 1 } [32m[Success][0m
+Test : 
+ { 1 - 1 } [32m[Success][0m
+Test :  { 1 - 1 } [32m[Success][0m
+Test :  { 1 - 1 } [32m[Success][0m
+Test :  { 1 - 1 } [32m[Success][0m
+Test :  { 1 - 1 } [32m[Success][0m
+Test :  { 1 - 1 } [32m[Success][0m
+Test :  { 1 - 1 } [32m[Success][0m
+Test :  { 1 - 1 } [32m[Success][0m
+Test :  { 1 - 1 } [32m[Success][0m
+Test :  { 1 - 1 } [32m[Success][0m
+Test :  { 1 - 1 } [32m[Success][0m
+Test :  { 1 - 1 } [32m[Success][0m
+Test :  { 1 - 1 } [32m[Success][0m
+Test :  { 1 - 1 } [32m[Success][0m
+Test :  { 1 - 1 } [32m[Success][0m
+Test :  { 1 - 1 } [32m[Success][0m
+Test :  { 1 - 1 } [32m[Success][0m
+Test :  { 1 - 1 } [32m[Success][0m
+Test :  { 1 - 1 } [32m[Success][0m
+Test :  { 1 - 1 } [32m[Success][0m
+Test :  { 1 - 1 } [32m[Success][0m
+Test :  { 1 - 1 } [32m[Success][0m
+Test :   { 1 - 1 } [32m[Success][0m
+Test : ! { 1 - 1 } [32m[Success][0m
+Test : " { 1 - 1 } [32m[Success][0m
+Test : # { 1 - 1 } [32m[Success][0m
+Test : $ { 1 - 1 } [32m[Success][0m
+Test : % { 1 - 1 } [32m[Success][0m
+Test : & { 1 - 1 } [32m[Success][0m
+Test : ' { 1 - 1 } [32m[Success][0m
+Test : ( { 1 - 1 } [32m[Success][0m
+Test : ) { 1 - 1 } [32m[Success][0m
+Test : * { 1 - 1 } [32m[Success][0m
+Test : + { 1 - 1 } [32m[Success][0m
+Test : , { 1 - 1 } [32m[Success][0m
+Test : - { 1 - 1 } [32m[Success][0m
+Test : . { 1 - 1 } [32m[Success][0m
+Test : / { 1 - 1 } [32m[Success][0m
+Test : 0 { 1 - 1 } [32m[Success][0m
+Test : 1 { 1 - 1 } [32m[Success][0m
+Test : 2 { 1 - 1 } [32m[Success][0m
+Test : 3 { 1 - 1 } [32m[Success][0m
+Test : 4 { 1 - 1 } [32m[Success][0m
+Test : 5 { 1 - 1 } [32m[Success][0m
+Test : 6 { 1 - 1 } [32m[Success][0m
+Test : 7 { 1 - 1 } [32m[Success][0m
+Test : 8 { 1 - 1 } [32m[Success][0m
+Test : 9 { 1 - 1 } [32m[Success][0m
+Test : : { 1 - 1 } [32m[Success][0m
+Test : ; { 1 - 1 } [32m[Success][0m
+Test : < { 1 - 1 } [32m[Success][0m
+Test : = { 1 - 1 } [32m[Success][0m
+Test : > { 1 - 1 } [32m[Success][0m
+Test : ? { 1 - 1 } [32m[Success][0m
+Test : @ { 1 - 1 } [32m[Success][0m
+Test : A { 1 - 1 } [32m[Success][0m
+Test : B { 1 - 1 } [32m[Success][0m
+Test : C { 1 - 1 } [32m[Success][0m
+Test : D { 1 - 1 } [32m[Success][0m
+Test : E { 1 - 1 } [32m[Success][0m
+Test : F { 1 - 1 } [32m[Success][0m
+Test : G { 1 - 1 } [32m[Success][0m
+Test : H { 1 - 1 } [32m[Success][0m
+Test : I { 1 - 1 } [32m[Success][0m
+Test : J { 1 - 1 } [32m[Success][0m
+Test : K { 1 - 1 } [32m[Success][0m
+Test : L { 1 - 1 } [32m[Success][0m
+Test : M { 1 - 1 } [32m[Success][0m
+Test : N { 1 - 1 } [32m[Success][0m
+Test : O { 1 - 1 } [32m[Success][0m
+Test : P { 1 - 1 } [32m[Success][0m
+Test : Q { 1 - 1 } [32m[Success][0m
+Test : R { 1 - 1 } [32m[Success][0m
+Test : S { 1 - 1 } [32m[Success][0m
+Test : T { 1 - 1 } [32m[Success][0m
+Test : U { 1 - 1 } [32m[Success][0m
+Test : V { 1 - 1 } [32m[Success][0m
+Test : W { 1 - 1 } [32m[Success][0m
+Test : X { 1 - 1 } [32m[Success][0m
+Test : Y { 1 - 1 } [32m[Success][0m
+Test : Z { 1 - 1 } [32m[Success][0m
+Test : [ { 1 - 1 } [32m[Success][0m
+Test : \ { 1 - 1 } [32m[Success][0m
+Test : ] { 1 - 1 } [32m[Success][0m
+Test : ^ { 1 - 1 } [32m[Success][0m
+Test : _ { 1 - 1 } [32m[Success][0m
+Test : ` { 1 - 1 } [32m[Success][0m
+Test : a { 1 - 1 } [32m[Success][0m
+Test : b { 1 - 1 } [32m[Success][0m
+Test : c { 1 - 1 } [32m[Success][0m
+Test : d { 1 - 1 } [32m[Success][0m
+Test : e { 1 - 1 } [32m[Success][0m
+Test : f { 1 - 1 } [32m[Success][0m
+Test : g { 1 - 1 } [32m[Success][0m
+Test : h { 1 - 1 } [32m[Success][0m
+Test : i { 1 - 1 } [32m[Success][0m
+Test : j { 1 - 1 } [32m[Success][0m
+Test : k { 1 - 1 } [32m[Success][0m
+Test : l { 1 - 1 } [32m[Success][0m
+Test : m { 1 - 1 } [32m[Success][0m
+Test : n { 1 - 1 } [32m[Success][0m
+Test : o { 1 - 1 } [32m[Success][0m
+Test : p { 1 - 1 } [32m[Success][0m
+Test : q { 1 - 1 } [32m[Success][0m
+Test : r { 1 - 1 } [32m[Success][0m
+Test : s { 1 - 1 } [32m[Success][0m
+Test : t { 1 - 1 } [32m[Success][0m
+Test : u { 1 - 1 } [32m[Success][0m
+Test : v { 1 - 1 } [32m[Success][0m
+Test : w { 1 - 1 } [32m[Success][0m
+Test : x { 1 - 1 } [32m[Success][0m
+Test : y { 1 - 1 } [32m[Success][0m
+Test : z { 1 - 1 } [32m[Success][0m
+Test : { { 1 - 1 } [32m[Success][0m
+Test : | { 1 - 1 } [32m[Success][0m
+Test : } { 1 - 1 } [32m[Success][0m
+Test : ~ { 1 - 1 } [32m[Success][0m
+Test :  { 1 - 1 } [32m[Success][0m
+Test : Ä { 0 - 0 } [32m[Success][0m
+Test : Å { 0 - 0 } [32m[Success][0m
+Test : Ç { 0 - 0 } [32m[Success][0m
+Test : É { 0 - 0 } [32m[Success][0m
+Test : Ñ { 0 - 0 } [32m[Success][0m
+Test : Ö { 0 - 0 } [32m[Success][0m
+Test : Ü { 0 - 0 } [32m[Success][0m
+Test : á { 0 - 0 } [32m[Success][0m
+Test : à { 0 - 0 } [32m[Success][0m
+Test : â { 0 - 0 } [32m[Success][0m
+Test : ä { 0 - 0 } [32m[Success][0m
+Test : ã { 0 - 0 } [32m[Success][0m
+Test : å { 0 - 0 } [32m[Success][0m
+Test : ç { 0 - 0 } [32m[Success][0m
+Test : é { 0 - 0 } [32m[Success][0m
+Test : è { 0 - 0 } [32m[Success][0m
+Test : ê { 0 - 0 } [32m[Success][0m
+Test : ë { 0 - 0 } [32m[Success][0m
+Test : í { 0 - 0 } [32m[Success][0m
+Test : ì { 0 - 0 } [32m[Success][0m
+Test : î { 0 - 0 } [32m[Success][0m
+Test : ï { 0 - 0 } [32m[Success][0m
+Test : ñ { 0 - 0 } [32m[Success][0m
+Test : ó { 0 - 0 } [32m[Success][0m
+Test : ò { 0 - 0 } [32m[Success][0m
+Test : ô { 0 - 0 } [32m[Success][0m
+Test : ö { 0 - 0 } [32m[Success][0m
+Test : õ { 0 - 0 } [32m[Success][0m
+Test : ú { 0 - 0 } [32m[Success][0m
+Test : ù { 0 - 0 } [32m[Success][0m
+Test : û { 0 - 0 } [32m[Success][0m
+Test : ü { 0 - 0 } [32m[Success][0m
+Test : † { 0 - 0 } [32m[Success][0m
+Test : ° { 0 - 0 } [32m[Success][0m
+Test : ¢ { 0 - 0 } [32m[Success][0m
+Test : £ { 0 - 0 } [32m[Success][0m
+Test : § { 0 - 0 } [32m[Success][0m
+Test : • { 0 - 0 } [32m[Success][0m
+Test : ¶ { 0 - 0 } [32m[Success][0m
+Test : ß { 0 - 0 } [32m[Success][0m
+Test : ® { 0 - 0 } [32m[Success][0m
+Test : © { 0 - 0 } [32m[Success][0m
+Test : ™ { 0 - 0 } [32m[Success][0m
+Test : ´ { 0 - 0 } [32m[Success][0m
+Test : ¨ { 0 - 0 } [32m[Success][0m
+Test : ≠ { 0 - 0 } [32m[Success][0m
+Test : Æ { 0 - 0 } [32m[Success][0m
+Test : Ø { 0 - 0 } [32m[Success][0m
+Test : ∞ { 0 - 0 } [32m[Success][0m
+Test : ± { 0 - 0 } [32m[Success][0m
+Test : ≤ { 0 - 0 } [32m[Success][0m
+Test : ≥ { 0 - 0 } [32m[Success][0m
+Test : ¥ { 0 - 0 } [32m[Success][0m
+Test : µ { 0 - 0 } [32m[Success][0m
+Test : ∂ { 0 - 0 } [32m[Success][0m
+Test : ∑ { 0 - 0 } [32m[Success][0m
+Test : ∏ { 0 - 0 } [32m[Success][0m
+Test : π { 0 - 0 } [32m[Success][0m
+Test : ∫ { 0 - 0 } [32m[Success][0m
+Test : ª { 0 - 0 } [32m[Success][0m
+Test : º { 0 - 0 } [32m[Success][0m
+Test : Ω { 0 - 0 } [32m[Success][0m
+Test : æ { 0 - 0 } [32m[Success][0m
+Test : ø { 0 - 0 } [32m[Success][0m
+Test : ¿ { 0 - 0 } [32m[Success][0m
+Test : ¡ { 0 - 0 } [32m[Success][0m
+Test : ¬ { 0 - 0 } [32m[Success][0m
+Test : √ { 0 - 0 } [32m[Success][0m
+Test : ƒ { 0 - 0 } [32m[Success][0m
+Test : ≈ { 0 - 0 } [32m[Success][0m
+Test : ∆ { 0 - 0 } [32m[Success][0m
+Test : « { 0 - 0 } [32m[Success][0m
+Test : » { 0 - 0 } [32m[Success][0m
+Test : … { 0 - 0 } [32m[Success][0m
+Test :   { 0 - 0 } [32m[Success][0m
+Test : À { 0 - 0 } [32m[Success][0m
+Test : Ã { 0 - 0 } [32m[Success][0m
+Test : Õ { 0 - 0 } [32m[Success][0m
+Test : Œ { 0 - 0 } [32m[Success][0m
+Test : œ { 0 - 0 } [32m[Success][0m
+Test : – { 0 - 0 } [32m[Success][0m
+Test : — { 0 - 0 } [32m[Success][0m
+Test : “ { 0 - 0 } [32m[Success][0m
+Test : ” { 0 - 0 } [32m[Success][0m
+Test : ‘ { 0 - 0 } [32m[Success][0m
+Test : ’ { 0 - 0 } [32m[Success][0m
+Test : ÷ { 0 - 0 } [32m[Success][0m
+Test : ◊ { 0 - 0 } [32m[Success][0m
+Test : ÿ { 0 - 0 } [32m[Success][0m
+Test : Ÿ { 0 - 0 } [32m[Success][0m
+Test : ⁄ { 0 - 0 } [32m[Success][0m
+Test : € { 0 - 0 } [32m[Success][0m
+Test : ‹ { 0 - 0 } [32m[Success][0m
+Test : › { 0 - 0 } [32m[Success][0m
+Test : ﬁ { 0 - 0 } [32m[Success][0m
+Test : ﬂ { 0 - 0 } [32m[Success][0m
+Test : ‡ { 0 - 0 } [32m[Success][0m
+Test : · { 0 - 0 } [32m[Success][0m
+Test : ‚ { 0 - 0 } [32m[Success][0m
+Test : „ { 0 - 0 } [32m[Success][0m
+Test : ‰ { 0 - 0 } [32m[Success][0m
+Test : Â { 0 - 0 } [32m[Success][0m
+Test : Ê { 0 - 0 } [32m[Success][0m
+Test : Á { 0 - 0 } [32m[Success][0m
+Test : Ë { 0 - 0 } [32m[Success][0m
+Test : È { 0 - 0 } [32m[Success][0m
+Test : Í { 0 - 0 } [32m[Success][0m
+Test : Î { 0 - 0 } [32m[Success][0m
+Test : Ï { 0 - 0 } [32m[Success][0m
+Test : Ì { 0 - 0 } [32m[Success][0m
+Test : Ó { 0 - 0 } [32m[Success][0m
+Test : Ô { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test : Ò { 0 - 0 } [32m[Success][0m
+Test : Ú { 0 - 0 } [32m[Success][0m
+Test : Û { 0 - 0 } [32m[Success][0m
+Test : Ù { 0 - 0 } [32m[Success][0m
+Test : ı { 0 - 0 } [32m[Success][0m
+Test : ˆ { 0 - 0 } [32m[Success][0m
+Test : ˜ { 0 - 0 } [32m[Success][0m
+Test : ¯ { 0 - 0 } [32m[Success][0m
+Test : ˘ { 0 - 0 } [32m[Success][0m
+Test : ˙ { 0 - 0 } [32m[Success][0m
+Test : ˚ { 0 - 0 } [32m[Success][0m
+Test : ¸ { 0 - 0 } [32m[Success][0m
+Test : ˝ { 0 - 0 } [32m[Success][0m
+Test : ˛ { 0 - 0 } [32m[Success][0m
+Test : ˇ { 0 - 0 } [32m[Success][0m
+End unit test : [32m[Success][0m
+
+Begin unit test : [34mft_isprint[0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test : 	 { 0 - 0 } [32m[Success][0m
+Test : 
+ { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test :   { 1 - 1 } [32m[Success][0m
+Test : ! { 1 - 1 } [32m[Success][0m
+Test : " { 1 - 1 } [32m[Success][0m
+Test : # { 1 - 1 } [32m[Success][0m
+Test : $ { 1 - 1 } [32m[Success][0m
+Test : % { 1 - 1 } [32m[Success][0m
+Test : & { 1 - 1 } [32m[Success][0m
+Test : ' { 1 - 1 } [32m[Success][0m
+Test : ( { 1 - 1 } [32m[Success][0m
+Test : ) { 1 - 1 } [32m[Success][0m
+Test : * { 1 - 1 } [32m[Success][0m
+Test : + { 1 - 1 } [32m[Success][0m
+Test : , { 1 - 1 } [32m[Success][0m
+Test : - { 1 - 1 } [32m[Success][0m
+Test : . { 1 - 1 } [32m[Success][0m
+Test : / { 1 - 1 } [32m[Success][0m
+Test : 0 { 1 - 1 } [32m[Success][0m
+Test : 1 { 1 - 1 } [32m[Success][0m
+Test : 2 { 1 - 1 } [32m[Success][0m
+Test : 3 { 1 - 1 } [32m[Success][0m
+Test : 4 { 1 - 1 } [32m[Success][0m
+Test : 5 { 1 - 1 } [32m[Success][0m
+Test : 6 { 1 - 1 } [32m[Success][0m
+Test : 7 { 1 - 1 } [32m[Success][0m
+Test : 8 { 1 - 1 } [32m[Success][0m
+Test : 9 { 1 - 1 } [32m[Success][0m
+Test : : { 1 - 1 } [32m[Success][0m
+Test : ; { 1 - 1 } [32m[Success][0m
+Test : < { 1 - 1 } [32m[Success][0m
+Test : = { 1 - 1 } [32m[Success][0m
+Test : > { 1 - 1 } [32m[Success][0m
+Test : ? { 1 - 1 } [32m[Success][0m
+Test : @ { 1 - 1 } [32m[Success][0m
+Test : A { 1 - 1 } [32m[Success][0m
+Test : B { 1 - 1 } [32m[Success][0m
+Test : C { 1 - 1 } [32m[Success][0m
+Test : D { 1 - 1 } [32m[Success][0m
+Test : E { 1 - 1 } [32m[Success][0m
+Test : F { 1 - 1 } [32m[Success][0m
+Test : G { 1 - 1 } [32m[Success][0m
+Test : H { 1 - 1 } [32m[Success][0m
+Test : I { 1 - 1 } [32m[Success][0m
+Test : J { 1 - 1 } [32m[Success][0m
+Test : K { 1 - 1 } [32m[Success][0m
+Test : L { 1 - 1 } [32m[Success][0m
+Test : M { 1 - 1 } [32m[Success][0m
+Test : N { 1 - 1 } [32m[Success][0m
+Test : O { 1 - 1 } [32m[Success][0m
+Test : P { 1 - 1 } [32m[Success][0m
+Test : Q { 1 - 1 } [32m[Success][0m
+Test : R { 1 - 1 } [32m[Success][0m
+Test : S { 1 - 1 } [32m[Success][0m
+Test : T { 1 - 1 } [32m[Success][0m
+Test : U { 1 - 1 } [32m[Success][0m
+Test : V { 1 - 1 } [32m[Success][0m
+Test : W { 1 - 1 } [32m[Success][0m
+Test : X { 1 - 1 } [32m[Success][0m
+Test : Y { 1 - 1 } [32m[Success][0m
+Test : Z { 1 - 1 } [32m[Success][0m
+Test : [ { 1 - 1 } [32m[Success][0m
+Test : \ { 1 - 1 } [32m[Success][0m
+Test : ] { 1 - 1 } [32m[Success][0m
+Test : ^ { 1 - 1 } [32m[Success][0m
+Test : _ { 1 - 1 } [32m[Success][0m
+Test : ` { 1 - 1 } [32m[Success][0m
+Test : a { 1 - 1 } [32m[Success][0m
+Test : b { 1 - 1 } [32m[Success][0m
+Test : c { 1 - 1 } [32m[Success][0m
+Test : d { 1 - 1 } [32m[Success][0m
+Test : e { 1 - 1 } [32m[Success][0m
+Test : f { 1 - 1 } [32m[Success][0m
+Test : g { 1 - 1 } [32m[Success][0m
+Test : h { 1 - 1 } [32m[Success][0m
+Test : i { 1 - 1 } [32m[Success][0m
+Test : j { 1 - 1 } [32m[Success][0m
+Test : k { 1 - 1 } [32m[Success][0m
+Test : l { 1 - 1 } [32m[Success][0m
+Test : m { 1 - 1 } [32m[Success][0m
+Test : n { 1 - 1 } [32m[Success][0m
+Test : o { 1 - 1 } [32m[Success][0m
+Test : p { 1 - 1 } [32m[Success][0m
+Test : q { 1 - 1 } [32m[Success][0m
+Test : r { 1 - 1 } [32m[Success][0m
+Test : s { 1 - 1 } [32m[Success][0m
+Test : t { 1 - 1 } [32m[Success][0m
+Test : u { 1 - 1 } [32m[Success][0m
+Test : v { 1 - 1 } [32m[Success][0m
+Test : w { 1 - 1 } [32m[Success][0m
+Test : x { 1 - 1 } [32m[Success][0m
+Test : y { 1 - 1 } [32m[Success][0m
+Test : z { 1 - 1 } [32m[Success][0m
+Test : { { 1 - 1 } [32m[Success][0m
+Test : | { 1 - 1 } [32m[Success][0m
+Test : } { 1 - 1 } [32m[Success][0m
+Test : ~ { 1 - 1 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test : Ä { 0 - 0 } [32m[Success][0m
+Test : Å { 0 - 0 } [32m[Success][0m
+Test : Ç { 0 - 0 } [32m[Success][0m
+Test : É { 0 - 0 } [32m[Success][0m
+Test : Ñ { 0 - 0 } [32m[Success][0m
+Test : Ö { 0 - 0 } [32m[Success][0m
+Test : Ü { 0 - 0 } [32m[Success][0m
+Test : á { 0 - 0 } [32m[Success][0m
+Test : à { 0 - 0 } [32m[Success][0m
+Test : â { 0 - 0 } [32m[Success][0m
+Test : ä { 0 - 0 } [32m[Success][0m
+Test : ã { 0 - 0 } [32m[Success][0m
+Test : å { 0 - 0 } [32m[Success][0m
+Test : ç { 0 - 0 } [32m[Success][0m
+Test : é { 0 - 0 } [32m[Success][0m
+Test : è { 0 - 0 } [32m[Success][0m
+Test : ê { 0 - 0 } [32m[Success][0m
+Test : ë { 0 - 0 } [32m[Success][0m
+Test : í { 0 - 0 } [32m[Success][0m
+Test : ì { 0 - 0 } [32m[Success][0m
+Test : î { 0 - 0 } [32m[Success][0m
+Test : ï { 0 - 0 } [32m[Success][0m
+Test : ñ { 0 - 0 } [32m[Success][0m
+Test : ó { 0 - 0 } [32m[Success][0m
+Test : ò { 0 - 0 } [32m[Success][0m
+Test : ô { 0 - 0 } [32m[Success][0m
+Test : ö { 0 - 0 } [32m[Success][0m
+Test : õ { 0 - 0 } [32m[Success][0m
+Test : ú { 0 - 0 } [32m[Success][0m
+Test : ù { 0 - 0 } [32m[Success][0m
+Test : û { 0 - 0 } [32m[Success][0m
+Test : ü { 0 - 0 } [32m[Success][0m
+Test : † { 0 - 0 } [32m[Success][0m
+Test : ° { 0 - 0 } [32m[Success][0m
+Test : ¢ { 0 - 0 } [32m[Success][0m
+Test : £ { 0 - 0 } [32m[Success][0m
+Test : § { 0 - 0 } [32m[Success][0m
+Test : • { 0 - 0 } [32m[Success][0m
+Test : ¶ { 0 - 0 } [32m[Success][0m
+Test : ß { 0 - 0 } [32m[Success][0m
+Test : ® { 0 - 0 } [32m[Success][0m
+Test : © { 0 - 0 } [32m[Success][0m
+Test : ™ { 0 - 0 } [32m[Success][0m
+Test : ´ { 0 - 0 } [32m[Success][0m
+Test : ¨ { 0 - 0 } [32m[Success][0m
+Test : ≠ { 0 - 0 } [32m[Success][0m
+Test : Æ { 0 - 0 } [32m[Success][0m
+Test : Ø { 0 - 0 } [32m[Success][0m
+Test : ∞ { 0 - 0 } [32m[Success][0m
+Test : ± { 0 - 0 } [32m[Success][0m
+Test : ≤ { 0 - 0 } [32m[Success][0m
+Test : ≥ { 0 - 0 } [32m[Success][0m
+Test : ¥ { 0 - 0 } [32m[Success][0m
+Test : µ { 0 - 0 } [32m[Success][0m
+Test : ∂ { 0 - 0 } [32m[Success][0m
+Test : ∑ { 0 - 0 } [32m[Success][0m
+Test : ∏ { 0 - 0 } [32m[Success][0m
+Test : π { 0 - 0 } [32m[Success][0m
+Test : ∫ { 0 - 0 } [32m[Success][0m
+Test : ª { 0 - 0 } [32m[Success][0m
+Test : º { 0 - 0 } [32m[Success][0m
+Test : Ω { 0 - 0 } [32m[Success][0m
+Test : æ { 0 - 0 } [32m[Success][0m
+Test : ø { 0 - 0 } [32m[Success][0m
+Test : ¿ { 0 - 0 } [32m[Success][0m
+Test : ¡ { 0 - 0 } [32m[Success][0m
+Test : ¬ { 0 - 0 } [32m[Success][0m
+Test : √ { 0 - 0 } [32m[Success][0m
+Test : ƒ { 0 - 0 } [32m[Success][0m
+Test : ≈ { 0 - 0 } [32m[Success][0m
+Test : ∆ { 0 - 0 } [32m[Success][0m
+Test : « { 0 - 0 } [32m[Success][0m
+Test : » { 0 - 0 } [32m[Success][0m
+Test : … { 0 - 0 } [32m[Success][0m
+Test :   { 0 - 0 } [32m[Success][0m
+Test : À { 0 - 0 } [32m[Success][0m
+Test : Ã { 0 - 0 } [32m[Success][0m
+Test : Õ { 0 - 0 } [32m[Success][0m
+Test : Œ { 0 - 0 } [32m[Success][0m
+Test : œ { 0 - 0 } [32m[Success][0m
+Test : – { 0 - 0 } [32m[Success][0m
+Test : — { 0 - 0 } [32m[Success][0m
+Test : “ { 0 - 0 } [32m[Success][0m
+Test : ” { 0 - 0 } [32m[Success][0m
+Test : ‘ { 0 - 0 } [32m[Success][0m
+Test : ’ { 0 - 0 } [32m[Success][0m
+Test : ÷ { 0 - 0 } [32m[Success][0m
+Test : ◊ { 0 - 0 } [32m[Success][0m
+Test : ÿ { 0 - 0 } [32m[Success][0m
+Test : Ÿ { 0 - 0 } [32m[Success][0m
+Test : ⁄ { 0 - 0 } [32m[Success][0m
+Test : € { 0 - 0 } [32m[Success][0m
+Test : ‹ { 0 - 0 } [32m[Success][0m
+Test : › { 0 - 0 } [32m[Success][0m
+Test : ﬁ { 0 - 0 } [32m[Success][0m
+Test : ﬂ { 0 - 0 } [32m[Success][0m
+Test : ‡ { 0 - 0 } [32m[Success][0m
+Test : · { 0 - 0 } [32m[Success][0m
+Test : ‚ { 0 - 0 } [32m[Success][0m
+Test : „ { 0 - 0 } [32m[Success][0m
+Test : ‰ { 0 - 0 } [32m[Success][0m
+Test : Â { 0 - 0 } [32m[Success][0m
+Test : Ê { 0 - 0 } [32m[Success][0m
+Test : Á { 0 - 0 } [32m[Success][0m
+Test : Ë { 0 - 0 } [32m[Success][0m
+Test : È { 0 - 0 } [32m[Success][0m
+Test : Í { 0 - 0 } [32m[Success][0m
+Test : Î { 0 - 0 } [32m[Success][0m
+Test : Ï { 0 - 0 } [32m[Success][0m
+Test : Ì { 0 - 0 } [32m[Success][0m
+Test : Ó { 0 - 0 } [32m[Success][0m
+Test : Ô { 0 - 0 } [32m[Success][0m
+Test :  { 0 - 0 } [32m[Success][0m
+Test : Ò { 0 - 0 } [32m[Success][0m
+Test : Ú { 0 - 0 } [32m[Success][0m
+Test : Û { 0 - 0 } [32m[Success][0m
+Test : Ù { 0 - 0 } [32m[Success][0m
+Test : ı { 0 - 0 } [32m[Success][0m
+Test : ˆ { 0 - 0 } [32m[Success][0m
+Test : ˜ { 0 - 0 } [32m[Success][0m
+Test : ¯ { 0 - 0 } [32m[Success][0m
+Test : ˘ { 0 - 0 } [32m[Success][0m
+Test : ˙ { 0 - 0 } [32m[Success][0m
+Test : ˚ { 0 - 0 } [32m[Success][0m
+Test : ¸ { 0 - 0 } [32m[Success][0m
+Test : ˝ { 0 - 0 } [32m[Success][0m
+Test : ˛ { 0 - 0 } [32m[Success][0m
+Test : ˇ { 0 - 0 } [32m[Success][0m
+End unit test : [32m[Success][0m
+
+Begin unit test : [34mft_toupper[0m
+Test :  {  -  } [32m[Success][0m
+Test :  {  -  } [32m[Success][0m
+Test :  {  -  } [32m[Success][0m
+Test :  {  -  } [32m[Success][0m
+Test :  {  -  } [32m[Success][0m
+Test :  {  -  } [32m[Success][0m
+Test :  {  -  } [32m[Success][0m
+Test :  {  -  } [32m[Success][0m
+Test : 	 { 	 - 	 } [32m[Success][0m
+Test : 
+ { 
+ - 
+ } [32m[Success][0m
+Test :  {  -  } [32m[Success][0m
+Test :  {  -  } [32m[Success][0m
+Test :  {  -  } [32m[Success][0m
+Test :  {  -  } [32m[Success][0m
+Test :  {  -  } [32m[Success][0m
+Test :  {  -  } [32m[Success][0m
+Test :  {  -  } [32m[Success][0m
+Test :  {  -  } [32m[Success][0m
+Test :  {  -  } [32m[Success][0m
+Test :  {  -  } [32m[Success][0m
+Test :  {  -  } [32m[Success][0m
+Test :  {  -  } [32m[Success][0m
+Test :  {  -  } [32m[Success][0m
+Test :  {  -  } [32m[Success][0m
+Test :  {  -  } [32m[Success][0m
+Test :  {  -  } [32m[Success][0m
+Test :  {  -  } [32m[Success][0m
+Test :  {  -  } [32m[Success][0m
+Test :  {  -  } [32m[Success][0m
+Test :  {  -  } [32m[Success][0m
+Test :  {  -  } [32m[Success][0m
+Test :   {   -   } [32m[Success][0m
+Test : ! { ! - ! } [32m[Success][0m
+Test : " { " - " } [32m[Success][0m
+Test : # { # - # } [32m[Success][0m
+Test : $ { $ - $ } [32m[Success][0m
+Test : % { % - % } [32m[Success][0m
+Test : & { & - & } [32m[Success][0m
+Test : ' { ' - ' } [32m[Success][0m
+Test : ( { ( - ( } [32m[Success][0m
+Test : ) { ) - ) } [32m[Success][0m
+Test : * { * - * } [32m[Success][0m
+Test : + { + - + } [32m[Success][0m
+Test : , { , - , } [32m[Success][0m
+Test : - { - - - } [32m[Success][0m
+Test : . { . - . } [32m[Success][0m
+Test : / { / - / } [32m[Success][0m
+Test : 0 { 0 - 0 } [32m[Success][0m
+Test : 1 { 1 - 1 } [32m[Success][0m
+Test : 2 { 2 - 2 } [32m[Success][0m
+Test : 3 { 3 - 3 } [32m[Success][0m
+Test : 4 { 4 - 4 } [32m[Success][0m
+Test : 5 { 5 - 5 } [32m[Success][0m
+Test : 6 { 6 - 6 } [32m[Success][0m
+Test : 7 { 7 - 7 } [32m[Success][0m
+Test : 8 { 8 - 8 } [32m[Success][0m
+Test : 9 { 9 - 9 } [32m[Success][0m
+Test : : { : - : } [32m[Success][0m
+Test : ; { ; - ; } [32m[Success][0m
+Test : < { < - < } [32m[Success][0m
+Test : = { = - = } [32m[Success][0m
+Test : > { > - > } [32m[Success][0m
+Test : ? { ? - ? } [32m[Success][0m
+Test : @ { @ - @ } [32m[Success][0m
+Test : A { A - A } [32m[Success][0m
+Test : B { B - B } [32m[Success][0m
+Test : C { C - C } [32m[Success][0m
+Test : D { D - D } [32m[Success][0m
+Test : E { E - E } [32m[Success][0m
+Test : F { F - F } [32m[Success][0m
+Test : G { G - G } [32m[Success][0m
+Test : H { H - H } [32m[Success][0m
+Test : I { I - I } [32m[Success][0m
+Test : J { J - J } [32m[Success][0m
+Test : K { K - K } [32m[Success][0m
+Test : L { L - L } [32m[Success][0m
+Test : M { M - M } [32m[Success][0m
+Test : N { N - N } [32m[Success][0m
+Test : O { O - O } [32m[Success][0m
+Test : P { P - P } [32m[Success][0m
+Test : Q { Q - Q } [32m[Success][0m
+Test : R { R - R } [32m[Success][0m
+Test : S { S - S } [32m[Success][0m
+Test : T { T - T } [32m[Success][0m
+Test : U { U - U } [32m[Success][0m
+Test : V { V - V } [32m[Success][0m
+Test : W { W - W } [32m[Success][0m
+Test : X { X - X } [32m[Success][0m
+Test : Y { Y - Y } [32m[Success][0m
+Test : Z { Z - Z } [32m[Success][0m
+Test : [ { [ - [ } [32m[Success][0m
+Test : \ { \ - \ } [32m[Success][0m
+Test : ] { ] - ] } [32m[Success][0m
+Test : ^ { ^ - ^ } [32m[Success][0m
+Test : _ { _ - _ } [32m[Success][0m
+Test : ` { ` - ` } [32m[Success][0m
+Test : a { A - A } [32m[Success][0m
+Test : b { B - B } [32m[Success][0m
+Test : c { C - C } [32m[Success][0m
+Test : d { D - D } [32m[Success][0m
+Test : e { E - E } [32m[Success][0m
+Test : f { F - F } [32m[Success][0m
+Test : g { G - G } [32m[Success][0m
+Test : h { H - H } [32m[Success][0m
+Test : i { I - I } [32m[Success][0m
+Test : j { J - J } [32m[Success][0m
+Test : k { K - K } [32m[Success][0m
+Test : l { L - L } [32m[Success][0m
+Test : m { M - M } [32m[Success][0m
+Test : n { N - N } [32m[Success][0m
+Test : o { O - O } [32m[Success][0m
+Test : p { P - P } [32m[Success][0m
+Test : q { Q - Q } [32m[Success][0m
+Test : r { R - R } [32m[Success][0m
+Test : s { S - S } [32m[Success][0m
+Test : t { T - T } [32m[Success][0m
+Test : u { U - U } [32m[Success][0m
+Test : v { V - V } [32m[Success][0m
+Test : w { W - W } [32m[Success][0m
+Test : x { X - X } [32m[Success][0m
+Test : y { Y - Y } [32m[Success][0m
+Test : z { Z - Z } [32m[Success][0m
+Test : { { { - { } [32m[Success][0m
+Test : | { | - | } [32m[Success][0m
+Test : } { } - } } [32m[Success][0m
+Test : ~ { ~ - ~ } [32m[Success][0m
+Test :  {  -  } [32m[Success][0m
+Test : Ä { Ä - Ä } [32m[Success][0m
+Test : Å { Å - Å } [32m[Success][0m
+Test : Ç { Ç - Ç } [32m[Success][0m
+Test : É { É - É } [32m[Success][0m
+Test : Ñ { Ñ - Ñ } [32m[Success][0m
+Test : Ö { Ö - Ö } [32m[Success][0m
+Test : Ü { Ü - Ü } [32m[Success][0m
+Test : á { á - á } [32m[Success][0m
+Test : à { à - à } [32m[Success][0m
+Test : â { â - â } [32m[Success][0m
+Test : ä { ä - ä } [32m[Success][0m
+Test : ã { ã - ã } [32m[Success][0m
+Test : å { å - å } [32m[Success][0m
+Test : ç { ç - ç } [32m[Success][0m
+Test : é { é - é } [32m[Success][0m
+Test : è { è - è } [32m[Success][0m
+Test : ê { ê - ê } [32m[Success][0m
+Test : ë { ë - ë } [32m[Success][0m
+Test : í { í - í } [32m[Success][0m
+Test : ì { ì - ì } [32m[Success][0m
+Test : î { î - î } [32m[Success][0m
+Test : ï { ï - ï } [32m[Success][0m
+Test : ñ { ñ - ñ } [32m[Success][0m
+Test : ó { ó - ó } [32m[Success][0m
+Test : ò { ò - ò } [32m[Success][0m
+Test : ô { ô - ô } [32m[Success][0m
+Test : ö { ö - ö } [32m[Success][0m
+Test : õ { õ - õ } [32m[Success][0m
+Test : ú { ú - ú } [32m[Success][0m
+Test : ù { ù - ù } [32m[Success][0m
+Test : û { û - û } [32m[Success][0m
+Test : ü { ü - ü } [32m[Success][0m
+Test : † { † - † } [32m[Success][0m
+Test : ° { ° - ° } [32m[Success][0m
+Test : ¢ { ¢ - ¢ } [32m[Success][0m
+Test : £ { £ - £ } [32m[Success][0m
+Test : § { § - § } [32m[Success][0m
+Test : • { • - • } [32m[Success][0m
+Test : ¶ { ¶ - ¶ } [32m[Success][0m
+Test : ß { ß - ß } [32m[Success][0m
+Test : ® { ® - ® } [32m[Success][0m
+Test : © { © - © } [32m[Success][0m
+Test : ™ { ™ - ™ } [32m[Success][0m
+Test : ´ { ´ - ´ } [32m[Success][0m
+Test : ¨ { ¨ - ¨ } [32m[Success][0m
+Test : ≠ { ≠ - ≠ } [32m[Success][0m
+Test : Æ { Æ - Æ } [32m[Success][0m
+Test : Ø { Ø - Ø } [32m[Success][0m
+Test : ∞ { ∞ - ∞ } [32m[Success][0m
+Test : ± { ± - ± } [32m[Success][0m
+Test : ≤ { ≤ - ≤ } [32m[Success][0m
+Test : ≥ { ≥ - ≥ } [32m[Success][0m
+Test : ¥ { ¥ - ¥ } [32m[Success][0m
+Test : µ { µ - µ } [32m[Success][0m
+Test : ∂ { ∂ - ∂ } [32m[Success][0m
+Test : ∑ { ∑ - ∑ } [32m[Success][0m
+Test : ∏ { ∏ - ∏ } [32m[Success][0m
+Test : π { π - π } [32m[Success][0m
+Test : ∫ { ∫ - ∫ } [32m[Success][0m
+Test : ª { ª - ª } [32m[Success][0m
+Test : º { º - º } [32m[Success][0m
+Test : Ω { Ω - Ω } [32m[Success][0m
+Test : æ { æ - æ } [32m[Success][0m
+Test : ø { ø - ø } [32m[Success][0m
+Test : ¿ { ¿ - ¿ } [32m[Success][0m
+Test : ¡ { ¡ - ¡ } [32m[Success][0m
+Test : ¬ { ¬ - ¬ } [32m[Success][0m
+Test : √ { √ - √ } [32m[Success][0m
+Test : ƒ { ƒ - ƒ } [32m[Success][0m
+Test : ≈ { ≈ - ≈ } [32m[Success][0m
+Test : ∆ { ∆ - ∆ } [32m[Success][0m
+Test : « { « - « } [32m[Success][0m
+Test : » { » - » } [32m[Success][0m
+Test : … { … - … } [32m[Success][0m
+Test :   {   -   } [32m[Success][0m
+Test : À { À - À } [32m[Success][0m
+Test : Ã { Ã - Ã } [32m[Success][0m
+Test : Õ { Õ - Õ } [32m[Success][0m
+Test : Œ { Œ - Œ } [32m[Success][0m
+Test : œ { œ - œ } [32m[Success][0m
+Test : – { – - – } [32m[Success][0m
+Test : — { — - — } [32m[Success][0m
+Test : “ { “ - “ } [32m[Success][0m
+Test : ” { ” - ” } [32m[Success][0m
+Test : ‘ { ‘ - ‘ } [32m[Success][0m
+Test : ’ { ’ - ’ } [32m[Success][0m
+Test : ÷ { ÷ - ÷ } [32m[Success][0m
+Test : ◊ { ◊ - ◊ } [32m[Success][0m
+Test : ÿ { ÿ - ÿ } [32m[Success][0m
+Test : Ÿ { Ÿ - Ÿ } [32m[Success][0m
+Test : ⁄ { ⁄ - ⁄ } [32m[Success][0m
+Test : € { € - € } [32m[Success][0m
+Test : ‹ { ‹ - ‹ } [32m[Success][0m
+Test : › { › - › } [32m[Success][0m
+Test : ﬁ { ﬁ - ﬁ } [32m[Success][0m
+Test : ﬂ { ﬂ - ﬂ } [32m[Success][0m
+Test : ‡ { ‡ - ‡ } [32m[Success][0m
+Test : · { · - · } [32m[Success][0m
+Test : ‚ { ‚ - ‚ } [32m[Success][0m
+Test : „ { „ - „ } [32m[Success][0m
+Test : ‰ { ‰ - ‰ } [32m[Success][0m
+Test : Â { Â - Â } [32m[Success][0m
+Test : Ê { Ê - Ê } [32m[Success][0m
+Test : Á { Á - Á } [32m[Success][0m
+Test : Ë { Ë - Ë } [32m[Success][0m
+Test : È { È - È } [32m[Success][0m
+Test : Í { Í - Í } [32m[Success][0m
+Test : Î { Î - Î } [32m[Success][0m
+Test : Ï { Ï - Ï } [32m[Success][0m
+Test : Ì { Ì - Ì } [32m[Success][0m
+Test : Ó { Ó - Ó } [32m[Success][0m
+Test : Ô { Ô - Ô } [32m[Success][0m
+Test :  {  -  } [32m[Success][0m
+Test : Ò { Ò - Ò } [32m[Success][0m
+Test : Ú { Ú - Ú } [32m[Success][0m
+Test : Û { Û - Û } [32m[Success][0m
+Test : Ù { Ù - Ù } [32m[Success][0m
+Test : ı { ı - ı } [32m[Success][0m
+Test : ˆ { ˆ - ˆ } [32m[Success][0m
+Test : ˜ { ˜ - ˜ } [32m[Success][0m
+Test : ¯ { ¯ - ¯ } [32m[Success][0m
+Test : ˘ { ˘ - ˘ } [32m[Success][0m
+Test : ˙ { ˙ - ˙ } [32m[Success][0m
+Test : ˚ { ˚ - ˚ } [32m[Success][0m
+Test : ¸ { ¸ - ¸ } [32m[Success][0m
+Test : ˝ { ˝ - ˝ } [32m[Success][0m
+Test : ˛ { ˛ - ˛ } [32m[Success][0m
+Test : ˇ { ˇ - ˇ } [32m[Success][0m
+End unit test : [32m[Success][0m
+
+Begin unit test : [34mft_tolower[0m
+Tests [32m[Success][0m
+End unit test : [32m[Success][0m
+
+Begin unit test : [34mft_memalloc[0m
+End unit test : [32m[Success][0m
+
+Begin unit test : [34mft_memdel[0m
+End unit test : [32m[Success][0m
+
+Begin unit test : [34mft_strnew & ft_strdel[0m
+Test : 1024 [32m[Success][0m
+Test : 0 [32m[Success][0m
+End unit test : [32m[Success][0m
+
+Begin unit test : [34mft_strclr[0m
+Test : "Welcome !" [32m[Success][0m
+Test : "" [32m[Success][0m
+End unit test : [32m[Success][0m
+
+Begin unit test : [34mft_striter[0m
+Test : "##WelCome in New world !##" { "##WELCOME IN NEW WORLD !##" } [32m[Success][0m
+Test : "" { "" } [32m[Success][0m
+End unit test : [32m[Success][0m
+
+Begin unit test : [34mft_striteri[0m
+Test : "##WelCome in New world !##" { "##WELCOME in New world !##" } [32m[Success][0m
+Test : "" { "" } [32m[Success][0m
+End unit test : [32m[Success][0m
+
+Begin unit test : [34mft_strmap[0m
+Test : "##WelCome in New world !##" { "##WELCOME IN NEW WORLD !##FQKOWE" } [32m[Success][0m
+Test : "" { "" } [32m[Success][0m
+End unit test : [32m[Success][0m
+
+Begin unit test : [34mft_strmapi[0m
+Test : "##WelCome in New world !##" { "##WELCOME in New world !##" } [32m[Success][0m
+Test : "" { "" } [32m[Success][0m
+End unit test : [32m[Success][0m
+
+Begin unit test : [34mft_strequ[0m
+Test : Compare "Bonjour" and "Bonjour" { 1 - 1 } [32m[Success][0m
+Test : Compare "Bon" and "bon" { 0 - 0 } [32m[Success][0m
+Test : Compare "Bonjour" and "Bon" { 0 - 0 } [32m[Success][0m
+Test : Compare "" and "" { 1 - 1 } [32m[Success][0m
+End unit test : [32m[Success][0m
+
+Begin unit test : [34mft_strnequ[0m
+Test : Compare "Bonjour" and "Bonjour" (3) { 1 - 1 } [32m[Success][0m
+Test : Compare "Bon" and "bon" (1) { 0 - 0 } [32m[Success][0m
+Test : Compare "Bonjour" and "Bon" (4) { 0 - 0 } [32m[Success][0m
+Test : Compare "Bonjour" and "Bon" (3) { 0 - 1 } [31m[Fail][0m
+Test : Compare "" and "" (3) { 1 - 1 } [32m[Success][0m
+End unit test : [31m[Fail][0m
+
+Begin unit test : [34mft_strsub[0m
+Test : Sub "Bonjour" (2, 3) { "njo" } [32m[Success][0m
+Test : Sub "Bonjour" (0, 0) { "" } [32m[Success][0m
+Test : Sub "Bienvenue" (7, 2) { "ue" } [32m[Success][0m
+End unit test : [32m[Success][0m
+
+Begin unit test : [34mft_strjoin[0m
+Test : Join "Bonjour" and " tout le monde" { "Bonjour tout le monded !##" } [31m[Fail][0m
+Test : Join "" and "Hello" { "Hello" } [32m[Success][0m
+
+[31mAn segfault is appear in test of : [0m"ft_strjoin"

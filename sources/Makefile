@@ -6,23 +6,22 @@
 #    By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/05 01:32:20 by jpirsch           #+#    #+#              #
-#    Updated: 2016/03/26 17:42:09 by fjanoty          ###   ########.fr        #
+#    Updated: 2016/03/26 20:21:13 by fjanoty          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	../fdf
 SRC		= 	main.c \
-			get_next_line.c \
 	 		parsing.c \
 			mlx_env.c \
 			hook.c \
 		 	drawline.c \
 			maped.c \
-			print_map.c \
 			cam.c \
 			print_line.c \
 			print_triangle.c \
 			coord.c
+#			print_map.c 
 
 OBJ		= $(SRC:.c=.o)
 
@@ -36,7 +35,7 @@ $(NAME): $(OBJ)
 		-lmlx -framework OpenGL -framework AppKit
 
 $(OBJ):
-	gcc -c $(FLAGS) $(SRC) -I ../includes -I ../c_maths
+	gcc -c $(FLAGS) $(SRC) -I ../includes -I ../c_maths -I ../libft/
 
 clean:
 	rm -f $(OBJ)

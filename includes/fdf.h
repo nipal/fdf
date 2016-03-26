@@ -6,13 +6,14 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/29 02:21:11 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/03/26 17:46:31 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/26 21:56:13 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 
+# include "libft.h"
 # include "c_maths.h"
 
 /*
@@ -218,9 +219,10 @@ void					draw_point(t_env *e);
 t_list	*get_file(int fd);
 char	*get_str(t_list *lst);
 int		get_tabsize(char **tab);
-int		free_charab(char **tab);
+int		free_chartab(char **tab);
 int		*fill_line(char **char_line, int size_line);
 int		**get_number(char *str, int *size_line, int *nb_line);
+void		define_color(t_env *e, t_matrix*** map, int nbl, int min);
 t_matrix	***get_matrix_map(t_env *e);
 
 

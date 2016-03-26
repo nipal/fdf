@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/10 04:08:06 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/03/26 17:47:01 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/26 21:33:25 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,21 +142,21 @@ void	print_state(t_env *e)
 
 int		**init_map(t_env *e, int fd)
 {
-	return (get_number(get_str(get_file(fd)), &(e->nb_line), &(e->size_line)));
+	return (get_number(get_str(get_file(fd)), &e->map_y, &e->map_x));
 }
 
 void	env(int fd)
 {
 	t_env	e;
 
-	if (!(e.mlx = mlx_init()) || !(e->map = init_map(&e, fd)))
+	if (!(e.mlx = mlx_init()) || !(e.map = init_map(&e, fd)))
 		return ;
 	e.win = mlx_new_window(e.mlx, SIZE_X, SIZE_Y, "La Netre-fre du SwagySwag");
 	e.img = mlx_new_image(e.mlx, SIZE_X, SIZE_Y);
 	e.data = mlx_get_data_addr(e.img, &e.depth, &e.size_line, &e.endian);
 	e.z_buffer = (double*)malloc(sizeof(double) * SIZE_X * SIZE_Y);
-	e.size_map_x = 11;	
-	e.size_map_y = 19;	
+	e.map_x = 11;	
+	e.map_y = 19;	
 	e.ecr_x = SIZE_X;
 	e.ecr_y = SIZE_Y;
 	e.proj = 0;

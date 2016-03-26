@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/15 14:35:08 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/03/24 03:20:36 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/03/26 21:26:13 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 //*
 # define MIN(A, B) ((A) < (B) ? (A) : (B))
 # define MAX(A, B) ((A) < (B) ? (B) : (A))
+# define ABS(A) ((A >= 0) ? A : A * -1)
 //*/
 typedef struct	s_matrix
 {
