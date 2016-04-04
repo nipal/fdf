@@ -10,8 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
 #include "c_maths.h"
+#include "fdf.h"
+#define ABS(X) ((X >= 0) ? X : -X)
 
 /*	si non on fait tout simple,
  *	- on relis le premier au deuxieme et au troisieme

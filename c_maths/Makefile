@@ -42,7 +42,7 @@ $(NAME): $(OBJ)
 	ranlib $(NAME)
 
 %.o:%.c
-	gcc -Ofast  -c $(SRC) $(FLAGS) -I ./
+	gcc -Ofast  -c $(SRC) $(FLAGS) -I ./ 
 #	gcc -Ofast $(FLAGS) -I ../includes/ -c $(SRC)
 
 clean:

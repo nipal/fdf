@@ -220,4 +220,8 @@ void	print_line(t_matrix *pt1, t_matrix *c1,  t_matrix *pt2, t_matrix *c2);
 void	line_x(t_env *e, t_matrix *eq, t_matrix *c1, t_matrix *diff_c);
 void	line_y(t_env *e, t_matrix *eq, t_matrix *c1, t_matrix *diff_c);
 t_matrix	**tab_matrix(t_matrix *pt1, t_matrix *pt2, t_matrix *pt3);
+
+
+
+void			print_repaire(t_matrix *min, t_matrix *pos, t_matrix *color, t_env *e);
 #endif

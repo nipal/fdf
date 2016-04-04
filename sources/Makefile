@@ -21,7 +21,9 @@ SRC		= 	main.c \
 			cam.c \
 			print_line.c \
 			print_triangle.c \
-			coord.c
+			print_eq.c \
+
+
 
 OBJ		= $(SRC:.c=.o)
 

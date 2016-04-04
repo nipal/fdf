@@ -16,6 +16,8 @@
 
 int		check_map(int fd)
 {
+	(void)fd;
+	/*
 	char	buf[1000001];
 	int		ret;
 
@@ -28,6 +30,7 @@ int		check_map(int fd)
 		return (0);
 	if (buf[ret - 1] == '\n' && buf[ret - 2] == '\n')
 		return (0);
+	*/
 	return (1);
 }
 
@@ -50,8 +53,10 @@ int		main(int ac, char **av)
 			else
 				fd = open("maps/42.fdf", O_RDONLY);
 			if (fd > 0)
+			{
 				if ((map = parse(fd)))
 					env(map);
+			}
 		}
 		else
 			ft_putendl_fd("No \\n or more than 2 \\n at the end of file", 2);

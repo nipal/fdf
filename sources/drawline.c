@@ -14,6 +14,7 @@
 #include <math.h>
 #include "fdf.h"
 #include "libft.h"
+#include "c_maths.h"
 #include <unistd.h>
 #include <stdio.h>
 
@@ -204,9 +205,29 @@ t_matrix	*sqr_rotate(int rot, int x, int y, int size)
 	return (pt);
 }
 
-
-
 void	draw_point(t_env *e)
+{
+	t_matrix	*min;	
+	t_matrix	*pos;	
+	t_matrix	*color;	
+
+	min = matrix_put_in_new(-100, -100, 0, 0);
+	pos = matrix_put_in_new(100, 100, 0, 0);
+	color = matrix_put_in_new(255, 255, 255, 0);
+
+	print_repaire(min, pos, color, e);
+
+	mlx_put_image_to_window(e->mlx, e->win, e->img, 0, 0);
+	print_state(e);
+	mlx_do_sync(e->mlx);
+}
+
+
+
+
+
+
+void	draw_point_new(t_env *e)
 {
 	double	z_max;
 	double	z_min;

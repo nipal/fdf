@@ -11,10 +11,12 @@
 /* ************************************************************************** */
 
 //void	print_line(t_matrix *pt1, t_matrix *c1,  t_matrix *pt2, t_matrix *c2);
-#include "c_maths.h"
+#include "fdf.h"
 
 void			print_x_axe(int min, int pos_y, int ecr_x, t_matrix *color)
 {
+	t_matrix	*p1;
+	t_matrix	*p2;
 	int	i;
 	int	size;
 	int	coef;
@@ -36,8 +38,8 @@ void			print_x_axe(int min, int pos_y, int ecr_x, t_matrix *color)
 			}
 			if((ABS(i - min) % coef * 5) == 0)
 			{
-				p1 = (i, pos_y + (3 * (j + 1)));
-				p2 = (i, pos_y - (3 * (j + 1)));
+				p1 = matrix_put_in_new(i, pos_y + (3 * (j + 1)), 0, 0);
+				p2 = matrix_put_in_new(i, pos_y - (3 * (j + 1)), 0, 0);
 				print_line(p1, color, p2, color);
 			}
 			i++;
@@ -49,6 +51,8 @@ void			print_x_axe(int min, int pos_y, int ecr_x, t_matrix *color)
 
 void			print_y_axe(int min, int pos_x, int ecr_y, t_matrix *color)
 {
+	t_matrix	*p1;
+	t_matrix	*p2;
 	int	i;
 	int	size;
 	int	coef;
@@ -84,13 +88,21 @@ void			print_y_axe(int min, int pos_x, int ecr_y, t_matrix *color)
 
 void			print_repaire(t_matrix *min, t_matrix *pos, t_matrix *color, t_env *e)
 {
+	(void)min;
+	(void)pos;
+	(void)color;
+	(void)e;
+/*
 	print_x_axe(min->m[X], pos->m[X], e->ecr_x, color);
 	print_y_axe(min->m[Y], pos->m[Y], e->ecr_y, color);
+	*/
 }
 
 /*
 **	on desine sur un interval
 */
+
+/*
 void			print_eq(t_eq *eq)
 {
 	t_matrix *p1;
@@ -150,3 +162,4 @@ int				eq_solve_degn(t_eq *eq)
 	//	on defnie le nombre de zero a partir des la racine de la deriver;
 	
 }
+*/

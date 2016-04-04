@@ -12,9 +12,15 @@
 
 #ifndef C_MATHS_H
 # define C_MATHS_H
+
+//#ifndef ABS
+#define ABS(X) ((X >= 0) ? X : -X)
+//#endif
+
 # include "libft.h"
 # include <math.h>
 # include <stdio.h>
+//# include "../includes/fdf.h"
 # define TRIGO_FACT	3
 # define TRIGO_ACCURACY (TRIGO_FACT * 360)
 
@@ -46,6 +52,32 @@ typedef struct	s_coefs
 	double		d;
 	double		e;
 }				t_coefs;
+
+/*
+typedef	struct	s_eq
+{
+	t_matrix	*coef;
+	t_matrix	*roots;
+	int			nb_roots;
+	int			dim;
+	struct s_eq	*derivate;
+	struct s_eq	*prime;
+}				t_eq;
+*/
+
+
+//void			print_repaire(t_matrix *min, t_matrix *pos, t_matrix *color, t_env *e)
+/*
+void			eq_print(t_eq *eq);
+int				eq_define_derivate(t_eq *eq);
+int				eq_solve(t_eq *eq);
+int				eq_solve_deg1(t_eq *eq);
+int				eq_solve_deg2(t_eq *eq);
+int				eq_solve_deg3(t_eq *eq);
+int				eq_solve_deg4(t_eq *eq);
+int				eq_solve_degn(t_eq *eq, int accuracy);
+t_eq			*eq_creat(int dim, t_matrix *coef, t_eq *prime);
+*/
 
 t_matrix		*matrix_init(int x, int y);
 void			matrix_display(t_matrix *a);

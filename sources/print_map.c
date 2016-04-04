@@ -10,6 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef ABS
+#define ABS(X) ((X >= 0) ? X : -X)
+#endif
 #include "fdf.h"
 
 void	define_color(t_matrix *point, t_matrix *color)
