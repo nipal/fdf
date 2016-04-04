@@ -24,7 +24,7 @@ void			print_x_axe(int min, int pos_y, int ecr_x, t_matrix *color)
 
 	coef = 1;
 	size = ecr_x;
-	j = 0;
+	j = 1;
 	while (coef < size)
 	{
 		i = 0;
@@ -32,20 +32,24 @@ void			print_x_axe(int min, int pos_y, int ecr_x, t_matrix *color)
 		{
 			if((ABS(i - min) % coef) == 0)
 			{
-				p1 = matrix_put_in_new(i, pos_y + (3 * j), 0, 0);
-				p2 = matrix_put_in_new(i, pos_y - (3 * j), 0, 0);
+				p1 = matrix_put_in_new(i, pos_y + (1 * j), 0, 0);
+				p2 = matrix_put_in_new(i, pos_y - (1 * j), 0, 0);
 				print_line(p1, color, p2, color);
+				matrix_free(&p1);
+				matrix_free(&p2);
 			}
-			if((ABS(i - min) % coef * 5) == 0)
+			if((ABS(i - min) % (coef * 5)) == 0)
 			{
-				p1 = matrix_put_in_new(i, pos_y + (3 * (j + 1)), 0, 0);
-				p2 = matrix_put_in_new(i, pos_y - (3 * (j + 1)), 0, 0);
+				p1 = matrix_put_in_new(i, pos_y + (1 * (j + 2)), 0, 0);
+				p2 = matrix_put_in_new(i, pos_y - (1 * (j + 2)), 0, 0);
 				print_line(p1, color, p2, color);
+				matrix_free(&p1);
+				matrix_free(&p2);
 			}
 			i++;
 		}
 		coef *= 10;
-		j += 2;
+		j += 10;
 	}
 }
 
@@ -60,7 +64,7 @@ void			print_y_axe(int min, int pos_x, int ecr_y, t_matrix *color)
 
 	coef = 1;
 	size = ecr_y;
-	j = 0;
+	j = 1;
 	while (coef < (size / 5))
 	{
 		i = 0;
@@ -68,59 +72,105 @@ void			print_y_axe(int min, int pos_x, int ecr_y, t_matrix *color)
 		{
 			if((ABS(i - min) % coef) == 0)
 			{
-				p1 = matrix_put_in_new(pos_x + (3 * j), i, 0, 0);
-				p2 = matrix_put_in_new(pos_x - (3 * j), i, 0, 0);
+				p1 = matrix_put_in_new(pos_x + (1 * j), i, 0, 0);
+				p2 = matrix_put_in_new(pos_x - (1 * j), i, 0, 0);
 				print_line(p1, color, p2, color);
+				matrix_free(&p1);
+				matrix_free(&p2);
 			}
-			if((ABS(i - min) % coef * 5) == 0)
+			if((ABS(i - min) % (coef * 5)) == 0)
 			{
-				p1 = matrix_put_in_new(pos_x + (3 * (j + 1)), i, 0, 0);
-				p2 = matrix_put_in_new(pos_x - (3 * (j + 1)), i, 0, 0);
+				p1 = matrix_put_in_new(pos_x + (1 * (j + 2)), i, 0, 0);
+				p2 = matrix_put_in_new(pos_x - (1 * (j + 2)), i, 0, 0);
 				print_line(p1, color, p2, color);
+				matrix_free(&p1);
+				matrix_free(&p2);
 			}
 			i++;
 		}
 		coef *= 10;
-		j += 2;
+		j += 7;
 	}
 }
 
 
-void			print_repaire(t_matrix *min, t_matrix *pos, t_matrix *color, t_env *e)
+void			print_repaire(t_matrix *pos, t_matrix *color, t_env *e)
 {
-	(void)min;
 	(void)pos;
 	(void)color;
 	(void)e;
-/*
-	print_x_axe(min->m[X], pos->m[X], e->ecr_x, color);
-	print_y_axe(min->m[Y], pos->m[Y], e->ecr_y, color);
-	*/
+//*
+	print_x_axe(pos->m[X], pos->m[X], e->ecr_x, color);
+	print_y_axe(pos->m[Y], pos->m[Y], e->ecr_y, color);
+//	*/
 }
 
 /*
 **	on desine sur un interval
 */
 
-/*
-void			print_eq(t_eq *eq)
+double			power(double number, int pow)
+{
+	double	result;
+
+	if (pow == 0)
+		return (1);
+	else if (pow % 2 == 0)
+	{
+		result = power(number, pow / 2);
+		return (result * result);
+	}
+	else
+		return (number * power(number, pow - 1));
+}
+
+double			func(t_eq *eq, double x)
+{
+	double	result;
+	int		i;
+
+	i = 0;
+	result = 0;
+	while (i < eq->dim)
+	{
+		result += eq->coef->m[i] * power(x, i);
+		i++;
+	}
+	return (result);
+}
+
+void			print_eq(t_eq *eq, t_matrix *org, double fact, t_env *e)
 {
 	t_matrix *p1;
-	t_matrix *p2
+	t_matrix *p2;
+	t_matrix *color;
 	int		i;
 	int		size;
+	double	x;
+	double	y;
 
 	i = 0;
 	size = e->ecr_x;
-	f(eq, 0);
+	color = matrix_put_in_new(200, 200, 200, 0);
 	while (i <size)
 	{
-		p1 = matrix_pu_in_new(i, f(0, (size_intervale / size_ecr) * (i) + x_min), 0, 0);
-		p2 = matrix_pu_in_new(i + 1, f(0, (size_intervale / size_ecr) * (i + 1) + x_min), 0, 0);
+		x = ((double)(i - org->m[X])) * fact;
+		y = func(eq, x) - org->m[Y];
+		p1 = matrix_put_in_new(i, y, 0, 0);
+
+		x = ((double)(i + 1 - org->m[X])) * fact;
+		y = func(eq, x) - org->m[Y];
+		p2 = matrix_put_in_new(i + 1, y, 0, 0);
+
 		i++;
+		matrix_free(&p1);
+		matrix_free(&p2);
 	}
+	matrix_free(&color);
 }
 
+
+/*
 int				eq_solve_deg1(t_eq *eq)
 {
 	t_matrix	*roots;

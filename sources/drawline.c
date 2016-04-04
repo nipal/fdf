@@ -212,14 +212,18 @@ void	draw_point(t_env *e)
 	t_matrix	*color;	
 
 	min = matrix_put_in_new(-100, -100, 0, 0);
-	pos = matrix_put_in_new(100, 100, 0, 0);
+	pos = matrix_put_in_new(500, 500, 0, 0);
 	color = matrix_put_in_new(255, 255, 255, 0);
 
-	print_repaire(min, pos, color, e);
+	print_repaire(pos, color, e);
 
 	mlx_put_image_to_window(e->mlx, e->win, e->img, 0, 0);
 	print_state(e);
 	mlx_do_sync(e->mlx);
+
+	matrix_free(&min);
+	matrix_free(&pos);
+	matrix_free(&color);
 }
 
 
