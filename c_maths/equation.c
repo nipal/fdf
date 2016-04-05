@@ -2,14 +2,16 @@
 
 t_eq			*eq_init(int dim, t_matrix *coef)
 {
-	t_eq	*eq;
+	t_eq		*eq;
+	t_matrix	*roots;
 
-	if (!(eq = (t_eq*)malloc(sizeof(t_eq))))
+	if (!(eq = (t_eq*)malloc(sizeof(t_eq)))
+		|| !(roots = matrix_init(1, eq->dim)))
 		return (NULL);
 	eq->dim = dim;
 	eq->coef = coef;
 	eq->prime = NULL;
-	eq->roots = NULL;
+	eq->roots = roots;
 	eq->nb_roots = 0;
 	eq->derivate = (dim > 0) ? eq_derivation(eq) : NULL;
 	return (eq);
@@ -19,14 +21,16 @@ t_eq			*eq_creat(int dim)
 {
 	t_eq		*eq;
 	t_matrix	*coef;
+	t_matrix	*roots;
 
 	if (!(eq = (t_eq*)malloc(sizeof(t_eq)))
-		|| !(coef = matrix_init(1, dim + 1)))
+		|| !(coef = matrix_init(1, dim + 1))
+		|| !(roots = matrix_init(1, eq->dim)))
 		return (NULL);
 	eq->dim = dim;
 	eq->coef = coef;
 	eq->prime = NULL;
-	eq->roots = NULL;	
+	eq->roots = roots;	
 	eq->nb_roots = 0;
 	eq->derivate = NULL;
 	return (eq);
@@ -152,10 +156,68 @@ int				eq_solve_deg2(t_eq *eq)
 	eq->roots->m[1] = (-b + delta) / (2 * a);
 	return (1);
 }
+
+double			power(double nb, int pow)
+{
+	double	result;
+
+	if (pow == 0)
+		return (1);
+	else if (pow % 2 == 0)
+	{
+		result = power(nb, pow);
+		return (result * result);
+	}
+	else
+		return (nb * power(nb, pow - 1));
+}
+
+double			polynome_at(t_eq *eq, double x)
+{
+	double	result;
+	int		i;
+
+	i = 0;
+	result = 0;
+	while (i <= eq->dim)
+	{
+		result += eq->coef->m[i] * power(x, i);
+		i++;
+	}
+	return (result);
+}
+
+double			dicothomy(t_eq *eq, double begin, double end, int acuracy)
+{
+	double	result;
+	double	midle;
+	double	signe;
+	int		i;
+
+	i = 0;
+	signe = polynome_at(eq, min);
+	midle = (begin + end) / 2;
+	while (i < acuracy)
+	{
+		if ((polynome_at(eq, mid) * signe) > 0)
+			end = midle;
+		else
+			begin = midle;
+		midle = (begin + end) / 2;
+		i++;
+	}
+	return (midle);
+}
+
 int				eq_solve_degn(t_eq *eq, int accuracy)
 {
 	(void)eq;
 	(void)accuracy;
+	/*
+	-on defini un intervel
+	-on procede par dicotomie
+	
+	*/
 	return (1);
 }
 
