@@ -31,6 +31,7 @@ SRC		=	matrix_init.c \
 			vector_product.c \
 			matrix_copy.c \
 			free_mat.c \
+			equation.c \
 			set_scale.c
 FLAGS		= -Wall -Wextra -Werror
 OBJ		= $(SRC:.c=.o)

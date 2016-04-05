@@ -131,7 +131,7 @@ double			func(t_eq *eq, double x)
 
 	i = 0;
 	result = 0;
-	while (i < eq->dim)
+	while (i <= eq->dim)
 	{
 		result += eq->coef->m[i] * power(x, i);
 		i++;
@@ -155,18 +155,24 @@ void			print_eq(t_eq *eq, t_matrix *org, double fact, t_env *e)
 	while (i <size)
 	{
 		x = ((double)(i - org->m[X])) * fact;
-		y = func(eq, x) - org->m[Y];
+		y = -func(eq, x) + org->m[Y];
 		p1 = matrix_put_in_new(i, y, 0, 0);
 
 		x = ((double)(i + 1 - org->m[X])) * fact;
-		y = func(eq, x) - org->m[Y];
+		y = -func(eq, x) + org->m[Y];
 		p2 = matrix_put_in_new(i + 1, y, 0, 0);
+		
+		dprintf(1, "p1:\n");
+		matrix_display(p1);
+		dprintf(1, "p2:\n");
+		matrix_display(p2);
 
+		print_line(p1, color, p2, color);
 		i++;
 		matrix_free(&p1);
 		matrix_free(&p2);
 	}
-	matrix_free(&color);
+//	matrix_free(&color);
 }
 
 

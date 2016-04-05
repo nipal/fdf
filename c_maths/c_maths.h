@@ -65,14 +65,21 @@ typedef	struct	s_eq
 
 //void			print_repaire(t_matrix *min, t_matrix *pos, t_matrix *color, t_env *e)
 void			eq_print(t_eq *eq);
-int				eq_define_derivate(t_eq *eq);
+void			eq_print_coef(t_eq *eq);
+void			eq_print_roots(t_eq *eq);
+void			eq_print_all_deriv(t_eq *eq);
+
+
+t_eq			*eq_init(int dim, t_matrix *coef);
+t_eq			*eq_creat(int dim);
+t_eq			*eq_derivation(t_eq *eq);
+
 int				eq_solve(t_eq *eq);
 int				eq_solve_deg1(t_eq *eq);
 int				eq_solve_deg2(t_eq *eq);
 int				eq_solve_deg3(t_eq *eq);
 int				eq_solve_deg4(t_eq *eq);
 int				eq_solve_degn(t_eq *eq, int accuracy);
-t_eq			*eq_creat(int dim, t_matrix *coef, t_eq *prime);
 
 
 t_matrix		*matrix_init(int x, int y);

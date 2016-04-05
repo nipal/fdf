@@ -207,23 +207,32 @@ t_matrix	*sqr_rotate(int rot, int x, int y, int size)
 
 void	draw_point(t_env *e)
 {
-	t_matrix	*min;	
 	t_matrix	*pos;	
 	t_matrix	*color;	
+	t_matrix	*coef;	
+	t_eq		*eq;
+(void) eq;
+(void) coef;
 
-	min = matrix_put_in_new(-100, -100, 0, 0);
 	pos = matrix_put_in_new(500, 500, 0, 0);
+	coef = matrix_put_in_new(107, 0, 0, 1);
+//	coef = matrix_put_in_new(100, 0, 0, 0);
+	eq = eq_creat(3, coef, NULL);
+
 	color = matrix_put_in_new(255, 255, 255, 0);
 
+
 	print_repaire(pos, color, e);
+//	pos = matrix_put_in_new(500, 500, 0, 0);
+	print_eq(eq, pos, 0.1, e);
 
 	mlx_put_image_to_window(e->mlx, e->win, e->img, 0, 0);
 	print_state(e);
 	mlx_do_sync(e->mlx);
 
-	matrix_free(&min);
 	matrix_free(&pos);
 	matrix_free(&color);
+	matrix_free(&coef);
 }
 
 
