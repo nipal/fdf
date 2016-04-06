@@ -209,16 +209,60 @@ double			dicothomy(t_eq *eq, double begin, double end, int acuracy)
 	return (midle);
 }
 
+//	find_begin	:	determine le premier interval
+//	find_next	:	determine l'interval suivant en fonction de la racine a la quele on est
+//						ET donne la racine sur laquelle il c'est arreter
+//	donne le nombre d'intervalle viable donc le nombre de racine
+//	==>	si next roots est a -1 alors c'est la fin
+
+double			find_first_limit(t_eq *eq, int *next_roots)
+{
+	double	begin;
+	double	x;
+	double	yf;
+	double	yfp;
+
+	x = eq->derivate->roots->m[0];
+	yf = polynome_at(eq, x);
+	yfp = polynome_at(eq->derivate, x - 1);
+	if (/*y a pas de racine*/)
+		//	onregarde ce qui se passe au point zero et on cherche avant ou apres
+	else if (yf == 0)
+		//	on est pile sur la racine
+	else if ((yf * yfp) > 0)
+		//	la racine est avant ==> on cherche avant
+	else
+		//	elle est apres
+	return (begin);
+}
+
+double			find_next_limit()
+{
+	//
+}
+
+t_matrix		define_interval(t_eq *eq)
+{
+	// on initialse au nombre maxe et on reduira sa taille si besoin
+	return (1);
+}
+
 int				eq_solve_degn(t_eq *eq, int accuracy)
 {
-	(void)eq;
-	(void)accuracy;
-	/*
-	-on defini un intervel
-	-on procede par dicotomie
-	
-	*/
-	return (1);
+	t_matrix	*inter;
+	int			i;
+
+	eq_solve(eq->derivate);
+	inter = define_interval(eq);
+	i = 0;
+	while (i < inter->y)
+	{
+		eq->roots->m[i] = dicothomy(eq, inter->m[i], inter->m[i + 1], accuracy);
+		i++;
+	}
+	if ((eq->nb_roots = inter->y))
+		return (1);
+	return (0);
 }
 
 /*
