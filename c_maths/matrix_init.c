@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/09/14 00:25:54 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/03/13 19:51:16 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/04/08 09:58:02 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ t_matrix	*matrix_init(int x, int y)
 	int		j;
 
 	
-	//dprintf(1, "matrix init: x:%d y:%d\n", x, y);
+//	dprintf(1, "matrix init: x:%d y:%d\n", x, y);
 	if (!(mat = malloc(sizeof(t_matrix))))
 		return (NULL);
-	if (!(m = malloc(sizeof(double) * x * y)))
+	if (!(m = malloc(sizeof(double) * (x) * (y))))
 		return (NULL);
 	mat->x = x;
 	mat->y = y;
@@ -40,5 +40,6 @@ t_matrix	*matrix_init(int x, int y)
 		}
 		i++;
 	}
+//	dprintf(1, "matrix_init_end\n");
 	return (mat);
 }

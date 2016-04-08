@@ -6,7 +6,7 @@
 /*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/07 10:53:39 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/04/08 09:33:59 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/04/08 09:57:17 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ t_eq			*eq_derivation(t_eq *eq)
 {
 	t_eq		*derivate;
 
-	dprintf(1, "deriv:%d\n", eq->dim);
 	if (!(derivate = eq_init(eq->dim - 1, eq_get_deriv_coef(eq))) || eq->dim == 0)
 		return (NULL);
 	derivate->prime = eq;
