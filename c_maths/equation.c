@@ -1,161 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   equation.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/04/07 10:45:58 by fjanoty           #+#    #+#             */
+/*   Updated: 2016/04/08 09:34:09 by fjanoty          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "c_maths.h"
-
-t_eq			*eq_init(int dim, t_matrix *coef)
-{
-	t_eq		*eq;
-	t_matrix	*roots;
-
-	if (!(eq = (t_eq*)malloc(sizeof(t_eq)))
-		|| !(roots = matrix_init(1, eq->dim)))
-		return (NULL);
-	eq->dim = dim;
-	eq->coef = coef;
-	eq->prime = NULL;
-	eq->roots = roots;
-	eq->nb_roots = 0;
-	eq->derivate = (dim > 0) ? eq_derivation(eq) : NULL;
-	return (eq);
-}
-
-t_eq			*eq_creat(int dim)
-{
-	t_eq		*eq;
-	t_matrix	*coef;
-	t_matrix	*roots;
-
-	if (!(eq = (t_eq*)malloc(sizeof(t_eq)))
-		|| !(coef = matrix_init(1, dim + 1))
-		|| !(roots = matrix_init(1, eq->dim)))
-		return (NULL);
-	eq->dim = dim;
-	eq->coef = coef;
-	eq->prime = NULL;
-	eq->roots = roots;	
-	eq->nb_roots = 0;
-	eq->derivate = NULL;
-	return (eq);
-}
-
-t_matrix		*eq_get_deriv_coef(t_eq *eq)
-{
-	t_matrix	*coef;
-	int			i;
-
-	if (!(coef = matrix_init(1, eq->dim)))
-		return (NULL);
-	i = 0;
-	while (i < eq->dim)
-	{
-		coef->m[i] = (i + 1) * eq->coef->m[i + 1];
-		i++;
-	}
-	return (coef);
-}
-
-t_eq			*eq_derivation(t_eq *eq)
-{
-	t_eq		*derivate;
-
-	if (!(derivate = eq_init(eq->dim - 1, eq_get_deriv_coef(eq))) || eq->dim == 0)
-		return (NULL);
-	derivate->prime = eq;
-	return (derivate);
-}
-
-void			eq_print_coef(t_eq *eq)
-{
-	int	i;
-
-	i = eq->dim;
-	while (i >= 0)
-	{
-		dprintf(1, "%f X^%d	", eq->coef->m[i], i);
-		i--;
-	}
-	dprintf(1, "\n");
-}
-
-void			eq_print_all_deriv(t_eq *eq)
-{
-	t_eq	*deriv;
-	int		i;
-
-	dprintf(1, "f'{0}	:");
-	eq_print_coef(eq);
-	deriv = eq->derivate;
-	i = 1;
-	while (deriv)
-	{
-		dprintf(1, "f'{%d}	:", i);
-		eq_print_coef(deriv);
-		deriv = deriv->derivate;
-		i++;
-	}
-}
-
-
-void			eq_print_roots(t_eq *eq)
-{
-	int	i;
-
-	i = 0;
-	while (i < eq->nb_roots)
-	{
-		dprintf(1, "x[%d] = %f", i, eq->roots->m[i]);
-		i++;
-	}
-	dprintf(1, "\n");
-}
-
-int				eq_solve(t_eq *eq)
-{
-	double	accuracy;
-
-	accuracy = 30;
-	if (eq->dim == 0)
-		return(0);
-	else if (eq->dim == 1)
-		return (eq_solve_deg1(eq));
-	else if (eq->dim == 2)
-		return (eq_solve_deg2(eq));
-	else
-		return (eq_solve_degn(eq, accuracy));
-}
-int				eq_solve_deg1(t_eq *eq)
-{
-	double	a;
-	double	b;
-
-	a = eq->coef->m[1];
-	b = eq->coef->m[0];
-	if (a == 0)
-		return (0);
-	eq->nb_roots = 1;
-	eq->roots->m[0] = -b / a;
-	return (1);
-}
-
-int				eq_solve_deg2(t_eq *eq)
-{
-	double	a;
-	double	b;
-	double	c;
-	double	delta;
-
-	a = eq->coef->m[2];
-	b = eq->coef->m[1];
-	c = eq->coef->m[0];
-	if (a == 0 && b == 0)
-		return (0);
-	delta = b * b - 4 * a * c;
-	delta = sqrt(delta);
-	if (delta < 0)
-		return (0);
-	eq->nb_roots = 2;
-	eq->roots->m[0] = (-b - delta) / (2 * a);
-	eq->roots->m[1] = (-b + delta) / (2 * a);
-	return (1);
-}
 
 double			power(double nb, int pow)
 {
@@ -189,17 +44,16 @@ double			polynome_at(t_eq *eq, double x)
 
 double			dicothomy(t_eq *eq, double begin, double end, int acuracy)
 {
-	double	result;
 	double	midle;
 	double	signe;
 	int		i;
 
 	i = 0;
-	signe = polynome_at(eq, min);
+	signe = polynome_at(eq, begin);
 	midle = (begin + end) / 2;
 	while (i < acuracy)
 	{
-		if ((polynome_at(eq, mid) * signe) > 0)
+		if ((polynome_at(eq, midle) * signe) > 0)
 			end = midle;
 		else
 			begin = midle;
@@ -215,9 +69,70 @@ double			dicothomy(t_eq *eq, double begin, double end, int acuracy)
 //	donne le nombre d'intervalle viable donc le nombre de racine
 //	==>	si next roots est a -1 alors c'est la fin
 
-double			find_first_limit(t_eq *eq, int *next_roots)
+
+//	on cherche le premier x vers -inf qui inverse le sens en doublan l'interval a chaque fois
+double			find_before(t_eq *eq, double x)
+{
+	double	interval;
+	double	y_begin;
+
+	interval = 1;
+	y_begin = polynome_at(eq, x);
+	while ((polynome_at(eq, x) * y_begin) > 0)
+	{
+		x -= interval;
+		interval *= 2;
+	}
+	return (x);
+}
+
+//	on cherche le premier x vers +inf qui inverse le sens en doublan l'interval a chaque fois
+double			find_after(t_eq *eq, double x)
+{
+	double	interval;
+	double	y_begin;
+
+	interval = 1;
+	y_begin = polynome_at(eq, x);
+	while ((polynome_at(eq, x) * y_begin) > 0)
+	{
+		x += interval;
+		interval *= 2;
+	}
+	return (x);
+}
+
+//	on donne
+double			find_next_limit(t_eq *eq, int *root)
 {
 	double	begin;
+	double	x;
+	double	y;
+
+	x = eq->derivate->roots->m[*root];
+	begin = polynome_at(eq, x);
+	y = begin;
+	(*root)++;
+	while (*root < eq->derivate->nb_roots && (y * begin) > 0)
+	{
+		x = eq->derivate->roots->m[*root];
+		y = polynome_at(eq, x);
+		(*root)++;
+	}
+	if ((y * begin) < 0)
+		return (x);
+	y = polynome_at(eq->derivate, x + 1);
+	if ((y * begin) > 0)
+	{
+		*root = -1;
+		return (0);
+	}
+	else
+		return (find_after(eq, x));
+}
+
+double			find_first_limit(t_eq *eq, int *roots)
+{
 	double	x;
 	double	yf;
 	double	yfp;
@@ -225,26 +140,34 @@ double			find_first_limit(t_eq *eq, int *next_roots)
 	x = eq->derivate->roots->m[0];
 	yf = polynome_at(eq, x);
 	yfp = polynome_at(eq->derivate, x - 1);
-	if (/*y a pas de racine*/)
-		//	onregarde ce qui se passe au point zero et on cherche avant ou apres
+	if (eq->derivate->nb_roots == 0)
+		return (((yf * yfp) > 0) ? find_before(eq, 0) : find_after(eq, 0));
 	else if (yf == 0)
-		//	on est pile sur la racine
-	else if ((yf * yfp) > 0)
-		//	la racine est avant ==> on cherche avant
-	else
-		//	elle est apres
-	return (begin);
+	{
+		(*roots)++;
+		return (x);
+	}
+	return (((yf * yfp) > 0) ? find_before(eq, 0 ) : find_next_limit(eq, roots));
 }
 
-double			find_next_limit()
+t_matrix		*define_interval(t_eq *eq)
 {
-	//
-}
+	int			i;
+	t_matrix	*interval;
 
-t_matrix		define_interval(t_eq *eq)
-{
-	// on initialse au nombre maxe et on reduira sa taille si besoin
-	return (1);
+	if (!(interval = matrix_init(1, eq->dim + 1)))
+		return (NULL);
+	i = 0;
+	interval->m[eq->nb_roots] = find_first_limit(eq, &i);
+	eq->nb_roots += (i >= 0) ? 1 : 0;
+	if (i < 0)
+		return (NULL);
+	while (i >= 0)
+	{
+		interval->m[(eq->nb_roots)] = find_next_limit(eq, &i);
+		eq->nb_roots += (i >= 0) ? 1 : 0;
+	}
+	return (eq->coef);
 }
 
 int				eq_solve_degn(t_eq *eq, int accuracy)
@@ -252,6 +175,7 @@ int				eq_solve_degn(t_eq *eq, int accuracy)
 	t_matrix	*inter;
 	int			i;
 
+	dprintf(1, "deg:%d\n", eq->dim);
 	eq_solve(eq->derivate);
 	inter = define_interval(eq);
 	i = 0;

@@ -6,7 +6,7 @@
 #    By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/09/13 19:48:58 by jpirsch           #+#    #+#              #
-#    Updated: 2016/03/09 22:16:01 by fjanoty          ###   ########.fr        #
+#    Updated: 2016/04/08 09:34:14 by fjanoty          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,10 @@ SRC		=	matrix_init.c \
 			matrix_copy.c \
 			free_mat.c \
 			equation.c \
+			eq_def.c \
+			eq_print.c \
+			eq_deriv.c \
+			eq_solve.c \
 			set_scale.c
 FLAGS		= -Wall -Wextra -Werror
 OBJ		= $(SRC:.c=.o)
