@@ -27,7 +27,7 @@ int	main(int ac, char **av)
 		eq = eq_init(ac - 2, init_coef(ac - 1, av + 1));
 		eq_print_coef(eq);	
 	//	dprintf(1, "main 2\n");
-	//	eq_solve_degn(eq, 30);
+		eq_solve_degn(eq, 30);
 	//	dprintf(1, "main 3\n");
 //	eq_print_coef(eq);	
 //		eq_print_all_deriv(eq);	
