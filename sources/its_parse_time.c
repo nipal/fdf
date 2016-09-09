@@ -1,32 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   its_parse_time.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/05 15:06:43 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/09/09 02:09:54 by fjanoty          ###   ########.fr       */
+/*   Created: 2016/09/09 16:43:26 by fjanoty           #+#    #+#             */
+/*   Updated: 2016/09/09 16:52:56 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# define BUFF_SIZE 8
-# define MIN(A, B) (A > B) ? B : A
-# include <sys/types.h>
-# include <sys/stat.h>
-# include <fcntl.h>
-# include "libft/libft.h"
-# include <stdio.h>
-# include <string.h>
-# include <errno.h>
-
-int					get_next_line(int fd, char **line);
-typedef	struct		s_fdgnl
-{
-	int				fd;
-	char			*rest;
-	struct s_fdgnl	*next;
-}					t_fdgnl;
-#endif
+/*
+ *	On lis ligne par ligne
+ *	On split sur les '\n' 
+ *	On va changer tout les ['	', '\r', '\t'] etc en espace : ' '
+ *	On split sur les espace eventuelement
+ *	
+ *	On connait les dimmantion de la map
+ *	On malloc la map a la bonne taille 
+ *	
+ *	On fait le atoi modifier pour aussi choper les couleur de le map
+ * */
