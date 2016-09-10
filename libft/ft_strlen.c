@@ -6,9 +6,11 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/09/13 16:33:58 by jpirsch           #+#    #+#             */
-/*   Updated: 2014/09/14 01:16:23 by jpirsch          ###   ########.fr       */
+/*   Updated: 2016/09/10 02:32:32 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 int		ft_strlen(char *str)
 {

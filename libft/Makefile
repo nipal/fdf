@@ -6,7 +6,7 @@
 #    By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/09/13 19:48:58 by jpirsch           #+#    #+#              #
-#    Updated: 2015/01/12 03:07:02 by jpirsch          ###   ########.fr        #
+#    Updated: 2016/09/09 23:47:21 by fjanoty          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,6 +69,7 @@ SRC		= ft_atoi.c \
 		  ft_swap.c \
 		  ft_tabmalloc.c \
 		  ft_tolower.c \
+		  get_next_line.c \
 		  ft_toupper.c 
 CFLAGS = -Wall -Wextra -Werror
 OBJ		= $(SRC:.c=.o)
