@@ -6,21 +6,21 @@
 #    By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/05 01:32:20 by jpirsch           #+#    #+#              #
-#    Updated: 2016/03/12 11:30:56 by fjanoty          ###   ########.fr        #
+#    Updated: 2016/09/12 09:18:58 by fjanoty          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	../fdf
 SRC		= 	main.c \
-			get_next_line.c \
 	 		parse.c \
 			mlx_env.c \
 			hook.c \
 		 	drawline.c \
 			maped.c \
 			print_map.c \
-			cam.c \
-			coord.c
+			its_parse_time.c \
+			cam.c 
+#			coord.c
 OBJ		= $(SRC:.c=.o)
 
 FLAGS = -Wall -Wextra -Werror
@@ -33,7 +33,7 @@ $(NAME): $(OBJ)
 		-lmlx -framework OpenGL -framework AppKit
 
 $(OBJ):
-	gcc -c $(FLAGS) $(SRC) -I ../includes -I ../c_maths
+	gcc -c  $(FLAGS) $(SRC) -I ../includes -I ../c_maths
 
 clean:
 	rm -f $(OBJ)

@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/29 02:21:11 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/03/15 09:18:03 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/09/12 08:45:31 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,7 +165,7 @@ void					vectpx_to_img(t_env *e, t_matrix *pos_color);
 void					print_state(t_env *e);
 
 //	Fonction preparant l'env et qui lance le loop hook
-void					env(int **map);
+void	env(int **map, int size_x, int size_y);
 /*
 ** coord
 */

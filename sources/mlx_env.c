@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/10 04:08:06 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/03/15 10:52:22 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/09/12 09:54:25 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,20 +89,22 @@ void	print_state(t_env *e)
 	ft_strdel(&str);
 }
 
-void	env(int **map)
+void	env(int **map, int size_x, int size_y)
 {
+	(void)size_x;
+	(void)size_y;
 	t_env	e;
 	t_cam	*cam;
 
 	e.map = map;
 	if (!(e.mlx = mlx_init()))
 		return ;
-	e.win = mlx_new_window(e.mlx, SIZE_Y, SIZE_X, "sandwich");
+	e.win = mlx_new_window(e.mlx, SIZE_Y, SIZE_X, "Leu test");
 	e.img = mlx_new_image(e.mlx, SIZE_Y, SIZE_X);
 	e.data = mlx_get_data_addr(e.img, &e.depth, &e.size_line, &e.endian);
 	e.z_buffer = (double*)malloc(sizeof(double) * SIZE_X * SIZE_Y);
-	e.size_map_x = 10;	
-	e.size_map_y = 10;	
+	e.size_map_x = size_x;	
+	e.size_map_y = size_y;	
 	e.ecr_x = SIZE_X;
 	e.ecr_y = SIZE_Y;
 	e.proj = 0;
@@ -115,7 +117,7 @@ void	env(int **map)
 	e.g = 0;
 	e.b = 0;
 	e.speed = 0;
-	dprintf(1, "ouiii\n");
+//	dprintf(1, "ouiii\n");
 	if (!(cam = init_cam(60.0/360.0 * M_PI , 60.0/360.0 * M_PI, &e)))
 		return ;
 	e.cam = cam;

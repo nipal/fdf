@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/15 14:35:08 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/03/10 09:38:13 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/09/11 00:10:11 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void				ft_striter(char *s, void (*f)(char*));
 void				ft_striteri(char *s, void (*f)(unsigned int, char *));
 char				*ft_strjoin(const char *s1, const char *s2);
 size_t				ft_strlcat(char *s1, const char *s2, size_t size);
-size_t				ft_strlen(char *s);
+int					ft_strlen(char *s);
 char				*ft_strmap(const char *s, char (*f)(char));
 char				*ft_strmapi(const char *s, char (*f)(unsigned int, char));
 char				*ft_strncat(char *s1, const char *s2, size_t n);
@@ -82,4 +82,5 @@ void				ft_swap(void *a, void *b);
 char				**ft_tabmalloc(size_t nbstr, size_t slen);
 int					ft_toupper(int c);
 int					ft_tolower(int c);
+int					is_int_over_flow(char *number);
 #endif
