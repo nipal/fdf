@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/29 02:21:11 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/09/13 08:28:56 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/09/13 09:57:51 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,9 @@ typedef struct			s_env
 	int					depth;
 	int					endian;
 	int					**map;
+	t_matrix			***vect_map;
+	double				z_min;
+	double				z_max;
 	int					proj;
 	double				scale;
 	double				cte1;

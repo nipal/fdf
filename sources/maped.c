@@ -6,7 +6,7 @@
 /*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 08:33:48 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/09/13 08:27:11 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/09/13 10:56:02 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ t_matrix	***get_map(double *z_max, double *z_min, t_env *e)
 	if (!(map_mat = (t_matrix***)malloc(sizeof(t_matrix**) * y_max)))
 		return (NULL);
 	j = 0;
+//	dprintf(1, "x_max:%d	y_max:%d\n", x_max, y_max);
 	while (j < y_max)
 	{
 		i = 0;
@@ -87,17 +88,20 @@ t_matrix	***get_map(double *z_max, double *z_min, t_env *e)
 			return (NULL);
 		while (i < x_max)
 		{
-			if (!(map_mat[j][i] = matrix_init(1, 4)))
-				return (NULL);
 			*z_max = MAX(tab[j][i], *z_max);
 			*z_min = MIN(tab[j][i], *z_min);
-			matrix_buffer(map_mat[j][i]);
-			matrix_put_in((i - 5) * 30, (j - 5) * 30, tab[j][i] / 2, 1);
+			map_mat[j][i] = matrix_put_in_new((double)i, (double)j, tab[j][i], 0);
+//			dprintf(1, "before\n");
+//			matrix_display(map_mat[j][i]);
+//			dprintf(1, "after [%d]\n", i);
+//			matrix_buffer(map_mat[j][i]);
+//			matrix_put_in((i - 5) * 30, (j - 5) * 30, tab[j][i] / 2, 1);
 			i++;
 		}
+//			dprintf(1, "after2	[%d]\n", j);
 		j++;
 	}
 //	dprintf(1, "F\n");
-//	print_the_map(map_mat);
+	print_the_map(map_mat);
 	return (map_mat);
 }

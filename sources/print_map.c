@@ -6,7 +6,7 @@
 /*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/12 03:54:36 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/09/13 06:13:55 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/09/13 11:01:53 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -393,15 +393,15 @@ void	print_map(t_env *e, t_cam *cam, t_matrix ***map)
 	}
 
 //	adapt_point(cam, map, e->size_map_x, e->size_map_y);
-	dprintf(1, "  $	F\n");
+//	dprintf(1, "  $	F\n");
 	j = 0;
 	if ((!point && (!(point = (t_matrix**)malloc(sizeof(t_matrix*) * 8))
 		|| !init_color(point))))
 		return ;
-	dprintf(1, "  $	G\n");
+//	dprintf(1, "  $	G\n");
 	while (j < e->size_map_y)
 	{
-		dprintf(1, "    $	H [%d]\n", j);
+//		dprintf(1, "    $	H [%d]\n", j);
 		i = 0;
 		while (i < e->size_map_x)
 		{
@@ -414,10 +414,9 @@ void	print_map(t_env *e, t_cam *cam, t_matrix ***map)
 //			dprintf(1, "    $	J\n");
 //	dprintf(1, "voulou\n");
 //	dprintf(1, "voulou\n");
-			if (i == 9 && j == 9)
-			{
-//				matrix_display(map[j][i]);
-			}
+//			matrix_display(e->vect_map[j][i]);
+			dprintf(1, "	%f", e->vect_map[j][i]->m[i + j * e->size_map_x]);
+//		dprintf(1, "      $	h [%d]\n", i);
 //			dprintf(1, "    $	K\n");
 //			draw_link(e, cam, point);
 //			dprintf(1, "    $	L\n");
@@ -432,7 +431,7 @@ void	print_map(t_env *e, t_cam *cam, t_matrix ***map)
 	}
 //	free_point(map, e->size_map_x, e->size_map_y);
 
-	dprintf(1, "  $	M\n");
+//	dprintf(1, "  $	M\n");
 }
 
 //	void	draw_line(t_env *e, t_matrix *mat_line)
