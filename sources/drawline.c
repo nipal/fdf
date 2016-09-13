@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/30 14:38:59 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/09/12 10:17:24 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/09/13 08:29:32 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,29 +199,6 @@ t_matrix	*sqr_rotate(int rot, int x, int y, int size)
 
 
 
-void	draw_point(t_env *e)
-{
-	// On veux juste tracer la map
-	double	z_max;
-	double	z_min;
-//(void)e;
-
-	t_matrix ***map = get_map(&z_max, &z_min);
-	(void)map;
-//	dprintf(1, "map:%ld\n", (long)map);
-//	dprintf(1, "*map:%ld\n", (long)*map );
-//	dprintf(1, "**map:%ld\n", (long)**map);
-//map;
-//	t_cam	*cam = init_cam(60.0/360.0 * M_PI , 60.0/360.0 * M_PI, e);
-
-	print_map(e, e->cam, map);
-//	(void)cam;
-//	(void)e;
-
-	mlx_put_image_to_window(e->mlx, e->win, e->img, 0, 0);
-	print_state(e);
-	mlx_do_sync(e->mlx);
-}
 
 void	draw_point_old(t_env *e)
 {
@@ -378,4 +355,36 @@ void	draw_point_old(t_env *e)
 	matrix_free(&color2);
 	matrix_free(&color3);
 	matrix_free(&mat_line);
+}
+
+//	ca c'est un peu la boucle principale
+//void	(t_env *e)
+void	main_work(t_env *e)
+{
+	// On veux juste tracer la map
+	double	z_max;
+	double	z_min;
+//(void)e;
+
+	t_matrix ***map = get_map(&z_max, &z_min, e);
+	(void)map;
+//	dprintf(1, "map:%ld\n", (long)map);
+//	dprintf(1, "*map:%ld\n", (long)*map );
+//	dprintf(1, "**map:%ld\n", (long)**map);
+//map;
+//	dprintf(1, "#	1\n");
+	t_cam	*cam = init_cam(60.0/360.0 * M_PI , 60.0/360.0 * M_PI, e);
+//	dprintf(1, "#	2\n");
+
+	e->cam = cam;
+//	dprintf(1, "#	3\n");
+	print_map(e, e->cam, map);
+//	dprintf(1, "#	4\n");
+
+	mlx_put_image_to_window(e->mlx, e->win, e->img, 0, 0);
+//	dprintf(1, "#	5\n");
+//	print_state(e);
+//	(void)cam;
+//	(void)e;
+	mlx_do_sync(e->mlx);
 }

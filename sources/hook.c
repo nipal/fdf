@@ -6,13 +6,15 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/09 12:17:52 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/03/15 11:07:48 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/09/13 04:39:16 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <mlx.h>
 #include "libft.h"
 #include "fdf.h"
+
+void	main_work(t_env *e);
 
 void	init_t_key(t_key *key)
 {
@@ -166,6 +168,8 @@ int		loop_hook(t_env *e)
 	dprintf(1, "speed%f\n", e->speed);
 	ft_bzero(e->data, e->size_line * 990);
 	ft_bzero(e->z_buffer, SIZE_X * SIZE_Y);
-	draw_point(e);
+	main_work(e);
+//	main_work(e);
+//	draw_point(e);
 	return (1);
 }

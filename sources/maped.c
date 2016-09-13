@@ -6,7 +6,7 @@
 /*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 08:33:48 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/09/12 09:23:55 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/09/13 08:27:11 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,17 +35,19 @@ void		print_the_map(t_matrix ***map)
 }
 
 
-t_matrix	***get_map(double *z_max, double *z_min)
+t_matrix	***get_map(double *z_max, double *z_min, t_env *e)
 {
 	t_matrix	***map_mat;
-	int			x;
-	int			y;
+	int			**tab;
+	int			x_max;
+	int			y_max;
 	int			i;
 	int			j;
 //	double		z_max;
 //	double		z_min;
 
 //	dprintf(1, "D\n");
+/*
 	int			tab2[10][10]		=	{{0, 0, 0,-0,-0, 0, 0, 0, 0, 0},
 										{-0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 										{-0, 0, 0, 0,-0, 0, 0, 0, 0, 0},
@@ -67,27 +69,30 @@ t_matrix	***get_map(double *z_max, double *z_min)
 									{-50, 67, 36, 13, 12, -2,-28, 10,-60,-58},
 									{  3,-27,-52, 56, 26,-52, 59,-31,-48,-6},
 									{-59,-30, 50, 36,  5,-11,  0, 60,-24,-34}};
-
-	(void)tab2;
-	(void)tab1;
-	x = 10;
-	y = 10;
-	if (!(map_mat = (t_matrix***)malloc(sizeof(t_matrix**) * y)))
+*/
+//	(void)tab2;
+//	(void)tab1;
+	if (!e)
+		return (NULL);
+	tab = e->map;
+	x_max = e->size_map_x;
+	y_max = e->size_map_y;
+	if (!(map_mat = (t_matrix***)malloc(sizeof(t_matrix**) * y_max)))
 		return (NULL);
 	j = 0;
-	while (j < y)
+	while (j < y_max)
 	{
 		i = 0;
-		if (!(map_mat[j] = (t_matrix**)malloc(sizeof(t_matrix*) * x)))
+		if (!(map_mat[j] = (t_matrix**)malloc(sizeof(t_matrix*) * x_max)))
 			return (NULL);
-		while (i < x)
+		while (i < x_max)
 		{
 			if (!(map_mat[j][i] = matrix_init(1, 4)))
 				return (NULL);
-			*z_max = MAX(tab2[j][i], *z_max);
-			*z_min = MIN(tab2[j][i], *z_min);
+			*z_max = MAX(tab[j][i], *z_max);
+			*z_min = MIN(tab[j][i], *z_min);
 			matrix_buffer(map_mat[j][i]);
-			matrix_put_in((i - 5) * 30, (j - 5) * 30, tab2[j][i] / 2, 1);
+			matrix_put_in((i - 5) * 30, (j - 5) * 30, tab[j][i] / 2, 1);
 			i++;
 		}
 		j++;

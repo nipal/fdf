@@ -6,7 +6,7 @@
 /*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/12 03:54:36 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/03/15 11:05:36 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/09/13 06:13:55 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -378,6 +378,7 @@ int		init_color(t_matrix **point)
 	return (1);
 }
 
+//	
 void	print_map(t_env *e, t_cam *cam, t_matrix ***map)
 {
 	int					i;
@@ -385,45 +386,53 @@ void	print_map(t_env *e, t_cam *cam, t_matrix ***map)
 	static	t_matrix	**point = NULL;
 //	static	t_matrix	**color = NULL;
 
-	if (!cam)
-		dprintf(1, "print_map	no cam\n");
-	if (!map)
-		dprintf(1, "print_map	no map\n");
-	if (!*map)
-		dprintf(1, "print_map	no *map\n");
-	if (!**map)
-		dprintf(1, "print_map	no **map\n");
+	if (!cam || !map || !*map || !**map)
+	{
+		dprintf(1, "error\n");
+		return ;
+	}
 
-	adapt_point(cam, map, e->size_map_x, e->size_map_y);
+//	adapt_point(cam, map, e->size_map_x, e->size_map_y);
+	dprintf(1, "  $	F\n");
 	j = 0;
 	if ((!point && (!(point = (t_matrix**)malloc(sizeof(t_matrix*) * 8))
 		|| !init_color(point))))
 		return ;
+	dprintf(1, "  $	G\n");
 	while (j < e->size_map_y)
 	{
+		dprintf(1, "    $	H [%d]\n", j);
 		i = 0;
 		while (i < e->size_map_x)
 		{
+//			dprintf(1, "    $	I\n");
 		//	matrix_display(map[j][i]);
 //			dprintf(1, "i: %d	j:%d\n", i, j);
 		//	if (i >= 8 && j == 9)
 //				dprintf(1, "i:%d j:%d\n", i, j);
-			get_point(map, point, i, j);
+//			get_point(map, point, i, j);
+//			dprintf(1, "    $	J\n");
 //	dprintf(1, "voulou\n");
 //	dprintf(1, "voulou\n");
 			if (i == 9 && j == 9)
-				matrix_display(map[j][i]);
-			draw_link(e, cam, point);
+			{
+//				matrix_display(map[j][i]);
+			}
+//			dprintf(1, "    $	K\n");
+//			draw_link(e, cam, point);
+//			dprintf(1, "    $	L\n");
 	//		if (i >= 8 && j == 9)
 	//			dprintf(1, "end\n");
 //(void)e;
 //	dprintf(1, "voulou\n");
 			i++;
 		}
+		dprintf(1, "    $	______\n");
 		j++;
 	}
-	free_point(map, e->size_map_x, e->size_map_y);
+//	free_point(map, e->size_map_x, e->size_map_y);
 
+	dprintf(1, "  $	M\n");
 }
 
 //	void	draw_line(t_env *e, t_matrix *mat_line)

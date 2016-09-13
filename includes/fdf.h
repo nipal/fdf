@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/29 02:21:11 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/09/12 08:45:31 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/09/13 08:28:56 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,7 +190,8 @@ void					draw_point(t_env *e);
 int						**parse(int fd);
 
 
-t_matrix	***get_map(double *z_max, double *z_min);
+//t_matrix	***get_map(double *z_max, double *z_min);
+t_matrix	***get_map(double *z_max, double *z_min, t_env *e);
 void	draw_line(t_env *e, t_matrix *mat_line);
 t_matrix	*init_mat_line(t_matrix *pt1, t_matrix *pt2, t_matrix *c1, t_matrix *c2);
 #endif
