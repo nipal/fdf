@@ -6,7 +6,7 @@
 #    By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/09/13 19:48:58 by jpirsch           #+#    #+#              #
-#    Updated: 2016/03/09 22:16:01 by fjanoty          ###   ########.fr        #
+#    Updated: 2016/09/14 01:11:16 by fjanoty          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ SRC		=	matrix_init.c \
 			vector_product.c \
 			matrix_copy.c \
 			free_mat.c \
+			matrix_new.c \
 			set_scale.c
 FLAGS		= -Wall -Wextra -Werror
 OBJ		= $(SRC:.c=.o)

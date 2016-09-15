@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/09 12:17:52 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/09/13 04:39:16 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/09/14 15:51:03 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,7 +165,7 @@ int		loop_hook(t_env *e)
 	(e->key.b == 1) ? e->b += 20 : (void)e->key.echap;
 	(e->key.speed_up == 1) ? e->speed += increm_dir_cam(e) : (void)e;
 	(e->key.speed_down == 1) ? e->speed -= increm_dir_cam(e) : (void)e;
-	dprintf(1, "speed%f\n", e->speed);
+//	dprintf(1, "speed%f\n", e->speed);
 	ft_bzero(e->data, e->size_line * 990);
 	ft_bzero(e->z_buffer, SIZE_X * SIZE_Y);
 	main_work(e);

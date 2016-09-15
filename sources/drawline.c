@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/30 14:38:59 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/09/13 08:36:09 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/09/14 17:05:23 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 #include "libft.h"
 #include <unistd.h>
 #include <stdio.h>
+
+void	adapt_point(t_cam *c, t_matrix ***pt, int size_x, int size_y);
 
 void	draw_line(t_env *e, t_matrix *mat_line)
 {
@@ -378,6 +380,10 @@ void	main_work(t_env *e)
 
 	e->cam = cam;
 //	dprintf(1, "#	3\n");
+	if (!e->cam)
+		dprintf(1, "jjjjjjjjjjjlkjlkj lkhjlkjh kjh kjgh kg jh gjh gjh g\n");
+	dprintf (1, "%ld\n", (long)e->cam);
+	adapt_point(e->cam, map, e->size_map_x, e->size_map_y);
 	print_map(e, e->cam, map);
 //	dprintf(1, "#	4\n");
 

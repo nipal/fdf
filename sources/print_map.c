@@ -6,7 +6,7 @@
 /*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/12 03:54:36 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/09/13 11:01:53 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/09/14 17:03:57 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -415,7 +415,7 @@ void	print_map(t_env *e, t_cam *cam, t_matrix ***map)
 //	dprintf(1, "voulou\n");
 //	dprintf(1, "voulou\n");
 //			matrix_display(e->vect_map[j][i]);
-			dprintf(1, "	%f", e->vect_map[j][i]->m[i + j * e->size_map_x]);
+			dprintf(1, "	%f", e->vect_map[j][i]->m[2]);
 //		dprintf(1, "      $	h [%d]\n", i);
 //			dprintf(1, "    $	K\n");
 //			draw_link(e, cam, point);
@@ -429,6 +429,7 @@ void	print_map(t_env *e, t_cam *cam, t_matrix ***map)
 		dprintf(1, "    $	______\n");
 		j++;
 	}
+	dprintf(1, "    $\n-------------------------------------------------------------------------------------------------------------------\n\n");
 //	free_point(map, e->size_map_x, e->size_map_y);
 
 //	dprintf(1, "  $	M\n");

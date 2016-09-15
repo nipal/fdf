@@ -6,7 +6,7 @@
 /*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 08:33:48 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/09/13 10:56:02 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/09/14 01:32:47 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,27 @@ void		print_the_map(t_matrix ***map)
 		i = 0;
 		while (i < 10)
 		{
-			dprintf(1, "%f	", map[j][i]->m[Y]);
+			dprintf(1, "%f	", map[j][i]->m[Z]);
 			i++;
 		}
 		dprintf(1, "\n");
 		j++;
 	}
-	dprintf(1, "\n\n\n\n\n");
+	dprintf(1, "\n");
 //	sleep(10);
 }
 
+void		actu_vect_nb(int *vect_nb, int x, int y, int z)
+{
+	if (!(vect_nb))
+	{
+		dprintf(1, "you fucked-up");
+		return ;
+	}
+	vect_nb[0] = x;
+	vect_nb[1] = y;
+	vect_nb[2] = z;
+}
 
 t_matrix	***get_map(double *z_max, double *z_min, t_env *e)
 {
@@ -43,35 +54,13 @@ t_matrix	***get_map(double *z_max, double *z_min, t_env *e)
 	int			y_max;
 	int			i;
 	int			j;
-//	double		z_max;
-//	double		z_min;
+	int			*vect_nb;
 
-//	dprintf(1, "D\n");
-/*
-	int			tab2[10][10]		=	{{0, 0, 0,-0,-0, 0, 0, 0, 0, 0},
-										{-0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-										{-0, 0, 0, 0,-0, 0, 0, 0, 0, 0},
-										{ 0,-0, 0, 0, 0,-0, 0, 0,-0, 0},
-										{ 0,-0,-0, 0,-0, 0, 0, 0,-0,-0},
-										{-0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-										{ 0,-0,-0, 0, 0, 0, 0, 0, 0, 0},
-										{ 0, 0, 0, 0, 0, 0,-0, 0, 0, 0},
-										{-0,-0, 0, 0,-0, 0, 0, 0, 0, 0},
-										{ 0, 0, 0,-0, 0,-0, 0, 0, 0, 100}};
-
-	int			tab1[10][10]	=	{{-6,-67,-61,-38,  9,-16,-16, 32, 56, 16},
-									{ 27,-63, 23,-56, 63, 10, 33, -9,-55, 69},
-									{-44,-23,-58, 12,-55,  0, 21,-25, 27, 48},
-									{  1, 41,-38, 57, 38,-17,-50, -2,-63, 7},
-									{ 32,-46,-11, 30, 10, 13,-48,-37, 66,-53},
-									{-54, 34, 51,-40,-33, 52,-62,-37,-54,-9},
-									{-58, 40,-30, -9, 59,  7,-66,-12,-18, 41},
-									{-50, 67, 36, 13, 12, -2,-28, 10,-60,-58},
-									{  3,-27,-52, 56, 26,-52, 59,-31,-48,-6},
-									{-59,-30, 50, 36,  5,-11,  0, 60,-24,-34}};
-*/
-//	(void)tab2;
-//	(void)tab1;
+	if (!(vect_nb = (int*)malloc(sizeof(int) * 3)))
+	{
+		dprintf(1, "NOOOOOOOOOOOOOOOOOOOOOON	--> malloc error\n");
+		return (NULL);
+	}
 	if (!e)
 		return (NULL);
 	tab = e->map;
@@ -88,9 +77,10 @@ t_matrix	***get_map(double *z_max, double *z_min, t_env *e)
 			return (NULL);
 		while (i < x_max)
 		{
+			actu_vect_nb(vect_nb, i, j, tab[j][i]);
 			*z_max = MAX(tab[j][i], *z_max);
 			*z_min = MIN(tab[j][i], *z_min);
-			map_mat[j][i] = matrix_put_in_new((double)i, (double)j, tab[j][i], 0);
+			map_mat[j][i] = vect_new_horzi(vect_nb, 3);
 //			dprintf(1, "before\n");
 //			matrix_display(map_mat[j][i]);
 //			dprintf(1, "after [%d]\n", i);
@@ -102,6 +92,8 @@ t_matrix	***get_map(double *z_max, double *z_min, t_env *e)
 		j++;
 	}
 //	dprintf(1, "F\n");
-	print_the_map(map_mat);
+//	dprintf(1, "-------------------------------------------------------\n");
+//	print_the_map(map_mat);
+//	dprintf(1, "#######################################################\n");
 	return (map_mat);
 }
