@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/10 04:08:06 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/09/16 09:36:15 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/09/16 13:42:34 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,8 @@ void	env(int **map, int size_x, int size_y)
 	t_env	e;
 	t_cam	*cam;
 
-	e.rot_x = (0.0 / 360.0)  * 2 * M_PI;
-	e.rot_y = (90.0 / 360.0) * 2 * M_PI;
+	e.rot_x = (20.0 / 360.0)  * 2 * M_PI;
+	e.rot_y = (20.0 / 360.0) * 2 * M_PI;
 	e.rot_z = (0.0 / 360.0) * 2 * M_PI;
 	e.size_map_x = size_x;	
 	e.size_map_y = size_y;	
