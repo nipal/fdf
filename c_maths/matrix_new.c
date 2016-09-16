@@ -6,11 +6,35 @@
 /*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/14 00:32:54 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/09/14 01:24:14 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/09/16 05:57:52 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "c_maths.h"
+
+t_matrix	*vect_new_vertfd(double a,double b,double c)
+{
+	t_matrix	*vect;
+
+	if (!(vect = matrix_init(1, 3)))
+		return (NULL);
+	vect->m[0] = a;
+	vect->m[1] = b;
+	vect->m[2] = c;
+	return (vect);
+}
+
+t_matrix	*vect_new_vertfi(int a,int b,int c)
+{
+	t_matrix	*vect;
+
+	if (!(vect = matrix_init(1, 3)))
+		return (NULL);
+	vect->m[0] = (double)a;
+	vect->m[1] = (double)b;
+	vect->m[2] = (double)c;
+	return (vect);
+}
 
 t_matrix	*vect_new_vert(double *tab, int size)
 {

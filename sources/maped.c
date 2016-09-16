@@ -6,7 +6,7 @@
 /*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 08:33:48 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/09/14 01:32:47 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/09/16 13:07:30 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,10 @@ t_matrix	***get_map(double *z_max, double *z_min, t_env *e)
 			return (NULL);
 		while (i < x_max)
 		{
-			actu_vect_nb(vect_nb, i, j, tab[j][i]);
+			actu_vect_nb(vect_nb, i * 30, j * 30, 30 * tab[j][i]);
 			*z_max = MAX(tab[j][i], *z_max);
 			*z_min = MIN(tab[j][i], *z_min);
-			map_mat[j][i] = vect_new_horzi(vect_nb, 3);
+			map_mat[j][i] = vect_new_verti(vect_nb, 3);
 //			dprintf(1, "before\n");
 //			matrix_display(map_mat[j][i]);
 //			dprintf(1, "after [%d]\n", i);

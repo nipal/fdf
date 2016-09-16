@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/30 14:38:59 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/09/14 17:05:23 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/09/16 13:03:09 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	draw_line(t_env *e, t_matrix *mat_line)
 	t_matrix	*org;
 	t_matrix	*print;
 
+//	dprintf(1, "\n");
 	if (!(mat_line)
 		|| !(diff = matrix_init(6, 1))
 		|| (!(org = matrix_init(6, 1)) && matrix_free(&diff)))
@@ -42,8 +43,8 @@ void	draw_line(t_env *e, t_matrix *mat_line)
 		matrix_free(&org);
 		org = print;
 	}
-	matrix_free(&diff);
-	matrix_free(&print);
+//	matrix_free(&diff);
+//	matrix_free(&print);
 }
 
 t_matrix	*init_mat_line(t_matrix *pt1, t_matrix *pt2
@@ -73,7 +74,7 @@ t_matrix	*init_mat_line(t_matrix *pt1, t_matrix *pt2
 			dprintf(1, "no c2\n");
 		if (!(diff))
 			dprintf(1, "no diff\n");
-		return (NULL);
+	//	return (NULL);
 	}
 	diff->m[Z] = 0;
 	norme = matrix_dot_product(diff, diff);
@@ -169,13 +170,12 @@ t_matrix	*sqr_rotate(int rot, int x, int y, int size)
 	int			b;
 	int			val;
 
-	if (!(pt = matrix_init(4, 1)))
+	if (!(pt = matrix_init(3, 1)))
 		return (NULL);
 	a = rot % size == rot % (size * 2);
 	b = rot % (size * 2) == rot % (size * 4);
 	val = rot % size;
 	pt->m[2] = 0;
-	pt->m[3] = 0;
 	if (a && b)
 	{
 		pt->m[0] = x -(size / 2);
@@ -226,13 +226,13 @@ void	draw_point_old(t_env *e)
 	
 //dprintf(1, "\n\nAll is well 2\n");
 	
-	if (!(pt1 = matrix_init(4, 1))
-		|| !(color = matrix_init(4, 1))
-		|| !(color2 = matrix_init(4, 1))
-		|| !(color3 = matrix_init(4, 1))
-		|| !(pt2 = matrix_init(4, 1))
-		|| !(pt4 = matrix_init(4, 1))
-		|| !(pt5 = matrix_init(4, 1))
+	if (!(pt1 = matrix_init(3, 1))
+		|| !(color = matrix_init(3, 1))
+		|| !(color2 = matrix_init(3, 1))
+		|| !(color3 = matrix_init(3, 1))
+		|| !(pt2 = matrix_init(3, 1))
+		|| !(pt4 = matrix_init(3, 1))
+		|| !(pt5 = matrix_init(3, 1))
 //		|| !(rotate2 = set_rotate(M_PI * (angle / 360), 0, 0))
 		|| !(rotate = set_rotate(M_PI * (angle / 360), 0, 0)))
 		return ;
@@ -305,21 +305,39 @@ void	draw_point_old(t_env *e)
 //*
 
 	if (!(mat_line = init_mat_line(pt4, pt5, color2, color3)))
+	{
 		dprintf(1, "\n\nAll is well 2\n");
-	draw_line(e, mat_line);
+	}
+	else
+	{
+		draw_line(e, mat_line);
+		matrix_free(&mat_line);
+	}
 
 
-	matrix_free(&mat_line);
+
 	if (!(mat_line = init_mat_line(pt4, pt1, color2, color)))
+	{
 		dprintf(1, "All is well 3\n");
-	draw_line(e, (mat_line));
+	}
+	else
+	{
+		draw_line(e, mat_line);
+		matrix_free(&mat_line);
+	}
+
 	//draw_line(e, mat_line);
 
-	matrix_free(&mat_line);
 	if (!(mat_line = init_mat_line(pt1, pt5, color, color3)))
+	{
 		dprintf(1, "All is well 3\n");
-	draw_line(e, (mat_line));
-	draw_line(e, mat_line);
+	}
+	else
+	{
+		draw_line(e, mat_line);
+		matrix_free(&mat_line);
+	}
+//	draw_line(e, (mat_line));
 //*/
 
 
@@ -356,41 +374,176 @@ void	draw_point_old(t_env *e)
 	matrix_free(&color);
 	matrix_free(&color2);
 	matrix_free(&color3);
-	matrix_free(&mat_line);
 }
 
 //	ca c'est un peu la boucle principale
 //void	(t_env *e)
+
+/*######################################################*/
+/*######################################################*/
+
+//void	write_map(t_matrix	***map);
+void	write_map(t_env *e, t_matrix	***map)
+{
+	int	i;
+	int	j;
+	
+	j = 0;
+	while (j < e->size_map_y)
+	{
+		i = 0;
+		while (i < e->size_map_y)
+		{
+			dprintf(1, "	%f", map[j][i]->m[2]);
+			i++;
+		}
+		dprintf(1, "	<----\n");
+		j++;
+	}
+}
+
+void	base_change(t_env *e, t_cam *cam, t_matrix	***map)
+{
+	int	i;
+	int	j;
+	t_matrix	*tmp;
+	//	t_matrix	*diff;
+	t_matrix	*rot;
+	
+	j = 0;
+	dprintf(1, "angle:\n");
+	matrix_display(cam->rot);
+	if (!(rot = set_rotate(cam->rot->m[0], cam->rot->m[1], cam->rot->m[2])))
+	{
+		dprintf(1, "no  =malloc bitch!");
+	}
+	while (j < e->size_map_y)
+	{
+		i = 0;
+		while (i < e->size_map_y)
+		{
+			matrix_sub_in(map[j][i], cam->pos, map[j][i]);
+			tmp = matrix_product(rot, map[j][i]);
+//			matrix_free(&map[j][i]);
+			map[j][i] = tmp;
+//t_matrix		*matrix_product(t_matrix *a, t_matrix *b);
+			i++;
+		}
+		j++;
+	}
+}
+
+void	draw_link_map(t_env *e)
+{
+	int			j;
+	int			i;
+	t_matrix	*mat_line;
+	t_matrix	*colore;
+	t_matrix	*colore2;
+	t_matrix	***map;
+
+	colore = vect_new_vertfd(100, 100, 100);
+	colore2 = vect_new_vertfd(200, 200, 200);
+	map = e->vect_map;
+	j = 0;
+//	dprintf(1, "	__--__--__--__	[BEFORE] draw-link_map\n");
+	while (j < e->size_map_y)
+	{
+//		dprintf(1, "******-->	line[%d]\n", j);
+		i = 0;
+		while (i < e->size_map_x)	
+		{
+//			dprintf(1, "	#####-->	col[%d]\n", i);
+			//	avec devant si pas avant dernier
+			if (i < e->size_map_x - 1 && !(mat_line = init_mat_line(map[j][i], map[j][i + 1], colore, colore2)))
+			{
+//				dprintf(1, "A\n");
+				dprintf(1, "\n\nAll is well 2\n");
+			}
+//			dprintf(1, "B\n");
+			else
+			{
+//				dprintf(1, "C\n");
+				draw_line(e, mat_line);
+//				matrix_free(&mat_line);
+			}	
+//			dprintf(1, "D\n");
+			//	avec en bas
+			if (j < e->size_map_y - 1 && !(mat_line = init_mat_line(map[j][i], map[j + 1][i], colore, colore2)))
+			{
+//				dprintf(1, "E\n");
+				dprintf(1, "\n\nAll is well 2\n");
+			}
+			else
+			{
+//				dprintf(1, "F\n");
+				draw_line(e, mat_line);
+//				matrix_free(&mat_line);
+			}	
+//			dprintf(1, "G\n");
+			i++;
+		}
+		j++;
+	}
+//	dprintf(1, "	__--__--__--__	[AFTER] draw-link_map\n");
+	(void)e;
+}
+
+
+/*######################################################*/
+/*######################################################*/
+
+/*######*/				/*######*/
+
+/*#############*/
+
+/*######################################################*/
+/*######################################################*/
 void	main_work(t_env *e)
 {
 	// On veux juste tracer la map
 	double	z_max;
 	double	z_min;
-//(void)e;
+	//(void)e;
 
 	t_matrix ***map = get_map(&z_max, &z_min, e);
 	(void)map;
-//	dprintf(1, "map:%ld\n", (long)map);
-//	dprintf(1, "*map:%ld\n", (long)*map );
-//	dprintf(1, "**map:%ld\n", (long)**map);
-//map;
-//	dprintf(1, "#	1\n");
+	//	DONE	la on veux pouvoir afficher numeriquement la carte genre sur x, y ou z
+	//	DONE	puis avoir une camera 
+	//	DONE	puis faire le changement de base
+	//	puis afficher le resulta graphique
+	//	puis gere la distance
+	//	puis afficher le resulta graphique
+
+
+	//	dprintf(1, "map:%ld\n", (long)map);
+	//	dprintf(1, "*map:%ld\n", (long)*map );
+	//	dprintf(1, "**map:%ld\n", (long)**map);
+	//map;
+	//	dprintf(1, "#	1\n");
+	//	dprintf(1, "###################################################\n");
 	t_cam	*cam = init_cam(60.0/360.0 * M_PI , 60.0/360.0 * M_PI, e);
-//	dprintf(1, "#	2\n");
+	describe_cam(cam);
+	//	dprintf(1, "#	2\n");
 
 	e->cam = cam;
-//	dprintf(1, "#	3\n");
+	//	dprintf(1, "#	3\n");
 	if (!e->cam)
 		dprintf(1, "jjjjjjjjjjjlkjlkj lkhjlkjh kjh kjgh kg jh gjh gjh g\n");
 	dprintf (1, "%ld\n", (long)e->cam);
-	adapt_point(e->cam, map, e->size_map_x, e->size_map_y);
-	print_map(e, e->cam, map);
-//	dprintf(1, "#	4\n");
+	//	print_map(e, e->cam, map);
+	base_change(e, cam, map);
+	draw_link_map(e);
+//	print_map(e, e->cam, e->vect_map);
+	e->vect_map = map;
+	//	print_map(e, e->cam, e->vect_map);
+	//	dprintf(1, "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&\n");
+	//	dprintf(1, "#	4\n");
 
-	mlx_put_image_to_window(e->mlx, e->win, e->img, 0, 0);
-//	dprintf(1, "#	5\n");
-//	print_state(e);
-//	(void)cam;
-//	(void)e;
-	mlx_do_sync(e->mlx);
+		mlx_put_image_to_window(e->mlx, e->win, e->img, 0, 0);
+	//	dprintf(1, "#	5\n");
+	//	print_state(e);
+	//	(void)cam;
+	//	(void)e;
+		mlx_do_sync(e->mlx);
 }

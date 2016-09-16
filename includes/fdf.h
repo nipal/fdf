@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/29 02:21:11 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/09/14 05:25:26 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/09/16 08:27:21 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,6 +177,7 @@ void	env(int **map, int size_x, int size_y);
  **	cam
  **/
 t_cam	*init_cam(double fov_y, double fov_x, t_env *e);
+void	describe_cam(t_cam *cam);
 /*
  ** print_map	
  * */

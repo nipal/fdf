@@ -6,7 +6,7 @@
 #    By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/05 01:32:20 by jpirsch           #+#    #+#              #
-#    Updated: 2016/09/12 09:18:58 by fjanoty          ###   ########.fr        #
+#    Updated: 2016/09/16 05:14:41 by fjanoty          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ FLAGS = -Wall -Wextra -Werror
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	gcc -o $(NAME) $(FLAGS) $(OBJ) -L ../libft/ -lft -L ../minilibx/ \
+	gcc -o $(NAME) $(FLAGS) $(OBJ)  ../c_maths/libc_maths.a  -L ../libft/ -lft -L ../minilibx/ \
 		-L ../c_maths -lc_maths \
 		-lmlx -framework OpenGL -framework AppKit
 

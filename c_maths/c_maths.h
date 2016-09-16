@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/15 14:35:08 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/09/14 00:41:23 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/09/16 11:08:22 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ t_matrix		*vect_new_horzi(int *tab, int size);
 t_matrix		*vect_new_verti(int *tab, int size);
 t_matrix		*vect_new_horz(double *tab, int size);
 t_matrix		*vect_new_vert(double *tab, int size);
+t_matrix		*vect_new_vertfd(double a,double b,double c);
 
 t_matrix		*matrix_add(t_matrix *a, t_matrix *b);
 t_matrix		*matrix_add_in(t_matrix *a, t_matrix *b, t_matrix *c);

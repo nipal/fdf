@@ -6,7 +6,7 @@
 /*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 09:32:11 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/03/15 10:47:38 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/09/16 09:34:10 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,9 @@ void	describe_cam(t_cam *cam)
 		i = 0;
 		while (i < 4)
 		{
-
-			dprintf(1, " corner[%i]", i);
+			dprintf(1, " corner		[%i]:	{%f,	", i, (cam->corner[i])->m[X]);
+			dprintf(1, " %f,	",(cam->corner[i])->m[Y]);
+			dprintf(1, " %f}\n", (cam->corner[i])->m[Z]);
 			if (cam)
 				;//matrix_display(cam->corner[i]);
 			else
@@ -46,7 +47,7 @@ void	describe_cam(t_cam *cam)
 		{
 			dprintf(1, " normal[%i]", i);
 			if (cam)
-				;//matrix_display(cam->normal[i]);
+				matrix_display(cam->normal[i]);
 			else
 				dprintf(1, "	NO normal[%d]\n", i);
 			i++;
@@ -57,19 +58,19 @@ void	describe_cam(t_cam *cam)
 
 	dprintf(1, "pos\n");
 	if (cam->pos)
-		;//matrix_display(cam->pos);
+		matrix_display(cam->pos);
 	else
 		dprintf(1, "	NO POS\n");
 
 	dprintf(1, "dir\n");
 	if (cam->dir)
-		;//matrix_display(cam->dir);
+		matrix_display(cam->dir);
 	else
 		dprintf(1, "	NO DIR\n");
 
 	dprintf(1, "rot\n");
 	if (cam->rot)
-		;//matrix_display(cam->rot);
+		matrix_display(cam->rot);
 	else
 		dprintf(1, "	NO ROT\n");
 //	sleep(10);
@@ -144,6 +145,7 @@ int		malloc_cam_tab(t_cam *cam)
 	return (1);
 }
 
+//	on resoit des angle en radian
 t_cam	*init_cam(double fov_y, double fov_x, t_env *e)
 {
 	t_cam		*c;
@@ -156,21 +158,28 @@ t_cam	*init_cam(double fov_y, double fov_x, t_env *e)
 
 	c = (t_cam*) malloc(sizeof(t_cam));
 	if ((!c || fov_y <= 0 || fov_y >= 180 || fov_y > 180 || fov_y < 0 
-		|| !(c->dir = matrix_put_in_new(0, 0, 1, 1))
-		|| !(c->rot = matrix_put_in_new(e->rot_x, e->rot_y, e->rot_z, 1))
-		|| !(c->pos = matrix_put_in_new(0, 0, 0, 1))
+		|| !(c->dir = vect_new_vertfd(0, 0, 1))
+		|| !(c->rot =  vect_new_vertfd(e->rot_x, e->rot_y, e->rot_z))
+		|| !(c->pos =  vect_new_vertfd(0, 0, 0))
 		|| !(c->corner = (t_matrix**)malloc(sizeof(t_cam*) * 4))
 		|| !(c->normal = (t_matrix**)malloc(sizeof(t_cam*) * 4)))
 		|| !(malloc_cam_tab(c)))
+	{
+		dprintf(1, "error on cam PARAMETER!!!\n");
 		return (NULL);
+	}
 	marge = 1.5;
 	dx_cam = tan(fov_x / 2);
 	dy_cam = tan(fov_y / 2);
 //	dir = matrix_product(rot, c->dir);
 //	dir = matrix_scalar_product(dir, 0.01 * e->speed);
-	c->pos->m[Z] = 170 - MAX(((e->size_map_y * marge) / dy_cam), (e->size_map_x * marge) / dx_cam);
-	c->pos->m[X] = 50;
-	c->pos->m[Y] = 50;
+	c->pos->m[Z] = - 100 ;//- MAX(((e->size_map_y * marge) / dy_cam), (e->size_map_x * marge) / dx_cam);
+	c->pos->m[X] = 0;
+	c->pos->m[Y] = 0;
+	
+	c->rot->m[0] = e->rot_x;
+	c->rot->m[1] = e->rot_y;
+	c->rot->m[2] = e->rot_z;
 
 	set_windir(c->corner, fov_x, fov_y);
 	set_normal(c->normal, c->corner);
