@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/30 14:38:59 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/09/16 13:03:09 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/09/17 15:23:23 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -420,7 +420,7 @@ void	base_change(t_env *e, t_cam *cam, t_matrix	***map)
 	while (j < e->size_map_y)
 	{
 		i = 0;
-		while (i < e->size_map_y)
+		while (i < e->size_map_x)
 		{
 			matrix_sub_in(map[j][i], cam->pos, map[j][i]);
 			tmp = matrix_product(rot, map[j][i]);
@@ -502,18 +502,24 @@ void	draw_link_map(t_env *e)
 void	main_work(t_env *e)
 {
 	// On veux juste tracer la map
-	double	z_max;
-	double	z_min;
+//	double	z_max;
+//	double	z_min;
 	//(void)e;
 
-	t_matrix ***map = get_map(&z_max, &z_min, e);
+	t_matrix ***map = get_map(e);
 	(void)map;
 	//	DONE	la on veux pouvoir afficher numeriquement la carte genre sur x, y ou z
 	//	DONE	puis avoir une camera 
 	//	DONE	puis faire le changement de base
-	//	puis afficher le resulta graphique
-	//	puis gere la distance
-	//	puis afficher le resulta graphique
+	//	DONE	puis afficher le resulta graphique
+	//	DONE	puis gere la distance
+	//	DONE	puis afficher le resulta graphique
+	
+	//	faire iun peutiot scaling en fonction des dimention (x, y, z)
+	//	rendre un peu plus propre les truc des angle, mais auttan ca va
+	//	mapper des touche pour faire :
+	//		{rotation, translation} -->	la camera
+	//								-->	l'objet
 
 
 	//	dprintf(1, "map:%ld\n", (long)map);
@@ -524,18 +530,13 @@ void	main_work(t_env *e)
 	//	dprintf(1, "###################################################\n");
 	t_cam	*cam = init_cam(60.0/360.0 * M_PI , 60.0/360.0 * M_PI, e);
 	describe_cam(cam);
-	//	dprintf(1, "#	2\n");
-
 	e->cam = cam;
-	//	dprintf(1, "#	3\n");
 	if (!e->cam)
-		dprintf(1, "jjjjjjjjjjjlkjlkj lkhjlkjh kjh kjgh kg jh gjh gjh g\n");
+		dprintf(1, "Ther is no cam!!!\n");
 	dprintf (1, "%ld\n", (long)e->cam);
-	//	print_map(e, e->cam, map);
 	base_change(e, cam, map);
-	draw_link_map(e);
-//	print_map(e, e->cam, e->vect_map);
 	e->vect_map = map;
+	draw_link_map(e);
 	//	print_map(e, e->cam, e->vect_map);
 	//	dprintf(1, "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&\n");
 	//	dprintf(1, "#	4\n");

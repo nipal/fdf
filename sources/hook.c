@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/09 12:17:52 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/09/16 12:55:12 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/09/17 14:20:53 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,11 +142,11 @@ int		loop_hook(t_env *e)
 	
 //	dprintf(1, "x:%f y:%f x:%f\n", e->rot_x, e->rot_y, e->rot_z);
 	(e->key.rot_z2 == 1) ? e->rot_z -= increm : (void)e;
-	(e->key.rot_x2 == 1) ? e->rot_x -= increm : (void)e;
-	(e->key.rot_z1 == 1) ? e->rot_z += increm : (void)e;
 	(e->key.rot_y2 == 1) ? e->rot_y -= increm : (void)e;
+	(e->key.rot_x2 == 1) ? e->rot_x -= increm : (void)e;
 	(e->key.rot_x1 == 1) ? e->rot_x += increm : (void)e;
 	(e->key.rot_y1 == 1) ? e->rot_y += increm : (void)e;
+	(e->key.rot_z1 == 1) ? e->rot_z += increm : (void)e;
 	(e->key.echap == 1) ? exit(0) : (void)e->key.echap;
 	(e->key.decal_down == 1) ? e->decaly -= e->zoom / 2 : (void)e->key.echap;
 	(e->key.decal_up == 1) ? e->decaly += e->zoom / 2 : (void)e->key.echap;
@@ -170,9 +170,9 @@ int		loop_hook(t_env *e)
 	ft_bzero(e->data, e->size_line * 990);
 	ft_bzero(e->z_buffer, SIZE_X * SIZE_Y);
 //	main_work(e);
-	dprintf(1, "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$	avannnnnnnnnnt\n");
+//	dprintf(1, "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$	avannnnnnnnnnt\n");
 	main_work(e);
-	dprintf(1, "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$	apreeeeeeeeeees\n");
+//	dprintf(1, "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$	apreeeeeeeeeees\n");
 //	draw_point(e);
 //	draw_point_old(e);
 	return (1);

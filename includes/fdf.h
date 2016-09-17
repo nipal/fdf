@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/29 02:21:11 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/09/16 08:27:21 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/09/17 15:18:10 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,8 +120,6 @@ typedef struct			s_env
 	int					endian;
 	int					**map;
 	t_matrix			***vect_map;
-	double				z_min;
-	double				z_max;
 	int					proj;
 	double				scale;
 	double				cte1;
@@ -134,6 +132,8 @@ typedef struct			s_env
 	t_key				key;
 	int					size_map_x;
 	int					size_map_y;
+	double				z_min;
+	double				z_max;
 	double				rot_x;
 	double				rot_y;
 	double				rot_z;
@@ -195,7 +195,7 @@ int						**parse(int fd);
 
 
 //t_matrix	***get_map(double *z_max, double *z_min);
-t_matrix	***get_map(double *z_max, double *z_min, t_env *e);
+t_matrix	***get_map(t_env *e);
 void	draw_line(t_env *e, t_matrix *mat_line);
 t_matrix	*init_mat_line(t_matrix *pt1, t_matrix *pt2, t_matrix *c1, t_matrix *c2);
 #endif

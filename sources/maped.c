@@ -6,7 +6,7 @@
 /*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 08:33:48 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/09/16 13:07:30 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/09/17 15:36:32 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,16 @@ void		actu_vect_nb(int *vect_nb, int x, int y, int z)
 	vect_nb[2] = z;
 }
 
-t_matrix	***get_map(double *z_max, double *z_min, t_env *e)
+//	il faudrAIT FAIRE UNE SYSTEM DE COPY...
+//	
+//
+//		Pour faire le scaling on veux la taille de l'ecran
+//
+
+//	(i - (x_max / 2)) * ((e->ecr_x * 1.25) / x_max)
+//	(j - (y_max / 2)) * ((e->ecr_y * 1.25) / y_max)
+
+t_matrix	***get_map(t_env *e)
 {
 	t_matrix	***map_mat;
 	int			**tab;
@@ -77,9 +86,12 @@ t_matrix	***get_map(double *z_max, double *z_min, t_env *e)
 			return (NULL);
 		while (i < x_max)
 		{
-			actu_vect_nb(vect_nb, i * 30, j * 30, 30 * tab[j][i]);
-			*z_max = MAX(tab[j][i], *z_max);
-			*z_min = MIN(tab[j][i], *z_min);
+			actu_vect_nb(vect_nb
+			,(i - (x_max / 2)) * ((e->ecr_x * 0.5) / x_max)
+			 ,(j - (y_max / 2)) * ((e->ecr_y * 0.5) / y_max)
+			 , (tab[j][i] - ((e->z_max - e->z_min)) / 2) * 50 );
+//			*z_max = MAX(tab[j][i], *z_max);
+//			*z_min = MIN(tab[j][i], *z_min);
 			map_mat[j][i] = vect_new_verti(vect_nb, 3);
 //			dprintf(1, "before\n");
 //			matrix_display(map_mat[j][i]);

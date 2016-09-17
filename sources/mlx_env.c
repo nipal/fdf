@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/10 04:08:06 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/09/16 13:42:34 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/09/17 15:19:51 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,20 +89,55 @@ void	print_state(t_env *e)
 	ft_strdel(&str);
 }
 
+/*	ici il faudrait stoquer les dimetion maximale de la map
+ * 	on a deja le max x et y il maque le max et le min en z*/
+
+t_matrix	*get_max_zdim(int **map, int size_x, int size_y)
+{
+	int			i;
+	int			j;
+	t_matrix	*z_dim;
+
+	if (!(z_dim = matrix_init(2, 1)))
+		return (NULL);
+	z_dim->m[0] = map[0][0];	
+	z_dim->m[1] = map[0][0];	
+	j = 0;
+	while (j < size_y)
+	{
+		i = 0;
+		while (i < size_x)
+		{
+			if (map[j][i] < z_dim->m[0])
+				z_dim->m[0] = map[j][i];
+			if (map[j][i] > z_dim->m[1])
+				z_dim->m[1] = map[j][i];
+			i++;
+		}
+		j++;
+	}
+	return (z_dim);
+}
+
 void	env(int **map, int size_x, int size_y)
 {
 	(void)size_x;
 	(void)size_y;
 	t_env	e;
 	t_cam	*cam;
+	t_matrix	*z_dim;
 
+	if (!(z_dim = get_max_zdim(map, size_x, size_y)))
+		return ;
+	e.z_min = z_dim->m[0];
+	e.z_max = z_dim->m[1];
 	e.rot_x = (20.0 / 360.0)  * 2 * M_PI;
 	e.rot_y = (20.0 / 360.0) * 2 * M_PI;
 	e.rot_z = (0.0 / 360.0) * 2 * M_PI;
 	e.size_map_x = size_x;	
 	e.size_map_y = size_y;	
 	e.map = map;
-	e.vect_map = get_map(&e.z_max, &e.z_min, &e);
+	e.vect_map = get_map(&e);
 	if (!(e.mlx = mlx_init()))
 		return ;
 	e.win = mlx_new_window(e.mlx, SIZE_Y, SIZE_X, "Leu test");
@@ -131,4 +166,5 @@ void	env(int **map, int size_x, int size_y)
 	mlx_hook(e.win, 3, 2, key_release, &e);
 	mlx_loop_hook(e.mlx, loop_hook, &e);
 	mlx_loop(e.mlx);
+	free(z_dim);
 }
