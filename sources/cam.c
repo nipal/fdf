@@ -6,7 +6,7 @@
 /*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 09:32:11 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/09/16 13:42:36 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/09/18 04:00:37 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,8 +173,8 @@ t_cam	*init_cam(double fov_y, double fov_x, t_env *e)
 	dy_cam = tan(fov_y / 2);
 //	dir = matrix_product(rot, c->dir);
 //	dir = matrix_scalar_product(dir, 0.01 * e->speed);
-	c->pos->m[Z] = -100 ;//- MAX(((e->size_map_y * marge) / dy_cam), (e->size_map_x * marge) / dx_cam);
-	c->pos->m[X] = 300;
+	c->pos->m[Z] = -1000 ;//- MAX(((e->size_map_y * marge) / dy_cam), (e->size_map_x * marge) / dx_cam);
+	c->pos->m[X] = 0;
 	c->pos->m[Y] = 0;
 	
 	c->rot->m[0] = e->rot_x;

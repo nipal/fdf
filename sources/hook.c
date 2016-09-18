@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/09 12:17:52 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/09/17 14:20:53 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/09/18 07:06:07 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,12 @@ void	init_t_key(t_key *key)
 	key->rot_x2 = 0;
 	key->rot_y1 = 0;
 	key->rot_y2 = 0;
+	key->rot_cam_z1 = 0;
+	key->rot_cam_z2 = 0;
+	key->rot_cam_x1 = 0;
+	key->rot_cam_x2 = 0;
+	key->rot_cam_y1 = 0;
+	key->rot_cam_y2 = 0;
 	key->speed_up = 0;
 	key->speed_down = 0;
 }
@@ -50,24 +56,25 @@ int		key_press(int keycode, t_env *e)
 {
 	(keycode == 78) ? e->key.speed_down = 1 : (void)keycode;
 	(keycode == 69) ? e->key.speed_up = 1 : (void)keycode;
-	(keycode == 0) ? e->key.rot_z2 = 1 : (void)keycode;
-	(keycode == 1) ? e->key.rot_x1 = 1 : (void)keycode;
-	(keycode == 2) ? e->key.rot_z1 = 1 : (void)keycode;
-	(keycode == 12) ? e->key.rot_y2 = 1 : (void)keycode;
-	(keycode == 13) ? e->key.rot_x2 = 1 : (void)keycode;
-	(keycode == 14) ? e->key.rot_y1 = 1 : (void)keycode;
+
+	(keycode == 13) ? e->key.rot_x1 = 1 : (void)keycode;
+	(keycode == 12) ? e->key.rot_y1 = 1 : (void)keycode;
+	(keycode == 0) ? e->key.rot_z1 = 1 : (void)keycode;
+	(keycode == 1) ? e->key.rot_x2 = 1 : (void)keycode;
+	(keycode == 14) ? e->key.rot_y2 = 1 : (void)keycode;
+	(keycode == 2) ? e->key.rot_z2 = 1 : (void)keycode;
+
+	(keycode == 32) ? e->key.rot_cam_x1 = 1 : (void)keycode;
+	(keycode == 34) ? e->key.rot_cam_y1 = 1 : (void)keycode;
+	(keycode == 37) ? e->key.rot_cam_z1 = 1 : (void)keycode;
+	(keycode == 31) ? e->key.rot_cam_x2 = 1 : (void)keycode;
+	(keycode == 40) ? e->key.rot_cam_y2 = 1 : (void)keycode;
+	(keycode == 37) ? e->key.rot_cam_z2 = 1 : (void)keycode;
+
 	(keycode == 53) ? e->key.echap = 1 : (void)keycode;
 	(keycode == 125) ? e->key.decal_down = 1 : (void)keycode;
 	(keycode == 126) ? e->key.decal_up = 1 : (void)keycode;
 	(keycode == 124) ? e->key.decal_right = 1 : (void)keycode;
-	(keycode == 0) ? e->key.rot_z2 = 1 : (void)keycode;
-	(keycode == 1) ? e->key.rot_x1 = 1 : (void)keycode;
-	(keycode == 2) ? e->key.rot_z1 = 1 : (void)keycode;
-	(keycode == 12) ? e->key.rot_y2 = 1 : (void)keycode;
-	(keycode == 13) ? e->key.rot_x2 = 1 : (void)keycode;
-	(keycode == 14) ? e->key.rot_y1 = 1 : (void)keycode;
-	(keycode == 53) ? e->key.echap = 1 : (void)keycode;
-	(keycode == 53) ? e->key.echap = 1 : (void)keycode;
 	(keycode == 125) ? e->key.decal_down = 1 : (void)keycode;
 	(keycode == 126) ? e->key.decal_up = 1 : (void)keycode;
 	(keycode == 124) ? e->key.decal_right = 1 : (void)keycode;
@@ -89,15 +96,26 @@ int		key_press(int keycode, t_env *e)
 
 int		key_release(int keycode, t_env *e)
 {
+	ft_putchar('[');
 	ft_putnbr(keycode);
-	(keycode == 27) ? e->key.speed_down = 0 : (void)keycode;
-	(keycode == 24) ? e->key.speed_up = 0 : (void)keycode;
-	(keycode == 0) ? e->key.rot_z2 = 0 : (void)keycode;
-	(keycode == 1) ? e->key.rot_x1 = 0 : (void)keycode;
-	(keycode == 2) ? e->key.rot_z1 = 0 : (void)keycode;
-	(keycode == 12) ? e->key.rot_y2 = 0 : (void)keycode;
-	(keycode == 13) ? e->key.rot_x2 = 0 : (void)keycode;
-	(keycode == 14) ? e->key.rot_y1 = 0 : (void)keycode;
+	ft_putstr("] ");
+	(keycode == 78) ? e->key.speed_down = 0 : (void)keycode;
+	(keycode == 69) ? e->key.speed_up = 0 : (void)keycode;
+
+	(keycode == 13) ? e->key.rot_x1 = 0 : (void)keycode;
+	(keycode == 12) ? e->key.rot_y1 = 0 : (void)keycode;
+	(keycode == 0) ? e->key.rot_z1 = 0 : (void)keycode;
+	(keycode == 1) ? e->key.rot_x2 = 0 : (void)keycode;
+	(keycode == 14) ? e->key.rot_y2 = 0 : (void)keycode;
+	(keycode == 2) ? e->key.rot_z2 = 0 : (void)keycode;
+
+	(keycode == 32) ? e->key.rot_cam_x1 = 0 : (void)keycode;
+	(keycode == 34) ? e->key.rot_cam_y1 = 0 : (void)keycode;
+	(keycode == 37) ? e->key.rot_cam_z1 = 0 : (void)keycode;
+	(keycode == 31) ? e->key.rot_cam_x2 = 0 : (void)keycode;
+	(keycode == 40) ? e->key.rot_cam_y2 = 0 : (void)keycode;
+	(keycode == 37) ? e->key.rot_cam_z2 = 0 : (void)keycode;
+
 	(keycode == 53) ? e->key.echap = 0 : (void)keycode;
 	(keycode == 125) ? e->key.decal_down = 0 : (void)keycode;
 	(keycode == 126) ? e->key.decal_up = 0 : (void)keycode;

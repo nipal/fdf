@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/29 02:21:11 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/09/17 15:18:10 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/09/18 06:30:17 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,12 @@ typedef struct			s_key
 	int					rot_x2;
 	int					rot_y2;
 	int					rot_z2;
+	int					rot_cam_x1;
+	int					rot_cam_x2;
+	int					rot_cam_y1;
+	int					rot_cam_y2;
+	int					rot_cam_z1;
+	int					rot_cam_z2;
 	int					speed_up;
 	int					speed_down;
 }						t_key;

@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/30 14:38:59 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/09/17 15:23:23 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/09/18 06:20:13 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -388,6 +388,7 @@ void	write_map(t_env *e, t_matrix	***map)
 	int	i;
 	int	j;
 	
+	(void)map;
 	j = 0;
 	while (j < e->size_map_y)
 	{
@@ -402,6 +403,22 @@ void	write_map(t_env *e, t_matrix	***map)
 	}
 }
 
+void	conique_adapte(t_matrix *vect)
+{
+	//	On veu reduire x et y en fonction de z
+	//		-on va le faire autoure de 0
+	//		ou autoure du centre de l'ecran ...
+	double	norme;
+
+//	norme = sqrt(matrix_dot_product(vect, vect));
+//	norme /= 300;
+	norme = vect->m[2] / 500;
+	vect->m[0] /= norme;
+	vect->m[1] /= norme;
+//	vect->m[2] /= norme;
+//	dprintf(1, " nrm[%lf]{%lf, %lf}	", norme, vect->m[0], vect->m[1]);
+}
+
 void	base_change(t_env *e, t_cam *cam, t_matrix	***map)
 {
 	int	i;
@@ -411,8 +428,8 @@ void	base_change(t_env *e, t_cam *cam, t_matrix	***map)
 	t_matrix	*rot;
 	
 	j = 0;
-	dprintf(1, "angle:\n");
-	matrix_display(cam->rot);
+//	dprintf(1, "angle:\n");
+//	matrix_display(cam->rot);
 	if (!(rot = set_rotate(cam->rot->m[0], cam->rot->m[1], cam->rot->m[2])))
 	{
 		dprintf(1, "no  =malloc bitch!");
@@ -422,15 +439,24 @@ void	base_change(t_env *e, t_cam *cam, t_matrix	***map)
 		i = 0;
 		while (i < e->size_map_x)
 		{
-			matrix_sub_in(map[j][i], cam->pos, map[j][i]);
 			tmp = matrix_product(rot, map[j][i]);
+			matrix_sub_in(tmp, cam->pos, tmp);
+			conique_adapte(tmp);
 //			matrix_free(&map[j][i]);
+//			
 			map[j][i] = tmp;
 //t_matrix		*matrix_product(t_matrix *a, t_matrix *b);
 			i++;
 		}
 		j++;
 	}
+}
+
+int		is_out(t_matrix *vect, t_env *e)
+{
+	if (vect->m[0] < e->ecr_x * -0.5 || vect->m[0] > e->ecr_x * 0.5 || vect->m[1] < e->ecr_y * -0.5 || vect->m[1] > e->ecr_y * 0.5 || vect->m[2] < 0)
+		return (1);
+	return (0);
 }
 
 void	draw_link_map(t_env *e)
@@ -446,37 +472,41 @@ void	draw_link_map(t_env *e)
 	colore2 = vect_new_vertfd(200, 200, 200);
 	map = e->vect_map;
 	j = 0;
-//	dprintf(1, "	__--__--__--__	[BEFORE] draw-link_map\n");
 	while (j < e->size_map_y)
 	{
-//		dprintf(1, "******-->	line[%d]\n", j);
 		i = 0;
 		while (i < e->size_map_x)	
 		{
-//			dprintf(1, "	#####-->	col[%d]\n", i);
-			//	avec devant si pas avant dernier
-			if (i < e->size_map_x - 1 && !(mat_line = init_mat_line(map[j][i], map[j][i + 1], colore, colore2)))
-			{
-//				dprintf(1, "A\n");
+//				dprintf(1, "	(A%d,%d){%f:%f:%f}\n", j, i, map[j][i]->m[0], map[j][i]->m[1], map[j][i]->m[2]);
+			if (i > (e->size_map_x - 2))
+				;//dprintf(1, "\n\nAll is well 1\n");
+			else if(!(mat_line = init_mat_line(map[j][i], map[j][i + 1], colore, colore2)))
 				dprintf(1, "\n\nAll is well 2\n");
+			else if ((is_out(map[j][i], e) || is_out(map[j][i + 1], e)))
+			{
+				;//dprintf(1, "\n\nAll is well 3\n");
 			}
-//			dprintf(1, "B\n");
 			else
 			{
-//				dprintf(1, "C\n");
+//				dprintf(1, "size_x:%d", e->size_map_x);
+//				dprintf(1, "	(B%d,%d)", j, i + 1);dprintf(1, "	{%f:%f:%f}", map[j][i + 1]->m[0], map[j][i + 1]->m[1], map[j][i + 1]->m[2]);
 				draw_line(e, mat_line);
 //				matrix_free(&mat_line);
 			}	
-//			dprintf(1, "D\n");
-			//	avec en bas
-			if (j < e->size_map_y - 1 && !(mat_line = init_mat_line(map[j][i], map[j + 1][i], colore, colore2)))
+			if (j > (e->size_map_y - 2))
+				;//dprintf(1, "\n\nAll is well A\n");
+			else if (!(mat_line = init_mat_line(map[j][i], map[j + 1][i], colore, colore2)))
+				dprintf(1, "\n\nAll is well B\n");
+			else if ((is_out(map[j][i], e) || is_out(map[j + 1][i], e)))
 			{
-//				dprintf(1, "E\n");
-				dprintf(1, "\n\nAll is well 2\n");
+				;//dprintf(1, "\n\nAll is well C\n");
 			}
 			else
 			{
-//				dprintf(1, "F\n");
+//				dprintf(1, "size_y:%d", e->size_map_y);
+//				dprintf(1, "	(B%d,%d)", j + 1, i);dprintf(1, "	{%f:%f:%f}", map[j][i + 1]->m[0], map[j][i + 1]->m[1], map[j][i + 1]->m[2]);
+//				dprintf(1, "	(A){%f:%f:%f}", map[j][i]->m[0], map[j][i]->m[1], map[j][i]->m[2]);
+//				dprintf(1, "	(C%d,%d){%f:%f:%f}", j, i,map[j + 1][i]->m[0], map[j + 1][i]->m[1], map[j + 1][i]->m[2]);
 				draw_line(e, mat_line);
 //				matrix_free(&mat_line);
 			}	
@@ -499,6 +529,29 @@ void	draw_link_map(t_env *e)
 
 /*######################################################*/
 /*######################################################*/
+t_matrix***	copy_vect_map(t_env *e)
+{
+	int	i;
+	int	j;
+	t_matrix	***map;
+
+	if (!(map = (t_matrix***)malloc(sizeof(t_matrix**) * e->size_map_y)))
+		return (NULL);
+	j = 0;
+	while (j < e->size_map_y)
+	{
+		i = 0;
+		if (!(map[j] = (t_matrix**)malloc(sizeof(t_matrix*) * e->size_map_x)))
+			return (NULL);
+		while (i < e->size_map_x)
+		{
+			map[j][i] = matrix_copy(e->vect_map[j][i]);
+			i++;
+		}
+		j++;
+	}
+	return (map);
+}
 void	main_work(t_env *e)
 {
 	// On veux juste tracer la map
@@ -507,6 +560,7 @@ void	main_work(t_env *e)
 	//(void)e;
 
 	t_matrix ***map = get_map(e);
+//	t_matrix ***map = copy_vect_map(e);//get_map(e);
 	(void)map;
 	//	DONE	la on veux pouvoir afficher numeriquement la carte genre sur x, y ou z
 	//	DONE	puis avoir une camera 
@@ -521,6 +575,7 @@ void	main_work(t_env *e)
 	//		{rotation, translation} -->	la camera
 	//								-->	l'objet
 
+	//	faire les rotation et la translation + acceleration sur la camera
 
 	//	dprintf(1, "map:%ld\n", (long)map);
 	//	dprintf(1, "*map:%ld\n", (long)*map );
@@ -529,11 +584,11 @@ void	main_work(t_env *e)
 	//	dprintf(1, "#	1\n");
 	//	dprintf(1, "###################################################\n");
 	t_cam	*cam = init_cam(60.0/360.0 * M_PI , 60.0/360.0 * M_PI, e);
-	describe_cam(cam);
+//	describe_cam(cam);
 	e->cam = cam;
 	if (!e->cam)
 		dprintf(1, "Ther is no cam!!!\n");
-	dprintf (1, "%ld\n", (long)e->cam);
+//	dprintf (1, "%ld\n", (long)e->cam);
 	base_change(e, cam, map);
 	e->vect_map = map;
 	draw_link_map(e);

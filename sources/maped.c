@@ -6,7 +6,7 @@
 /*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 08:33:48 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/09/17 15:36:32 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/09/18 04:34:42 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,10 +86,16 @@ t_matrix	***get_map(t_env *e)
 			return (NULL);
 		while (i < x_max)
 		{
+			/*
 			actu_vect_nb(vect_nb
-			,(i - (x_max / 2)) * ((e->ecr_x * 0.5) / x_max)
-			 ,(j - (y_max / 2)) * ((e->ecr_y * 0.5) / y_max)
-			 , (tab[j][i] - ((e->z_max - e->z_min)) / 2) * 50 );
+			,(i - 0 * (x_max / 2)) * ((e->ecr_x * 0.5) / x_max)
+			 ,(j - 1 * (y_max / 2)) * ((e->ecr_y * 0.5) / y_max)
+			 , ((tab[j][i] - ((e->z_max - e->z_min)) / 2))/(e->z_max - e->z_min) * 50 );
+			 */
+			vect_nb[0] = (i - (x_max * 0.5)) * ((e->ecr_x * 0.5) / x_max);
+			vect_nb[1] = (j - (y_max * 0.5)) * ((e->ecr_y * 0.5) / y_max);
+			vect_nb[2] = 50 * ((tab[j][i] - ((e->z_max - e->z_min) / 2)))/(e->z_max - e->z_min);
+		
 //			*z_max = MAX(tab[j][i], *z_max);
 //			*z_min = MIN(tab[j][i], *z_min);
 			map_mat[j][i] = vect_new_verti(vect_nb, 3);
