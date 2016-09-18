@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/09 12:17:52 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/09/18 07:06:07 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/09/18 10:24:03 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int		key_press(int keycode, t_env *e)
 
 	(keycode == 32) ? e->key.rot_cam_x1 = 1 : (void)keycode;
 	(keycode == 34) ? e->key.rot_cam_y1 = 1 : (void)keycode;
-	(keycode == 37) ? e->key.rot_cam_z1 = 1 : (void)keycode;
+	(keycode == 38) ? e->key.rot_cam_z1 = 1 : (void)keycode;
 	(keycode == 31) ? e->key.rot_cam_x2 = 1 : (void)keycode;
 	(keycode == 40) ? e->key.rot_cam_y2 = 1 : (void)keycode;
 	(keycode == 37) ? e->key.rot_cam_z2 = 1 : (void)keycode;
@@ -111,7 +111,7 @@ int		key_release(int keycode, t_env *e)
 
 	(keycode == 32) ? e->key.rot_cam_x1 = 0 : (void)keycode;
 	(keycode == 34) ? e->key.rot_cam_y1 = 0 : (void)keycode;
-	(keycode == 37) ? e->key.rot_cam_z1 = 0 : (void)keycode;
+	(keycode == 38) ? e->key.rot_cam_z1 = 0 : (void)keycode;
 	(keycode == 31) ? e->key.rot_cam_x2 = 0 : (void)keycode;
 	(keycode == 40) ? e->key.rot_cam_y2 = 0 : (void)keycode;
 	(keycode == 37) ? e->key.rot_cam_z2 = 0 : (void)keycode;
@@ -154,6 +154,42 @@ int		increm_dir_cam(t_env *e)
 	return (1);
 }
 
+void	manage_cam_rot(t_env *e)
+{
+	int			i;
+	t_matrix	*tmp;
+	t_matrix	*rot;
+	t_matrix	*mat_rot;
+	(void)tmp;
+	static	double	deg = 0.3;
+
+	if (!(rot = matrix_init(1, 3)))
+		return ;
+	if (e->key.rot_cam_z2)
+		rot->m[2] -= deg;
+	if (e->key.rot_cam_z1)
+		rot->m[2] += deg;
+	if (e->key.rot_cam_x2)
+		rot->m[0] -= deg;
+	if (e->key.rot_cam_x1)
+		rot->m[0] += deg;
+	if (e->key.rot_cam_y2)
+		rot->m[1] -= deg;
+	if (e->key.rot_cam_y1)
+		rot->m[1] += deg;
+	if (!(mat_rot = set_rotate(rot->m[0], rot->m[1], rot->m[2])))
+		return ;
+	i = 0;
+	while (i < 3)
+	{
+		if (!(tmp = matrix_product(mat_rot, e->cam->base[i])))
+			return ;
+	//	matrix_free(e->cam->base + i);
+		e->cam->base[i] = tmp;
+		i++;
+	}
+}
+//	si 
 int		loop_hook(t_env *e)
 {
 	static	double	increm = 0.03;
@@ -165,6 +201,9 @@ int		loop_hook(t_env *e)
 	(e->key.rot_x1 == 1) ? e->rot_x += increm : (void)e;
 	(e->key.rot_y1 == 1) ? e->rot_y += increm : (void)e;
 	(e->key.rot_z1 == 1) ? e->rot_z += increm : (void)e;
+
+	manage_cam_rot(e);
+
 	(e->key.echap == 1) ? exit(0) : (void)e->key.echap;
 	(e->key.decal_down == 1) ? e->decaly -= e->zoom / 2 : (void)e->key.echap;
 	(e->key.decal_up == 1) ? e->decaly += e->zoom / 2 : (void)e->key.echap;

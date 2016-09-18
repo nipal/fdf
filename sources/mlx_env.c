@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/10 04:08:06 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/09/17 15:19:51 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/09/18 07:48:42 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,8 +144,8 @@ void	env(int **map, int size_x, int size_y)
 	e.img = mlx_new_image(e.mlx, SIZE_Y, SIZE_X);
 	e.data = mlx_get_data_addr(e.img, &e.depth, &e.size_line, &e.endian);
 	e.z_buffer = (double*)malloc(sizeof(double) * SIZE_X * SIZE_Y);
-	e.ecr_x = SIZE_X;
-	e.ecr_y = SIZE_Y;
+	e.ecr_x = SIZE_Y;
+	e.ecr_y = SIZE_X;
 	e.proj = 0;
 	e.scale = 2.5;
 	e.cte1 = 0.6;

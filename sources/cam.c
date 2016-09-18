@@ -6,7 +6,7 @@
 /*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 09:32:11 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/09/18 04:00:37 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/09/18 14:44:59 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	describe_cam(t_cam *cam)
 		dprintf(1, "	NO CORNER TAB\n");
 
 	dprintf(1, "normal\n");
+	/*
 	if (cam->normal)
 	{
 		i = 0;
@@ -55,7 +56,7 @@ void	describe_cam(t_cam *cam)
 	}
 	else
 		dprintf(1, "	NO NORMAL TAB\n");
-
+	*/
 	dprintf(1, "pos\n");
 	if (cam->pos)
 		matrix_display(cam->pos);
@@ -84,20 +85,27 @@ void	set_windir(t_matrix **corner, double fov_x, double fov_y)
 	int		coefy;
 	int		coefx;
 
+	ft_putstr("a\n");
 	if (fov_y <= 0 || fov_y >= 180 || fov_y > 180 || fov_y < 0
 		|| !corner || !*corner) 
 		return ;
+	ft_putstr("b\n");
 	dx_cam = tan(fov_x);
 	dy_cam = tan(fov_y);
+	ft_putstr("c\n");
 	i = 0;
 	while (i < 4 && corner[i])
 	{
+	ft_putstr("d\n");
 		matrix_buffer(corner[i]);
 		coefy = (i % 2) ? 1 : -1;
 		coefx = (i > 2) ? 1 : -1;
-		matrix_put_in(coefx * dx_cam, coefy * dy_cam, 1, 1);
+	ft_putstr("e\n");
+//		matrix_put_in(coefx * dx_cam, coefy * dy_cam, 1, 1);
+	ft_putstr("f\n");
 		i++;
 	}	
+	ft_putstr("g\n");
 }
 
 void	set_normal(t_matrix **normal, t_matrix **corner)
@@ -133,21 +141,49 @@ int		malloc_cam_tab(t_cam *cam)
 	int	i;
 
 	i = 0;
-	if (!cam || !cam->corner || !cam->normal)
+	if (!cam || !cam->corner || !cam->base)
 		return 0;
-	while (i < 4)
+	while (i < 3)
 	{
-		if (!(cam->corner[i] = matrix_init(4, 1))
-			|| !(cam->normal[i] = matrix_init(4, 1)))
+		if (!(cam->corner[i] = matrix_init(1, 3))
+			|| !(cam->base[i] = matrix_init(1, 3)))
 			return 0;
 		i++;
 	}
 	return (1);
 }
 
+t_matrix	**init_base()
+{
+	int			i;
+	t_matrix	**base;
+
+	if (!(base = (t_matrix**)malloc(sizeof(t_matrix*))))
+		return (NULL);
+	i = 0;
+	while (i < 3)
+	{
+		if (!(base[i] = vect_new_vertfd(i == 0, i == 1, i == 2)))
+			return (NULL);
+		i++;
+	}
+	ft_putstr("=======8====8==8====\n");	
+	matrix_display(base[0]);
+	ft_putstr("_________________\n");	
+	matrix_display(base[1]);
+	ft_putstr("_________________\n");	
+	matrix_display(base[2]);
+	ft_putstr("======8====8====8=8=\n");	
+//	char cc; read(0, &cc, 1);
+	
+
+	return (base);
+}
+
 //	on resoit des angle en radian
 t_cam	*init_cam(double fov_y, double fov_x, t_env *e)
 {
+	ft_putstr("avant init_cam\n");
 	t_cam		*c;
 	double		marge;
 	double		dx_cam;
@@ -156,23 +192,35 @@ t_cam	*init_cam(double fov_y, double fov_x, t_env *e)
 //	t_matrix	*dir;
 //	static	double	increm = 0;
 
+//	ft_putstr("On re cree une cam youuoyuyouhouhohu\n");
 	c = (t_cam*) malloc(sizeof(t_cam));
-	if ((!c || fov_y <= 0 || fov_y >= 180 || fov_y > 180 || fov_y < 0 
+	ft_putstr("A\n");
+	if (!c || fov_y <= 0 || fov_y >= 180 || fov_y > 180 || fov_y < 0 
 		|| !(c->dir = vect_new_vertfd(0, 0, 1))
-		|| !(c->rot =  vect_new_vertfd(e->rot_x, e->rot_y, e->rot_z))
+		|| !(c->rot =  vect_new_vertfd(0, 0, 0))
 		|| !(c->pos =  vect_new_vertfd(0, 0, 0))
 		|| !(c->corner = (t_matrix**)malloc(sizeof(t_cam*) * 4))
-		|| !(c->normal = (t_matrix**)malloc(sizeof(t_cam*) * 4)))
-		|| !(malloc_cam_tab(c)))
+		|| !(c->base = init_base()))
 	{
-		dprintf(1, "error on cam PARAMETER!!!\n");
+		ft_putstr("error on cam PARAMETER!!!\n");
 		return (NULL);
 	}
+
+	ft_putstr("=================\n");	
+	matrix_display(c->base[0]);
+	ft_putstr("_________________\n");	
+	matrix_display(c->base[1]);
+	ft_putstr("_________________\n");	
+	matrix_display(c->base[2]);
+	ft_putstr("=================\n");	
+//	char cc; read(0, &cc, 1);
+
 	marge = 1.5;
 	dx_cam = tan(fov_x / 2);
 	dy_cam = tan(fov_y / 2);
 //	dir = matrix_product(rot, c->dir);
 //	dir = matrix_scalar_product(dir, 0.01 * e->speed);
+	ft_putstr("B\n");
 	c->pos->m[Z] = -1000 ;//- MAX(((e->size_map_y * marge) / dy_cam), (e->size_map_x * marge) / dx_cam);
 	c->pos->m[X] = 0;
 	c->pos->m[Y] = 0;
@@ -180,15 +228,19 @@ t_cam	*init_cam(double fov_y, double fov_x, t_env *e)
 	c->rot->m[0] = e->rot_x;
 	c->rot->m[1] = e->rot_y;
 	c->rot->m[2] = e->rot_z;
+	ft_putstr("C\n");
 
+	ft_putstr("D\n");
 	set_windir(c->corner, fov_x, fov_y);
-	set_normal(c->normal, c->corner);
+	ft_putstr("E\n");
+//	set_normal(c->base, c->corner);
 //	matrix_free(&rot);
 //	matrix_free(&dir);
 //	dprintf(1, "YES I AM\n");
 //	describe_cam(c);
 //	dprintf(1, "YES I AM2\n");
 //	increm += 0.03;
+	ft_putstr("APRES init_cam\n");
 	return (c);
 }
 

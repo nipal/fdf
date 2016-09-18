@@ -6,7 +6,7 @@
 /*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/09 16:43:26 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/09/13 04:29:16 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/09/18 08:26:02 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -259,8 +259,6 @@ void	print_all(t_list *begin)
 		elem = elem->next;
 	}
 }
-
-
 
 int	**get_the_map(int fd, int *x_max, int *y_max)
 {

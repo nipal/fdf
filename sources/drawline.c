@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/30 14:38:59 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/09/18 06:20:13 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/09/18 14:28:43 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -382,6 +382,52 @@ void	draw_point_old(t_env *e)
 /*######################################################*/
 /*######################################################*/
 
+void	draw_base_cam(t_env *e)
+{
+	t_matrix	*mat_line;
+	t_matrix	*color_x;
+	t_matrix	*color_y;
+	t_matrix	*color_z;
+	t_matrix	*pt1;
+	t_matrix	*pt2;
+
+//	dprintf(1, "++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
+	if (!(color_x = vect_new_vertfd(255, 0, 0))
+		|| !(color_y = vect_new_vertfd(0, 255, 0))
+		|| !(color_z = vect_new_vertfd(0, 0, 255))
+		|| !(pt1 = matrix_init(1, 3))
+		|| !(pt2 = matrix_init(1, 3)))
+		return ;
+	pt1->m[0] = 100;
+	pt1->m[1] = 100;
+	pt1->m[2] = 0;
+
+	pt2->m[0] = e->cam->base[0]->m[0] * 50 + 100;
+	pt2->m[1] = e->cam->base[0]->m[1] * 50 + 100;
+	pt2->m[2] = e->cam->base[0]->m[2] * 10;
+//	matrix_display(e->cam->base[0]);
+	if (!(mat_line = init_mat_line(pt1, pt2, color_x, color_x)))
+		return ;
+	draw_line(e, mat_line);
+
+	pt2->m[0] = e->cam->base[1]->m[0] * 50 + 100;
+	pt2->m[1] = e->cam->base[1]->m[1] * 50 + 100;
+	pt2->m[2] = e->cam->base[1]->m[2] * 10;
+//	matrix_display(e->cam->base[1]);
+	if (!(mat_line = init_mat_line(pt1, pt2, color_y, color_y)))
+		return ;
+	draw_line(e, mat_line);
+
+	pt2->m[0] = e->cam->base[2]->m[0] * 50 + 100;
+	pt2->m[1] = e->cam->base[2]->m[1] * 50 + 100;
+	pt2->m[2] = e->cam->base[2]->m[2] * 10;
+//	matrix_display(e->cam->base[2]);
+	if (!(mat_line = init_mat_line(pt1, pt2, color_z, color_z)))
+		return ;
+		draw_line(e, mat_line);
+	
+}
+
 //void	write_map(t_matrix	***map);
 void	write_map(t_env *e, t_matrix	***map)
 {
@@ -425,12 +471,15 @@ void	base_change(t_env *e, t_cam *cam, t_matrix	***map)
 	int	j;
 	t_matrix	*tmp;
 	//	t_matrix	*diff;
-	t_matrix	*rot;
+	t_matrix	*rot_obj;
+	t_matrix	*rot_cam;
 	
 	j = 0;
 //	dprintf(1, "angle:\n");
 //	matrix_display(cam->rot);
-	if (!(rot = set_rotate(cam->rot->m[0], cam->rot->m[1], cam->rot->m[2])))
+	rot_cam = NULL;	
+	if (!(rot_obj = set_rotate(e->rot_x, e->rot_y, e->rot_z))
+		|| !(rot_cam = set_rotate(cam->rot->m[0], cam->rot->m[1], cam->rot->m[2])))
 	{
 		dprintf(1, "no  =malloc bitch!");
 	}
@@ -439,9 +488,11 @@ void	base_change(t_env *e, t_cam *cam, t_matrix	***map)
 		i = 0;
 		while (i < e->size_map_x)
 		{
-			tmp = matrix_product(rot, map[j][i]);
+			tmp = matrix_product(rot_obj, map[j][i]);
 			matrix_sub_in(tmp, cam->pos, tmp);
+			tmp = matrix_product(rot_cam, tmp);
 			conique_adapte(tmp);
+
 //			matrix_free(&map[j][i]);
 //			
 			map[j][i] = tmp;
@@ -583,7 +634,7 @@ void	main_work(t_env *e)
 	//map;
 	//	dprintf(1, "#	1\n");
 	//	dprintf(1, "###################################################\n");
-	t_cam	*cam = init_cam(60.0/360.0 * M_PI , 60.0/360.0 * M_PI, e);
+	t_cam	*cam = e->cam;//init_cam(60.0/360.0 * M_PI , 60.0/360.0 * M_PI, e);
 //	describe_cam(cam);
 	e->cam = cam;
 	if (!e->cam)
@@ -592,6 +643,7 @@ void	main_work(t_env *e)
 	base_change(e, cam, map);
 	e->vect_map = map;
 	draw_link_map(e);
+	draw_base_cam(e);
 	//	print_map(e, e->cam, e->vect_map);
 	//	dprintf(1, "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&\n");
 	//	dprintf(1, "#	4\n");

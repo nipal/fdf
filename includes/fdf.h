@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/29 02:21:11 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/09/18 06:30:17 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/09/18 08:04:39 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ typedef struct			s_key
 typedef	struct			s_cam
 {
 	t_matrix			**corner;
-	t_matrix			**normal;
+	t_matrix			**base;
 	t_matrix			*pos;
 	t_matrix			*dir;
 	t_matrix			*rot;
