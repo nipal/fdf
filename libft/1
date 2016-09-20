@@ -1,0 +1,50 @@
+ft_putendl.c:15:6: error: conflicting types for ‘ft_putendl’
+ void ft_putendl(char *str)
+      ^
+In file included from ft_putendl.c:13:0:
+../includes/libft.h:69:9: note: previous declaration of ‘ft_putendl’ was here
+ void    ft_putendl(char const *s);
+         ^
+ft_putendl_fd.c:15:6: error: conflicting types for ‘ft_putendl_fd’
+ void ft_putendl_fd(char *str, int fd)
+      ^
+In file included from ft_putendl_fd.c:13:0:
+../includes/libft.h:73:9: note: previous declaration of ‘ft_putendl_fd’ was here
+ void    ft_putendl_fd(char const *s, int fd);
+         ^
+ft_putstr.c:15:6: error: conflicting types for ‘ft_putstr’
+ void ft_putstr(char *str)
+      ^
+In file included from ft_putstr.c:13:0:
+../includes/libft.h:68:9: note: previous declaration of ‘ft_putstr’ was here
+ void    ft_putstr(char const *s);
+         ^
+ft_putstr_fd.c:15:6: error: conflicting types for ‘ft_putstr_fd’
+ void ft_putstr_fd(char *str, int fd)
+      ^
+In file included from ft_putstr_fd.c:13:0:
+../includes/libft.h:72:9: note: previous declaration of ‘ft_putstr_fd’ was here
+ void    ft_putstr_fd(char const *s, int fd);
+         ^
+ft_strclr.c:15:7: error: conflicting types for ‘ft_strclr’
+ void *ft_strclr(char *str)
+       ^
+In file included from ft_strclr.c:13:0:
+../includes/libft.h:55:9: note: previous declaration of ‘ft_strclr’ was here
+ void    ft_strclr(char *s);
+         ^
+ft_strdup.c:15:7: error: conflicting types for ‘ft_strdup’
+ char *ft_strdup(char *str)
+       ^
+In file included from ft_strdup.c:13:0:
+../includes/libft.h:30:10: note: previous declaration of ‘ft_strdup’ was here
+ char    *ft_strdup(const char *s);
+          ^
+ft_strlen.c:15:9: error: conflicting types for ‘ft_strlen’
+ size_t  ft_strlen(char *str)
+         ^
+In file included from ft_strlen.c:13:0:
+../includes/libft.h:29:11: note: previous declaration of ‘ft_strlen’ was here
+ size_t    ft_strlen(const char *s);
+           ^
+make: *** [ft_atoi.o] Error 1

@@ -6,23 +6,14 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/29 02:21:11 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/03/24 03:32:02 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/09/18 08:04:39 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
-# define ABS(x) (x >= 0) ? x : -x
 
 # include "c_maths.h"
-
-/*
- **	mat_line
- **/
-
-
-# define COEF 2
-# define SIZE 3
 
 # define R 0
 # define G 1
@@ -60,12 +51,6 @@
 # define DB 11
 # define NORME 12
 
-
-# define BEG_POS 0
-# define DELTA_POS 1
-# define BEG_COL 2
-# define DELTA_COL 3
-
 typedef struct			s_key
 {
 	int					echap;
@@ -91,6 +76,12 @@ typedef struct			s_key
 	int					rot_x2;
 	int					rot_y2;
 	int					rot_z2;
+	int					rot_cam_x1;
+	int					rot_cam_x2;
+	int					rot_cam_y1;
+	int					rot_cam_y2;
+	int					rot_cam_z1;
+	int					rot_cam_z2;
 	int					speed_up;
 	int					speed_down;
 }						t_key;
@@ -110,24 +101,16 @@ typedef struct			s_key
 typedef	struct			s_cam
 {
 	t_matrix			**corner;
-	t_matrix			**normal;
+	t_matrix			**base;
 	t_matrix			*pos;
 	t_matrix			*dir;
 	t_matrix			*rot;
-	t_matrix			**repere;
 }						t_cam;
 //*/
 
-/*
- **	on a un repe cam_x, cam_y, cam_z, cam_origin
- **	x = dot_product(diff , cam_x);
- **	y = dot_product(diff , cam_y);
- **	z = dot_product(diff , cam_z);
- **	
- * */
 
-# define SIZE_X 1440
-# define SIZE_Y 990
+# define SIZE_Y 1440
+# define SIZE_X 990
 # define PRINT_DIAG 0
 typedef struct			s_env
 {
@@ -142,6 +125,7 @@ typedef struct			s_env
 	int					depth;
 	int					endian;
 	int					**map;
+	t_matrix			***vect_map;
 	int					proj;
 	double				scale;
 	double				cte1;
@@ -154,6 +138,8 @@ typedef struct			s_env
 	t_key				key;
 	int					size_map_x;
 	int					size_map_y;
+	double				z_min;
+	double				z_max;
 	double				rot_x;
 	double				rot_y;
 	double				rot_z;
@@ -185,11 +171,10 @@ int						loop_hook(t_env *e);
 */
 void					px_to_img(t_env *e, int x, int y, int color);
 void					vectpx_to_img(t_env *e, t_matrix *pos_color);
-void					pix_to_img(t_env *e, t_matrix *pos, t_matrix *color);
 void					print_state(t_env *e);
 
 //	Fonction preparant l'env et qui lance le loop hook
-void					env(int **map);
+void	env(int **map, int size_x, int size_y);
 /*
 ** coord
 */
@@ -198,6 +183,7 @@ void					env(int **map);
  **	cam
  **/
 t_cam	*init_cam(double fov_y, double fov_x, t_env *e);
+void	describe_cam(t_cam *cam);
 /*
  ** print_map	
  * */
@@ -214,11 +200,9 @@ void					draw_point(t_env *e);
 int						**parse(int fd);
 
 
-t_matrix	***get_map(t_env *e, double *z_max, double *z_min);
-void		draw_line(t_env *e, t_matrix *mat_line);
+//t_matrix	***get_map(double *z_max, double *z_min);
+t_matrix	***get_map(t_env *e);
+void	draw_line(t_env *e, t_matrix *mat_line);
 t_matrix	*init_mat_line(t_matrix *pt1, t_matrix *pt2, t_matrix *c1, t_matrix *c2);
-void	print_line(t_matrix *pt1, t_matrix *c1,  t_matrix *pt2, t_matrix *c2);
-void	line_x(t_env *e, t_matrix *eq, t_matrix *c1, t_matrix *diff_c);
-void	line_y(t_env *e, t_matrix *eq, t_matrix *c1, t_matrix *diff_c);
-t_matrix	**tab_matrix(t_matrix *pt1, t_matrix *pt2, t_matrix *pt3);
+int	**get_the_map(int fd, int *x_max, int *y_max);
 #endif

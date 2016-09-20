@@ -47,6 +47,14 @@ typedef struct	s_coefs
 	double		e;
 }				t_coefs;
 
+
+t_matrix	*vect_new_vertfd(double a,double b,double c);
+t_matrix	*vect_new_vertfi(int a,int b,int c);
+t_matrix	*vect_new_vert(double *tab, int size);
+t_matrix	*vect_new_horz(double *tab, int size);
+t_matrix	*vect_new_verti(int *tab, int size);
+t_matrix	*vect_new_horzi(int *tab, int size);
+
 t_matrix		*matrix_init(int x, int y);
 void			matrix_display(t_matrix *a);
 t_matrix		*matrix_add(t_matrix *a, t_matrix *b);

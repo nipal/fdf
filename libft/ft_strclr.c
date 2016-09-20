@@ -3,20 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strclr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/04 18:24:51 by fjanoty           #+#    #+#             */
-/*   Updated: 2015/11/05 00:11:36 by fjanoty          ###   ########.fr       */
+/*   Created: 2014/11/10 02:13:35 by jpirsch           #+#    #+#             */
+/*   Updated: 2015/01/10 04:51:50 by jpirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_strclr(char *s)
+void	*ft_strclr(char *str)
 {
-	while (*s)
+	if (!str)
+		return (NULL);
+	while (*str)
 	{
-		*s = 0;
-		s++;
+		*str = '\0';
+		str++;
 	}
+	*str = '\0';
+	return (str);
 }

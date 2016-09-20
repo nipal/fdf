@@ -6,7 +6,7 @@
 /*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 08:33:48 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/03/19 01:19:12 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/09/18 04:34:42 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,105 +24,75 @@ void		print_the_map(t_matrix ***map)
 		i = 0;
 		while (i < 10)
 		{
-			dprintf(1, "%f	", map[j][i]->m[Y]);
+			dprintf(1, "%f	", map[j][i]->m[Z]);
 			i++;
 		}
 		dprintf(1, "\n");
 		j++;
 	}
-	dprintf(1, "\n\n\n\n\n");
+	dprintf(1, "\n");
 //	sleep(10);
 }
 
-
-t_matrix	***get_map(t_env *e, double *z_max, double *z_min)
+void		actu_vect_nb(int *vect_nb, int x, int y, int z)
 {
-	t_matrix	***map_mat;
-	int			x;
-	int			y;
-	int			i;
-	int			j;
-//	double		z_max;
-//	double		z_min;
+	if (!(vect_nb))
+	{
+		dprintf(1, "you fucked-up");
+		return ;
+	}
+	vect_nb[0] = x;
+	vect_nb[1] = y;
+	vect_nb[2] = z;
+}
 
-//	dprintf(1, "D\n");
+//	il faudrAIT FAIRE UNE SYSTEM DE COPY...
+//	
+//
+//		Pour faire le scaling on veux la taille de l'ecran
 //
 
-/*
-	int			tab2[10][10]		=	{{-100, 0, 0,-0,-0, 0, 0, 0, 0, 0},
-										{-0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-										{-0, 0, 0, 0,-0, 0, 0, 0, 0, 0},
-										{ 0,-0, 0, 0, 0,-0, 0, 0,-0, 0},
-										{ 0,-0,-0, 0,-0, 0, 0, 0,-0,-0},
-										{-0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-										{ 0,-0,-0, 0, 0, 0, 0, 0, 0, 0},
-										{ 0, 0, 0, 0, 0, 0,-0, 0, 0, 0},
-										{-0,-0, 0, 0,-0, 0, 0, 0, 0, 0},
-										{ 0, 0, 0,-0, 0,-0, 0, 0, 0, 100}};
-#define Y 10
-#define X 10
-//*/
+//	(i - (x_max / 2)) * ((e->ecr_x * 1.25) / x_max)
+//	(j - (y_max / 2)) * ((e->ecr_y * 1.25) / y_max)
 
-/*
-	int			tab1[10][10]	=	{{-6,-67,-61,-38,  9,-16,-16, 32, 56, 16},
-									{ 27,-63, 23,-56, 63, 10, 33, -9,-55, 69},
-									{-44,-23,-58, 12,-55,  0, 21,-25, 27, 48},
-									{  1, 41,-38, 57, 38,-17,-50, -2,-63, 7},
-									{ 32,-46,-11, 30, 10, 13,-48,-37, 66,-53},
-									{-54, 34, 51,-40,-33, 52,-62,-37,-54,-9},
-									{-58, 40,-30, -9, 59,  7,-66,-12,-18, 41},
-									{-50, 67, 36, 13, 12, -2,-28, 10,-60,-58},
-									{  3,-27,-52, 56, 26,-52, 59,-31,-48,-6},
-									{-59,-30, 50, 36,  5,-11,  0, 60,-24,-34}};
-#define Y 10
-#define X 10
-*/
+t_matrix	***get_map(t_env *e)
+{
+	t_matrix	***map_mat;
+	int			**tab;
+	int			x_max;
+	int			y_max;
+	int			i;
+	int			j;
+	int			*vect_nb;
 
-//*
-int	tab2[11][19] =		{{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-			{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-			{0, 0, 10, 10, 0, 0, 10, 10, 0, 0, 0, 10, 10, 10, 10, 10, 0, 0, 0},
-			{0, 0, 10, 10, 0, 0, 10, 10, 0, 0, 0, 0, 0, 0, 0, 10, 10, 0, 0},
-			{0, 0, 10, 10, 0, 0, 10, 10, 0, 0, 0, 0, 0, 0, 0, 10, 10, 0, 0},
-			{0, 0, 10, 10, 10, 10, 10, 10, 0, 0, 0, 0, 10, 10, 10, 10, 0, 0, 0},
-			{0, 0, 0, 10, 10, 10, 10, 10, 0, 0, 0, 10, 10, 0, 0, 0, 0, 0, 0},
-			{0, 0, 0, 0, 0, 0, 10, 10, 0, 0, 0, 10, 10, 0, 0, 0, 0, 0, 0},
-			{0, 0, 0, 0, 0, 0, 10, 10, 0, 0, 0, 10, 10, 10, 10, 10, 10, 0, 0},
-			{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-			{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-//#define Y 11
-//#define X 18
-//*/
-
-	(void)tab2;
-//	(void)tab1;
-	x = 11;
-	y = 18;
-	if (!(map_mat = (t_matrix***)malloc(sizeof(t_matrix**) * 2 * y)))
+	if (!(vect_nb = (int*)malloc(sizeof(int) * 3)))
+	{
+		ft_putstr("NOOOOOOOOOOOOOOOOOOOOOON	--> malloc error\n");
+		return (NULL);
+	}
+	if (!e)
+		return (NULL);
+	tab = e->map;
+	x_max = e->size_map_x;
+	y_max = e->size_map_y;
+	if (!(map_mat = (t_matrix***)malloc(sizeof(t_matrix**) * y_max)))
 		return (NULL);
 	j = 0;
-	while (j < y)
+	while (j < y_max)
 	{
 		i = 0;
-		if (!(map_mat[j] = (t_matrix**)malloc(sizeof(t_matrix*) * x))
-			|| !(map_mat[j + y] = (t_matrix**)malloc(sizeof(t_matrix*) * x)))
+		if (!(map_mat[j] = (t_matrix**)malloc(sizeof(t_matrix*) * x_max)))
 			return (NULL);
-		while (i < x)
+		while (i < x_max)
 		{
-			if (!(map_mat[j][i] = matrix_init(1, 4))
-				|| !(map_mat[j + y][i] = matrix_init(1, 4)))
-				return (NULL);
-			*z_max = MAX(tab2[j][i], *z_max);
-			*z_min = MIN(tab2[j][i], *z_min);
-			matrix_buffer(map_mat[j][i]);
-			matrix_put_in((i - 5) * 30, (tab2[j][i] * e->zoom * 0.01), (j - 5) * 30, 1);
-			matrix_buffer(map_mat[j + y][i]);
-			matrix_put_in((i - 5) * 30, (tab2[j][i] * e->zoom * 1), (j - 5) * 30, 1);
+			vect_nb[0] = (i - (x_max * 0.5)) * ((e->ecr_x * 0.5) / x_max);
+			vect_nb[1] = (j - (y_max * 0.5)) * ((e->ecr_y * 0.5) / y_max);
+			vect_nb[2] = 50 * ((tab[j][i] - ((e->z_max - e->z_min) / 2)))/(e->z_max - e->z_min);
+		
+			map_mat[j][i] = vect_new_verti(vect_nb, 3);
 			i++;
 		}
 		j++;
 	}
-//	dprintf(1, "F\n");
-//	print_the_map(map_mat);
 	return (map_mat);
 }

@@ -6,24 +6,32 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/09/14 00:25:54 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/03/14 03:39:18 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/09/16 08:05:34 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
 #include "c_maths.h"
+/*
+[0,1,2,3]
+[4,5,6,7]
+[8,9,a,b]
+[c,d,e,f]
 
+[0,1,2]
+[3,4,5]
+[6,7,8]
+*/
 static t_matrix	*init_xrot_matrix(double thetx)
 {
 	t_matrix	*r;
 
-	r = matrix_init(4, 4);
-	r->m[5] = cos(thetx);
-	r->m[6] = sin(thetx);
-	r->m[9] = -sin(thetx);
-	r->m[10] = cos(thetx);
+	r = matrix_init(3, 3);
+	r->m[4] = cos(thetx);
+	r->m[5] = sin(thetx);
+	r->m[7] = -sin(thetx);
+	r->m[8] = cos(thetx);
 	r->m[0] = 1;
-	r->m[15] = 1;
 	return (r);
 }
 
@@ -31,13 +39,12 @@ static t_matrix	*init_yrot_matrix(double thety)
 {
 	t_matrix	*r;
 
-	r = matrix_init(4, 4);
+	r = matrix_init(3, 3);
 	r->m[0] = cos(thety);
 	r->m[2] = -sin(thety);
-	r->m[5] = 1;
-	r->m[8] = sin(thety);
-	r->m[10] = cos(thety);
-	r->m[15] = 1;
+	r->m[4] = 1;
+	r->m[6] = sin(thety);
+	r->m[8] = cos(thety);
 	return (r);
 }
 
@@ -45,13 +52,12 @@ static t_matrix	*init_zrot_matrix(double thetz)
 {
 	t_matrix	*r;
 
-	r = matrix_init(4, 4);
+	r = matrix_init(3, 3);
 	r->m[0] = cos(thetz);
 	r->m[1] = sin(thetz);
-	r->m[4] = -sin(thetz);
-	r->m[5] = cos(thetz);
-	r->m[10] = 1;
-	r->m[15] = 1;
+	r->m[3] = -sin(thetz);
+	r->m[4] = cos(thetz);
+	r->m[8] = 1;
 	return (r);
 }
 

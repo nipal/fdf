@@ -3,26 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/12/15 14:59:59 by jpirsch           #+#    #+#             */
-/*   Updated: 2014/12/30 07:03:59 by jpirsch          ###   ########.fr       */
+/*   Created: 2016/09/05 15:06:43 by fjanoty           #+#    #+#             */
+/*   Updated: 2016/09/10 05:10:06 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
+# define BUFF_SIZE 256
+# define MIN(A, B) (A > B) ? B : A
 # include <sys/types.h>
-# include <sys/uio.h>
-# define BUFF_SIZE 65536
+# include <sys/stat.h>
+# include <fcntl.h>
+# include "libft.h"
+# include <stdio.h>
+# include <string.h>
+# include <errno.h>
 
-typedef struct	s_info
+int					get_next_line(int fd, char **line);
+typedef	struct		s_fdgnl
 {
-	int			i;
-	int			ret;
-	char		*s;
-}				t_info;
-
-int				get_next_line(int fd, char **line);
-
+	int				fd;
+	char			*rest;
+	struct s_fdgnl	*next;
+}					t_fdgnl;
 #endif

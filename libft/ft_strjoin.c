@@ -3,23 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/04 18:24:51 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/01/19 23:20:33 by fjanoty          ###   ########.fr       */
+/*   Created: 2014/11/11 00:49:57 by jpirsch           #+#    #+#             */
+/*   Updated: 2014/11/26 07:07:12 by jpirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(const char *s1, const char *s2)
 {
-	char	*copy;
+	size_t	size;
+	char	*str;
 
-	copy = ft_strnew(ft_strlen(s1) + ft_strlen(s2) + 1);
-	if (!copy)
+	if (!s1 || !s2)
 		return (NULL);
-	copy = ft_strcpy(copy, s1);
-	copy = ft_strcat(copy, s2);
-	return (copy);
+	size = (ft_strlen((char*)s1) + ft_strlen((char*)s2));
+	if (!(str = ft_strnew(size + 1)))
+		return (NULL);
+	while (*s1)
+	{
+		*str = *(char*)s1;
+		s1++;
+		str++;
+	}
+	while (*s2)
+	{
+		*str = *(char*)s2;
+		s2++;
+		str++;
+	}
+	str[1] = '\0';
+	return (str - size);
 }

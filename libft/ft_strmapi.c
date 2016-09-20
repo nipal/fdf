@@ -3,27 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/04 18:24:51 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/01/19 23:20:53 by fjanoty          ###   ########.fr       */
+/*   Created: 2014/11/10 04:11:31 by jpirsch           #+#    #+#             */
+/*   Updated: 2015/01/10 04:53:05 by jpirsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
+char	*ft_strmapi(const char *s, char (*f)(unsigned int, char))
 {
-	unsigned int	i;
-	char			*new;
+	size_t	i;
+	char	*str;
 
 	i = 0;
-	new = ft_strnew(ft_strlen(s));
-	ft_strcpy(new, s);
-	while (new[i])
+	str = ft_strnew(sizeof(s));
+	if (!s)
+		return (NULL);
+	if (!f)
+		return (NULL);
+	while (*s)
 	{
-		new[i] = f(i, new[i]);
+		*str = f(i, *(char*)s);
+		s++;
+		str++;
 		i++;
 	}
-	return (new);
+	return (str - i);
 }
