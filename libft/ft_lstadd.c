@@ -20,7 +20,7 @@ void	ft_lstadd(t_list **begin, t_list *new)
 
 void	ft_lstadd_back(t_list **begin, t_list *new)
 {
-	t_list	*elem
+	t_list	*elem;
 
 	if (!begin || !new)
 		return ;

@@ -12,6 +12,7 @@
 
 #ifndef FDF_H
 # define FDF_H
+# define ABS(x) (x >= 0) ? x : -x
 
 # include "c_maths.h"
 
