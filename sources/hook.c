@@ -285,7 +285,7 @@ int		loop_hook(t_env *e)
 	increm_pos_cam(e);
 //	dprintf(1, "speed%f\n", e->speed);
 	ft_bzero(e->data, e->size_line * e->ecr_y);
-	ft_bzero(e->z_buffer, SIZE_X * SIZE_Y);
+	ft_bzero(e->z_buffer, SIZE_X * SIZE_Y * sizeof(double));
 //	main_work(e);
 //	dprintf(1, "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$	avannnnnnnnnnt\n");
 	main_work(e);

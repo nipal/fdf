@@ -25,7 +25,6 @@
  *	
  *
  * */
-
 #include "libft.h"
 #include "get_next_line.h"
 #include <unistd.h>
@@ -257,7 +256,12 @@ int	**get_the_map(int fd, int *x_max, int *y_max)
 		begin = elem;
 	}
 	if (!(map = get_map_lst(begin, x_max, y_max)))	
+	{
+		if (errno)
+			perror(maps_name(NULL));
+		else
 		dprintf(1, "Error on getting the map");
+	}
 	close(fd);
 	return (map);
 }

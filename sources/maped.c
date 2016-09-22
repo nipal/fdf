@@ -57,6 +57,7 @@ void		actu_vect_nb(int *vect_nb, int x, int y, int z)
 
 t_matrix	***get_map(t_env *e)
 {
+	double		z_emp;
 	t_matrix	***map_mat;
 	int			**tab;
 	int			x_max;
@@ -75,6 +76,7 @@ t_matrix	***get_map(t_env *e)
 	tab = e->map;
 	x_max = e->size_map_x;
 	y_max = e->size_map_y;
+	z_emp = ((e->z_max - e->z_min))? (e->z_max - e->z_min): 1;
 	if (!(map_mat = (t_matrix***)malloc(sizeof(t_matrix**) * y_max)))
 		return (NULL);
 	j = 0;
@@ -87,7 +89,7 @@ t_matrix	***get_map(t_env *e)
 		{
 			vect_nb[0] = (i - (x_max * 0.5)) * ((e->ecr_x * 0.5) / x_max);
 			vect_nb[1] = (j - (y_max * 0.5)) * ((e->ecr_y * 0.5) / y_max);
-			vect_nb[2] = 50 * ((tab[j][i] - ((e->z_max - e->z_min) / 2)))/(e->z_max - e->z_min);
+			vect_nb[2] = 100 * ((tab[j][i] - ((e->z_max - e->z_min) / 2)))/(z_emp);
 		
 			map_mat[j][i] = vect_new_verti(vect_nb, 3);
 			i++;

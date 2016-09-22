@@ -19,6 +19,35 @@
 
 void	adapt_point(t_cam *c, t_matrix ***pt, int size_x, int size_y);
 
+
+void	print_map_value(t_env *e)
+{
+	int	i;
+	int	j;
+
+	
+	ft_putstr("print_begining\n");
+	if (!e || !e->vect_map)
+	{
+		dprintf(1, "Tamere!!!!!!!!!!!!!\n");
+		return ;
+	}
+	j = 0;
+	while (j < e->size_map_y)
+	{
+		i = 0;
+		while (i < e->size_map_x)
+		{
+			dprintf(1, "	%.1lf", e->vect_map[j][i]->m[2]);
+			i++;
+		}
+		ft_putstr("\n");
+		j++;
+	}
+	ft_putstr("printing finished\n");
+}
+
+
 void	draw_line(t_env *e, t_matrix *mat_line)
 {
 	int			i;
@@ -43,9 +72,7 @@ void	draw_line(t_env *e, t_matrix *mat_line)
 		matrix_free(&org);
 		org = print;
 	}
-//ft_putstr("AAAAA\n");
 	matrix_free(&diff);
-//ft_putstr("BBBBB\n");
 	matrix_free(&org);
 }
 
@@ -62,7 +89,7 @@ t_matrix	*init_mat_line(t_matrix *pt1, t_matrix *pt2
 	diff = NULL;
 	if (!(mat_line = matrix_init(14, 1))
 		|| !pt1 || !pt2 || !c1 || !c2
-		|| (!(diff = matrix_sub(pt2, pt1)) && matrix_free(&mat_line)))
+		|| ((!(diff = matrix_sub(pt2, pt1)) && matrix_free(&mat_line))))
 	{
 		if (!(mat_line))
 			dprintf(1, "no mat_line\n");
@@ -110,11 +137,11 @@ t_matrix	*init_mat_line2(t_matrix *pt_color, t_matrix *pt3, t_matrix *c3)
 		dprintf(1, "	c3\n");
 	if (!(mat_line = matrix_init(14, 1))
 		|| !pt_color || !pt3 || !c3
-		|| !(pt_inter = matrix_init(4, 1))
-		|| !(color_inter = matrix_init(4, 1)))
+		|| !(pt_inter = matrix_init(1, 3))
+		|| !(color_inter = matrix_init(1, 3)))
 		return (NULL);
 	ft_memmove(pt_inter->m, pt_color->m, sizeof(double) * 3);
-	if (!(diff = matrix_sub(pt_inter, pt3)) && free_matrix(mat_line))
+	if (!(diff = matrix_sub(pt_inter, pt3)) && matrix_free(&mat_line))
 		return (NULL);
 	diff->m[Z] = 0;
 	norme = matrix_dot_product(diff, diff);
@@ -124,18 +151,18 @@ t_matrix	*init_mat_line2(t_matrix *pt_color, t_matrix *pt3, t_matrix *c3)
 	ft_memmove(mat_line->m, pt3->m, sizeof(double) * 3);
 	ft_memmove(mat_line->m + 3, c3->m, sizeof(double) * 3);
 	ft_memmove(mat_line->m + 6, diff->m, sizeof(double) * 3);
-	free_matrix(diff);
+	matrix_free(&diff);
 	ft_memmove(color_inter->m, pt_color->m + 3, sizeof(double) * 3);
 	matrix_scalar_product(diff = matrix_sub(color_inter, c3), 1 / norme);
 	ft_memmove(mat_line->m + 9, diff->m, sizeof(double) * 3);
-	free_matrix(diff);
+	matrix_free(&diff);
 	matrix_free(&color_inter);
 	matrix_free(&pt_inter);
 	return (mat_line);
 }
 
 
-void	draw_triangle(t_env *e, t_matrix *mat_line, t_matrix *pt3, t_matrix *c3)
+int		draw_triangle(t_env *e, t_matrix *mat_line, t_matrix *pt3, t_matrix *c3)
 {
 	int			i;
 	int			size;
@@ -144,20 +171,23 @@ void	draw_triangle(t_env *e, t_matrix *mat_line, t_matrix *pt3, t_matrix *c3)
 	t_matrix	*print;
 	t_matrix	*mat_line2;
 
-	if (!(mat_line)
-		|| !(diff = matrix_init(6, 1))
-		|| (!(org = matrix_init(6, 1)) && matrix_free(&diff)))
-		return ;
-	i = -1;
+	if ((!(mat_line))
+		|| (!(diff = matrix_init(6, 1)))
+		|| (((!(org = matrix_init(6, 1)) && matrix_free(&diff)))))
+	{
+		ft_putstr("y a embrouille\n");
+		return (0);
+	}
 	ft_memmove(org->m, mat_line->m, sizeof(double) * 6);
 	ft_memmove(diff->m, mat_line->m + 6, sizeof(double) * 6);
 	size = (int)(mat_line->m[NORME] + 0.5);
+	i = -1;
 	while (++i < size)
 	{
 		print = matrix_add(org, diff); 
 		if (!(mat_line2 = init_mat_line2(print, pt3, c3)))
 		{
-			dprintf(1, "Yapa\n");
+			ft_putstr("Yapa\n");
 		}
 		draw_line(e, mat_line2);
 		matrix_free(&org);
@@ -165,6 +195,7 @@ void	draw_triangle(t_env *e, t_matrix *mat_line, t_matrix *pt3, t_matrix *c3)
 	}
 	matrix_free(&diff);
 	matrix_free(&print);
+	return (1);
 }
 
 t_matrix	*sqr_rotate(int rot, int x, int y, int size)
@@ -466,6 +497,7 @@ void	conique_adapte(t_matrix *vect)
 //	norme = sqrt(matrix_dot_product(vect, vect));
 //	norme /= 300;
 	norme = vect->m[2] / 500;
+//ft_putstr("BBBBB\n");
 	vect->m[0] /= norme;
 	vect->m[1] /= norme;
 //	vect->m[2] /= norme;
@@ -478,6 +510,80 @@ void	conique_adapte(t_matrix *vect)
 	SORTI: 
 	
 */
+
+/*
+		la on va faire le:
+			-draw_face_map
+			-z_buffer
+			->mix surface ligne
+			->autre gestion des rotation
+			->modif de lacoordone z et/ou normalisation
+			->changementinteractif
+		
+
+*/
+
+int		is_out(t_matrix *vect, t_env *e)
+{
+	if (vect->m[0] < e->ecr_x * -0.5
+		|| vect->m[0] > e->ecr_x * 0.5
+		|| vect->m[1] < e->ecr_y * -0.5
+		|| vect->m[1] > e->ecr_y * 0.5)
+		return (1);
+	return (0);
+}
+
+
+int		are_they_out(t_matrix *vect1, t_matrix *vect2, t_env *e)
+{
+	if (!vect1 || !vect2 || !e 
+		|| ((is_out(vect1, e) && is_out(vect2, e))
+		|| vect1->m[2] < 1 || vect2->m[2] < 1))
+		return (1);
+	return (0);
+}
+
+
+//int	draw_triangle(t_env *e, t_matrix *mat_line, t_matrix *pt3, t_matrix *c3)
+//*
+void	draw_face_map(t_env *e, t_matrix ***map)
+{
+	int			j;
+	int			i;
+	t_matrix	*mat_line;
+	t_matrix	*c1;
+	t_matrix	*c2;
+
+	j = 0;
+	mat_line = NULL;
+	while (j < e->size_map_y)
+	{
+		i = 0;
+		while (i < e->size_map_x)
+		{
+			c1 = e->color_map[j][i];
+			if (i > e->size_map_x - 2 || j > e->size_map_y - 2
+				|| (!(c1 = e->color_map[j][i]))
+				|| (!(c2 = e->color_map[j + 1][i + 1]))
+				|| (!(mat_line = init_mat_line(map[j][i], map[j + 1][i + 1], c1, c2)))
+				|| (!(c2 = e->color_map[j][i + 1]))
+				|| (!draw_triangle(e, mat_line, map[j][i + 1], c2))
+				|| (!(c2 = e->color_map[j + 1][i]) && dprintf(1, "!c4\n"))
+				|| ((!draw_triangle(e, mat_line, map[j + 1][i], c2))))
+			{
+				matrix_free(&mat_line);
+			}
+			else
+			{
+				matrix_free(&mat_line);
+			}
+			i++;
+		}
+		j++;
+	}
+}
+
+//*/
 
 t_matrix	*base_change_scalar(t_cam *cam, t_matrix *vect)
 {
@@ -523,16 +629,6 @@ void	base_change(t_env *e, t_cam *cam, t_matrix	***map)
 	matrix_free(&rot_cam);
 }
 
-int		is_out(t_matrix *vect, t_env *e)
-{
-	if (vect->m[0] < e->ecr_x * -0.5
-		|| vect->m[0] > e->ecr_x * 0.5
-		|| vect->m[1] < e->ecr_y * -0.5
-		|| vect->m[1] > e->ecr_y * 0.5
-		|| vect->m[2] < 0)
-		return (1);
-	return (0);
-}
 
 void	draw_link_map(t_env *e, t_matrix ***map)
 {
@@ -549,18 +645,18 @@ void	draw_link_map(t_env *e, t_matrix ***map)
 		while (i < e->size_map_x)	
 		{
 			colore = e->color_map[j][i];
-			if (i > (e->size_map_x - 2) || !(colore2 = e->color_map[j][i])
+			if (i > (e->size_map_x - 2) || !(colore2 = e->color_map[j][i + 1])
 				|| !(mat_line = init_mat_line(map[j][i], map[j][i + 1], colore, colore2))
-				|| is_out(map[j][i], e) || is_out(map[j][i + 1], e))
+				|| (are_they_out(map[j][i], map[j][i + 1], e) && matrix_free(&mat_line)))
 				;
 			else
 			{
 				draw_line(e, mat_line);
 				matrix_free(&mat_line);
 			}	
-			if (j > (e->size_map_y - 2) || !(colore2 = e->color_map[j][i])
-				|| (!(mat_line = init_mat_line(map[j][i], map[j + 1][i], colore, colore2)))
-				|| is_out(map[j][i], e) || is_out(map[j + 1][i], e))
+			if (j > (e->size_map_y - 2) || !(colore2 = e->color_map[j + 1][i])
+				|| !(mat_line = init_mat_line(map[j][i], map[j + 1][i], colore, colore2))
+				|| (are_they_out(map[j][i], map[j + 1][i], e) && matrix_free(&mat_line)))
 				;
 			else
 			{
@@ -633,8 +729,9 @@ void	free_map(t_matrix	****map, t_env *e)
 }
 
 void	main_work(t_env *e)
-{
+{	
 	t_matrix ***map = get_map(e);
+//	print_map_value(e);
 //	t_matrix ***map = copy_vect_map(e);//get_map(e);
 	(void)map;
 	t_cam	*cam = e->cam;//init_cam(60.0/360.0 * M_PI , 60.0/360.0 * M_PI, e);
@@ -644,7 +741,8 @@ void	main_work(t_env *e)
 	base_change(e, cam, map);
 	e->vect_map = map;
 	draw_link_map(e, e->vect_map);
-	draw_base_cam(e);
+	draw_face_map(e, e->vect_map);
+//	draw_base_cam(e);
 	mlx_put_image_to_window(e->mlx, e->win, e->img, 0, 0);
 	mlx_do_sync(e->mlx);
 	free_map(&map, e);

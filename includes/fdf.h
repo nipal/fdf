@@ -14,6 +14,8 @@
 # define FDF_H
 
 # include "c_maths.h"
+# include <errno.h>
+# include <string.h>
 
 # define R 0
 # define G 1
@@ -199,6 +201,7 @@ void					draw_point(t_env *e);
 ** parse
 */
 int						**parse(int fd);
+char					*maps_name(char *str);
 
 
 //t_matrix	***get_map(double *z_max, double *z_min);

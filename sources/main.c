@@ -34,19 +34,35 @@ int		check_map(int fd)
 		return (fd);
 }
 
+char	*maps_name(char *str)
+{
+	static	char	*name = NULL;
+
+	if (str)
+		name = str;
+	return (name);
+}
+
 int		main(int ac, char **av)
 {
 		int		fd;
 		int		**map;
 		int		size_x;
 		int		size_y;
+		char	*str;
 
 		if (ac == 2)
-				fd = open(av[1], O_RDONLY);
+			str = av[1];
 		else
-				fd = open("maps/42.fdf", O_RDONLY);
+			str = "maps/42.fdf";
+		maps_name(str);
+		fd = open(str, O_RDONLY);
 		if (fd > 0)
+		{
 				if ((map = get_the_map(fd, &size_x, &size_y)))
 						env(map, size_x, size_y);
+		}
+		else
+			perror(str);
 		return (0);
 }

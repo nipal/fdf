@@ -41,12 +41,14 @@ void	vectpx_to_img(t_env *e, t_matrix *pos_color)
 	y = (int) pos_color->m[1];
 	x += SIZE_Y / 2;
 	y += SIZE_X / 2;
-	if ( x < 0 || x >= e->size_line / 4 || y < 0 || y >= e->ecr_y)
+	if ( x < 0 || x >= e->ecr_x || y < 0 || y >= e->ecr_y || pos_color->m[2] < 0
+		|| (pos_color->m[2] > e->z_buffer[x + y * e->ecr_x] && e->z_buffer[x + y * e->ecr_x]))
 	{
 //		dprintf(1, "x_max:%d y_max:%d\n", e->size_line  / 4, 990);
 //		dprintf(1, "out of window x:%d y:%d\n", x, y);
 		return ;
 	}
+	e->z_buffer[x + y * e->ecr_x] = pos_color->m[2];
 	r = (int) pos_color->m[3] + 0.5;
 	g = (int) pos_color->m[4] + 0.5;
 	b = (int) pos_color->m[5] + 0.5;
@@ -101,8 +103,8 @@ t_matrix	*get_max_zdim(int **map, int size_x, int size_y)
 
 	if (!(z_dim = matrix_init(2, 1)))
 		return (NULL);
-	z_dim->m[0] = map[0][0];	
-	z_dim->m[1] = map[0][0];	
+	z_dim->m[0] = map[0][0];
+	z_dim->m[1] = map[0][0];
 	j = 0;
 	while (j < size_y)
 	{
@@ -129,6 +131,7 @@ t_matrix	*set_color(t_env *e, double value)
 
 	emp = e->z_max - e->z_min;
 	color = NULL;
+	color1 = 0;
 	if (value < 0)	
 	{
 		if (e->z_max > 0)
@@ -153,6 +156,7 @@ t_matrix	*set_color(t_env *e, double value)
 		if (!(color = vect_new_vertfd(color1, color2, 0)))
 			return (NULL);
 	}
+//matrix_display(color);
 //	ft_putstr("one colore OK!!\n\n\n");
 	return (color);
 }

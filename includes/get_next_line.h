@@ -13,7 +13,7 @@
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 # define BUFF_SIZE 256
-# define MIN(A, B) (A > B) ? B : A
+# define MIN(A, B) ((A) < (B)) ? (A) : (B)
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
