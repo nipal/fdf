@@ -72,7 +72,6 @@ int		*get_number_from_str(char **char_nb,int *size)
 	*size = ft_tablen(char_nb);
 	if (*size <= 0 || !(tab_nb = (int*)malloc(*size * sizeof(int))))
 		return (NULL);	
-
 	while (i < *size)
 	{
 		tab_nb[i] = ft_atoi(char_nb[i]);

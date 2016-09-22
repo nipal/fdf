@@ -97,7 +97,7 @@ int		key_press_mac(int keycode, t_env *e)
 int		key_press(int keycode, t_env *e)
 {
 	(keycode == '-') ? e->key.speed_down = 1 : (void)keycode;
-	(keycode == '+') ? e->key.speed_up = 1 : (void)keycode;
+	(keycode == '=') ? e->key.speed_up = 1 : (void)keycode;
 
 	(keycode == 'a') ? e->key.rot_x1 = 1 : (void)keycode;
 	(keycode == 'w') ? e->key.rot_y1 = 1 : (void)keycode;
@@ -138,12 +138,12 @@ int		key_press(int keycode, t_env *e)
 
 int		key_release(int keycode, t_env *e)
 {
-	ft_putchar('[');
-	ft_putnbr(keycode);
-	ft_putstr("] ");
+//	ft_putchar('[');
+//	ft_putnbr(keycode);
+//	ft_putstr("] ");
 
 	(keycode == '-') ? e->key.speed_down = 0 : (void)keycode;
-	(keycode == '+') ? e->key.speed_up = 0 : (void)keycode;
+	(keycode == '=') ? e->key.speed_up = 0 : (void)keycode;
 
 	(keycode == 'a') ? e->key.rot_x1 = 0 : (void)keycode;
 	(keycode == 'w') ? e->key.rot_y1 = 0 : (void)keycode;
@@ -201,6 +201,16 @@ int		increm_dir_cam(t_env *e)
 	return (1);
 }
 
+void	increm_pos_cam(t_env *e)
+{
+	t_matrix	*move;
+
+	if (!(move = matrix_scalar_product_new(e->cam->base[2], e->speed)))
+		return ;
+	matrix_add_in(e->cam->pos, move, e->cam->pos);
+	matrix_free(&move);
+}
+
 void	manage_cam_rot(t_env *e)
 {
 	int			i;
@@ -208,7 +218,7 @@ void	manage_cam_rot(t_env *e)
 	t_matrix	*rot;
 	t_matrix	*mat_rot;
 	(void)tmp;
-	static	double	deg = 0.1;
+	static	double	deg = 0.03;
 
 	if (!(rot = matrix_init(1, 3)))
 		return ;
@@ -270,8 +280,9 @@ int		loop_hook(t_env *e)
 	(e->key.r == 1) ? e->r += 20 : (void)e->key.echap;
 	(e->key.g == 1) ? e->g += 20 : (void)e->key.echap;
 	(e->key.b == 1) ? e->b += 20 : (void)e->key.echap;
-	(e->key.speed_up == 1) ? e->speed += increm_dir_cam(e) : (void)e;
-	(e->key.speed_down == 1) ? e->speed -= increm_dir_cam(e) : (void)e;
+	(e->key.speed_up == 1) ? e->speed += 1 : (void)e;
+	(e->key.speed_down == 1) ? e->speed -= 1 : (void)e;
+	increm_pos_cam(e);
 //	dprintf(1, "speed%f\n", e->speed);
 	ft_bzero(e->data, e->size_line * e->ecr_y);
 	ft_bzero(e->z_buffer, SIZE_X * SIZE_Y);

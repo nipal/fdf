@@ -120,6 +120,71 @@ t_matrix	*get_max_zdim(int **map, int size_x, int size_y)
 	return (z_dim);
 }
 
+t_matrix	*set_color(t_env *e, double value)
+{
+	t_matrix	*color;
+	double		emp;
+	double		color1;
+	double		color2;
+
+	emp = e->z_max - e->z_min;
+	color = NULL;
+	if (value < 0)	
+	{
+		if (e->z_max > 0)
+			color1 = 255 * value / e->z_min;
+		else if (emp > 0)
+			color1 = 255 * value / emp;
+		else
+			color1 = 255;
+		color2 = 255 - color1;
+		if (!(color = vect_new_vertfd(0, color2, color1)))
+			return (NULL);
+	}
+	else
+	{
+		if (e->z_max != 0 && e->z_min < 0)
+			color1 = 255 * value / e->z_max;
+		else if (emp != 0)
+			color1 = 255 * value / emp;
+		else
+			color1 = 255;
+		color2 = 255 - color1;
+		if (!(color = vect_new_vertfd(color1, color2, 0)))
+			return (NULL);
+	}
+//	ft_putstr("one colore OK!!\n\n\n");
+	return (color);
+}
+
+int		map_color_init(t_env *e)
+{
+	t_matrix	***color;
+	int			i;
+	int			j;
+
+	if (!(color = (t_matrix***)malloc(sizeof(t_matrix**) * e->size_map_y)))
+		return (0);
+	j = 0;
+	while (j < e->size_map_y)
+	{
+		if (!(color[j] = (t_matrix**)malloc(sizeof(t_matrix*) * e->size_map_x)))
+			return (0);
+		i = 0;
+		while (i < e->size_map_x)
+		{
+			if (!(color[j][i] = set_color(e, e->map[j][i])))
+				return (0);
+		//	matrix_display(color[j][i]);
+			i++;
+		}
+		j++;
+	}
+//	ft_putstr("color FINISHED\n");
+	e->color_map = color;
+	return (1);
+}
+
 void	env(int **map, int size_x, int size_y)
 {
 	(void)size_x;
@@ -138,6 +203,8 @@ void	env(int **map, int size_x, int size_y)
 	e.size_map_x = size_x;	
 	e.size_map_y = size_y;	
 	e.map = map;
+	if (!(map_color_init(&e)))
+		return ;
 	e.vect_map = get_map(&e);
 	if (!(e.mlx = mlx_init()))
 		return ;

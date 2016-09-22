@@ -534,61 +534,43 @@ int		is_out(t_matrix *vect, t_env *e)
 	return (0);
 }
 
-void	draw_link_map(t_env *e)
+void	draw_link_map(t_env *e, t_matrix ***map)
 {
 	int			j;
 	int			i;
 	t_matrix	*mat_line;
 	t_matrix	*colore;
 	t_matrix	*colore2;
-	t_matrix	***map;
 
-	colore = vect_new_vertfd(100, 100, 100);
-	colore2 = vect_new_vertfd(200, 200, 200);
-	map = e->vect_map;
 	j = 0;
 	while (j < e->size_map_y)
 	{
 		i = 0;
 		while (i < e->size_map_x)	
 		{
-			if (i > (e->size_map_x - 2))
-				;//dprintf(1, "\n\nAll is well 1\n");
-			else if(!(mat_line = init_mat_line(map[j][i], map[j][i + 1], colore, colore2)))
-				dprintf(1, "\n\nAll is well 2\n");
-			else if ((is_out(map[j][i], e) || is_out(map[j][i + 1], e)))
-			{
-				//;//dprintf(1, "\n\nAll is well 3\n");
-				matrix_free(&mat_line);
-			}
+			colore = e->color_map[j][i];
+			if (i > (e->size_map_x - 2) || !(colore2 = e->color_map[j][i])
+				|| !(mat_line = init_mat_line(map[j][i], map[j][i + 1], colore, colore2))
+				|| is_out(map[j][i], e) || is_out(map[j][i + 1], e))
+				;
 			else
 			{
 				draw_line(e, mat_line);
 				matrix_free(&mat_line);
 			}	
-			if (j > (e->size_map_y - 2))
-				;//dprintf(1, "\n\nAll is well A\n");
-			else if (!(mat_line = init_mat_line(map[j][i], map[j + 1][i], colore, colore2)))
-				dprintf(1, "\n\nAll is well B\n");
-			else if ((is_out(map[j][i], e) || is_out(map[j + 1][i], e)))
-			{
-			//	;//dprintf(1, "\n\nAll is well C\n");
-				matrix_free(&mat_line);
-			}
+			if (j > (e->size_map_y - 2) || !(colore2 = e->color_map[j][i])
+				|| (!(mat_line = init_mat_line(map[j][i], map[j + 1][i], colore, colore2)))
+				|| is_out(map[j][i], e) || is_out(map[j + 1][i], e))
+				;
 			else
 			{
 				draw_line(e, mat_line);
 				matrix_free(&mat_line);
 			}	
-//			dprintf(1, "G\n");
 			i++;
 		}
 		j++;
 	}
-	matrix_free(&colore);
-	matrix_free(&colore2);
-//	dprintf(1, "	__--__--__--__	[AFTER] draw-link_map\n");
-	(void)e;
 }
 
 
@@ -661,7 +643,7 @@ void	main_work(t_env *e)
 		dprintf(1, "Ther is no cam!!!\n");
 	base_change(e, cam, map);
 	e->vect_map = map;
-	draw_link_map(e);
+	draw_link_map(e, e->vect_map);
 	draw_base_cam(e);
 	mlx_put_image_to_window(e->mlx, e->win, e->img, 0, 0);
 	mlx_do_sync(e->mlx);

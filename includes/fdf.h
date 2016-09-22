@@ -125,6 +125,7 @@ typedef struct			s_env
 	int					depth;
 	int					endian;
 	int					**map;
+	t_matrix			***color_map;
 	t_matrix			***vect_map;
 	int					proj;
 	double				scale;
