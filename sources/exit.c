@@ -85,9 +85,9 @@ int	ft_exit(t_env **e)
 {
 	free((*e)->z_buffer);
 	free_int_map(*e);
-	free_map(&((*e)->vect_map), *e);
+//	free_map(&((*e)->vect_map), *e);
 	free_map(&((*e)->color_map),*e);
-	free_cam(*e);
+	free_cam(*e);	
 	mlx_destroy_image((*e)->mlx, (*e)->img);
 	mlx_destroy_window((*e)->mlx, (*e)->win);
 //	free(*e);

@@ -114,13 +114,21 @@ void	print_int_tab(int *tab, int size)
 
 int		free_char_split(char **tab)
 {
-	while (*tab)
+	int	i;
+
+	i = 0;
+	while (tab[i])
 	{
-		free(*tab);
-		(*tab)++;
+		free(tab[i]);
+		i++;
 	}
-	free(*tab);
 	free(tab);
+	return (1);
+}
+
+int		free_tricks(char *str)
+{
+	free(str);
 	return (1);
 }
 
@@ -135,6 +143,8 @@ t_list	*read_line_number(int fd)
 	ret = get_next_line(fd, &line);
 	if (ret <= 0)
 		return (NULL);
+//	free(line);
+//	exit(0);
 	ft_replace(line, "\t\v\r", ' ');	
 	tab_nb = ft_strsplit(line, ' ');
 	free(line);
@@ -142,7 +152,9 @@ t_list	*read_line_number(int fd)
 		return (NULL);
 	if (!(elem = ft_lstnew(line_nb, ret * sizeof(int))))
 		return (NULL);
-//	free_char_split(tab_nb);
+	free_char_split(tab_nb);
+//	free(tab_nb[0]);
+//	free(tab_nb);
 //	free(line_nb);
 	return (elem);
 }
@@ -257,6 +269,20 @@ void	print_all(t_list *begin)
 	}
 }
 
+int	free_the_node(t_list *elem)
+{
+	t_list	*tmp;
+
+	while (elem)
+	{
+		tmp = elem->next;
+		free(elem->content);
+		free(elem);
+		elem = tmp;
+	}
+	return (1);
+}
+
 int	**get_the_map(int fd, int *x_max, int *y_max)
 {
 	t_list	*elem;
@@ -274,8 +300,9 @@ int	**get_the_map(int fd, int *x_max, int *y_max)
 		if (errno)
 			perror(maps_name(NULL));
 		else
-		dprintf(1, "Error on getting the map");
+			ft_putstr("Error on getting the map");
 	}
+	free_the_node(begin);
 	close(fd);
 	return (map);
 }

@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+//void				free_the_node(t_fdgnl **begin, int fd);
 
 int			ft_strmchr(char *s, int c)
 {
@@ -111,5 +112,7 @@ int			get_next_line(int fd, char **line)
 	*line = str;
 	if (ret < 0)
 		return (-1);
+	else if (ret == 0)
+		free_one_node(&begin, fd);
 	return (*line != NULL && ((ret > 0) || (ft_strlen(*line) > 0)));
 }

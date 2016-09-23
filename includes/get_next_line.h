@@ -22,11 +22,12 @@
 # include <string.h>
 # include <errno.h>
 
-int					get_next_line(int fd, char **line);
 typedef	struct		s_fdgnl
 {
 	int				fd;
 	char			*rest;
 	struct s_fdgnl	*next;
 }					t_fdgnl;
+void				free_one_node(t_fdgnl **begin, int fd);
+int					get_next_line(int fd, char **line);
 #endif
