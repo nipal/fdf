@@ -163,7 +163,7 @@ t_matrix	**init_base()
 	int			i;
 	t_matrix	**base;
 
-	if (!(base = (t_matrix**)malloc(sizeof(t_matrix*))))
+	if (!(base = (t_matrix**)malloc(sizeof(t_matrix*) * 3)))
 		return (NULL);
 	i = 0;
 	while (i < 3)

@@ -23,9 +23,9 @@ t_matrix	*matrix_init(int x, int y)
 	
 	//dprintf(1, "matrix init: x:%d y:%d\n", x, y);
 	max = x * y;
-	if (!(mat = malloc(sizeof(t_matrix))))
+	if (!(mat = (t_matrix*)malloc(sizeof(t_matrix))))
 		return (NULL);
-	if (!(m = malloc(sizeof(double) * max)))
+	if (!(m = (double*)malloc(sizeof(double) * max)))
 		return (NULL);
 	mat->x = x;
 	mat->y = y;

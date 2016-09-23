@@ -209,7 +209,7 @@ void	env(int **map, int size_x, int size_y)
 	e.map = map;
 	if (!(map_color_init(&e)))
 		return ;
-	e.vect_map = get_map(&e);
+//	e.vect_map = get_map(&e);
 	if (!(e.mlx = mlx_init()))
 		return ;
 	e.win = mlx_new_window(e.mlx, SIZE_Y, SIZE_X, "Leu test");

@@ -190,6 +190,7 @@ int		draw_triangle(t_env *e, t_matrix *mat_line, t_matrix *pt3, t_matrix *c3)
 			ft_putstr("Yapa\n");
 		}
 		draw_line(e, mat_line2);
+		matrix_free(&mat_line2);
 		matrix_free(&org);
 		org = print;
 	}
@@ -669,6 +670,47 @@ void	draw_link_map(t_env *e, t_matrix ***map)
 	}
 }
 
+void	draw_link_map2(t_env *e, t_matrix ***map)
+{
+	int			j;
+	int			i;
+	t_matrix	*mat_line;
+	t_matrix	*colore;
+	t_matrix	*colore2;
+
+	j = 0;
+	colore = vect_new_vertfd(0, 0, 0);
+	colore2 = vect_new_vertfd(0, 0, 0);
+	while (j < e->size_map_y)
+	{
+		i = 0;
+		while (i < e->size_map_x)	
+		{
+			if (i > (e->size_map_x - 2)
+				|| !(mat_line = init_mat_line(map[j][i], map[j][i + 1], colore, colore2))
+				|| (are_they_out(map[j][i], map[j][i + 1], e) && matrix_free(&mat_line)))
+				;
+			else
+			{
+				draw_line(e, mat_line);
+				matrix_free(&mat_line);
+			}	
+			if (j > (e->size_map_y - 2)
+				|| !(mat_line = init_mat_line(map[j][i], map[j + 1][i], colore, colore2))
+				|| (are_they_out(map[j][i], map[j + 1][i], e) && matrix_free(&mat_line)))
+				;
+			else
+			{
+				draw_line(e, mat_line);
+				matrix_free(&mat_line);
+			}	
+			i++;
+		}
+		j++;
+	}
+	matrix_free(&colore);
+	matrix_free(&colore2);
+}
 
 /*######################################################*/
 /*######################################################*/
@@ -703,31 +745,6 @@ t_matrix***	copy_vect_map(t_env *e)
 	return (map);
 }
 
-void	free_map(t_matrix	****map, t_env *e)
-{
-	int	i;
-	int	j;
-
-	if (!e || !map || !*map || !***map)
-		return ;
-	j = 0;
-	while (j < e->size_map_y)
-	{
-		i = 0;
-		while (i < e->size_map_x)
-		{
-			matrix_free((*map)[j] + i);
-			i++;
-		}
-		free((*map)[j]);
-//		map[j] = NULL;
-		j++;
-	}
-	free(*map);
-//	free(*map);
-//	*map = NULL;
-}
-
 void	main_work(t_env *e)
 {	
 	t_matrix ***map = get_map(e);
@@ -740,9 +757,10 @@ void	main_work(t_env *e)
 		dprintf(1, "Ther is no cam!!!\n");
 	base_change(e, cam, map);
 	e->vect_map = map;
+//	draw_face_map(e, e->vect_map);
+//	draw_link_map2(e, e->vect_map);
 	draw_link_map(e, e->vect_map);
-	draw_face_map(e, e->vect_map);
-//	draw_base_cam(e);
+	draw_base_cam(e);
 	mlx_put_image_to_window(e->mlx, e->win, e->img, 0, 0);
 	mlx_do_sync(e->mlx);
 	free_map(&map, e);

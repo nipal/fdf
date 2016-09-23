@@ -59,6 +59,7 @@ int				is_int_over_flow(char *number)
 		free(tmp);
 		return (1);
 	}	
+	free(cleaned);
 	free(tmp);
 	return (0);
 }

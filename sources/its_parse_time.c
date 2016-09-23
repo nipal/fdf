@@ -112,6 +112,18 @@ void	print_int_tab(int *tab, int size)
 	}
 }
 
+int		free_char_split(char **tab)
+{
+	while (*tab)
+	{
+		free(*tab);
+		(*tab)++;
+	}
+	free(*tab);
+	free(tab);
+	return (1);
+}
+
 t_list	*read_line_number(int fd)
 {
 	char	**tab_nb;
@@ -125,11 +137,13 @@ t_list	*read_line_number(int fd)
 		return (NULL);
 	ft_replace(line, "\t\v\r", ' ');	
 	tab_nb = ft_strsplit(line, ' ');
+	free(line);
 	if (!(line_nb = get_number_from_str(tab_nb, &ret)))
 		return (NULL);
 	if (!(elem = ft_lstnew(line_nb, ret * sizeof(int))))
 		return (NULL);
-	free(line_nb);
+//	free_char_split(tab_nb);
+//	free(line_nb);
 	return (elem);
 }
 

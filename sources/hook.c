@@ -263,7 +263,7 @@ int		loop_hook(t_env *e)
 
 	manage_cam_rot(e);
 
-	(e->key.echap == 1) ? exit(0) : (void)e->key.echap;
+	(e->key.echap == 1) ? ft_exit(&e) : (void)e->key.echap;
 	(e->key.decal_down == 1) ? e->decaly -= e->zoom / 2 : (void)e->key.echap;
 	(e->key.decal_up == 1) ? e->decaly += e->zoom / 2 : (void)e->key.echap;
 	(e->key.decal_right == 1) ? e->decalx -= e->zoom / 2 : (void)e->key.echap;

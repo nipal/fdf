@@ -111,8 +111,8 @@ typedef	struct			s_cam
 //*/
 
 
-# define SIZE_Y 1440
-# define SIZE_X 990
+# define SIZE_Y 300
+# define SIZE_X 300
 # define PRINT_DIAG 0
 typedef struct			s_env
 {
@@ -209,4 +209,10 @@ t_matrix	***get_map(t_env *e);
 void	draw_line(t_env *e, t_matrix *mat_line);
 t_matrix	*init_mat_line(t_matrix *pt1, t_matrix *pt2, t_matrix *c1, t_matrix *c2);
 int	**get_the_map(int fd, int *x_max, int *y_max);
+
+
+void	free_map(t_matrix	****map, t_env *e);
+int	free_int_map(t_env *e);
+int	free_cam(t_env *e);
+int	ft_exit(t_env **e);
 #endif

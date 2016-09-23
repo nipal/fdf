@@ -33,8 +33,10 @@ SRC		=	matrix_init.c \
 			free_mat.c \
 			matrix_new.c \
 			set_scale.c
+
 FLAGS		= -Wall -Wextra -Werror
-OBJ		= $(SRC:.c=.o)
+FLAGS-DEBUG = -g -Wall -Wextra -Werror
+OBJ			= $(SRC:.c=.o)
 
 all: $(NAME)
 
@@ -46,6 +48,7 @@ $(NAME): $(OBJ)
 	gcc -Ofast  -c $(SRC) $(FLAGS) -I ./
 #	gcc -Ofast $(FLAGS) -I ../includes/ -c $(SRC)
 
+
 clean:
 	rm -f $(OBJ)
 
@@ -53,3 +56,8 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
+
+gdb: fclean
+	gcc -Ofast  -c $(SRC) $(FLAGS) -I ./
+	ar rc $(NAME) $(OBJ)
+	ranlib $(NAME)

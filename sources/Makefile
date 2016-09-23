@@ -19,6 +19,7 @@ SRC		= 	main.c \
 			maped.c \
 			print_map.c \
 			cam.c \
+			exit.c \
 			its_parse_time.c 
 #			print_triangle.c 
 #			print_line.c \
@@ -28,12 +29,15 @@ OBJ		= $(SRC:.c=.o)
 
 FLAGS = -Wall -Wextra -Werror
 
+FLAGS-DEBUG = -g -Wall -Wextra -Werror
+
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	gcc -o $(NAME) $(FLAGS) $(OBJ) -L ../libft/ -lft \
+		gcc -o $(NAME) $(FLAGS) $(OBJ) -L ../libft/ -lft \
 		-L ../c_maths -lc_maths \
 		-L /usr/lib/ -lmlx -lm -lX11 -lXext
+
 
 $(OBJ):
 	gcc -c $(FLAGS) $(SRC) -I ../includes -I ../c_maths# -I /usr/includes/
@@ -45,3 +49,9 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
+
+gdb: fclean
+		gcc -c $(FLAGS-DEBUG) $(SRC) -I ../includes -I ../c_maths# -I /usr/includes/
+		gcc -o $(NAME) $(FLAGS-DEBUG) $(OBJ) -L ../libft/ -lft \
+		-L ../c_maths -lc_maths \
+		-L /usr/lib/ -lmlx -lm -lX11 -lXext

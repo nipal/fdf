@@ -75,6 +75,9 @@ SRC		= ft_atoi.c \
 CFLAGS = -Wall -Wextra -Werror
 OBJ		= $(SRC:.c=.o)
 
+
+FLAGS-DEBUG = -g -Wall -Wextra -Werror
+
 all: $(NAME)
 
 $(NAME): $(OBJ)
@@ -83,7 +86,7 @@ $(NAME): $(OBJ)
 
 #%.o: %.c
 $(OBJ):
-	    gcc $(FLAGS) -I ../includes/ -c $(SRC)
+	    gcc $(CFLAGS) -I ../includes/ -c $(SRC)
 
 clean:
 	rm -f $(OBJ)
@@ -92,3 +95,8 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
+
+gdb: fclean	
+	    gcc $(FLAGS-DEBUG) -I ../includes/ -c $(SRC)
+		ar rc $(NAME) $(OBJ)
+		ranlib $(NAME)

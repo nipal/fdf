@@ -32,3 +32,8 @@ fclean: clean
 	make -C $(SRC_DIR) fclean
 
 re: fclean all
+
+gdb:
+	make -C $(LIB_FT) gdb
+	make -C $(LIB_M) gdb
+	make -C $(SRC_DIR) gdb
