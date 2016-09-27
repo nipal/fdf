@@ -1,0 +1,618 @@
+Norme: ./sources/_Makefile
+Warning: Not a valid file
+Norme: ./sources/Makefile
+Warning: Not a valid file
+Norme: ./sources/libft.a
+Warning: Not a valid file
+Norme: ./sources/parse.c
+Error (line 16): wrong number of spaces in preprocessor indentation
+Error (line 18): comment not well formatted
+Error (line 25): multiple empty lines
+Error (line 67): multiple empty lines
+Error (line 69): spaces at the end of line
+Error (line 112): spaces at the end of line
+Error (line 114): bad spacing before parse
+Error (line 124): C++ comment
+Error (line 125): C++ comment
+Error (line 125): spaces at the end of line
+Norme: ./sources/main.c
+Error (line 19): comment not well formatted
+Error (line 19): bad indentation
+Error (line 19): comment not well placed
+Error (line 22): Empty line
+Error (line 34): bad indentation
+Error (line 48): bad indentation
+Error (line 49): bad indentation
+Error (line 50): bad indentation
+Error (line 51): bad indentation
+Error (line 52): bad indentation
+Error (line 54): bad indentation
+Error (line 55): bad indentation
+Error (line 56): bad indentation
+Error (line 57): bad indentation
+Error (line 58): bad indentation
+Error (line 59): bad indentation
+Error (line 60): bad indentation
+Error (line 61): bad indentation
+Error (line 62): bad indentation
+Error (line 63): bad indentation
+Error (line 64): bad indentation
+Error (line 65): bad indentation
+Error (line 66): bad indentation
+Error (line 67): bad indentation
+Norme: ./sources/exit.c
+Error: global scope bad aligned
+Error (line 17): Bad spacing for argument map
+Error (line 22): spaces at the end of line
+Error (line 23): spaces at the end of line
+Error (line 25): spaces at the end of line
+Error (line 59): declarations must be followed by one empty line in free_cam
+Error (line 63): comment not well formatted
+Error (line 63): comment not well placed
+Error (line 88): C++ comment
+Error (line 89, col 28): bad character after ,
+Error (line 90): spaces at the end of line
+Error (line 90, col 13): bad character after ;
+Error (line 93): C++ comment
+Error (line 95): C++ comment
+Norme: ./sources/print_triangle.c
+Error: global scope bad aligned
+Error: 42 header not well formatted
+Error: file must end with a single empty line
+Error (line 4): line has 82 characters
+Error (line 16): comment not well formatted
+Error (line 18): spaces at the end of line
+Error (line 35, col 24): space after cast
+Error (line 46): function print_triangle has 66 lines
+Error (line 46): declarations in print_triangle must be at the top of the function
+Error (line 46, col 0): print_triangle has 11 variables
+Error (line 61): bad indentation
+Error (line 66): 2 instructions
+Error (line 66, col 41): bad character after ;
+Error (line 67): Empty line
+Error (line 75): Empty line
+Error (line 76): C++ comment
+Error (line 83): C++ comment
+Error (line 84): Empty line
+Error (line 88): C++ comment
+Error (line 90): C++ comment
+Error (line 91): Empty line
+Error (line 94): Empty line
+Error (line 97): Empty line
+Error (line 98): bad indentation
+Error (line 98): C++ comment
+Error (line 101): C++ comment
+Error (line 102): Empty line
+Error (line 103): multiple empty lines
+Error (line 103): Empty line
+Error (line 104): C++ comment
+Error (line 105): C++ comment
+Error (line 106): C++ comment
+Error (line 107): comment not well formatted
+Error (line 107): comment not well placed
+Error (line 110): Empty line
+Error (line 114, col 0): no empty line before block
+Error (line 116): C++ comment
+Error (line 117): C++ comment
+Error (line 118): C++ comment
+Error (line 120): multiple empty lines
+Norme: ./sources/main_test.c
+Error: global scope bad aligned
+Error: 42 header must be followed by one empty line
+Error (line 12): wrong number of spaces in preprocessor indentation
+Error (line 13): wrong number of spaces in preprocessor indentation
+Error (line 14): wrong number of spaces in preprocessor indentation
+Error (line 16): multiple empty lines
+Error (line 17): multiple empty lines
+Error (line 21): multiple empty lines
+Error (line 22): declaration of read_line_number forbidden in .c
+Error (line 24): function main has 36 lines
+Error (line 24, col 0): main has 7 variables
+Error (line 42): bad indentation
+Error (line 42): C++ comment
+Error (line 45): C++ comment
+Error (line 48): C++ comment
+Error (line 49): C++ comment
+Error (line 50): C++ comment
+Error (line 51, col 2): no empty line before block
+Error (line 52): C++ comment
+Error (line 53): missing newline after if
+Error (line 53): spaces at the end of line
+Error (line 58): C++ comment
+Error (line 64): comment not well formatted
+Norme: ./sources/paseur.c
+Warning: /nfs/2015/f/fjanoty/Documents/renouveau_ma_gueule/fdf/sources/paseur.c may not compile or is invalid for some reasons.
+Norme: ./sources/print_line.c
+Error (line 15): comment not well formatted
+Error (line 22): bad spacing after line_x
+Error (line 28): 2 assignations
+Error (line 48): spaces at the end of line
+Error (line 48, col 1): no newline after block
+Error (line 51): multiple empty lines
+Error (line 52): bad spacing before line_y
+Error (line 58): 2 assignations
+Error (line 78): spaces at the end of line
+Error (line 78, col 1): no newline after block
+Error (line 81, col 44): bad spacing
+Error (line 94): line has 93 characters
+Error (line 96): must begin only by tabulations
+Error (line 96): spaces at the end of line
+Error (line 96): line has 82 characters
+Error (line 102): line has 93 characters
+Error (line 104): must begin only by tabulations
+Error (line 104): spaces at the end of line
+Error (line 104): line has 82 characters
+Error (line 107): C++ comment
+Norme: ./sources/parsing.c
+Error: 42 header not at top of the file
+Error (line 7): C++ comment
+Error (line 37): spaces at the end of line
+Error (line 81, col 19): space after cast
+Error (line 83): missing newline after if
+Error (line 83): spaces at the end of line
+Norme: ./sources/get_next_line.c
+Norme: ./sources/new_ft_strsplit.c
+Norme: ./sources/coord.c
+Error: file must end with a single empty line
+Norme: ./sources/mlx_env.c
+Error: global scope bad aligned
+Error: 8 functions in the file
+Error (line 20): C++ comment
+Error (line 21): C++ comment
+Error (line 22): C++ comment
+Error (line 23): C++ comment
+Error (line 24): C++ comment
+Error (line 29): C++ comment
+Error (line 30, col 0): no empty line before block
+Error (line 40, col 9): space after cast
+Error (line 41, col 9): space after cast
+Error (line 44, col 4): space after (
+Error (line 45): line has 95 characters
+Error (line 47): C++ comment
+Error (line 48): C++ comment
+Error (line 52, col 9): space after cast
+Error (line 53, col 9): space after cast
+Error (line 54, col 9): space after cast
+Error (line 58): C++ comment
+Error (line 58): line has 113 characters
+Error (line 59, col 0): no empty line before block
+Error (line 95): comment not well formatted
+Error (line 125): function set_color has 35 lines
+Error (line 135): missing newline after if
+Error (line 135): spaces at the end of line
+Error (line 159): C++ comment
+Error (line 160): C++ comment
+Error (line 182): bad indentation
+Error (line 182): C++ comment
+Error (line 187): C++ comment
+Error (line 192): declarations in env are bad aligned
+Error (line 192): function env has 46 lines
+Error (line 192): declarations in env must be at the top of the function
+Error (line 204, col 25): bad spacing
+Error (line 207): spaces at the end of line
+Error (line 207, col 22): bad character after ;
+Error (line 208): spaces at the end of line
+Error (line 208, col 22): bad character after ;
+Error (line 212): C++ comment
+Error (line 231, col 26): missing space around /
+Error (line 231, col 40): space before ,
+Error (line 231, col 46): missing space around /
+Norme: ./sources/its_parse_time.c
+Error: global scope bad aligned
+Error: 15 functions in the file
+Error (line 13): comment not well formatted
+Error (line 17): spaces at the end of line
+Error (line 19): spaces at the end of line
+Error (line 20): spaces at the end of line
+Error (line 24): comment not well formatted
+Error (line 25): spaces at the end of line
+Error (line 47): bad spacing after ft_tablen
+Error (line 59): multiple empty lines
+Error (line 60): multiple empty lines
+Error (line 61): bad spacing before get_number_from_str
+Error (line 61, col 40): bad character after ,
+Error (line 73): spaces at the end of line
+Error (line 73, col 15): bad character after ;
+Error (line 146): C++ comment
+Error (line 147): C++ comment
+Error (line 148): spaces at the end of line
+Error (line 148, col 32): bad character after ;
+Error (line 156): C++ comment
+Error (line 157): C++ comment
+Error (line 158): C++ comment
+Error (line 179): 2 instructions
+Error (line 179, col 15): bad character after ;
+Error (line 227): function get_map_lst has 29 lines
+Error (line 298): missing newline after if
+Error (line 298): spaces at the end of line
+Norme: ./sources/print_map.c
+Error: 9 functions in the file
+Error (line 15): comment not well formatted
+Error (line 45): function get_point has 26 lines
+Error (line 49): C++ comment
+Error (line 52): bad indentation
+Error (line 52): C++ comment
+Error (line 54, col 39): missing space around +
+Error (line 55): bad indentation
+Error (line 55): C++ comment
+Error (line 57, col 36): missing space around +
+Error (line 58): bad indentation
+Error (line 58): C++ comment
+Error (line 60, col 36): missing space around +
+Error (line 60, col 41): missing space around +
+Error (line 61): bad indentation
+Error (line 61): C++ comment
+Error (line 65): bad indentation
+Error (line 65): C++ comment
+Error (line 72): C++ comment
+Error (line 75): function is_visible has 30 lines
+Error (line 81): Empty line
+Error (line 84): bad indentation
+Error (line 84): C++ comment
+Error (line 85, col 9): missing parentheses in return statement
+Error (line 89): Empty line
+Error (line 92): bad indentation
+Error (line 92): C++ comment
+Error (line 93): bad indentation
+Error (line 93): C++ comment
+Error (line 94): bad indentation
+Error (line 94): C++ comment
+Error (line 95): bad indentation
+Error (line 95): C++ comment
+Error (line 96): bad indentation
+Error (line 96): C++ comment
+Error (line 97): Empty line
+Error (line 98): 2 instructions
+Error (line 98, col 13): bad character after ;
+Error (line 100): C++ comment
+Error (line 101): C++ comment
+Error (line 102): C++ comment
+Error (line 103): C++ comment
+Error (line 109): function draw_link has 27 lines
+Error (line 113): bad indentation
+Error (line 113): C++ comment
+Error (line 116): bad indentation
+Error (line 116): C++ comment
+Error (line 120): bad indentation
+Error (line 123): bad indentation
+Error (line 123): C++ comment
+Error (line 127): bad indentation
+Error (line 130): bad indentation
+Error (line 130): C++ comment
+Error (line 134): bad indentation
+Error (line 137): bad indentation
+Error (line 140): C++ comment
+Error (line 141): declarations in iso_proj are bad aligned
+Error (line 141): function iso_proj has 104 lines
+Error (line 141): declarations in iso_proj must be at the top of the function
+Error (line 141): declarations must be followed by one empty line in iso_proj
+Error (line 141): bad spacing before iso_proj
+Error (line 141): bad spacing after iso_proj
+Error (line 141, col 0): iso_proj has 8 variables
+Error (line 147): multiple declarations
+Error (line 154, col 4): bad spacing
+Error (line 155): comment not well formatted
+Error (line 155): comment not well placed
+Error (line 167): Empty line
+Error (line 168): comment not well formatted
+Error (line 168): comment not well placed
+Error (line 169): Empty line
+Error (line 174): Empty line
+Error (line 175): multiple empty lines
+Error (line 175): Empty line
+Error (line 178): Empty line
+Error (line 180): Empty line
+Error (line 183): Empty line
+Error (line 184): C++ comment
+Error (line 185): C++ comment
+Error (line 189): Empty line
+Error (line 190): spaces at the end of line
+Error (line 190, col 49): bad character after ;
+Error (line 191): C++ comment
+Error (line 192): C++ comment
+Error (line 193): C++ comment
+Error (line 194): C++ comment
+Error (line 195): C++ comment
+Error (line 196): C++ comment
+Error (line 202): Empty line
+Error (line 203): multiple empty lines
+Error (line 203): Empty line
+Error (line 204): C++ comment
+Error (line 212): C++ comment
+Error (line 213): Empty line
+Error (line 214): multiple empty lines
+Error (line 214): Empty line
+Error (line 215): C++ comment
+Error (line 216): C++ comment
+Error (line 217): Empty line
+Error (line 218): C++ comment
+Error (line 219): C++ comment
+Error (line 220): Empty line
+Error (line 221): C++ comment
+Error (line 222): C++ comment
+Error (line 223): C++ comment
+Error (line 224): Empty line
+Error (line 225): C++ comment
+Error (line 226): C++ comment
+Error (line 227): C++ comment
+Error (line 229): Empty line
+Error (line 230): C++ comment
+Error (line 230): spaces at the end of line
+Error (line 231): C++ comment
+Error (line 232): C++ comment
+Error (line 232): spaces at the end of line
+Error (line 233): C++ comment
+Error (line 234): Empty line
+Error (line 235): C++ comment
+Error (line 236): C++ comment
+Error (line 237): C++ comment
+Error (line 238): comment not well formatted
+Error (line 238): comment not well placed
+Error (line 247, col 0): no empty line before block
+Error (line 248): C++ comment
+Error (line 250): declarations in adapt_point are bad aligned
+Error (line 250): function adapt_point has 95 lines
+Error (line 250): declarations in adapt_point must be at the top of the function
+Error (line 250): declarations must be followed by one empty line in adapt_point
+Error (line 250, col 0): adapt_point has 7 variables
+Error (line 257): multiple empty lines
+Error (line 258): multiple declarations
+Error (line 262): C++ comment
+Error (line 270): line has 91 characters
+Error (line 270, col 60): bad spacing
+Error (line 272): Empty line
+Error (line 279): bad indentation
+Error (line 279): C++ comment
+Error (line 280): bad indentation
+Error (line 280): C++ comment
+Error (line 281): bad indentation
+Error (line 281): C++ comment
+Error (line 282): bad indentation
+Error (line 282): C++ comment
+Error (line 283): bad indentation
+Error (line 283): C++ comment
+Error (line 284): bad indentation
+Error (line 284): C++ comment
+Error (line 285): bad indentation
+Error (line 285): C++ comment
+Error (line 286): Empty line
+Error (line 287): bad indentation
+Error (line 287): C++ comment
+Error (line 287): spaces at the end of line
+Error (line 288): Empty line
+Error (line 289): multiple empty lines
+Error (line 289): Empty line
+Error (line 290): bad indentation
+Error (line 290): C++ comment
+Error (line 291): Empty line
+Error (line 292): bad indentation
+Error (line 292): C++ comment
+Error (line 293): Empty line
+Error (line 294): multiple empty lines
+Error (line 294): Empty line
+Error (line 298): Empty line
+Error (line 299): multiple empty lines
+Error (line 299): Empty line
+Error (line 300): multiple empty lines
+Error (line 300): Empty line
+Error (line 304): Empty line
+Error (line 305): comment not well formatted
+Error (line 305): comment not well placed
+Error (line 307): Empty line
+Error (line 311): Empty line
+Error (line 313): Empty line
+Error (line 316): Empty line
+Error (line 317): multiple empty lines
+Error (line 317): Empty line
+Error (line 321): Empty line
+Error (line 322): multiple empty lines
+Error (line 322): Empty line
+Error (line 323): multiple empty lines
+Error (line 323): Empty line
+Error (line 324): C++ comment
+Error (line 325): C++ comment
+Error (line 326): C++ comment
+Error (line 327): Empty line
+Error (line 328): multiple empty lines
+Error (line 328): Empty line
+Error (line 329): C++ comment
+Error (line 330): Empty line
+Error (line 331): C++ comment
+Error (line 332): C++ comment
+Error (line 333): Empty line
+Error (line 334): C++ comment
+Error (line 335): C++ comment
+Error (line 336): Empty line
+Error (line 337, col 36): missing space around <
+Error (line 339): bad indentation
+Error (line 339): C++ comment
+Error (line 340): bad indentation
+Error (line 340): C++ comment
+Error (line 341): bad indentation
+Error (line 341): C++ comment
+Error (line 346): spaces at the end of line
+Error (line 346, col 1): no newline after block
+Error (line 364): spaces at the end of line
+Error (line 364, col 1): no newline after block
+Error (line 367): bad spacing after init_color
+Error (line 381): multiple empty lines
+Error (line 382): multiple empty lines
+Error (line 383): multiple empty lines
+Error (line 384): C++ comment
+Error (line 384): line has 185 characters
+Error (line 385): C++ comment
+Error (line 385): line has 94 characters
+Error (line 387): C++ comment
+Error (line 387): spaces at the end of line
+Error (line 388): function print_map has 43 lines
+Error (line 388): declarations must be followed by one empty line in print_map
+Error (line 388): bad spacing before print_map
+Error (line 393): C++ comment
+Error (line 394): Empty line
+Error (line 400): Empty line
+Error (line 410): bad indentation
+Error (line 410): C++ comment
+Error (line 411): C++ comment
+Error (line 412): comment not well formatted
+Error (line 412): bad indentation
+Error (line 412): comment not well placed
+Error (line 423): bad indentation
+Error (line 423): C++ comment
+Error (line 426): C++ comment
+Error (line 429): C++ comment
+Error (line 429): line has 146 characters
+Error (line 430): C++ comment
+Error (line 431): Empty line
+Error (line 432): C++ comment
+Error (line 435): C++ comment
+Error (line 436): C++ comment
+Error (line 436): line has 89 characters
+Norme: ./sources/cam.c
+Error: global scope bad aligned
+Error: 6 functions in the file
+Error (line 15): function describe_cam has 61 lines
+Error (line 29): line has 83 characters
+Error (line 30, col 21): bad character after ,
+Error (line 33): C++ comment
+Error (line 41): Empty line
+Error (line 43): comment not well formatted
+Error (line 43): comment not well placed
+Error (line 65): Empty line
+Error (line 71): Empty line
+Error (line 77): C++ comment
+Error (line 78, col 0): no empty line before block
+Error (line 80): function set_windir has 32 lines
+Error (line 85): comment not well formatted
+Error (line 85): comment not well placed
+Error (line 91): Empty line
+Error (line 94): spaces at the end of line
+Error (line 111): spaces at the end of line
+Error (line 114, col 0): no empty line before block
+Error (line 121, col 12): space before ,
+Error (line 123, col 12): space before ,
+Error (line 125, col 12): space before ,
+Error (line 127, col 12): space before ,
+Error (line 129, col 12): space before ,
+Error (line 141): C++ comment
+Error (line 142, col 0): no empty line before block
+Error (line 150, col 9): missing parentheses in return statement
+Error (line 155, col 10): missing parentheses in return statement
+Error (line 161): missing void in function init_base
+Error (line 175): comment not well formatted
+Error (line 175): comment not well placed
+Error (line 176): spaces at the end of line
+Error (line 178): spaces at the end of line
+Error (line 180): spaces at the end of line
+Error (line 182): spaces at the end of line
+Error (line 184): C++ comment
+Error (line 185): spaces at the end of line
+Error (line 186): Empty line
+Error (line 190): C++ comment
+Error (line 191): function init_cam has 54 lines
+Error (line 191): declarations must be followed by one empty line in init_cam
+Error (line 191): bad spacing before init_cam
+Error (line 194): C++ comment
+Error (line 195): C++ comment
+Error (line 196): C++ comment
+Error (line 197): C++ comment
+Error (line 198): C++ comment
+Error (line 199): C++ comment
+Error (line 200): Empty line
+Error (line 201): C++ comment
+Error (line 202, col 12): space after cast
+Error (line 203): spaces at the end of line
+Error (line 205, col 15): bad spacing
+Error (line 206, col 15): bad spacing
+Error (line 213): comment not well formatted
+Error (line 213): comment not well placed
+Error (line 214): spaces at the end of line
+Error (line 216): spaces at the end of line
+Error (line 218): spaces at the end of line
+Error (line 220): spaces at the end of line
+Error (line 222): C++ comment
+Error (line 223): Empty line
+Error (line 224): C++ comment
+Error (line 225): C++ comment
+Error (line 226): C++ comment
+Error (line 227): C++ comment
+Error (line 228): C++ comment
+Error (line 229): C++ comment
+Error (line 229): line has 105 characters
+Error (line 229, col 22): space before ;
+Error (line 232): spaces at the end of line
+Error (line 236): Empty line
+Error (line 238): C++ comment
+Error (line 239): C++ comment
+Error (line 240): C++ comment
+Error (line 241): C++ comment
+Error (line 242): C++ comment
+Error (line 243): C++ comment
+Error (line 244): C++ comment
+Error (line 245): C++ comment
+Error (line 249): comment not well formatted
+Norme: ./sources/maped.c
+Error (line 34): C++ comment
+Error (line 35, col 0): no empty line before block
+Error (line 49): C++ comment
+Error (line 50): C++ comment
+Error (line 50): spaces at the end of line
+Error (line 51): C++ comment
+Error (line 52): C++ comment
+Error (line 53): C++ comment
+Error (line 55): C++ comment
+Error (line 56): C++ comment
+Error (line 58): function get_map has 40 lines
+Error (line 58, col 0): get_map has 8 variables
+Error (line 79, col 32): missing space around ?
+Error (line 79, col 55): missing space around :
+Error (line 92): line has 84 characters
+Error (line 92, col 65): missing space around /
+Error (line 93): bad indentation
+Error (line 93): spaces at the end of line
+Norme: ./sources/hook.c
+Error: 8 functions in the file
+Error (line 17): declaration of draw_point_old forbidden in .c
+Error (line 18): declaration of main_work forbidden in .c
+Error (line 20): function init_t_key has 31 lines
+Error (line 55): function key_press_mac has 38 lines
+Error (line 59): Empty line
+Error (line 66): Empty line
+Error (line 73): Empty line
+Error (line 97): function key_press has 38 lines
+Error (line 101): Empty line
+Error (line 108): Empty line
+Error (line 115): Empty line
+Error (line 139): function key_release has 40 lines
+Error (line 141): C++ comment
+Error (line 142): C++ comment
+Error (line 143): C++ comment
+Error (line 144): Empty line
+Error (line 147): Empty line
+Error (line 154): Empty line
+Error (line 161): Empty line
+Error (line 162): multiple empty lines
+Error (line 162): Empty line
+Error (line 189, col 1): missing space after if
+Error (line 214): declarations in manage_cam_rot are bad aligned
+Error (line 214): function manage_cam_rot has 34 lines
+Error (line 214): declarations in manage_cam_rot must be at the top of the function
+Error (line 214): bad spacing after manage_cam_rot
+Error (line 251): C++ comment
+Error (line 251): spaces at the end of line
+Error (line 252): function loop_hook has 42 lines
+Error (line 252): declarations must be followed by one empty line in loop_hook
+Error (line 252): bad spacing before loop_hook
+Error (line 255): spaces at the end of line
+Error (line 256): C++ comment
+Error (line 263): Empty line
+Error (line 265): Empty line
+Error (line 286): C++ comment
+Error (line 289): C++ comment
+Error (line 290): C++ comment
+Error (line 290): line has 84 characters
+Error (line 292): C++ comment
+Error (line 292): line has 85 characters
+Error (line 293): C++ comment
+Error (line 294): C++ comment
+Norme: ./sources/drawline.c
+Warning: /nfs/2015/f/fjanoty/Documents/renouveau_ma_gueule/fdf/sources/drawline.c: timeouted.

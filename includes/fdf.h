@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/29 02:21:11 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/09/18 08:04:39 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/09/27 18:57:30 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,6 +166,18 @@ void					init_t_key(t_key *key);
 int						key_press(int keycode, t_env *e);
 int						key_release(int keycode, t_env *e);
 
+
+void					init_t_key_2(t_key *key);
+void					init_t_key(t_key *key);
+void					key_press_end(int keycode, t_env *e);
+int						key_press(int keycode, t_env *e);
+
+void					key_release_end(int keycode, t_env *e);
+int						key_release(int keycode, t_env *e);
+int						increm_dir_cam(t_env *e);
+void					increm_pos_cam(t_env *e);
+void					manage_cam_rot(t_env *e);
+
 //	redessine et set les vars en fonction des inputs
 int						loop_hook(t_env *e);
 
@@ -215,4 +227,7 @@ void	free_map(t_matrix	****map, t_env *e);
 int	free_int_map(t_env *e);
 int	free_cam(t_env *e);
 int	ft_exit(t_env **e);
+
+	void	draw_point_old(t_env *e);
+	void	main_work(t_env *e);
 #endif

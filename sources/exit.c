@@ -6,7 +6,7 @@
 /*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/09 12:17:52 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/09/18 10:24:03 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/09/27 16:52:02 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 #include "libft.h"
 #include "fdf.h"
 
-void	free_map(t_matrix	****map, t_env *e)
+void	free_map(t_matrix ****map, t_env *e)
 {
 	int	i;
 	int	j;
 
-	if (!e 
-		|| !map 
+	if (!e
+		|| !map
 		|| !(*map)
-		|| !(**map) 
+		|| !(**map)
 		|| !(***map))
 		return ;
 	j = 0;
@@ -42,7 +42,7 @@ void	free_map(t_matrix	****map, t_env *e)
 	*map = NULL;
 }
 
-int	free_int_map(t_env *e)
+int		free_int_map(t_env *e)
 {
 	int	j;
 
@@ -56,18 +56,16 @@ int	free_int_map(t_env *e)
 	return (0);
 }
 
-int	free_cam(t_env *e)
+int		free_cam(t_env *e)
 {
 	int	i;
 
-/*
 	i = 0;
 	while (i < 4)
 	{
 		matrix_free(e->cam->corner + i);
 		i++;
 	}
-*/
 	i = 0;
 	while (i < 3)
 	{
@@ -81,17 +79,14 @@ int	free_cam(t_env *e)
 	return (0);
 }
 
-int	ft_exit(t_env **e)
+int		ft_exit(t_env **e)
 {
 	free((*e)->z_buffer);
 	free_int_map(*e);
-//	free_map(&((*e)->vect_map), *e);
-	free_map(&((*e)->color_map),*e);
-	free_cam(*e);	
+	free_map(&((*e)->color_map), *e);
+	free_cam(*e);
 	mlx_destroy_image((*e)->mlx, (*e)->img);
 	mlx_destroy_window((*e)->mlx, (*e)->win);
-//	free(*e);
 	exit(0);
-//	*e = NULL;
 	return (0);
 }
