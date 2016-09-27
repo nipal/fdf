@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/09/14 00:25:54 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/09/18 14:40:39 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/09/27 08:29:10 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,11 @@ void	matrix_display(t_matrix *a)
 		j = 0;
 		while (j < a->x)
 		{
-			printf("%lf ", a->m[j + a->x * i]);
-//			ft_putnbr(a->m[j + a->x * i]);
-//			ft_putchar(' ');
+			ft_putnbr(a->m[j + a->x * i]);
+			ft_putchar(' ');
 			j++;
 		}
-		printf("\n");
-//		ft_putchar('\n');
+		ft_putchar('\n');
 		i++;
 	}
 }

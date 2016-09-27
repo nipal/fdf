@@ -6,13 +6,13 @@
 /*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/09 20:07:17 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/03/15 09:18:22 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/09/27 08:30:18 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "c_maths.h"
 
-void	matrix_put_in(double a, double b, double c, double d)
+void		matrix_put_in(double a, double b, double c, double d)
 {
 	t_matrix	*mat;
 

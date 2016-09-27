@@ -6,7 +6,7 @@
 /*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/05 01:46:49 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/03/05 09:38:25 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/09/27 07:54:09 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ double	ft_cos(double deg)
 		init = 0;
 		while (i < TRIGO_ACCURACY)
 		{
-			tab[i] = cos((((double) i) / ((double) TRIGO_ACCURACY)) * 2 * M_PI);
+			tab[i] = cos((((double)i) / ((double)TRIGO_ACCURACY)) * 2 * M_PI);
 			i++;
 		}
 	}
