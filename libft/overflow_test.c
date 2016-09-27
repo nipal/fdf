@@ -6,24 +6,24 @@
 /*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/10 23:52:21 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/09/12 07:49:21 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/09/27 12:19:58 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static	char	*clean_str(char	*nb)
+static	char	*clean_str(char *nb)
 {
 	int		i;
 	char	*nbr;
 
-	if ((i = 0) || !nb || !(nbr = ft_strdup(nb)))
+	if ((i = 0) || !nb
+		|| !(nbr = ft_strdup(nb)))
 		return (NULL);
 	while (nb[i])
 	{
 		if (!(nb[i] == '-' || nb[i] == '+' || !(nb[i] >= 0 && nb[i] <= 9)))
-			nbr[i] = ' ';
-		i++;
+			nbr[i++] = ' ';
 	}
 	i = 0;
 	while (nbr[i] == ' ')
@@ -35,7 +35,7 @@ static	char	*clean_str(char	*nb)
 	i = 0;
 	if (nbr[i] == '-')
 		i++;
-	while (nbr[i] >= '0' && nbr[i] <= '9')	
+	while (nbr[i] >= '0' && nbr[i] <= '9')
 		i++;
 	nbr[i] = '\0';
 	return (nbr);
@@ -58,8 +58,7 @@ int				is_int_over_flow(char *number)
 	{
 		free(tmp);
 		return (1);
-	}	
-	free(cleaned);
+	}
 	free(tmp);
 	return (0);
 }

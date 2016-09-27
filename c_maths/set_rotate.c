@@ -6,23 +6,14 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/09/14 00:25:54 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/09/16 08:05:34 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/09/27 08:02:34 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
 #include "c_maths.h"
-/*
-[0,1,2,3]
-[4,5,6,7]
-[8,9,a,b]
-[c,d,e,f]
 
-[0,1,2]
-[3,4,5]
-[6,7,8]
-*/
-static t_matrix	*init_xrot_matrix(double thetx)
+static	t_matrix	*init_xrot_matrix(double thetx)
 {
 	t_matrix	*r;
 
@@ -35,7 +26,7 @@ static t_matrix	*init_xrot_matrix(double thetx)
 	return (r);
 }
 
-static t_matrix	*init_yrot_matrix(double thety)
+static	t_matrix	*init_yrot_matrix(double thety)
 {
 	t_matrix	*r;
 
@@ -48,7 +39,7 @@ static t_matrix	*init_yrot_matrix(double thety)
 	return (r);
 }
 
-static t_matrix	*init_zrot_matrix(double thetz)
+static t_matrix		*init_zrot_matrix(double thetz)
 {
 	t_matrix	*r;
 
@@ -61,7 +52,7 @@ static t_matrix	*init_zrot_matrix(double thetz)
 	return (r);
 }
 
-t_matrix	*set_rotate(double thetx, double thety, double thetz)
+t_matrix			*set_rotate(double thetx, double thety, double thetz)
 {
 	t_matrix	*rx;
 	t_matrix	*ry;
@@ -80,7 +71,3 @@ t_matrix	*set_rotate(double thetx, double thety, double thetz)
 	matrix_free(&rz);
 	return (r);
 }
-/*
- *	supression des leaks potentiel sur avec matrix_free
- *	et le remlloc de matrix product 
- * */

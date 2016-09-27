@@ -6,12 +6,11 @@
 /*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/05 15:02:25 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/09/10 07:33:32 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/09/27 08:41:29 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-//void				free_the_node(t_fdgnl **begin, int fd);
 
 int			ft_strmchr(char *s, int c)
 {
@@ -43,7 +42,7 @@ char		*ft_str_magic(char *str1, char *str2)
 		return (NULL);
 	ft_strncat(result, str1, max1);
 	ft_strncat(result + ft_strlen(str1), str2, max2);
-//	free(str1);
+	free(str1);
 	return (result);
 }
 
@@ -112,7 +111,5 @@ int			get_next_line(int fd, char **line)
 	*line = str;
 	if (ret < 0)
 		return (-1);
-	else if (ret == 0)
-		free_one_node(&begin, fd);
 	return (*line != NULL && ((ret > 0) || (ft_strlen(*line) > 0)));
 }

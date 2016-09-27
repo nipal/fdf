@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/15 14:35:08 by jpirsch           #+#    #+#             */
-/*   Updated: 2015/04/05 18:33:19 by jpirsch          ###   ########.fr       */
+/*   Updated: 2016/09/12 07:48:00 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,6 @@ int					ft_isascii(int c);
 int					ft_isprint(int c);
 char				*ft_itoa(int n);
 t_list				*ft_lstnew(const void *content, size_t content_size);
-void				ft_lstdelone(t_list **alst, void (*del)(void *, size_t));
-void				ft_lstdel(t_list **alst, void (*del)(void *, size_t));
-void				ft_lstadd(t_list **alst, t_list *new);
-void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
-t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 void				*ft_memalloc(size_t size);
 void				*ft_memccpy(void *dst, const void *src, int c, size_t n);
 void				*ft_memchr(const void *s, int c, size_t n);
@@ -87,4 +82,5 @@ void				ft_swap(void *a, void *b);
 char				**ft_tabmalloc(size_t nbstr, size_t slen);
 int					ft_toupper(int c);
 int					ft_tolower(int c);
+int					is_int_over_flow(char *number);
 #endif

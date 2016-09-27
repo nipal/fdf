@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/09/14 00:25:54 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/03/14 19:25:39 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/09/27 08:28:22 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ t_matrix	*matrix_add(t_matrix *a, t_matrix *b)
 	}
 	return (c);
 }
-
 
 t_matrix	*matrix_add_in(t_matrix *a, t_matrix *b, t_matrix *c)
 {

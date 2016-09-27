@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/09/14 00:25:54 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/03/02 04:24:54 by jpirsch          ###   ########.fr       */
+/*   Updated: 2016/09/27 08:07:53 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ double	matrix_det(t_matrix *a)
 	int		j;
 	double	d;
 
-	// catch error in a better way ?
 	if (!a)
 		return (0);
 	d = 0;
@@ -28,7 +27,7 @@ double	matrix_det(t_matrix *a)
 		i = -1;
 		while (++i < a->x)
 		{
-				d += a->m[i + j * a->x] * d;
+			d += a->m[i + j * a->x] * d;
 		}
 	}
 	return (d);

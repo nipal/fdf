@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/30 14:38:59 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/09/27 19:04:16 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/09/27 19:15:33 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -431,12 +431,11 @@ t_matrix***	copy_vect_map(t_env *e)
 
 void	main_work(t_env *e)
 {	
-	t_matrix ***map = get_map(e);
-	(void)map;
-	t_cam	*cam = e->cam;
-	if (!e->cam)
-		dprintf(1, "Ther is no cam!!!\n");
-	base_change(e, cam, map);
+	t_matrix ***map;
+
+	if (!(map = get_map(e)))
+		return ;
+	base_change(e, e->cam, map);
 	e->vect_map = map;
 	draw_link_map(e, e->vect_map);
 	draw_base_cam(e);

@@ -6,7 +6,7 @@
 #    By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/09/13 19:48:58 by jpirsch           #+#    #+#              #
-#    Updated: 2016/09/14 01:11:16 by fjanoty          ###   ########.fr        #
+#    Updated: 2016/09/27 08:31:26 by fjanoty          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,6 @@ SRC		=	matrix_init.c \
 			matrix_buffer.c \
 			matrix_put_in.c \
 			eq_solve_2nd.c \
-			eq_solve_3rd.c \
 			eq_solve_4th.c \
 			set_rotate.c \
 			set_translate.c \
@@ -33,10 +32,8 @@ SRC		=	matrix_init.c \
 			free_mat.c \
 			matrix_new.c \
 			set_scale.c
-
 FLAGS		= -Wall -Wextra -Werror
-FLAGS-DEBUG = -g -Wall -Wextra -Werror
-OBJ			= $(SRC:.c=.o)
+OBJ		= $(SRC:.c=.o)
 
 all: $(NAME)
 
@@ -48,7 +45,6 @@ $(NAME): $(OBJ)
 	gcc -Ofast  -c $(SRC) $(FLAGS) -I ./
 #	gcc -Ofast $(FLAGS) -I ../includes/ -c $(SRC)
 
-
 clean:
 	rm -f $(OBJ)
 
@@ -56,8 +52,3 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
-
-gdb: fclean
-	gcc -Ofast  -c $(SRC) $(FLAGS) -I ./
-	ar rc $(NAME) $(OBJ)
-	ranlib $(NAME)

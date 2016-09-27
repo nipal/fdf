@@ -6,13 +6,9 @@
 /*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/05 15:02:25 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/09/10 07:33:32 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/09/27 19:07:34 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-//	soit le fd est au debut
-//	soit il est aux milieux
-//	soit il est a la fin mais en faitc'est comme au milieux
 
 #include "get_next_line.h"
 
