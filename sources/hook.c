@@ -6,7 +6,7 @@
 /*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/27 18:52:37 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/09/29 20:01:40 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/09/29 21:57:28 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int		loop_hook(t_env *e)
 {
 	double	incr;
 
-	incr = 0.05;
+	incr = 0.0005;
 	loop_hook_brgin(e);
 	(e->key.fi1 == 1) ? e->dr1 += incr: (void)e;
 	(e->key.fi_1 == 1) ? e->dr1 -= incr: (void)e;
