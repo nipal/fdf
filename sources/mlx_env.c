@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/10 04:08:06 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/09/27 18:46:24 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/09/29 19:32:22 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,6 +186,8 @@ void	env_end(t_env *e)
 {
 	t_cam		*cam;
 
+	e->dr1 = 0;
+	e->dr2 = 0;
 	e->ecr_x = SIZE_Y;
 	e->ecr_y = SIZE_X;
 	e->proj = 0;

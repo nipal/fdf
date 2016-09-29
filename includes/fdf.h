@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/29 02:21:11 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/09/29 17:17:00 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/09/29 19:38:14 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,10 @@ typedef struct			s_key
 	int					rot_cam_z2;
 	int					speed_up;
 	int					speed_down;
+	int					fi1;
+	int					fi_1;
+	int					fi2;
+	int					fi_2;
 }						t_key;
 
 
@@ -148,6 +152,8 @@ typedef struct			s_env
 	double				rot_z;
 	double				speed;
 	t_cam				*cam;
+	double				dr1;
+	double				dr2;
 }						t_env;
 
 typedef struct			s_point

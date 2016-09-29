@@ -6,7 +6,7 @@
 /*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 08:33:48 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/09/29 17:29:29 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/09/29 19:59:54 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,13 +70,13 @@ t_matrix	***finishe_get_map_torus(double **tab, int *vect_nb, double *max, t_env
 	{
 		i = 0;
 		if (!(map_mat[j] = (t_matrix**)malloc(sizeof(t_matrix*) * max[0]))
-			|| !(rot_y = set_rotate(0, (j * M_PI * 2) / (max[1] - 1), 0)))
+			|| !(rot_y = set_rotate(0, e->dr1 + (j * M_PI * 2) / (max[1] - 1), 0)))
 			return (NULL);
 		while (i < max[0])
 		{
 			result = (30 * tab[j][i] / (1 * max[2])) + max[4]; 
-			vect_nb[0] = max[3] + result * cos(((double)(2 * M_PI * i)) / (max[0] - 1));//(i - (max[0] * 0.5)) * ((e->ecr_x * 0.5) / max[0]);
-			vect_nb[1] = max[3] + result * sin(((double)(2 * M_PI * i)) / (max[0] - 1));//(j - (max[1] * 0.5)) * ((e->ecr_y * 0.5) / max[1]);
+			vect_nb[0] = max[3] + result * cos((e->dr2 + (double)(M_PI * (i + (max[0] - 1) / 2))) / (max[0] - 1));//(i - (max[0] * 0.5)) * ((e->ecr_x * 0.5) / max[0]);
+			vect_nb[1] = max[3] + result * sin((e->dr2 + (double)(M_PI * (i + (max[0] - 1) / 2))) / (max[0] - 1));//(j - (max[1] * 0.5)) * ((e->ecr_y * 0.5) / max[1]);
 			vect_nb[2] = 0;//(100 * ((tab[j][i] - ((e->z_max - e->z_min) / 2))) / (max[2]));
 			
 			if (!(tmp = vect_new_verti(vect_nb, 3))
@@ -124,8 +124,8 @@ t_matrix	***get_map(t_env *e)
 	max[0] = e->size_map_x;
 	max[1] = e->size_map_y;
 	max[2] = ((e->z_max - e->z_min)) ? (e->z_max - e->z_min) : 1;
-	max[3] = 500;	// r1
-	max[4] = 100;	// r2
+	max[3] = 0;	// r1
+	max[4] = 300;	// r2
 	if (!(tab = cast_tab(e->map, max[0], max[1])))
 		return (NULL);
 	if (10 > 11)

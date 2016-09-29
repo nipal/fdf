@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+/* ********************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   hook.c                                             :+:      :+:    :+:   */
@@ -6,7 +6,7 @@
 /*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/27 18:52:37 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/09/27 18:57:38 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/09/29 20:01:40 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,14 @@ void	loop_hook_brgin(t_env *e)
 
 int		loop_hook(t_env *e)
 {
+	double	incr;
+
+	incr = 0.05;
 	loop_hook_brgin(e);
+	(e->key.fi1 == 1) ? e->dr1 += incr: (void)e;
+	(e->key.fi_1 == 1) ? e->dr1 -= incr: (void)e;
+	(e->key.fi2 == 1) ? e->dr2 += 300 * incr: (void)e;
+	(e->key.fi_2 == 1) ? e->dr2 -= 300 * incr: (void)e;
 	(e->key.isometric == 1) ? e->proj = 0 : (void)e->key.echap;
 	(e->key.parallel == 1) ? e->proj = 1 : (void)e->key.echap;
 	(e->key.conic == 1) ? e->proj = 2 : (void)e->key.echap;
