@@ -347,7 +347,7 @@ void	draw_point_old(t_env *e)
 	else
 	{
 		draw_line(e, mat_line);
-		matrix_free(&mat_line);
+		//matrix_free(&mat_line);
 	}
 
 
@@ -359,7 +359,7 @@ void	draw_point_old(t_env *e)
 	else
 	{
 		draw_line(e, mat_line);
-		matrix_free(&mat_line);
+		//matrix_free(&mat_line);
 	}
 
 	//draw_line(e, mat_line);
@@ -371,7 +371,7 @@ void	draw_point_old(t_env *e)
 	else
 	{
 		draw_line(e, mat_line);
-		matrix_free(&mat_line);
+		//matrix_free(&mat_line);
 	}
 //	draw_line(e, (mat_line));
 //*/
@@ -401,15 +401,15 @@ void	draw_point_old(t_env *e)
 	print_state(e);
 	mlx_do_sync(e->mlx);
 
-	matrix_free(&pt1);
-	matrix_free(&pt2);
-	matrix_free(&pt3);
-	matrix_free(&pt4);
-	matrix_free(&pt5);
-	matrix_free(&rotate);
-	matrix_free(&color);
-	matrix_free(&color2);
-	matrix_free(&color3);
+//	matrix_free(&pt1);
+//	matrix_free(&pt2);
+//	matrix_free(&pt3);
+//	matrix_free(&pt4);
+//	matrix_free(&pt5);
+//	matrix_free(&rotate);
+//	matrix_free(&color);
+//	matrix_free(&color2);
+//	matrix_free(&color3);
 }
 
 //	ca c'est un peu la boucle principale
@@ -757,9 +757,9 @@ void	main_work(t_env *e)
 		dprintf(1, "Ther is no cam!!!\n");
 	base_change(e, cam, map);
 	e->vect_map = map;
-//	draw_face_map(e, e->vect_map);
-//	draw_link_map2(e, e->vect_map);
-	draw_link_map(e, e->vect_map);
+	draw_link_map2(e, e->vect_map);
+	draw_face_map(e, e->vect_map);
+//	draw_link_map(e, e->vect_map);
 	draw_base_cam(e);
 	mlx_put_image_to_window(e->mlx, e->win, e->img, 0, 0);
 	mlx_do_sync(e->mlx);

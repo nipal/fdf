@@ -17,6 +17,9 @@
 # include <errno.h>
 # include <string.h>
 
+# define SIZE_Y 1500
+# define SIZE_X 990
+
 # define R 0
 # define G 1
 # define B 2
@@ -111,8 +114,6 @@ typedef	struct			s_cam
 //*/
 
 
-# define SIZE_Y 300
-# define SIZE_X 300
 # define PRINT_DIAG 0
 typedef struct			s_env
 {

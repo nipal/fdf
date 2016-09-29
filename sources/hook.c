@@ -288,7 +288,10 @@ int		loop_hook(t_env *e)
 	ft_bzero(e->z_buffer, SIZE_X * SIZE_Y * sizeof(double));
 //	main_work(e);
 //	dprintf(1, "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$	avannnnnnnnnnt\n");
-	main_work(e);
+//	main_work(e);
+ft_putstr("a1\n");
+draw_point_old(e);
+ft_putstr("a2\n");
 //	dprintf(1, "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$	apreeeeeeeeeees\n");
 //	draw_point(e);
 //	draw_point_old(e);
