@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/29 02:21:11 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/09/27 18:57:30 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/09/29 17:17:00 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,8 +111,8 @@ typedef	struct			s_cam
 //*/
 
 
-# define SIZE_Y 300
-# define SIZE_X 300
+# define SIZE_Y 1900
+# define SIZE_X 1200
 # define PRINT_DIAG 0
 typedef struct			s_env
 {

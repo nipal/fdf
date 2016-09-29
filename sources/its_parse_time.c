@@ -6,7 +6,7 @@
 /*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/09 16:43:26 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/09/27 17:36:45 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/09/29 17:16:04 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ int			*get_number_from_str(char **char_nb, int *size)
 	while (i < *size)
 	{
 		tab_nb[i] = ft_atoi(char_nb[i]);
+		/*
 		if (is_int_over_flow(char_nb[i]))
 		{
 			tab_nb[i] = -42;
@@ -75,6 +76,7 @@ int			*get_number_from_str(char **char_nb, int *size)
 		{
 			tab_nb[i] = atoi(char_nb[i]);
 		}
+		*/
 		i++;
 	}
 	return (tab_nb);
