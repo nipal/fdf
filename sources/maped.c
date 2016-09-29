@@ -57,9 +57,9 @@ void		actu_vect_nb(int *vect_nb, int x, int y, int z)
 
 t_matrix	***get_map(t_env *e)
 {
-	double		z_emp;
 	t_matrix	***map_mat;
 	int			**tab;
+	double		z_emp;
 	int			x_max;
 	int			y_max;
 	int			i;
@@ -97,4 +97,38 @@ t_matrix	***get_map(t_env *e)
 		j++;
 	}
 	return (map_mat);
+}
+
+t_matrix	***torus_map(t_env *e, int x, int y)
+{
+	double		z_emp;
+	double		x_max;
+	double		y_max;
+	int			i;
+	int			i;
+	int			j;
+	int			r1;
+	int			r2;
+	t_matrix	***map;
+	t_matrix	**val_map;
+	
+	x_max = e->size_map_x;
+	y_max = e->size_map_y;
+	z_emp = ((e->z_max - e->z_min))? (e->z_max - e->z_min): 1;
+	val_map = e->map;
+	if (!(map = (t_matrix***)malloc(sizeof(t_matrix**) * y)))
+		return (NULL);
+	j = 0;
+	while (j < y)
+	{
+		if (!(map[j] = (t_matrix**)malloc(sizeof(t_matrix*) * x)))
+			return (NULL);
+		i = 0;
+		while (i < x)
+		{
+			if (!(map[j][i] = ))
+			i++;
+		}
+		j++;
+	}
 }
