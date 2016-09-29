@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/30 14:38:59 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/09/29 21:51:09 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/09/29 23:12:09 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,10 @@ t_matrix	*init_mat_line(t_matrix *pt1, t_matrix *pt2
 		|| ((!(diff = matrix_sub(pt2, pt1)) && matrix_free(&mat_line))))
 		return (NULL);
 	diff->m[Z] = 0;
-	norme = matrix_dot_product(diff, diff);
-	norme = sqrt(norme);
+	norme = MAX(ABS(diff->m[0]), ABS(diff->m[1]));
+//	norme = MAX(ABS(diff->m[2]), norme);
+//	norme = matrix_dot_product(diff, diff);
+//	norme = sqrt(norme);
 	mat_line->m[NORME] = norme;
 	matrix_scalar_product(diff, 1 / norme);
 	ft_memmove(mat_line->m, pt1->m, sizeof(double) * 3);

@@ -6,7 +6,7 @@
 /*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/27 18:52:37 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/09/29 21:57:28 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/09/29 23:23:09 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,11 @@ int		loop_hook(t_env *e)
 {
 	double	incr;
 
-	incr = 0.0005;
+	incr = 0.0003;
 	loop_hook_brgin(e);
-	(e->key.fi1 == 1) ? e->dr1 += incr: (void)e;
-	(e->key.fi_1 == 1) ? e->dr1 -= incr: (void)e;
-	(e->key.fi2 == 1) ? e->dr2 += 300 * incr: (void)e;
+	(e->key.fi1 == 1) ? e->dr1 += 50 *incr: (void)e;
+	(e->key.fi_1 == 1) ? e->dr1 -= 50 * incr: (void)e;
+	(e->key.fi2 == 1) ? e->dr2 += 150 * incr: (void)e;
 	(e->key.fi_2 == 1) ? e->dr2 -= 300 * incr: (void)e;
 	(e->key.isometric == 1) ? e->proj = 0 : (void)e->key.echap;
 	(e->key.parallel == 1) ? e->proj = 1 : (void)e->key.echap;
