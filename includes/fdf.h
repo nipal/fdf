@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/29 02:21:11 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/09/29 19:38:14 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/09/29 23:38:39 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ typedef struct			s_key
 	int					rot_cam_z2;
 	int					speed_up;
 	int					speed_down;
+	int					speed_stop;
 	int					fi1;
 	int					fi_1;
 	int					fi2;

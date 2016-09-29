@@ -6,7 +6,7 @@
 /*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/27 18:52:37 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/09/29 23:23:09 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/09/29 23:41:53 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,12 @@ int		loop_hook(t_env *e)
 {
 	double	incr;
 
-	incr = 0.0003;
+	incr = 0.003;
 	loop_hook_brgin(e);
-	(e->key.fi1 == 1) ? e->dr1 += 50 *incr: (void)e;
-	(e->key.fi_1 == 1) ? e->dr1 -= 50 * incr: (void)e;
-	(e->key.fi2 == 1) ? e->dr2 += 150 * incr: (void)e;
-	(e->key.fi_2 == 1) ? e->dr2 -= 300 * incr: (void)e;
+	(e->key.fi1 == 1) ? e->dr1 += 5 *incr: (void)e;
+	(e->key.fi_1 == 1) ? e->dr1 -= 5 * incr: (void)e;
+	(e->key.fi2 == 1) ? e->dr2 += 15 * incr: (void)e;
+	(e->key.fi_2 == 1) ? e->dr2 -= 15 * incr: (void)e;
 	(e->key.isometric == 1) ? e->proj = 0 : (void)e->key.echap;
 	(e->key.parallel == 1) ? e->proj = 1 : (void)e->key.echap;
 	(e->key.conic == 1) ? e->proj = 2 : (void)e->key.echap;
@@ -62,6 +62,7 @@ int		loop_hook(t_env *e)
 	(e->key.b == 1) ? e->b += 20 : (void)e->key.echap;
 	(e->key.speed_up == 1) ? e->speed += 1 : (void)e;
 	(e->key.speed_down == 1) ? e->speed -= 1 : (void)e;
+	(e->key.speed_stop == 1) ? e->speed = 0 : (void)e;
 	increm_pos_cam(e);
 	ft_bzero(e->data, e->size_line * e->ecr_y);
 	ft_bzero(e->z_buffer, SIZE_X * SIZE_Y * sizeof(double));

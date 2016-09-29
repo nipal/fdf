@@ -6,7 +6,7 @@
 /*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/27 18:52:27 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/09/29 19:29:44 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/09/29 23:40:08 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,9 @@ int		key_release(int keycode, t_env *e)
 	(keycode == 7) ? e->key.fi_1 = 0 : (void)keycode;
 	(keycode == 8) ? e->key.fi2 = 0 : (void)keycode;
 	(keycode == 9) ? e->key.fi_2 = 0 : (void)keycode;
-	(keycode == 78) ? e->key.speed_down = 0 : (void)keycode;
-	(keycode == 69) ? e->key.speed_up = 0 : (void)keycode;
+	(keycode == 27) ? e->key.speed_down = 0 : (void)keycode;
+	(keycode == 24) ? e->key.speed_up = 0 : (void)keycode;
+	(keycode == 29) ? e->key.speed_stop = 0 : (void)keycode;
 	(keycode == 13) ? e->key.rot_x1 = 0 : (void)keycode;
 	(keycode == 12) ? e->key.rot_y1 = 0 : (void)keycode;
 	(keycode == 0) ? e->key.rot_z1 = 0 : (void)keycode;

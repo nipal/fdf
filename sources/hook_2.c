@@ -6,7 +6,7 @@
 /*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/27 18:52:17 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/09/29 19:36:54 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/09/29 23:42:51 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	init_t_key_2(t_key *key)
 	key->rot_cam_y2 = 0;
 	key->speed_up = 0;
 	key->speed_down = 0;
+	key->speed_stop = 0;
 	key->fi1 = 0;
 	key->fi_1 = 0;
 	key->fi2 = 0;
@@ -90,8 +91,9 @@ int		key_press(int keycode, t_env *e)
 	(keycode == 7) ? e->key.fi_1 = 1 : (void)keycode;
 	(keycode == 8) ? e->key.fi2 = 1 : (void)keycode;
 	(keycode == 9) ? e->key.fi_2 = 1 : (void)keycode;
-	(keycode == 78) ? e->key.speed_down = 1 : (void)keycode;
-	(keycode == 69) ? e->key.speed_up = 1 : (void)keycode;
+	(keycode == 27) ? e->key.speed_down = 1 : (void)keycode;
+	(keycode == 24) ? e->key.speed_up = 1 : (void)keycode;
+	(keycode == 29) ? e->key.speed_stop = 1 : (void)keycode;
 	(keycode == 13) ? e->key.rot_x1 = 1 : (void)keycode;
 	(keycode == 12) ? e->key.rot_y1 = 1 : (void)keycode;
 	(keycode == 0) ? e->key.rot_z1 = 1 : (void)keycode;
