@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/30 14:38:59 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/09/29 23:12:09 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/09/30 04:07:10 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -439,9 +439,14 @@ void	main_work(t_env *e)
 		return ;
 	base_change(e, e->cam, map);
 	e->vect_map = map;
-	draw_link_map(e, e->vect_map);
-//	draw_face_map(e, e->vect_map);
-//	draw_link_map2(e, e->vect_map);
+//	dprintf(1, "\n\ne->draw:%d\n\n", e->draw);
+	if (e->draw % 2 == 0)
+		draw_link_map(e, e->vect_map);
+	else
+	{
+		draw_face_map(e, e->vect_map);
+		draw_link_map2(e, e->vect_map);
+	}
 	draw_base_cam(e);
 	mlx_put_image_to_window(e->mlx, e->win, e->img, 0, 0);
 	mlx_do_sync(e->mlx);

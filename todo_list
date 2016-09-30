@@ -1,0 +1,9 @@
+-mapper mieux la direction de la camera
+-mapper les different affichage (ligne, surface)
+-mapper les "projection" ==> {plan, sphere, tor}
+
+-toruver les segsault:
+	-fermeture
+	-mars & triangle
+
+-finir de normer:

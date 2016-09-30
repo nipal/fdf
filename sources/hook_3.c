@@ -6,7 +6,7 @@
 /*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/27 18:52:27 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/09/29 23:40:08 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/09/30 04:21:20 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ void	key_release_end(int keycode, t_env *e)
 
 int		key_release(int keycode, t_env *e)
 {
+	(keycode == 45) ? e->key.view = 0 : (void)keycode;
+	(keycode == 46) ? e->key.draw = 0 : (void)keycode;
 	(keycode == 6) ? e->key.fi1 = 0 : (void)keycode;
 	(keycode == 7) ? e->key.fi_1 = 0 : (void)keycode;
 	(keycode == 8) ? e->key.fi2 = 0 : (void)keycode;
@@ -100,26 +102,45 @@ void	increm_pos_cam(t_env *e)
 	matrix_free(&move);
 }
 
+int		reset_base_cam(t_cam *cam)
+{
+	int	i;
+
+	i = 0;
+	while (i < 3)
+	{
+		matrix_free(cam->base + i);
+		if (!(cam->base[i] = vect_new_vertfd(i == 0, i == 1, i == 2)))
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 void	manage_cam_rot(t_env *e)
 {
-	int				i;
-	t_matrix		*tmp;
-	t_matrix		*rot;
-	t_matrix		*mat_rot;
-	static	double	deg = 0.03;
+	int					i;
+	t_matrix			*tmp;
+	static	t_matrix	*rot = NULL;
+	t_matrix			*mat_rot;
+	static	double	deg = 0.05;
 
-	if (!(rot = matrix_init(1, 3)))
+	if (!(reset_base_cam(e->cam)))
 		return ;
-	(e->key.rot_cam_z2) ? rot->m[2] -= deg : (void)e;
-	(e->key.rot_cam_z1) ? rot->m[2] += deg : (void)e;
-	(e->key.rot_cam_x2) ? rot->m[0] -= deg : (void)e;
-	(e->key.rot_cam_x1) ? rot->m[0] += deg : (void)e;
-	(e->key.rot_cam_y2) ? rot->m[1] -= deg : (void)e;
-	(e->key.rot_cam_y1) ? rot->m[1] += deg : (void)e;
+	if (!rot && !(rot = matrix_init(1, 3)) && dprintf(1, "\n\nnew rooooo!!\n\n\n"))
+		return ;
+	rot->m[2] *= 0.95;
+	rot->m[0] *= 0.98;
+	rot->m[2] -= (e->key.rot_cam_z2 == 1) ? 2 * deg : 0 ;
+	rot->m[2] += (e->key.rot_cam_z1 == 1) ? 2 * deg : 0 ;
+	rot->m[1] -= (e->key.rot_cam_x2 == 1) ? deg : 0 ;
+	rot->m[1] += (e->key.rot_cam_x1 == 1) ? deg : 0 ;
+	rot->m[0] -= (e->key.rot_cam_y2 == 1) ? deg : 0 ;
+	rot->m[0] += (e->key.rot_cam_y1 == 1) ? deg : 0 ;
 	if (!(mat_rot = set_rotate(rot->m[0], rot->m[1], rot->m[2])))
 		return ;
 	i = -1;
-	while ((++i < 3) || (matrix_free(&mat_rot) && matrix_free(&rot)))
+	while ((++i < 3) || (matrix_free(&mat_rot)))
 	{
 		if (!(tmp = matrix_product(mat_rot, e->cam->base[i])))
 			return ;
@@ -127,5 +148,3 @@ void	manage_cam_rot(t_env *e)
 		e->cam->base[i] = tmp;
 	}
 }
-
-

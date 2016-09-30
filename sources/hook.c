@@ -6,7 +6,7 @@
 /*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/27 18:52:37 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/09/29 23:41:53 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/09/30 04:03:08 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,10 @@ int		loop_hook(t_env *e)
 	(e->key.speed_up == 1) ? e->speed += 1 : (void)e;
 	(e->key.speed_down == 1) ? e->speed -= 1 : (void)e;
 	(e->key.speed_stop == 1) ? e->speed = 0 : (void)e;
+	e->view += (e->key.view == 1 && e->view_sw == 0) ? e->view_sw = 1 : 0;
+	e->view_sw = (e->key.view == 0 && e->view_sw == 1) ? 0 : e->view_sw;
+	e->draw += (e->key.draw == 1 && e->draw_sw == 0) ? e->draw_sw = 1 : 0;
+	e->draw_sw = (e->key.draw == 0 && e->draw_sw == 1) ? 0 : e->draw_sw;
 	increm_pos_cam(e);
 	ft_bzero(e->data, e->size_line * e->ecr_y);
 	ft_bzero(e->z_buffer, SIZE_X * SIZE_Y * sizeof(double));

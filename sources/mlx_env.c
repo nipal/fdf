@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/10 04:08:06 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/09/29 19:32:22 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/09/30 04:05:25 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,17 @@ void	vectpx_to_img(t_env *e, t_matrix *pos_color)
 {
 	int	x;
 	int	y;
+	int	z;
 	int	r;
 	int	g;
 	int	b;
+	double	dist;
 
 	x = (int)pos_color->m[0];
 	y = (int)pos_color->m[1];
 	x += SIZE_Y / 2;
 	y += SIZE_X / 2;
+	z = (int)pos_color->m[2];
 	if (x < 0 || x >= e->ecr_x || y < 0 || y >= e->ecr_y || pos_color->m[2] < 0
 		|| (pos_color->m[2] >
 			e->z_buffer[x + y * e->ecr_x] && e->z_buffer[x + y * e->ecr_x]))
@@ -43,6 +46,11 @@ void	vectpx_to_img(t_env *e, t_matrix *pos_color)
 	r = (int)pos_color->m[3] + 0.5;
 	g = (int)pos_color->m[4] + 0.5;
 	b = (int)pos_color->m[5] + 0.5;
+	(void)dist;
+//	dist = sqrt(x * x + y * y + z * z) / 300;
+//	r = (int)(((double)r + (125.0 * dist)) / ((dist) + 1.0));
+//	g = (int)(((double)g + (125.0 * dist)) / ((dist) + 1.0));
+//	b = (int)(((double)b + (125.0 * dist)) / ((dist) + 1.0));
 	e->data[y * e->size_line + x * 4 + 2] = r;
 	e->data[y * e->size_line + x * 4 + 1] = g;
 	e->data[y * e->size_line + x * 4] = b;
@@ -217,6 +225,8 @@ void	env(int **map, int size_x, int size_y)
 
 	if (!(z_dim = get_max_zdim(map, size_x, size_y)))
 		return ;
+	e.view = 0;
+	e.draw = 0;
 	e.z_min = z_dim->m[0];
 	e.z_max = z_dim->m[1];
 	e.rot_x = (20.0 / 360.0) * 2 * M_PI;

@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/29 02:21:11 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/09/29 23:38:39 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/09/30 03:56:37 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,8 @@ typedef struct			s_key
 	int					fi_1;
 	int					fi2;
 	int					fi_2;
+	int					view;
+	int					draw;
 }						t_key;
 
 
@@ -155,6 +157,10 @@ typedef struct			s_env
 	t_cam				*cam;
 	double				dr1;
 	double				dr2;
+	int					view;
+	int					view_sw;
+	int					draw;
+	int					draw_sw;
 }						t_env;
 
 typedef struct			s_point

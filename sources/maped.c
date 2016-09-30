@@ -6,7 +6,7 @@
 /*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 08:33:48 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/09/29 23:18:55 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/09/30 04:01:28 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,9 +164,9 @@ t_matrix	***get_map(t_env *e)
 	max[4] = max[3] * 3.0 / 5.0;	// r2
 	if (!(tab = cast_tab(e->map, max[0], max[1])))
 		return (NULL);
-	if (10 > 11)
+	if (e->view % 3 == 0)
 		return (finishe_get_map(tab, vect_nb, max, e));
-	else if (9 < 8)
+	else if (e->view % 3 == 1)
 	{
 		max[3] = 0;	// r1
 		return (finishe_get_map_circle(tab, vect_nb, max, e));
