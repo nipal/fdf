@@ -6,7 +6,7 @@
 /*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/09 12:17:52 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/09/27 16:52:02 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/09/30 04:56:31 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,6 @@ int		free_cam(t_env *e)
 {
 	int	i;
 
-	i = 0;
-	while (i < 4)
-	{
-		matrix_free(e->cam->corner + i);
-		i++;
-	}
 	i = 0;
 	while (i < 3)
 	{
