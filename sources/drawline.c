@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/30 14:38:59 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/09/30 20:13:04 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/09/30 20:16:34 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,9 +145,7 @@ int		draw_triangle(t_env *e, t_matrix *mat_line, t_matrix *pt3, t_matrix *c3)
 		org = print;
 	}
 	matrix_free(&diff);
-	dprintf(1, "e15\n");
 	matrix_free(&print);
-	dprintf(1, "e16\n");
 	return (1);
 }
 
@@ -248,12 +246,6 @@ int		are_they_out(t_matrix *vect1, t_matrix *vect2, t_env *e)
 	return (0);
 }
 
-/*
-int	ft_putdebug()
-{
-	return ();
-}
-*/
 
 void	draw_face_map(t_env *e, t_matrix ***map)
 {
@@ -263,19 +255,14 @@ void	draw_face_map(t_env *e, t_matrix ***map)
 	t_matrix	*c1;
 	t_matrix	*c2;
 
-//ft_putstr("b0\n");
 	j = 0;
 	mat_line = NULL;
-//ft_putstr("b1\n");
 	while (j < e->size_map_y)
 	{
-//ft_putstr("b2\n");
 		i = 0;
 		while (i < e->size_map_x)
 		{
-//ft_putstr("b3\n");
 			c1 = e->color_map[j][i];
-//ft_putstr("b4\n");
 			if (i > e->size_map_x - 2 || j > e->size_map_y - 2
 				|| (!(c1 = e->color_map[j][i]))
 				|| (!(c2 = e->color_map[j + 1][i + 1]))
@@ -284,23 +271,13 @@ void	draw_face_map(t_env *e, t_matrix ***map)
 				|| (!draw_triangle(e, mat_line, map[j][i + 1], c2))
 				|| (!(c2 = e->color_map[j + 1][i]))
 				|| !dprintf(1, "--aa") || ((!draw_triangle(e, mat_line, map[j + 1][i], c2))) || !dprintf(1, "aa--	\n"))
-			{
-//ft_putstr("b5\n");
-				dprintf(1, "mouhhh\n");
 				matrix_free(&mat_line);
-			}
 			else
-			{
-//ft_putstr("b6\n");
 				matrix_free(&mat_line);
-			}
-//ft_putstr("b7\n");
 			i++;
 		}
-//ft_putstr("b7\n");
 		j++;
 	}
-//ft_putstr("b5\n");
 }
 
 t_matrix	*base_change_scalar(t_cam *cam, t_matrix *vect)
@@ -459,28 +436,17 @@ void	main_work(t_env *e)
 
 	if (!(map = get_map(e)))
 		return ;
-//		ft_putstr("a0\n");
 	base_change(e, e->cam, map);
-//		ft_putstr("a1\n");
 	e->vect_map = map;
-//		ft_putstr("a2\n");
-//	dprintf(1, "\n\ne->draw:%d\n\n", e->draw);
 	if (e->draw % 2 == 0)
 		draw_link_map(e, e->vect_map);
 	else
 	{
-//		ft_putstr("a3\n");
 		draw_face_map(e, e->vect_map);
-//		ft_putstr("a4\n");
 		draw_link_map2(e, e->vect_map);
-//		ft_putstr("a5\n");
 	}
-//		ft_putstr("a6\n");
 	draw_base_cam(e);
-//		ft_putstr("a7\n");
 	mlx_put_image_to_window(e->mlx, e->win, e->img, 0, 0);
-//		ft_putstr("a8\n");
 	mlx_do_sync(e->mlx);
-//		ft_putstr("a9\n");
 	free_map(&map, e);
 }
