@@ -6,7 +6,7 @@
 /*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/01 03:45:15 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/10/01 06:09:29 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/10/01 23:47:02 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include <unistd.h>
 #include <stdio.h>
 
-int		draw_line(t_env *e, t_matrix *mat_line)
+int			draw_line(t_env *e, t_matrix *mat_line)
 {
 	int			i;
 	int			size;
@@ -101,7 +101,8 @@ t_matrix	*init_mat_line2(t_matrix *pt_color, t_matrix *pt3, t_matrix *c3)
 	return (mat_l);
 }
 
-int		draw_triangle(t_env *e, t_matrix *mat_line, t_matrix *pt3, t_matrix *c3)
+int			draw_triangle(t_env *e, t_matrix *mat_line,
+		t_matrix *pt3, t_matrix *c3)
 {
 	int			i;
 	t_matrix	*diff;

@@ -6,7 +6,7 @@
 /*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/29 02:21:11 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/10/01 19:14:29 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/10/01 23:35:52 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@
 # define DB 11
 # define NORME 12
 
+# define BETA e->beta
+
 typedef struct			s_key
 {
 	int					echap;
@@ -97,12 +99,11 @@ typedef struct			s_key
 }						t_key;
 
 
-//*
+
 # define TOP_LEFT 0
 # define BOTOM_LEFT 1
 # define BOTOM_RIGHT 2
 # define TOP_RIGHT 3
-//# define MM 4
 
 # define LEFT 0 
 # define BOTOM 1
@@ -116,8 +117,6 @@ typedef	struct			s_cam
 	t_matrix			*dir;
 	t_matrix			*rot;
 }						t_cam;
-//*/
-
 
 # define SIZE_Y 1900
 # define SIZE_X 1200
@@ -189,7 +188,6 @@ void					init_t_key(t_key *key);
 int						key_press(int keycode, t_env *e);
 int						key_release(int keycode, t_env *e);
 
-
 void					init_t_key_2(t_key *key);
 void					init_t_key(t_key *key);
 void					key_press_end(int keycode, t_env *e);
@@ -201,18 +199,19 @@ int						increm_dir_cam(t_env *e);
 void					increm_pos_cam(t_env *e);
 void					manage_cam_rot(t_env *e);
 
-//	redessine et set les vars en fonction des inputs
 int						loop_hook(t_env *e);
 
 /*
 ** mlx_env
 */
+t_matrix				*finishe_color(t_env *e, double *pak);
+t_matrix				*get_max_zdim(int **map, int size_x, int size_y);
 void					px_to_img(t_env *e, int x, int y, int color);
 void					vectpx_to_img(t_env *e, t_matrix *pos_color);
 void					print_state(t_env *e);
 
 //	Fonction preparant l'env et qui lance le loop hook
-void	env(int **map, int size_x, int size_y);
+void					env(int **map, int size_x, int size_y);
 /*
 ** coord
 */
@@ -220,12 +219,14 @@ void	env(int **map, int size_x, int size_y);
 /*
  **	cam
  **/
-t_cam	*init_cam(double fov_y, double fov_x, t_env *e);
-void	describe_cam(t_cam *cam);
+t_cam					*init_cam(double fov_y, double fov_x, t_env *e);
+void					describe_cam(t_cam *cam);
 /*
  ** print_map	
  * */
-void	print_map(t_env *e, t_cam *cam, t_matrix ***map);
+void					define_color(t_matrix *point, t_matrix *color);
+void					get_point(t_matrix ***map, t_matrix **point, int i, int j);
+void					print_map(t_env *e, t_cam *cam, t_matrix ***map);
 
 /*
 ** draw
@@ -241,37 +242,46 @@ char					*maps_name(char *str);
 /*
 **	draw_line_triangle.c
 */
-int			draw_line(t_env *e, t_matrix *mat_line);
-t_matrix	*init_mat_line(t_matrix *pt1, t_matrix *pt2, t_matrix *c1, t_matrix *c2);
-t_matrix	*init_mat_line2(t_matrix *pt_color, t_matrix *pt3, t_matrix *c3);
-int			draw_triangle(t_env *e, t_matrix *mat_line, t_matrix *pt3, t_matrix *c3);
+int						draw_line(t_env *e, t_matrix *mat_line);
+t_matrix				*init_mat_line(t_matrix *pt1, t_matrix *pt2, t_matrix *c1, t_matrix *c2);
+t_matrix				*init_mat_line2(t_matrix *pt_color, t_matrix *pt3, t_matrix *c3);
+int						draw_triangle(t_env *e, t_matrix *mat_line, t_matrix *pt3, t_matrix *c3);
 
 /*
 **	draw_link_face.c
 */
-void	draw_link_map2(t_env *e, t_matrix ***map, t_matrix *c1, t_matrix *c2);
-void	draw_link_map(t_env *e, t_matrix ***map);
-void	draw_face_map(t_env *e, t_matrix ***map, t_matrix *mat_l);
+void					draw_link_map2(t_env *e, t_matrix ***map, t_matrix *c1, t_matrix *c2);
+void					draw_link_map(t_env *e, t_matrix ***map);
+void					draw_face_map(t_env *e, t_matrix ***map, t_matrix *mat_l);
 
 /*
 **	map_adapt_to_cam.c
 */
-void		conique_adapte(t_matrix *vect);
-int			is_out(t_matrix *vect, t_env *e);
-int			ato(t_matrix *vect1, t_matrix *vect2, t_env *e);
-t_matrix	*base_change_scalar(t_cam *cam, t_matrix *vect);
-void		base_change(t_env *e, t_cam *c, t_matrix ***map, t_matrix *rot_cam);
+void					conique_adapte(t_matrix *vect);
+int						is_out(t_matrix *vect, t_env *e);
+int						ato(t_matrix *vect1, t_matrix *vect2, t_env *e);
+t_matrix				*base_change_scalar(t_cam *cam, t_matrix *vect);
+void					base_change(t_env *e, t_cam *c, t_matrix ***map, t_matrix *rot_cam);
 
-//t_matrix	***get_map(double *z_max, double *z_min);
-t_matrix	***get_map(t_env *e);
-int			**get_the_map(int fd, int *x_max, int *y_max);
+/*
+**	its_parse_time.c
+*/
+t_list					*read_line_number(int fd);
+void					ft_replace(char *str, char *to_find, char replace);
+void					ft_replace(char *str, char *to_find, char replace);
+int						*get_number_from_str(char **char_nb, int *size);
+int						free_char_split(char **tab);
+t_list					*read_line_number(int fd);
 
-void	free_map(t_matrix	****map, t_env *e);
-int	free_int_map(t_env *e);
-int	free_cam(t_env *e);
-int	ft_exit(t_env **e);
+t_matrix				***get_map(t_env *e);
+int						**get_the_map(int fd, int *x_max, int *y_max);
 
-	void	draw_point_old(t_env *e);
-	void	main_work(t_env *e);
-double		**cast_tab(int **tab, int x, int y);
+void					free_map(t_matrix	****map, t_env *e);
+int						free_int_map(t_env *e);
+int						free_cam(t_env *e);
+int						ft_exit(t_env **e);
+
+void					draw_point_old(t_env *e);
+void					main_work(t_env *e);
+double					**cast_tab(int **tab, int x, int y);
 #endif

@@ -6,7 +6,7 @@
 /*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/30 14:38:59 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/10/01 19:13:52 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/10/01 23:18:49 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_matrix	**init_color_base(void)
 	return (color_base);
 }
 
-void	draw_base_cam(t_env *e, t_matrix *pt1, t_matrix *pt2)
+void		draw_base_cam(t_env *e, t_matrix *pt1, t_matrix *pt2)
 {
 	int			i;
 	int			coef_base;
@@ -89,7 +89,7 @@ t_matrix	***copy_vect_map(t_env *e)
 	return (map);
 }
 
-void	main_work(t_env *e)
+void		main_work(t_env *e)
 {
 	t_matrix	*color;
 	t_matrix	*color2;
@@ -110,7 +110,7 @@ void	main_work(t_env *e)
 		matrix_free(&color);
 		matrix_free(&color2);
 	}
-//	draw_base_cam(e, NULL, NULL);
+	draw_base_cam(e, NULL, NULL);
 	mlx_put_image_to_window(e->mlx, e->win, e->img, 0, 0);
 	mlx_do_sync(e->mlx);
 	free_map(&map, e);

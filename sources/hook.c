@@ -6,7 +6,7 @@
 /*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/01 01:26:10 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/10/01 18:02:04 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/10/01 23:39:38 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ void	loop_hook_begin(t_env *e)
 
 void	actu_anime_torus(t_env *e)
 {
-	static	int	sap = 0;
+	static	int		sap = 0;
+	static	double	a = 0.000001;
 
-//	(e->key.switch_anime == 1) ? e->increm *= -1: (void)e;
 	if (e->key.switch_anime == 0)
 		sap = 0;
 	else if (e->key.switch_anime == 1 && sap == 0 && (e->increm *= -1)
@@ -57,27 +57,18 @@ void	actu_anime_torus(t_env *e)
 	e->view_sw = (e->key.view == 0 && e->view_sw == 1) ? 0 : e->view_sw;
 	e->draw += (e->key.draw == 1 && e->draw_sw == 0) ? e->draw_sw = 1 : 0;
 	e->draw_sw = (e->key.draw == 0 && e->draw_sw == 1) ? 0 : e->draw_sw;
-
-	//	si on est dans le bon, si on est pas au max (defini selon le sens)
-	if (e->view % 3 != 0)
+	if (e->view > -1)
 	{
-		if ((e->increm < 0 && e->beta > M_PI / 4) 
+		if ((e->increm < 0 && e->beta > M_PI / 4)
 			|| (e->increm > 0 && e->beta < M_PI / 2))
-		{
 			e->beta += e->increm;
-			e->k = tan(e->beta);
-		}
-		else
-		{
-		//	e->view = (e->increm > 0) ? 0 :e->view ;
-		//	e->increm *= -1;
-//		e->beta = (e->increm > 0) ? M_PI / 2 + .000001: M_PI / 4 - .0000001;
-			e->k = tan(e->beta);
-		}
-		e->advence = (e->view % 3 == 2) ? (e->beta - (M_PI / 4)) / (M_PI / 4): 1;
+		e->beta = (e->increm < 0 && BETA < M_PI / 4) ? M_PI / 4 - a : BETA;
+		e->beta = (e->increm > 0 && BETA > M_PI / 2) ? M_PI / 2 + a : BETA;
+		e->k = tan(e->beta);
+		e->advence = (e->view % 2) ? (e->beta - (M_PI / 4)) / (M_PI / 4) : 1;
 		e->phi1 = 2 * M_PI / e->k;
-		e->phi2 = (e->view % 3 == 1) ? 2 * M_PI / e->k : (M_PI * (1 + e->advence)) / e->k;
-	//	e->k *= (e->view % 3 == 2) ? 1 + e->advence: 1;
+		e->phi2 = (e->view % 2 == 0) ? 2 * M_PI
+			/ e->k : (M_PI * (1 + e->advence)) / e->k;
 	}
 }
 
@@ -87,19 +78,17 @@ int		loop_hook(t_env *e)
 
 	incr = .003;
 	loop_hook_begin(e);
-	(e->key.fi1 == 1) ? e->dr1 += 5 *incr : (void)e;
+	(e->key.fi1 == 1) ? e->dr1 += 5 * incr : (void)e;
 	(e->key.fi_1 == 1) ? e->dr1 -= 5 * incr : (void)e;
 	(e->key.fi2 == 1) ? e->dr2 += 15 * incr : (void)e;
 	(e->key.fi_2 == 1) ? e->dr2 -= 15 * incr : (void)e;
 	(e->key.r == 1) ? e->r += 20 : (void)e->key.echap;
 	(e->key.g == 1) ? e->g += 20 : (void)e->key.echap;
 	(e->key.b == 1) ? e->b += 20 : (void)e->key.echap;
-	(e->key.speed_up == 1) ? e->speed += 1 : (void)e;
-	(e->key.speed_down == 1) ? e->speed -= 1 : (void)e;
+	(e->key.speed_up == 1) ? e->speed = 6 : (void)e;
+	(e->key.speed_down == 1) ? e->speed = -6 : (void)e;
 	(e->key.speed_stop == 1) ? e->speed = 0 : (void)e;
-	
 	actu_anime_torus(e);
-
 	increm_pos_cam(e);
 	ft_bzero(e->data, e->size_line * e->ecr_y);
 	ft_bzero(e->z_buffer, SIZE_X * SIZE_Y * sizeof(double));

@@ -6,25 +6,29 @@
 #    By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/05 01:32:20 by jpirsch           #+#    #+#              #
-#    Updated: 2016/10/01 04:01:20 by fjanoty          ###   ########.fr        #
+#    Updated: 2016/10/01 23:29:10 by fjanoty          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	../fdf
 SRC		= 	main.c \
 			mlx_env.c \
+			print_somthing.c \
 			hook.c \
 			hook_2.c \
 			hook_3.c \
+			hook_cam.c \
 		 	drawline.c \
 			draw_line_triangle.c \
 			draw_link_face.c \
 			map_adapt_to_cam.c \
 			maped.c \
 			print_map.c \
+			print_map_end.c \
 			cam.c \
 			exit.c \
-			its_parse_time.c 
+			its_parse_time.c \
+			its_parse_time_2.c 
 
 OBJ		= $(SRC:.c=.o)
 

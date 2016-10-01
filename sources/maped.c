@@ -6,49 +6,12 @@
 /*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 08:33:48 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/10/01 18:06:36 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/10/01 23:09:52 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "c_maths.h"
-
-void		actu_vect_nb(int *vect_nb, int x, int y, int z)
-{
-	if (!(vect_nb))
-		return ;
-	vect_nb[0] = x;
-	vect_nb[1] = y;
-	vect_nb[2] = z;
-}
-
-t_matrix	***finishe_get_map(double **tab, int *vect_nb, double *max, t_env *e)
-{
-	t_matrix	***map_mat;
-	int			j;
-	int			i;
-
-	if (!(map_mat = (t_matrix***)malloc(sizeof(t_matrix**) * max[1])))
-		return (NULL);
-	j = 0;
-	while (j < max[1])
-	{
-		i = 0;
-		if (!(map_mat[j] = (t_matrix**)malloc(sizeof(t_matrix*) * max[0])))
-			return (NULL);
-		while (i < max[0])
-		{
-			vect_nb[2] = (i - (max[0] * 0.5)) * ((e->ecr_x * 0.5) / max[0]);
-			vect_nb[1] = (j - (max[1] * 0.5)) * ((e->ecr_y * 0.5) / max[1]);
-			vect_nb[0] = (100
-				* ((tab[j][i] - ((e->z_max - e->z_min) / 2))) / (max[2]));
-			map_mat[j][i] = vect_new_verti(vect_nb, 3);
-			i++;
-		}
-		j++;
-	}
-	return (map_mat);
-}
 
 t_matrix	***malloc_tab_vect(int x, int y)
 {
@@ -69,20 +32,14 @@ t_matrix	***malloc_tab_vect(int x, int y)
 }
 
 /*
-**	L'idee ici c'est de realiser la position d'un point, en fonction
-**	du parametrage de l'animation/transformatioon colone par colone
+**	max:
+**		[0] : size_map_x
+**		[1] : size_map_y
+**		[2] : emplitude sur z de l'objet dans le monde
+**		[3] : emplitude sur y de l'objet sur l'ecran 	::R1::
+**		[4] : emplitude sur x de l'objet sur l'ecran	::R2::
 */
 
-/*
- **	max:
- **		[0] : size_map_x
- **		[1] : size_map_y
- **		[2] : emplitude sur z de l'objet dans le monde 
- **		[3] : emplitude sur y de l'objet sur l'ecran 	::R1::
- **		[4] : emplitude sur x de l'objet sur l'ecran	::R2::
- */
-
-//*
 void		define_position(t_matrix ***map_mat, double *max, int i, t_env *e)
 {
 	int			j;
@@ -91,27 +48,27 @@ void		define_position(t_matrix ***map_mat, double *max, int i, t_env *e)
 	t_matrix	*tmp;
 	int			vect_nb[3];
 
-	j = 0.0;
-	if (!(rot_y = set_rotate(0, e->dr1 + ((i - ((max[0] - 1) / 2)) * e->phi1) / (max[0] - 1), 0)))
+	j = -1;
+	if (!(rot_y = set_rotate(0, e->dr1 + ((i - ((max[0] - 1) / 2)) * e->phi1)
+		/ (max[0] - 1), 0)))
 		return ;
-	while (j < max[1])
+	while (++j < max[1])
 	{
-		result = (30 * e->map_d[j][i] / (1 * max[2])) + (max[4] * e->k); 
-	//	result *= (e->view % 3 == 2) ? 2: 1;
-		vect_nb[0] = (max[3] * e->k) + result * cos(e->dr2 + (e->phi2 * (j - ((max[1] - 1) / 2))) / (max[1] - 1));
-		vect_nb[1] = result * sin(e->dr2 + (e->phi2 * (j - ((max[1] - 1) / 2))) / (max[1] - 1));
-		vect_nb[2] = 0;	
+		result = (30 * e->map_d[j][i] / (1 * max[2])) + (max[4] * e->k);
+		vect_nb[0] = (max[3] * e->k) + result * cos(e->dr2 + (e->phi2
+				* (j - ((max[1] - 1) / 2))) / (max[1] - 1));
+		vect_nb[1] = result * sin(e->dr2 + (e->phi2 * (j - ((max[1] - 1) / 2)))
+				/ (max[1] - 1));
 		vect_nb[0] -= max[4] * (e->k - 1);
 		if (!(tmp = vect_new_verti(vect_nb, 3))
 				|| (!(map_mat[j][i] = matrix_product(rot_y, tmp))))
 			return ;
 		map_mat[j][i]->m[0] -= max[3] * (e->k) + max[4];
 		matrix_free(&tmp);
-		j++;
 	}
 	matrix_free(&rot_y);
 }
-//*/
+
 t_matrix	***finishe_get_map_torus(int *vect_nb, double *max, t_env *e)
 {
 	t_matrix	***map_mat;
@@ -154,13 +111,13 @@ double		**cast_tab(int **tab, int x, int y)
 }
 
 /*
- **	max:
- **		[0] : size_map_x
- **		[1] : size_map_y
- **		[2] : emplitude sur z de l'objet dans le monde 
- **		[3] : emplitude sur y de l'objet sur l'ecran 	::R1::
- **		[4] : emplitude sur x de l'objet sur l'ecran	::R2::
- */
+**	max:
+**		[0] : size_map_x
+**		[1] : size_map_y
+**		[2] : emplitude sur z de l'objet dans le monde
+**		[3] : emplitude sur y de l'objet sur l'ecran 	::R1::
+**		[4] : emplitude sur x de l'objet sur l'ecran	::R2::
+*/
 
 t_matrix	***get_map(t_env *e)
 {
@@ -174,9 +131,7 @@ t_matrix	***get_map(t_env *e)
 	max[2] = ((e->z_max - e->z_min)) ? (e->z_max - e->z_min) : 1;
 	max[3] = e->ecr_y * 0.70 / 5.0;
 	max[4] = max[3] * 3.0 / 5.0;
+	max[4] += max[3] * (1 - e->advence);
 	max[3] *= e->advence;
-	if (e->view % 3 == 0)
-		return (finishe_get_map(e->map_d, vect_nb, max, e));
-	else
-		return (finishe_get_map_torus(vect_nb, max, e));
+	return (finishe_get_map_torus(vect_nb, max, e));
 }
