@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/29 02:21:11 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/10/01 12:40:55 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/10/01 17:33:12 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,6 +170,7 @@ typedef struct			s_env
 	double				beta;
 	double				increm;
 	int					nb_frame;
+	double				advence;
 }						t_env;
 
 typedef struct			s_point

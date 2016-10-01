@@ -6,7 +6,7 @@
 /*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/01 01:26:10 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/10/01 12:48:26 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/10/01 18:02:04 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,21 @@ void	loop_hook_begin(t_env *e)
 
 void	actu_anime_torus(t_env *e)
 {
+	static	int	sap = 0;
+
+//	(e->key.switch_anime == 1) ? e->increm *= -1: (void)e;
+	if (e->key.switch_anime == 0)
+		sap = 0;
+	else if (e->key.switch_anime == 1 && sap == 0 && (e->increm *= -1)
+		&& (sap = 1))
+		;
 	e->view += (e->key.view == 1 && e->view_sw == 0) ? e->view_sw = 1 : 0;
 	e->view_sw = (e->key.view == 0 && e->view_sw == 1) ? 0 : e->view_sw;
 	e->draw += (e->key.draw == 1 && e->draw_sw == 0) ? e->draw_sw = 1 : 0;
 	e->draw_sw = (e->key.draw == 0 && e->draw_sw == 1) ? 0 : e->draw_sw;
 
 	//	si on est dans le bon, si on est pas au max (defini selon le sens)
-	if (e->view % 3 == 1)
+	if (e->view % 3 != 0)
 	{
 		if ((e->increm < 0 && e->beta > M_PI / 4) 
 			|| (e->increm > 0 && e->beta < M_PI / 2))
@@ -61,20 +69,24 @@ void	actu_anime_torus(t_env *e)
 		}
 		else
 		{
-			e->beta = (e->increm > 0) ? M_PI / 2 + .0000001: M_PI / 4 - .000001;
+		//	e->view = (e->increm > 0) ? 0 :e->view ;
+		//	e->increm *= -1;
+//		e->beta = (e->increm > 0) ? M_PI / 2 + .000001: M_PI / 4 - .0000001;
+			e->k = tan(e->beta);
 		}
+		e->advence = (e->view % 3 == 2) ? (e->beta - (M_PI / 4)) / (M_PI / 4): 1;
 		e->phi1 = 2 * M_PI / e->k;
-		e->phi2 = 2 * M_PI / e->k;
+		e->phi2 = (e->view % 3 == 1) ? 2 * M_PI / e->k : (M_PI * (1 + e->advence)) / e->k;
+	//	e->k *= (e->view % 3 == 2) ? 1 + e->advence: 1;
 	}
 }
 
 int		loop_hook(t_env *e)
 {
-	double	incr;
+	double		incr;
 
 	incr = .003;
 	loop_hook_begin(e);
-	(e->key.switch_anime == 1) ? e->increm *= -1 : (void)e;
 	(e->key.fi1 == 1) ? e->dr1 += 5 *incr : (void)e;
 	(e->key.fi_1 == 1) ? e->dr1 -= 5 * incr : (void)e;
 	(e->key.fi2 == 1) ? e->dr2 += 15 * incr : (void)e;
