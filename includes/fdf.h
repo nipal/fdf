@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/29 02:21:11 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/10/01 07:52:28 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/10/01 12:40:55 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ typedef struct			s_key
 	int					fi_2;
 	int					view;
 	int					draw;
+	int					switch_anime;
 }						t_key;
 
 
@@ -162,6 +163,13 @@ typedef struct			s_env
 	int					view_sw;
 	int					draw;
 	int					draw_sw;
+
+	double				k;
+	double				phi1;
+	double				phi2;
+	double				beta;
+	double				increm;
+	int					nb_frame;
 }						t_env;
 
 typedef struct			s_point

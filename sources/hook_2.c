@@ -6,7 +6,7 @@
 /*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/27 18:52:17 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/10/01 03:38:15 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/10/01 12:22:07 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,8 @@ void	key_press_end(int keycode, t_env *e)
 
 int		key_press(int keycode, t_env *e)
 {
-//	dprintf(1, "[%d]	", keycode);
+	dprintf(1, "[%d]	", keycode);
+	(keycode == 36) ? e->key.switch_anime = 1 : (void)keycode;
 	(keycode == 45) ? e->key.view = 1 : (void)keycode;
 	(keycode == 46) ? e->key.draw = 1 : (void)keycode;
 	(keycode == 6) ? e->key.fi1 = 1 : (void)keycode;

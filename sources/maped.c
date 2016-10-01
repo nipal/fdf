@@ -6,7 +6,7 @@
 /*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 08:33:48 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/10/01 08:40:25 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/10/01 12:50:47 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ t_matrix	***finishe_get_map(double **tab, int *vect_nb, double *max, t_env *e)
 			return (NULL);
 		while (i < max[0])
 		{
-			vect_nb[0] = (i - (max[0] * 0.5)) * ((e->ecr_x * 0.5) / max[0]);
+			vect_nb[2] = (i - (max[0] * 0.5)) * ((e->ecr_x * 0.5) / max[0]);
 			vect_nb[1] = (j - (max[1] * 0.5)) * ((e->ecr_y * 0.5) / max[1]);
-			vect_nb[2] = (100
+			vect_nb[0] = (100
 				* ((tab[j][i] - ((e->z_max - e->z_min) / 2))) / (max[2]));
 			map_mat[j][i] = vect_new_verti(vect_nb, 3);
 			i++;
@@ -85,37 +85,26 @@ t_matrix	***malloc_tab_vect(int x, int y)
 //*
 void		define_position(t_matrix ***map_mat, double *max, int i, t_env *e)
 {
-	static		double beta = M_PI / 2;
-	double		nb_frame = 5000;
-	double		increm = M_PI / (4 * nb_frame);
-	double		k = 1;
-
 	int			j;
 	double		result;
 	t_matrix	*rot_y;
 	t_matrix	*tmp;
 	int			vect_nb[3];
 
-	if (beta > M_PI / 4)
-	{
-		beta -= increm;
-	}
-	k = tan(beta);
-
 	j = 0;
-	if (!(rot_y = set_rotate(0, e->dr1 + ((i - (max[0] / 2)) * (M_PI * 2 / k)) / (max[0] - 1), 0)))
+	if (!(rot_y = set_rotate(0, e->dr1 + ((i - ((max[0] - 1) / 2)) * e->phi1) / (max[0] - 1), 0)))
 		return ;
 	while (j < max[1])
 	{
-		result = (30 * e->map_d[j][i] / (1 * max[2])) + (max[4] * k); 
-		vect_nb[0] = (max[3] * k) + result * cos(e->dr2 + ((2 * M_PI / k) * (j - (max[1] / 2))) / (max[1] - 1));
-		vect_nb[1] = result * sin(e->dr2 + ((2 * M_PI / k) * (j - (max[1] / 2))) / (max[1] - 1));
+		result = (30 * e->map_d[j][i] / (1 * max[2])) + (max[4] * e->k); 
+		vect_nb[0] = (max[3] * e->k) + result * cos(e->dr2 + (e->phi2 * (j - ((max[1] - 1) / 2))) / (max[1] - 1));
+		vect_nb[1] = result * sin(e->dr2 + (e->phi2 * (j - ((max[1] - 1) / 2))) / (max[1] - 1));
 		vect_nb[2] = 0;	
-		vect_nb[0] -= max[4] * (k - 1);
+		vect_nb[0] -= max[4] * (e->k - 1);
 		if (!(tmp = vect_new_verti(vect_nb, 3))
 				|| (!(map_mat[j][i] = matrix_product(rot_y, tmp))))
 			return ;
-		map_mat[j][i]->m[0] -= max[3] * (k - 1);
+		map_mat[j][i]->m[0] -= max[3] * (e->k) + max[4];
 		matrix_free(&tmp);
 		j++;
 	}
@@ -219,11 +208,11 @@ t_matrix	***get_map(t_env *e)
 	max[0] = e->size_map_x;
 	max[1] = e->size_map_y;
 	max[2] = ((e->z_max - e->z_min)) ? (e->z_max - e->z_min) : 1;
-	max[3] = e->ecr_y * 1.5 / 5.0;
+	max[3] = e->ecr_y * 0.75 / 5.0;
 	max[4] = max[3] * 3.0 / 5.0;
 	if (e->view % 3 == 0)
 		return (finishe_get_map(e->map_d, vect_nb, max, e));
-	else if (e->view % 3 == 1)
+	else if (e->view % 3 == 2)
 	{
 		max[3] = 0;
 		return (finishe_get_map_circle(e->map_d, vect_nb, max, e));

@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/10 04:08:06 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/10/01 07:51:16 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/10/01 12:45:23 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -216,6 +216,12 @@ void	env(int **map, int size_x, int size_y)
 
 	if (!(z_dim = get_max_zdim(map, size_x, size_y)))
 		return ;
+	e.k = 1;
+	e.phi1 = M_PI * 2;
+	e.phi2 = M_PI * 2;
+	e.beta = M_PI / 2 - 0.0001;
+	e.nb_frame = 0.1 * MAX(size_x, size_y);
+	e.increm = -(M_PI / (4 * e.nb_frame));
 	e.view = 0;
 	e.draw = 0;
 	e.z_min = z_dim->m[0];

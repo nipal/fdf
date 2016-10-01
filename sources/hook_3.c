@@ -6,7 +6,7 @@
 /*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/27 18:52:27 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/10/01 01:34:30 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/10/01 12:23:02 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 
 void	key_release_end(int keycode, t_env *e)
 {
+	(keycode == 36) ? e->key.switch_anime = 0 : (void)keycode;
 	(keycode == 53) ? e->key.echap = 0 : (void)keycode;
 	(keycode == 125) ? e->key.decal_down = 0 : (void)keycode;
 	(keycode == 126) ? e->key.decal_up = 0 : (void)keycode;
