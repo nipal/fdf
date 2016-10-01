@@ -6,7 +6,7 @@
 /*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/12 03:54:36 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/10/01 22:11:15 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/10/01 23:54:42 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,10 +81,7 @@ void	print_map(t_env *e, t_cam *cam, t_matrix ***map)
 	static	t_matrix	**point = NULL;
 
 	if (!cam || !map || !*map || !**map)
-	{
-		dprintf(1, "error\n");
 		return ;
-	}
 	j = 0;
 	if ((!point && (!(point = (t_matrix**)malloc(sizeof(t_matrix*) * 8))
 					|| !init_color(point))))
