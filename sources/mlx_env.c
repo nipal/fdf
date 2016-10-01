@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/01/10 04:08:06 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/10/01 12:45:23 by fjanoty          ###   ########.fr       */
+/*   Created: 2015/01/10 04:08:06 by fjanoty           #+#    #+#             */
+/*   Updated: 2016/10/01 19:28:33 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -227,7 +227,7 @@ void	env(int **map, int size_x, int size_y)
 	e.z_min = z_dim->m[0];
 	e.z_max = z_dim->m[1];
 	e.rot_x = (20.0 / 360.0) * 2 * M_PI;
-	e.rot_y = (20.0 / 360.0) * 2 * M_PI;
+	e.rot_y = (120.0 / 360.0) * 2 * M_PI;
 	e.rot_z = (0.0 / 360.0) * 2 * M_PI;
 	e.size_map_x = size_x;
 	e.size_map_y = size_y;

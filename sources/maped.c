@@ -6,7 +6,7 @@
 /*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 08:33:48 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/10/01 17:58:06 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/10/01 18:06:36 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,41 +129,6 @@ t_matrix	***finishe_get_map_torus(int *vect_nb, double *max, t_env *e)
 	return (map_mat);
 }
 
-t_matrix	***finishe_get_map_circle(double **tab, int *vect_nb, double *max, t_env *e)
-{
-	t_matrix	***map_mat;
-	t_matrix	*rot_y;
-	t_matrix	*tmp;
-	double		result;
-	int			j;
-	int			i;
-
-	(void)e;
-	if (!(map_mat = (t_matrix***)malloc(sizeof(t_matrix**) * max[1])))
-		return (NULL);
-	j = 0;
-	while (j < max[1])
-	{
-		i = 0;
-		if (!(map_mat[j] = (t_matrix**)malloc(sizeof(t_matrix*) * max[0]))
-				|| !(rot_y = set_rotate(0, e->dr1 + (j * M_PI * 2) / (max[1] - 1), 0)))
-			return (NULL);
-		while (i < max[0])
-		{
-			result = (30 * tab[j][i] / (1 * max[2])) + max[4];
-			vect_nb[0] = max[3] + result * cos(e->dr2 + ((double)(M_PI * (i + (max[0] - 1) / 2))) / (max[0] - 1));
-			vect_nb[1] = max[3] + result * sin(e->dr2 + ((double)(M_PI * (i + (max[0] - 1) / 2))) / (max[0] - 1));
-			vect_nb[2] = 0;
-			if (!(tmp = vect_new_verti(vect_nb, 3))
-					|| !(map_mat[j][i] = matrix_product(rot_y, tmp)))
-				return (NULL);
-			i++;
-		}
-		j++;
-	}
-	return (map_mat);
-}
-
 double		**cast_tab(int **tab, int x, int y)
 {
 	double	**tab_val;
@@ -209,13 +174,9 @@ t_matrix	***get_map(t_env *e)
 	max[2] = ((e->z_max - e->z_min)) ? (e->z_max - e->z_min) : 1;
 	max[3] = e->ecr_y * 0.70 / 5.0;
 	max[4] = max[3] * 3.0 / 5.0;
+	max[3] *= e->advence;
 	if (e->view % 3 == 0)
 		return (finishe_get_map(e->map_d, vect_nb, max, e));
-	else if (e->view % 3 == 2)
-	{
-		max[3] *= e->advence;
-		return (finishe_get_map_torus(vect_nb, max, e));
-	}
 	else
 		return (finishe_get_map_torus(vect_nb, max, e));
 }
