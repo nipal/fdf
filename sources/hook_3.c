@@ -6,7 +6,7 @@
 /*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/27 18:52:27 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/09/30 04:21:20 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/10/01 01:34:30 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,20 +123,20 @@ void	manage_cam_rot(t_env *e)
 	t_matrix			*tmp;
 	static	t_matrix	*rot = NULL;
 	t_matrix			*mat_rot;
-	static	double	deg = 0.05;
+	static	double		deg = 0.05;
 
 	if (!(reset_base_cam(e->cam)))
 		return ;
-	if (!rot && !(rot = matrix_init(1, 3)) && dprintf(1, "\n\nnew rooooo!!\n\n\n"))
+	if (!rot && !(rot = matrix_init(1, 3)))
 		return ;
 	rot->m[2] *= 0.95;
 	rot->m[0] *= 0.98;
-	rot->m[2] -= (e->key.rot_cam_z2 == 1) ? 2 * deg : 0 ;
-	rot->m[2] += (e->key.rot_cam_z1 == 1) ? 2 * deg : 0 ;
-	rot->m[1] -= (e->key.rot_cam_x2 == 1) ? deg : 0 ;
-	rot->m[1] += (e->key.rot_cam_x1 == 1) ? deg : 0 ;
-	rot->m[0] -= (e->key.rot_cam_y2 == 1) ? deg : 0 ;
-	rot->m[0] += (e->key.rot_cam_y1 == 1) ? deg : 0 ;
+	rot->m[2] -= (e->key.rot_cam_z2 == 1) ? 2 * deg : 0;
+	rot->m[2] += (e->key.rot_cam_z1 == 1) ? 2 * deg : 0;
+	rot->m[1] -= (e->key.rot_cam_x2 == 1) ? deg : 0;
+	rot->m[1] += (e->key.rot_cam_x1 == 1) ? deg : 0;
+	rot->m[0] -= (e->key.rot_cam_y2 == 1) ? deg : 0;
+	rot->m[0] += (e->key.rot_cam_y1 == 1) ? deg : 0;
 	if (!(mat_rot = set_rotate(rot->m[0], rot->m[1], rot->m[2])))
 		return ;
 	i = -1;

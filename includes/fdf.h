@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/29 02:21:11 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/09/30 03:56:37 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/10/01 04:05:23 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -228,13 +228,33 @@ void					draw_point(t_env *e);
 int						**parse(int fd);
 char					*maps_name(char *str);
 
+/*
+**	draw_line_triangle.c
+*/
+int			draw_line(t_env *e, t_matrix *mat_line);
+t_matrix	*init_mat_line(t_matrix *pt1, t_matrix *pt2, t_matrix *c1, t_matrix *c2);
+t_matrix	*init_mat_line2(t_matrix *pt_color, t_matrix *pt3, t_matrix *c3);
+int			draw_triangle(t_env *e, t_matrix *mat_line, t_matrix *pt3, t_matrix *c3);
+
+/*
+**	draw_link_face.c
+*/
+void	draw_link_map2(t_env *e, t_matrix ***map, t_matrix *c1, t_matrix *c2);
+void	draw_link_map(t_env *e, t_matrix ***map);
+void	draw_face_map(t_env *e, t_matrix ***map, t_matrix *mat_l);
+
+/*
+**	map_adapt_to_cam.c
+*/
+void		conique_adapte(t_matrix *vect);
+int			is_out(t_matrix *vect, t_env *e);
+int			ato(t_matrix *vect1, t_matrix *vect2, t_env *e);
+t_matrix	*base_change_scalar(t_cam *cam, t_matrix *vect);
+void		base_change(t_env *e, t_cam *c, t_matrix ***map, t_matrix *rot_cam);
 
 //t_matrix	***get_map(double *z_max, double *z_min);
 t_matrix	***get_map(t_env *e);
-void	draw_line(t_env *e, t_matrix *mat_line);
-t_matrix	*init_mat_line(t_matrix *pt1, t_matrix *pt2, t_matrix *c1, t_matrix *c2);
-int	**get_the_map(int fd, int *x_max, int *y_max);
-
+int			**get_the_map(int fd, int *x_max, int *y_max);
 
 void	free_map(t_matrix	****map, t_env *e);
 int	free_int_map(t_env *e);

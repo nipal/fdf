@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/10 04:08:06 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/09/30 04:05:25 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/10/01 04:45:06 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,22 +22,18 @@ void	px_to_img(t_env *e, int x, int y, int color)
 	e->data[y * e->size_line + x * 4 + 1] = (color & 0x0000FF00) >> 8;
 	e->data[y * e->size_line + x * 4] = (color & 0x000000FF);
 }
-
 void	vectpx_to_img(t_env *e, t_matrix *pos_color)
 {
 	int	x;
 	int	y;
-	int	z;
 	int	r;
 	int	g;
 	int	b;
-	double	dist;
 
 	x = (int)pos_color->m[0];
 	y = (int)pos_color->m[1];
 	x += SIZE_Y / 2;
 	y += SIZE_X / 2;
-	z = (int)pos_color->m[2];
 	if (x < 0 || x >= e->ecr_x || y < 0 || y >= e->ecr_y || pos_color->m[2] < 0
 		|| (pos_color->m[2] >
 			e->z_buffer[x + y * e->ecr_x] && e->z_buffer[x + y * e->ecr_x]))
@@ -46,15 +42,38 @@ void	vectpx_to_img(t_env *e, t_matrix *pos_color)
 	r = (int)pos_color->m[3] + 0.5;
 	g = (int)pos_color->m[4] + 0.5;
 	b = (int)pos_color->m[5] + 0.5;
-	(void)dist;
-//	dist = sqrt(x * x + y * y + z * z) / 300;
-//	r = (int)(((double)r + (125.0 * dist)) / ((dist) + 1.0));
-//	g = (int)(((double)g + (125.0 * dist)) / ((dist) + 1.0));
-//	b = (int)(((double)b + (125.0 * dist)) / ((dist) + 1.0));
 	e->data[y * e->size_line + x * 4 + 2] = r;
 	e->data[y * e->size_line + x * 4 + 1] = g;
 	e->data[y * e->size_line + x * 4] = b;
 }
+
+/*
+void	vectpx_to_img(t_env *e, t_matrix *pos_color)
+{
+	int	x;
+	int	y;
+	int	z;
+
+	x = (int)pos_color->m[0];
+	y = (int)pos_color->m[1];
+	x += SIZE_Y / 2;
+	y += SIZE_X / 2;
+	z = (int)pos_color->m[2] + 1;
+	matrix_display(pos_color);
+	if (x < 0 || x >= e->ecr_x || y < 0 || y >= e->ecr_y || z < 0
+		|| (z > e->z_buffer[x + y * e->ecr_x] && e->z_buffer[x + y * e->ecr_x] > 0))
+	{
+		dprintf(1, "x:%d	y:%d	z:%d	z_buff:%.1f\n", x, y, z, e->z_buffer[x + y * e->ecr_x]);
+		dprintf(1, "printing out\n");
+		return ;
+	}
+	e->z_buffer[x + y * e->ecr_x] = z;
+	e->data[y * e->size_line + x * 4 + 2] = 255;//(char)(pos_color->m[3] + 0.5);
+	e->data[y * e->size_line + x * 4 + 1] = 255;//(char)(pos_color->m[4] + 0.5);
+	e->data[y * e->size_line + x * 4] = 255;//(char)(pos_color->m[5] + 0.5);
+	dprintf(1, "end\n");
+}
+*/
 
 void	string_put(char *s1, char *s2, t_env *e, int y)
 {

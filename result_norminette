@@ -1,0 +1,3 @@
+Norme: ./sources/drawline.c
+Error: global scope bad aligned
+Error: 17 functions in the file

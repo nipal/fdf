@@ -6,7 +6,7 @@
 /*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/27 18:52:17 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/09/30 04:58:31 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/10/01 03:38:15 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ void	key_press_end(int keycode, t_env *e)
 int		key_press(int keycode, t_env *e)
 {
 //	dprintf(1, "[%d]	", keycode);
-//	6 7 8 9 =>	z, x, c, v
 	(keycode == 45) ? e->key.view = 1 : (void)keycode;
 	(keycode == 46) ? e->key.draw = 1 : (void)keycode;
 	(keycode == 6) ? e->key.fi1 = 1 : (void)keycode;
@@ -113,4 +112,3 @@ int		key_press(int keycode, t_env *e)
 	key_press_end(keycode, e);
 	return (1);
 }
-

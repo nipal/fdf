@@ -6,7 +6,7 @@
 /*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 08:33:48 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/09/30 04:01:28 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/10/01 01:22:47 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,6 @@ t_matrix	***finishe_get_map(double **tab, int *vect_nb, double *max, t_env *e)
 	return (map_mat);
 }
 
-
-//	On cree une lingne
-//	on copy cette ligne avec une transformation
 t_matrix	***finishe_get_map_torus(double **tab, int *vect_nb, double *max, t_env *e)
 {
 	t_matrix	***map_mat;
@@ -75,9 +72,9 @@ t_matrix	***finishe_get_map_torus(double **tab, int *vect_nb, double *max, t_env
 		while (i < max[0])
 		{
 			result = (30 * tab[j][i] / (1 * max[2])) + max[4]; 
-			vect_nb[0] = max[3] + result * cos(e->dr2 + ((double)(2 * M_PI * i)) / (max[0] - 1));//(i - (max[0] * 0.5)) * ((e->ecr_x * 0.5) / max[0]);
-			vect_nb[1] = max[3] + result * sin(e->dr2 + ((double)(2 * M_PI * i)) / (max[0] - 1));//(j - (max[1] * 0.5)) * ((e->ecr_y * 0.5) / max[1]);
-			vect_nb[2] = 0;//(100 * ((tab[j][i] - ((e->z_max - e->z_min) / 2))) / (max[2]));
+			vect_nb[0] = max[3] + result * cos(e->dr2 + ((double)(2 * M_PI * i)) / (max[0] - 1));
+			vect_nb[1] = max[3] + result * sin(e->dr2 + ((double)(2 * M_PI * i)) / (max[0] - 1));
+			vect_nb[2] = 0;
 			
 			if (!(tmp = vect_new_verti(vect_nb, 3))
 				|| !(map_mat[j][i] = matrix_product(rot_y, tmp)))
@@ -110,11 +107,12 @@ t_matrix	***finishe_get_map_circle(double **tab, int *vect_nb, double *max, t_en
 			return (NULL);
 		while (i < max[0])
 		{
-			result = (30 * tab[j][i] / (1 * max[2])) + max[4]; 
-			vect_nb[0] = max[3] + result * cos(e->dr2 + ((double)(M_PI * (i + (max[0] - 1) / 2))) / (max[0] - 1));//(i - (max[0] * 0.5)) * ((e->ecr_x * 0.5) / max[0]);
-			vect_nb[1] = max[3] + result * sin(e->dr2 + ((double)(M_PI * (i + (max[0] - 1) / 2))) / (max[0] - 1));//(j - (max[1] * 0.5)) * ((e->ecr_y * 0.5) / max[1]);
-			vect_nb[2] = 0;//(100 * ((tab[j][i] - ((e->z_max - e->z_min) / 2))) / (max[2]));
-			
+			result = (30 * tab[j][i] / (1 * max[2])) + max[4];
+			vect_nb[0] = max[3] + result * cos(e->dr2
+					+ ((double)(M_PI * (i + (max[0] - 1) / 2))) / (max[0] - 1));
+			vect_nb[1] = max[3] + result * sin(e->dr2
+					+ ((double)(M_PI * (i + (max[0] - 1) / 2))) / (max[0] - 1));
+			vect_nb[2] = 0;
 			if (!(tmp = vect_new_verti(vect_nb, 3))
 				|| !(map_mat[j][i] = matrix_product(rot_y, tmp)))
 				return (NULL);
@@ -149,10 +147,19 @@ double		**cast_tab(int **tab, int x, int y)
 	return (tab_val);
 }
 
+/*
+**	max:
+**		[0] : size_map_x
+**		[1] : size_map_y
+**		[2] : emplitude sur z de l'objet dans le monde
+**		[3] : emplitude sur y de l'objet sur l'ecran
+**		[4] : emplitude sur x de l'objet sur l'ecran
+*/
+
 t_matrix	***get_map(t_env *e)
 {
 	double		**tab;
-	double		max[6];
+	double		max[5];
 	int			*vect_nb;
 
 	if (!(vect_nb = (int*)malloc(sizeof(int) * 3)) || !e)
@@ -160,15 +167,15 @@ t_matrix	***get_map(t_env *e)
 	max[0] = e->size_map_x;
 	max[1] = e->size_map_y;
 	max[2] = ((e->z_max - e->z_min)) ? (e->z_max - e->z_min) : 1;
-	max[3] = e->ecr_y * 1.5 / 5.0;	// r1
-	max[4] = max[3] * 3.0 / 5.0;	// r2
+	max[3] = e->ecr_y * 1.5 / 5.0;
+	max[4] = max[3] * 3.0 / 5.0;
 	if (!(tab = cast_tab(e->map, max[0], max[1])))
 		return (NULL);
 	if (e->view % 3 == 0)
 		return (finishe_get_map(tab, vect_nb, max, e));
 	else if (e->view % 3 == 1)
 	{
-		max[3] = 0;	// r1
+		max[3] = 0;
 		return (finishe_get_map_circle(tab, vect_nb, max, e));
 	}
 	else

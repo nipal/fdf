@@ -6,7 +6,7 @@
 #    By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/05 01:32:20 by jpirsch           #+#    #+#              #
-#    Updated: 2016/09/30 00:46:07 by fjanoty          ###   ########.fr        #
+#    Updated: 2016/10/01 04:01:20 by fjanoty          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,9 @@ SRC		= 	main.c \
 			hook_2.c \
 			hook_3.c \
 		 	drawline.c \
+			draw_line_triangle.c \
+			draw_link_face.c \
+			map_adapt_to_cam.c \
 			maped.c \
 			print_map.c \
 			cam.c \

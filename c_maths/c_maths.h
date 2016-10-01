@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/15 14:35:08 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/09/27 08:36:24 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/10/01 02:07:15 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ t_matrix		*vect_new_vertfd(double a, double b, double c);
 t_matrix		*matrix_add(t_matrix *a, t_matrix *b);
 t_matrix		*matrix_add_in(t_matrix *a, t_matrix *b, t_matrix *c);
 t_matrix		*matrix_sub(t_matrix *a, t_matrix *b);
-void			matrix_sub_in(t_matrix *a, t_matrix *b, t_matrix *c);
+int				matrix_sub_in(t_matrix *a, t_matrix *b, t_matrix *c);
 t_matrix		*matrix_product(t_matrix *a, t_matrix *b);
 void			matrix_product_in(t_matrix *a, t_matrix *b, t_matrix *c);
 void			vector_product_in(t_matrix *a, t_matrix *b, t_matrix *result);

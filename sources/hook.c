@@ -1,12 +1,12 @@
-/* ********************************************************** */
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   hook.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/27 18:52:37 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/09/30 04:03:08 by fjanoty          ###   ########.fr       */
+/*   Created: 2016/10/01 01:26:10 by fjanoty           #+#    #+#             */
+/*   Updated: 2016/10/01 04:13:46 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@
 **	void	main_work(t_env *e);
 */
 
-
-void	loop_hook_brgin(t_env *e)
+void	loop_hook_begin(t_env *e)
 {
 	static	double	increm = 0.03;
 
@@ -48,15 +47,12 @@ int		loop_hook(t_env *e)
 {
 	double	incr;
 
-	incr = 0.003;
-	loop_hook_brgin(e);
-	(e->key.fi1 == 1) ? e->dr1 += 5 *incr: (void)e;
-	(e->key.fi_1 == 1) ? e->dr1 -= 5 * incr: (void)e;
-	(e->key.fi2 == 1) ? e->dr2 += 15 * incr: (void)e;
-	(e->key.fi_2 == 1) ? e->dr2 -= 15 * incr: (void)e;
-	(e->key.isometric == 1) ? e->proj = 0 : (void)e->key.echap;
-	(e->key.parallel == 1) ? e->proj = 1 : (void)e->key.echap;
-	(e->key.conic == 1) ? e->proj = 2 : (void)e->key.echap;
+	incr = .003;
+	loop_hook_begin(e);
+	(e->key.fi1 == 1) ? e->dr1 += 5 *incr : (void)e;
+	(e->key.fi_1 == 1) ? e->dr1 -= 5 * incr : (void)e;
+	(e->key.fi2 == 1) ? e->dr2 += 15 * incr : (void)e;
+	(e->key.fi_2 == 1) ? e->dr2 -= 15 * incr : (void)e;
 	(e->key.r == 1) ? e->r += 20 : (void)e->key.echap;
 	(e->key.g == 1) ? e->g += 20 : (void)e->key.echap;
 	(e->key.b == 1) ? e->b += 20 : (void)e->key.echap;
