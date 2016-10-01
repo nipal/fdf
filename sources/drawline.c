@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/30 14:38:59 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/10/01 04:19:31 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/10/01 05:24:45 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ void	main_work(t_env *e)
 		matrix_free(&color);
 		matrix_free(&color2);
 	}
-	draw_base_cam(e, NULL, NULL);
+//	draw_base_cam(e, NULL, NULL);
 	mlx_put_image_to_window(e->mlx, e->win, e->img, 0, 0);
 	mlx_do_sync(e->mlx);
 	free_map(&map, e);

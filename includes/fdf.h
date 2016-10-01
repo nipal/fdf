@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/29 02:21:11 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/10/01 04:05:23 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/10/01 07:52:28 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,7 @@ typedef struct			s_env
 	int					depth;
 	int					endian;
 	int					**map;
+	double				**map_d;
 	t_matrix			***color_map;
 	t_matrix			***vect_map;
 	int					proj;
@@ -263,4 +264,5 @@ int	ft_exit(t_env **e);
 
 	void	draw_point_old(t_env *e);
 	void	main_work(t_env *e);
+double		**cast_tab(int **tab, int x, int y);
 #endif

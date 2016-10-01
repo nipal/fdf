@@ -6,7 +6,7 @@
 /*   By: jpirsch <jpirsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/10 04:08:06 by jpirsch           #+#    #+#             */
-/*   Updated: 2016/10/01 04:45:06 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/10/01 07:51:16 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,34 +46,6 @@ void	vectpx_to_img(t_env *e, t_matrix *pos_color)
 	e->data[y * e->size_line + x * 4 + 1] = g;
 	e->data[y * e->size_line + x * 4] = b;
 }
-
-/*
-void	vectpx_to_img(t_env *e, t_matrix *pos_color)
-{
-	int	x;
-	int	y;
-	int	z;
-
-	x = (int)pos_color->m[0];
-	y = (int)pos_color->m[1];
-	x += SIZE_Y / 2;
-	y += SIZE_X / 2;
-	z = (int)pos_color->m[2] + 1;
-	matrix_display(pos_color);
-	if (x < 0 || x >= e->ecr_x || y < 0 || y >= e->ecr_y || z < 0
-		|| (z > e->z_buffer[x + y * e->ecr_x] && e->z_buffer[x + y * e->ecr_x] > 0))
-	{
-		dprintf(1, "x:%d	y:%d	z:%d	z_buff:%.1f\n", x, y, z, e->z_buffer[x + y * e->ecr_x]);
-		dprintf(1, "printing out\n");
-		return ;
-	}
-	e->z_buffer[x + y * e->ecr_x] = z;
-	e->data[y * e->size_line + x * 4 + 2] = 255;//(char)(pos_color->m[3] + 0.5);
-	e->data[y * e->size_line + x * 4 + 1] = 255;//(char)(pos_color->m[4] + 0.5);
-	e->data[y * e->size_line + x * 4] = 255;//(char)(pos_color->m[5] + 0.5);
-	dprintf(1, "end\n");
-}
-*/
 
 void	string_put(char *s1, char *s2, t_env *e, int y)
 {
@@ -254,6 +226,8 @@ void	env(int **map, int size_x, int size_y)
 	e.size_map_x = size_x;
 	e.size_map_y = size_y;
 	e.map = map;
+	if (!(e.map_d = cast_tab(map, size_x, size_y)))
+		return ;
 	if (!(map_color_init(&e)))
 		return ;
 	if (!(e.mlx = mlx_init()))

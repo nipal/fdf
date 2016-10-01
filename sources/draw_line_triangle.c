@@ -6,7 +6,7 @@
 /*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/01 03:45:15 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/10/01 04:25:23 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/10/01 06:09:29 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 
 int		draw_line(t_env *e, t_matrix *mat_line)
 {
-//	ft_putstr("draw_line----------->\n");
 	int			i;
 	int			size;
 	t_matrix	*diff;
@@ -28,7 +27,7 @@ int		draw_line(t_env *e, t_matrix *mat_line)
 
 	if (!(mat_line)
 		|| !(diff = matrix_init(6, 1))
-		|| (!(org = matrix_init(6, 1))))
+		|| !(org = matrix_init(6, 1)))
 		return (0);
 	i = -1;
 	ft_memmove(org->m, mat_line->m, sizeof(double) * 6);
@@ -36,10 +35,8 @@ int		draw_line(t_env *e, t_matrix *mat_line)
 	size = (int)(mat_line->m[NORME] + 0.5);
 	while (++i < size)
 	{
-//		ft_putstr("into the noucle\n");
 		if (!(print = matrix_add(org, diff)))
 			return (0);
-//		matrix_display(print);
 		vectpx_to_img(e, print);
 		matrix_free(&org);
 		org = print;
@@ -115,7 +112,7 @@ int		draw_triangle(t_env *e, t_matrix *mat_line, t_matrix *pt3, t_matrix *c3)
 	print = NULL;
 	if ((!(mat_line))
 		|| (!(diff = matrix_init(6, 1)))
-		|| (((!(org = matrix_init(6, 1)) && matrix_free(&diff)))))
+		|| (!(org = matrix_init(6, 1)) && matrix_free(&diff)))
 		return (0);
 	ft_memmove(org->m, mat_line->m, sizeof(double) * 6);
 	ft_memmove(diff->m, mat_line->m + 6, sizeof(double) * 6);
@@ -124,9 +121,9 @@ int		draw_triangle(t_env *e, t_matrix *mat_line, t_matrix *pt3, t_matrix *c3)
 	{
 		print = matrix_add(org, diff);
 		if ((mat_line2 = init_mat_line2(print, pt3, c3))
-			&& draw_line(e, mat_line2) && matrix_free(&mat_line2)
+			&& draw_line(e, mat_line2) > -1 && matrix_free(&mat_line2)
 			&& matrix_free(&org) && (org = print))
-			return (0);
+			;
 	}
 	matrix_free(&diff);
 	matrix_free(&print);
