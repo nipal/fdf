@@ -31,7 +31,7 @@ void	get_point(t_matrix ***map, t_matrix **point, int i, int j)
 		|| !(point[2] = (j < 9 && i < 10) ? matrix_copy(map[j + 1][i]) : NULL)
 		|| !(point[3] =
 			(j < 9 && i < 9) ? matrix_copy(map[j + 1][i + 1]) : NULL))
-		;
+		return ;
 	k = 0;
 	while (k < 4)
 	{

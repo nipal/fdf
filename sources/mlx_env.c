@@ -39,10 +39,9 @@ void	vectpx_to_img(t_env *e, t_matrix *pos_color)
 	y += SIZE_X / 2;
 	z = (int)pos_color->m[2];
 	if (x < 0 || x >= e->ecr_x || y < 0 || y >= e->ecr_y || pos_color->m[2] < 0
-		|| (pos_color->m[2] >
-			e->z_buffer[x + y * e->ecr_x] && e->z_buffer[x + y * e->ecr_x]))
+		|| (z > e->z_buffer[x + y * e->ecr_x] && e->z_buffer[x + y * e->ecr_x]))
 		return ;
-	e->z_buffer[x + y * e->ecr_x] = pos_color->m[2];
+	e->z_buffer[x + y * e->ecr_x] = z;
 	r = (int)pos_color->m[3] + 0.5;
 	g = (int)pos_color->m[4] + 0.5;
 	b = (int)pos_color->m[5] + 0.5;
@@ -229,7 +228,7 @@ void	env(int **map, int size_x, int size_y)
 	e.draw = 0;
 	e.z_min = z_dim->m[0];
 	e.z_max = z_dim->m[1];
-	e.rot_x = (20.0 / 360.0) * 2 * M_PI;
+	e.rot_x = (60.0 / 360.0) * 2 * M_PI;
 	e.rot_y = (20.0 / 360.0) * 2 * M_PI;
 	e.rot_z = (0.0 / 360.0) * 2 * M_PI;
 	e.size_map_x = size_x;

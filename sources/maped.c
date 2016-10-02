@@ -22,12 +22,18 @@ void		actu_vect_nb(int *vect_nb, int x, int y, int z)
 	vect_nb[2] = z;
 }
 
+//	en fonction d'une distance au centre et du temps;
 t_matrix	***finishe_get_map(double **tab, int *vect_nb, double *max, t_env *e)
 {
 	t_matrix	***map_mat;
 	int			j;
 	int			i;
+	int			k;
+	double		dist;
+	static	double	cnt = 0;
+	double		add;
 
+	add = 0;
 	if (!(map_mat = (t_matrix***)malloc(sizeof(t_matrix**) * max[1])))
 		return (NULL);
 	j = 0;
@@ -38,15 +44,25 @@ t_matrix	***finishe_get_map(double **tab, int *vect_nb, double *max, t_env *e)
 			return (NULL);
 		while (i < max[0])
 		{
-			vect_nb[0] = (i - (max[0] * 0.5)) * ((e->ecr_x * 0.5) / max[0]);
-			vect_nb[1] = (j - (max[1] * 0.5)) * ((e->ecr_y * 0.5) / max[1]);
-			vect_nb[2] = (100
-				* ((tab[j][i] - ((e->z_max - e->z_min) / 2))) / (max[2]));
+			dist = ((i - max[0] * 0.5) * (i - max[0] * 0.5)) + ((j - max[1] * 0.5) * (j - max[1] * 0.5));
+			dist = sqrt(dist);
+			dist /= 2;
+			add = (70 * sin((dist + cnt) / (1 + ((dist / max[0] / 4) * cnt / 20))) / ((dist + 0.5) / 6 + 0.2 + (cnt / 10)));
+			k = 0;
+			while (k < 1)
+			{
+				add = (cnt > (dist + k) * 1.2) ? add : 0;//add * 0.6;
+				k++;
+			}
+			vect_nb[0] = (i - (max[0] * 0.5)) * ((e->ecr_x * 0.75) / max[0]);
+			vect_nb[1] = (j - (max[1] * 0.5)) * ((e->ecr_y * 0.75) / max[1]);
+			vect_nb[2] = (add + (2) * (100 * ((tab[j][i] - ((e->z_max - e->z_min) / 2))) / (max[2])));
 			map_mat[j][i] = vect_new_verti(vect_nb, 3);
 			i++;
 		}
 		j++;
 	}
+	cnt += 0.3;
 	return (map_mat);
 }
 
@@ -61,6 +77,8 @@ t_matrix	***finishe_get_map_torus(double **tab, int *vect_nb, double *max, t_env
 	double		result;
 	int			j;
 	int			i;
+	double		dist;
+	static	double	cnt = 0;
 
 	(void)e;
 	if (!(map_mat = (t_matrix***)malloc(sizeof(t_matrix**) * max[1])))
@@ -74,7 +92,10 @@ t_matrix	***finishe_get_map_torus(double **tab, int *vect_nb, double *max, t_env
 			return (NULL);
 		while (i < max[0])
 		{
-			result = (30 * tab[j][i] / (1 * max[2])) + max[4]; 
+			dist = ((i - max[0] * 0.5) * (i - max[0] * 0.5)) + ((j - max[1] * 0.5) * (j - max[1] * 0.5));
+			dist = sqrt(dist);
+			dist /= 4;
+			result = (((20 * sin(dist + cnt) + (100 * ((tab[j][i] - ((e->z_max - e->z_min) / 2))) / (max[2]))) / ((dist + 0.5) / 6 + 0.2)) / (1 * max[2])) + max[4]; 
 			vect_nb[0] = max[3] + result * cos(e->dr2 + ((double)(2 * M_PI * i)) / (max[0] - 1));//(i - (max[0] * 0.5)) * ((e->ecr_x * 0.5) / max[0]);
 			vect_nb[1] = max[3] + result * sin(e->dr2 + ((double)(2 * M_PI * i)) / (max[0] - 1));//(j - (max[1] * 0.5)) * ((e->ecr_y * 0.5) / max[1]);
 			vect_nb[2] = 0;//(100 * ((tab[j][i] - ((e->z_max - e->z_min) / 2))) / (max[2]));
@@ -86,6 +107,7 @@ t_matrix	***finishe_get_map_torus(double **tab, int *vect_nb, double *max, t_env
 		}
 		j++;
 	}
+	cnt += 0.3;
 	return (map_mat);
 }
 

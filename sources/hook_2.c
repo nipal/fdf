@@ -63,6 +63,28 @@ void	init_t_key(t_key *key)
 
 void	key_press_end(int keycode, t_env *e)
 {
+	(keycode == '`') ? e->key.echap = 1 : (void)keycode;
+	(keycode == '1') ? e->key.decal_down = 1 : (void)keycode;
+	(keycode == '2') ? e->key.decal_up = 1 : (void)keycode;
+	(keycode == '3') ? e->key.decal_right = 1 : (void)keycode;
+	(keycode == '4') ? e->key.decal_down = 1 : (void)keycode;
+	(keycode == '5') ? e->key.decal_up = 1 : (void)keycode;
+	(keycode == '6') ? e->key.decal_right = 1 : (void)keycode;
+	(keycode == '7') ? e->key.decal_left = 1 : (void)keycode;
+	(keycode == '8') ? e->key.zoom = 1 : (void)keycode;
+	(keycode == '9') ? e->key.zoom_back = 1 : (void)keycode;
+	(keycode == '1') ? e->key.scale_increase = 1 : (void)keycode;
+	(keycode == '1') ? e->key.scale_decrease = 1 : (void)keycode;
+	(keycode == '1') ? e->key.cte1_increase = 1 : (void)keycode;
+	(keycode == '1') ? e->key.cte1_decrease = 1 : (void)keycode;
+	(keycode == '1') ? e->key.isometric = 1 : (void)keycode;
+	(keycode == '1') ? e->key.parallel = 1 : (void)keycode;
+	(keycode == '1') ? e->key.conic = 1 : (void)keycode;
+	(keycode == '1') ? e->key.r = 1 : (void)keycode;
+	(keycode == '1') ? e->key.g = 1 : (void)keycode;
+	(keycode == '1') ? e->key.b = 1 : (void)keycode;
+
+/*
 	(keycode == 53) ? e->key.echap = 1 : (void)keycode;
 	(keycode == 125) ? e->key.decal_down = 1 : (void)keycode;
 	(keycode == 126) ? e->key.decal_up = 1 : (void)keycode;
@@ -83,14 +105,39 @@ void	key_press_end(int keycode, t_env *e)
 	(keycode == 15) ? e->key.r = 1 : (void)keycode;
 	(keycode == 5) ? e->key.g = 1 : (void)keycode;
 	(keycode == 11) ? e->key.b = 1 : (void)keycode;
+*/
 }
 
 int		key_press(int keycode, t_env *e)
 {
-//	dprintf(1, "[%d]	", keycode);
+	dprintf(1, "[%d]	", keycode);
 //	6 7 8 9 =>	z, x, c, v
-	(keycode == 45) ? e->key.view = 1 : (void)keycode;
-	(keycode == 46) ? e->key.draw = 1 : (void)keycode;
+	(keycode == 'n') ? e->key.view = 1 : (void)keycode;
+	(keycode == 'm') ? e->key.draw = 1 : (void)keycode;
+	(keycode == 'z') ? e->key.fi1 = 1 : (void)keycode;
+	(keycode == 'x') ? e->key.fi_1 = 1 : (void)keycode;
+	(keycode == 'c') ? e->key.fi2 = 1 : (void)keycode;
+	(keycode == 'v') ? e->key.fi_2 = 1 : (void)keycode;
+	(keycode == '-') ? e->key.speed_down = 1 : (void)keycode;
+	(keycode == '=') ? e->key.speed_up = 1 : (void)keycode;
+	(keycode == '0') ? e->key.speed_stop = 1 : (void)keycode;
+	(keycode == 'w') ? e->key.rot_x1 = 1 : (void)keycode;
+	(keycode == 'q') ? e->key.rot_y1 = 1 : (void)keycode;
+	(keycode == 'a') ? e->key.rot_z1 = 1 : (void)keycode;
+	(keycode == 's') ? e->key.rot_x2 = 1 : (void)keycode;
+	(keycode == 'e') ? e->key.rot_y2 = 1 : (void)keycode;
+	(keycode == 'd') ? e->key.rot_z2 = 1 : (void)keycode;
+	(keycode == 'i') ? e->key.rot_cam_x1 = 1 : (void)keycode;
+	(keycode == 'u') ? e->key.rot_cam_y1 = 1 : (void)keycode;
+	(keycode == 'j') ? e->key.rot_cam_z1 = 1 : (void)keycode;
+	(keycode == 'k') ? e->key.rot_cam_x2 = 1 : (void)keycode;
+	(keycode == 'o') ? e->key.rot_cam_y2 = 1 : (void)keycode;
+	(keycode == 'l') ? e->key.rot_cam_z2 = 1 : (void)keycode;
+
+
+/*
+//	(keycode == 45) ? e->key.view = 1 : (void)keycode;
+//	(keycode == 46) ? e->key.draw = 1 : (void)keycode;
 	(keycode == 6) ? e->key.fi1 = 1 : (void)keycode;
 	(keycode == 7) ? e->key.fi_1 = 1 : (void)keycode;
 	(keycode == 8) ? e->key.fi2 = 1 : (void)keycode;
@@ -110,6 +157,7 @@ int		key_press(int keycode, t_env *e)
 	(keycode == 31) ? e->key.rot_cam_x2 = 1 : (void)keycode;
 	(keycode == 40) ? e->key.rot_cam_y2 = 1 : (void)keycode;
 	(keycode == 37) ? e->key.rot_cam_z2 = 1 : (void)keycode;
+*/
 	key_press_end(keycode, e);
 	return (1);
 }

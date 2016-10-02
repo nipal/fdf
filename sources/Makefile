@@ -34,8 +34,8 @@ all: $(NAME)
 $(NAME): $(OBJ)
 		gcc -o $(NAME) $(FLAGS) $(OBJ) -L ../libft/ -lft \
 		-L ../c_maths -lc_maths \
-		-lmlx -framework OpenGL -framework AppKit
-	#	-L /usr/lib/ -lmlx -lm -lX11 -lXext
+		-L /usr/lib/ -lmlx -lm -lX11 -lXext
+#		-lmlx -framework OpenGL -framework AppKit
 
 
 $(OBJ):

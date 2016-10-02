@@ -118,8 +118,8 @@ typedef	struct			s_cam
 //*/
 
 
-# define SIZE_Y 1900
-# define SIZE_X 1200
+# define SIZE_Y 1200
+# define SIZE_X 840
 # define PRINT_DIAG 0
 typedef struct			s_env
 {
