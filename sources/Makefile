@@ -23,14 +23,15 @@ SRC		= 	main.c \
 #			coord.c
 OBJ		= $(SRC:.c=.o)
 
-FLAGS = -Wall -Wextra -Werror
+ FLAGS = -Wall -Wextra -Werror
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
 	gcc -o $(NAME) $(FLAGS) $(OBJ)  ../c_maths/libc_maths.a  -L ../libft/ -lft -L ../minilibx/ \
 		-L ../c_maths -lc_maths \
-		-lmlx -framework OpenGL -framework AppKit
+		-L /usr/lib/ -lmlx -lm -lX11 -lXext
+#		-lmlx -framework OpenGL -framework AppKit
 
 $(OBJ):
 	gcc -c  $(FLAGS) $(SRC) -I ../includes -I ../c_maths

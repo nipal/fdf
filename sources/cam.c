@@ -101,7 +101,7 @@ void	set_windir(t_matrix **corner, double fov_x, double fov_y)
 		coefy = (i % 2) ? 1 : -1;
 		coefx = (i > 2) ? 1 : -1;
 	ft_putstr("e\n");
-//		matrix_put_in(coefx * dx_cam, coefy * dy_cam, 1, 1);
+		matrix_put_in(coefx * dx_cam, coefy * dy_cam, 1, 1);
 	ft_putstr("f\n");
 		i++;
 	}	
@@ -185,9 +185,9 @@ t_cam	*init_cam(double fov_y, double fov_x, t_env *e)
 {
 	ft_putstr("avant init_cam\n");
 	t_cam		*c;
-	double		marge;
-	double		dx_cam;
-	double		dy_cam;
+//	double		marge;
+//	double		dx_cam;
+//	double		dy_cam;
 //	t_matrix	*dir;
 //	t_matrix	*dir;
 //	static	double	increm = 0;
@@ -215,9 +215,9 @@ t_cam	*init_cam(double fov_y, double fov_x, t_env *e)
 	ft_putstr("=================\n");	
 //	char cc; read(0, &cc, 1);
 
-	marge = 1.5;
-	dx_cam = tan(fov_x / 2);
-	dy_cam = tan(fov_y / 2);
+//	marge = 1.5;
+//	dx_cam = tan(fov_x / 2);
+//	dy_cam = tan(fov_y / 2);
 //	dir = matrix_product(rot, c->dir);
 //	dir = matrix_scalar_product(dir, 0.01 * e->speed);
 	ft_putstr("B\n");
