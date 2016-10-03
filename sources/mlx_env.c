@@ -228,8 +228,8 @@ void	env(int **map, int size_x, int size_y)
 	e.draw = 0;
 	e.z_min = z_dim->m[0];
 	e.z_max = z_dim->m[1];
-	e.rot_x = (60.0 / 360.0) * 2 * M_PI;
-	e.rot_y = (-70.0 / 360.0) * 2 * M_PI;
+	e.rot_x = (30.0 / 360.0) * 2 * M_PI;
+	e.rot_y = (-20.0 / 360.0) * 2 * M_PI;
 	e.rot_z = (0.0 / 360.0) * 2 * M_PI;
 	e.size_map_x = size_x;
 	e.size_map_y = size_y;

@@ -113,7 +113,7 @@ t_cam		*init_cam(double fov_y, double fov_x, t_env *e)
 		ft_putstr("error on cam PARAMETER!!!\n");
 		return (NULL);
 	}
-	c->pos->m[Z] = -1000;
+	c->pos->m[Z] = -700;
 	c->pos->m[X] = 0;
 	c->pos->m[Y] = 0;
 	c->rot->m[0] = e->rot_x;
