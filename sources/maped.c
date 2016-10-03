@@ -22,18 +22,41 @@ void		actu_vect_nb(int *vect_nb, int x, int y, int z)
 	vect_nb[2] = z;
 }
 
+double		wave_valu(double coef2, double cnt, double *max, double i, double j, double cx, double cy)
+{
+//	int			sign;
+	int			k;
+	double		dist;
+	double		add;
+//	double		coef;
+	double		amort;
+(void)max;
+
+	dist = ((i - cx) * (i - cx)) + ((j - cy) * (j - cy));
+	dist = sqrt(dist);
+	dist /= 0.8;
+//	coef = ((dist + cnt) / (1 + ((dist / max[0] / 4) * cnt / 20)));
+	amort = ( dist / (cnt / (10) + 1) + 1);
+	add = cos((coef2 +  0.5 * dist / (1 +  cnt * 10)));
+//	add = sin(coef2 + dist) + 1.7 * sin(coef2 / 2.3 + dist) + 0.3 * sin(coef2 / 3.5 + dist) + 0.1 * sin(coef2 / 4.1 + dist) + 0.2 * sin(coef2 / 5.2 + dist);
+	add *= 700 + 0*k;
+	add /= amort;
+//	sign = (add > 0) ? 1 : -1;
+//	add = log(ABS(add)) * sign * 10;
+
+	return (add);
+}
+
 //	en fonction d'une distance au centre et du temps;
 t_matrix	***finishe_get_map(double **tab, int *vect_nb, double *max, t_env *e)
 {
 	t_matrix	***map_mat;
-	int			j;
-	int			i;
-	int			k;
-	double		dist;
+	static	int		k = 0;
+	int				j;
+	int				i;
 	static	double	cnt = 0;
-	double		add;
+	static	double	coef2 = 0;
 
-	add = 0;
 	if (!(map_mat = (t_matrix***)malloc(sizeof(t_matrix**) * max[1])))
 		return (NULL);
 	j = 0;
@@ -44,25 +67,20 @@ t_matrix	***finishe_get_map(double **tab, int *vect_nb, double *max, t_env *e)
 			return (NULL);
 		while (i < max[0])
 		{
-			dist = ((i - max[0] * 0.5) * (i - max[0] * 0.5)) + ((j - max[1] * 0.5) * (j - max[1] * 0.5));
-			dist = sqrt(dist);
-			dist /= 2;
-			add = (70 * sin((dist + cnt) / (1 + ((dist / max[0] / 4) * cnt / 20))) / ((dist + 0.5) / 6 + 0.2 + (cnt / 10)));
-			k = 0;
-			while (k < 1)
-			{
-				add = (cnt > (dist + k) * 1.2) ? add : 0;//add * 0.6;
-				k++;
-			}
 			vect_nb[0] = (i - (max[0] * 0.5)) * ((e->ecr_x * 0.75) / max[0]);
 			vect_nb[1] = (j - (max[1] * 0.5)) * ((e->ecr_y * 0.75) / max[1]);
-			vect_nb[2] = (add + (2) * (100 * ((tab[j][i] - ((e->z_max - e->z_min) / 2))) / (max[2])));
+			vect_nb[2] = ((2) * (100 * ((tab[j][(i + k) % (int)max[0]] - ((e->z_max - e->z_min) / 2))) / (max[2])));
+//			vect_nb[2] += wave_valu(coef2, cnt, max, i, j, max[0] * 0.1, max[1] * 0.1); 
+//			vect_nb[2] += wave_valu(coef2 * 1.1, cnt, max, i, j, max[0] * 0.8, max[1] * 0.8);
+//			vect_nb[2] += wave_valu(coef2 * 1.2 + M_PI * 1.1, cnt, max, i, j, max[0] / 2 + sin(coef2) * cnt, max[1] / 2 + cos(coef2) * cnt);
 			map_mat[j][i] = vect_new_verti(vect_nb, 3);
 			i++;
 		}
 		j++;
 	}
-	cnt += 0.3;
+	k++;
+	cnt += 0.05;
+	coef2 += 0.2 / (1 + cnt / (7 * M_PI));
 	return (map_mat);
 }
 

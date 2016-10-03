@@ -150,6 +150,8 @@ typedef struct			s_env
 	int					size_map_y;
 	double				z_min;
 	double				z_max;
+	double				color_min;
+	double				color_max;
 	double				rot_x;
 	double				rot_y;
 	double				rot_z;

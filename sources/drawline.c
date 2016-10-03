@@ -340,6 +340,7 @@ void	draw_link_map(t_env *e, t_matrix ***map)
 		while (i < e->size_map_x)	
 		{
 			colore = e->color_map[j][i];
+//*
 			if (i > (e->size_map_x - 2) || !(colore2 = e->color_map[j][i + 1])
 				|| !(mat_line = init_mat_line(map[j][i], map[j][i + 1], colore, colore2))
 				|| (are_they_out(map[j][i], map[j][i + 1], e) && matrix_free(&mat_line)))
@@ -349,6 +350,8 @@ void	draw_link_map(t_env *e, t_matrix ***map)
 				draw_line(e, mat_line);
 				matrix_free(&mat_line);
 			}	
+//*/
+/*
 			if (j > (e->size_map_y - 2) || !(colore2 = e->color_map[j + 1][i])
 				|| !(mat_line = init_mat_line(map[j][i], map[j + 1][i], colore, colore2))
 				|| (are_they_out(map[j][i], map[j + 1][i], e) && matrix_free(&mat_line)))
@@ -358,6 +361,7 @@ void	draw_link_map(t_env *e, t_matrix ***map)
 				draw_line(e, mat_line);
 				matrix_free(&mat_line);
 			}	
+*/
 			i++;
 		}
 		j++;
@@ -430,12 +434,105 @@ t_matrix***	copy_vect_map(t_env *e)
 	return (map);
 }
 
+t_matrix	*finishe_color_actu(t_env *e, double *pak, double pos, double max)
+{
+	t_matrix	*color;
+
+	if (e->color_max != 0 && e->color_min < 0)
+		pak[0] = 255 * pak[3] / e->color_max;
+	else if (pak[2] != 0)
+		pak[0] = 255 * pak[3] / pak[2];
+	else
+		pak[0] = 255;
+	pak[1] = 255 - pak[0];
+	if (!(color = vect_new_vertfd(pak[0] * pos / max, pak[1] * pos / max, 0)))
+		return (NULL);
+	return (color);
+}
+t_matrix	*set_color_actu(t_env *e, double value, double pos, double max)
+{
+	t_matrix	*color;
+	double		pak[4];
+
+	pak[3] = value;
+	pak[2] = e->color_max - e->color_min;
+	color = NULL;
+	pak[0] = 0;
+	if (pak[3] < 0)
+	{
+		if (e->z_max > 0)
+			pak[0] = 255 * pak[3] / e->color_min;
+		else if (pak[2] > 0)
+			pak[0] = 255 * pak[3] / pak[2];
+		else
+			pak[0] = 255;
+		pak[1] = 255 - pak[0];
+		if (!(color = vect_new_vertfd(0, pak[1] * pos / max, pak[0] * pos / max)))
+			return (NULL);
+	}
+	else
+		color = finishe_color_actu(e, pak, pos, max);
+	return (color);
+}
+
+void	actu_emp_color(t_env *e)
+{
+	static	double	min = 0;
+	static	double	max = 0;
+	int			i;
+	int			j;
+
+	e->color_min = -20;//e->vect_map[0][0]->m[2];i
+	e->color_max = 20;//e->vect_map[0][0]->m[2];
+	j = 0;
+	while (j < e->size_map_y)
+	{
+		i = 0;
+		while (i < e->size_map_x)
+		{
+			if (e->vect_map[j][i]->m[2] > e->color_max)
+				e->color_max =  e->vect_map[j][i]->m[2];
+			if (e->vect_map[j][i]->m[2] < e->color_min)
+				e->color_min =  e->vect_map[j][i]->m[2];
+			i++;
+			min = MIN(min, e->color_min);
+			max = MAX(max, e->color_max);
+//			dprintf(1, "min:%lf	max:%lf\n", min, max);
+		}
+		j++;
+	}
+}
+
+int		map_color_actu(t_env *e)
+{
+	int			i;
+	int			j;
+
+	actu_emp_color(e);
+	j = 0;
+	while (j < e->size_map_y)
+	{
+		i = 0;
+		while (i < e->size_map_x)
+		{
+			matrix_free(e->color_map[j] + i);
+			if (!(e->color_map[j][i] = set_color_actu(e, e->vect_map[j][i]->m[2], i, e->size_map_x)))
+				return (0);
+			i++;
+		}
+		j++;
+	}
+	return (1);
+}
+
 void	main_work(t_env *e)
 {	
 	t_matrix ***map;
 
 	if (!(map = get_map(e)))
 		return ;
+	e->vect_map = map;
+	map_color_actu(e);
 	base_change(e, e->cam, map);
 	e->vect_map = map;
 	if (e->draw % 2 == 0)
