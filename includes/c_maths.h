@@ -6,7 +6,7 @@
 /*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/15 14:35:08 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/10/01 19:14:27 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/10/03 16:10:29 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,9 @@
 # define TRIGO_FACT	3
 # define TRIGO_ACCURACY (TRIGO_FACT * 360)
 
-//*
 # define MIN(A, B) ((A) < (B) ? (A) : (B))
 # define MAX(A, B) ((A) < (B) ? (B) : (A))
-//*/
+
 typedef struct	s_matrix
 {
 	double		*m;
@@ -47,13 +46,12 @@ typedef struct	s_coefs
 	double		e;
 }				t_coefs;
 
-
-t_matrix	*vect_new_vertfd(double a,double b,double c);
-t_matrix	*vect_new_vertfi(int a,int b,int c);
-t_matrix	*vect_new_vert(double *tab, int size);
-t_matrix	*vect_new_horz(double *tab, int size);
-t_matrix	*vect_new_verti(int *tab, int size);
-t_matrix	*vect_new_horzi(int *tab, int size);
+t_matrix		*vect_new_vertfd(double a, double b, double c);
+t_matrix		*vect_new_vertfi(int a, int b, int c);
+t_matrix		*vect_new_vert(double *tab, int size);
+t_matrix		*vect_new_horz(double *tab, int size);
+t_matrix		*vect_new_verti(int *tab, int size);
+t_matrix		*vect_new_horzi(int *tab, int size);
 
 t_matrix		*matrix_init(int x, int y);
 void			matrix_display(t_matrix *a);
@@ -93,6 +91,7 @@ t_matrix		*set_rotate(double thetx, double thety, double thetz);
 t_matrix		*set_translate(double dx, double dy, double dz);
 t_matrix		*set_scale(double sx, double sy, double sz);
 
-void	print_line(t_matrix *pt1, t_matrix *c1,  t_matrix *pt2, t_matrix *c2);
+void			print_line(t_matrix *pt1, t_matrix *c1, t_matrix *pt2,
+				t_matrix *c2);
 
 #endif

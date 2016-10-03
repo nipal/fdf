@@ -6,7 +6,7 @@
 /*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/29 02:21:11 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/10/01 23:35:52 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/10/03 16:08:26 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,19 +96,20 @@ typedef struct			s_key
 	int					view;
 	int					draw;
 	int					switch_anime;
+	int					z_up;
+	int					z_down;
 }						t_key;
-
-
 
 # define TOP_LEFT 0
 # define BOTOM_LEFT 1
 # define BOTOM_RIGHT 2
 # define TOP_RIGHT 3
 
-# define LEFT 0 
+# define LEFT 0
 # define BOTOM 1
 # define RIGHT 2
 # define TOP 3
+
 typedef	struct			s_cam
 {
 	t_matrix			**corner;
@@ -121,6 +122,7 @@ typedef	struct			s_cam
 # define SIZE_Y 1900
 # define SIZE_X 1200
 # define PRINT_DIAG 0
+
 typedef struct			s_env
 {
 	void				*mlx;
@@ -162,7 +164,6 @@ typedef struct			s_env
 	int					view_sw;
 	int					draw;
 	int					draw_sw;
-
 	double				k;
 	double				phi1;
 	double				phi2;
@@ -170,6 +171,7 @@ typedef struct			s_env
 	double				increm;
 	int					nb_frame;
 	double				advence;
+	double				mult_z;
 }						t_env;
 
 typedef struct			s_point
@@ -179,7 +181,6 @@ typedef struct			s_point
 	int					z;
 	unsigned int		color;
 }						t_point;
-
 
 /*
 ** hook
@@ -210,28 +211,27 @@ void					px_to_img(t_env *e, int x, int y, int color);
 void					vectpx_to_img(t_env *e, t_matrix *pos_color);
 void					print_state(t_env *e);
 
-//	Fonction preparant l'env et qui lance le loop hook
 void					env(int **map, int size_x, int size_y);
 /*
 ** coord
 */
 
 /*
- **	cam
- **/
+**	cam
+*/
 t_cam					*init_cam(double fov_y, double fov_x, t_env *e);
 void					describe_cam(t_cam *cam);
 /*
- ** print_map	
- * */
+** print_map
+*/
 void					define_color(t_matrix *point, t_matrix *color);
-void					get_point(t_matrix ***map, t_matrix **point, int i, int j);
+void					get_point(t_matrix ***map, t_matrix **point,
+						int i, int j);
 void					print_map(t_env *e, t_cam *cam, t_matrix ***map);
 
 /*
 ** draw
 */
-//fonctions de dessin (putline, put map of vect)
 void					draw_point(t_env *e);
 /*
 ** parse
@@ -243,16 +243,21 @@ char					*maps_name(char *str);
 **	draw_line_triangle.c
 */
 int						draw_line(t_env *e, t_matrix *mat_line);
-t_matrix				*init_mat_line(t_matrix *pt1, t_matrix *pt2, t_matrix *c1, t_matrix *c2);
-t_matrix				*init_mat_line2(t_matrix *pt_color, t_matrix *pt3, t_matrix *c3);
-int						draw_triangle(t_env *e, t_matrix *mat_line, t_matrix *pt3, t_matrix *c3);
+t_matrix				*init_mat_line(t_matrix *pt1, t_matrix *pt2,
+						t_matrix *c1, t_matrix *c2);
+t_matrix				*init_mat_line2(t_matrix *pt_color, t_matrix *pt3,
+						t_matrix *c3);
+int						draw_triangle(t_env *e, t_matrix *mat_line,
+						t_matrix *pt3, t_matrix *c3);
 
 /*
 **	draw_link_face.c
 */
-void					draw_link_map2(t_env *e, t_matrix ***map, t_matrix *c1, t_matrix *c2);
+void					draw_link_map2(t_env *e, t_matrix ***map,
+						t_matrix *c1, t_matrix *c2);
 void					draw_link_map(t_env *e, t_matrix ***map);
-void					draw_face_map(t_env *e, t_matrix ***map, t_matrix *mat_l);
+void					draw_face_map(t_env *e, t_matrix ***map,
+						t_matrix *mat_l);
 
 /*
 **	map_adapt_to_cam.c
@@ -261,7 +266,8 @@ void					conique_adapte(t_matrix *vect);
 int						is_out(t_matrix *vect, t_env *e);
 int						ato(t_matrix *vect1, t_matrix *vect2, t_env *e);
 t_matrix				*base_change_scalar(t_cam *cam, t_matrix *vect);
-void					base_change(t_env *e, t_cam *c, t_matrix ***map, t_matrix *rot_cam);
+void					base_change(t_env *e, t_cam *c, t_matrix ***map,
+						t_matrix *rot_cam);
 
 /*
 **	its_parse_time.c

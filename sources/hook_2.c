@@ -6,7 +6,7 @@
 /*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/27 18:52:17 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/10/01 23:52:57 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/10/03 15:57:48 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ void	init_t_key_2(t_key *key)
 	key->fi2 = 0;
 	key->fi_2 = 0;
 	key->view = 0;
+	key->z_up = 0;
+	key->z_down = 0;
 }
 
 void	init_t_key(t_key *key)
@@ -63,6 +65,8 @@ void	init_t_key(t_key *key)
 
 void	key_press_end(int keycode, t_env *e)
 {
+	(keycode == 18) ? e->key.z_up = 1 : (void)keycode;
+	(keycode == 19) ? e->key.z_down = 1 : (void)keycode;
 	(keycode == 53) ? e->key.echap = 1 : (void)keycode;
 	(keycode == 125) ? e->key.decal_down = 1 : (void)keycode;
 	(keycode == 126) ? e->key.decal_up = 1 : (void)keycode;

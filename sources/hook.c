@@ -6,7 +6,7 @@
 /*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/01 01:26:10 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/10/01 23:39:38 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/10/03 15:51:48 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void	loop_hook_begin(t_env *e)
 {
 	static	double	increm = 0.03;
 
+	(e->key.z_down == 1) ? e->mult_z -= 0.2 : (void)e;
+	(e->key.z_up == 1) ? e->mult_z += 0.2 : (void)e;
 	(e->key.rot_z2 == 1) ? e->rot_z -= increm : (void)e;
 	(e->key.rot_y2 == 1) ? e->rot_y -= increm : (void)e;
 	(e->key.rot_x2 == 1) ? e->rot_x -= increm : (void)e;

@@ -6,7 +6,7 @@
 /*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/27 18:52:27 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/10/01 22:54:19 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/10/03 15:46:16 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ void	key_release_end(int keycode, t_env *e)
 
 int		key_release(int keycode, t_env *e)
 {
+	(keycode == 18) ? e->key.z_up = 0 : (void)keycode;
+	(keycode == 19) ? e->key.z_down = 0 : (void)keycode;
 	(keycode == 45) ? e->key.view = 0 : (void)keycode;
 	(keycode == 46) ? e->key.draw = 0 : (void)keycode;
 	(keycode == 6) ? e->key.fi1 = 0 : (void)keycode;

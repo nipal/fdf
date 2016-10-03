@@ -6,7 +6,7 @@
 /*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/10 04:08:06 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/10/01 22:52:23 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/10/03 15:51:33 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,7 @@ void		env(int **map, int size_x, int size_y)
 
 	if (!(z_dim = get_max_zdim(map, size_x, size_y)))
 		return ;
+	e.mult_z = 1;
 	e.size_map_x = size_x;
 	e.size_map_y = size_y;
 	e.z_min = z_dim->m[0];
