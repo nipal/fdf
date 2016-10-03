@@ -6,7 +6,7 @@
 /*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 08:33:48 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/10/03 15:59:07 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/10/03 17:29:25 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void		define_position(t_matrix ***map_mat, double *max, int i, t_env *e)
 		return ;
 	while (++j < max[1])
 	{
-		r = (300 * e->mult_z * e->map_d[j][i] / (1 * max[2])) + (max[4] * e->k);
+		r = (300 * e->mult_z * e->map_d[j][i] / (max[2])) + (max[4] * e->k);
 		vect_nb[0] = (max[3] * e->k) + r * cos(e->dr2 + (e->phi2
 				* (j - ((max[1] - 1) / 2))) / (max[1] - 1));
 		vect_nb[1] = r * sin(e->dr2 + (e->phi2 * (j - ((max[1] - 1) / 2)))
