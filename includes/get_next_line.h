@@ -13,7 +13,7 @@
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 # define BUFF_SIZE 256
-# define MIN(A, B) (A > B) ? B : A
+# define MIN(A, B) ((A) < (B)) ? (A) : (B)
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
@@ -22,11 +22,12 @@
 # include <string.h>
 # include <errno.h>
 
-int					get_next_line(int fd, char **line);
 typedef	struct		s_fdgnl
 {
 	int				fd;
 	char			*rest;
 	struct s_fdgnl	*next;
 }					t_fdgnl;
+void				free_one_node(t_fdgnl **begin, int fd);
+int					get_next_line(int fd, char **line);
 #endif

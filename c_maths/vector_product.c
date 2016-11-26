@@ -6,7 +6,7 @@
 /*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/04 09:57:43 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/09/27 08:07:14 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/10/01 23:58:58 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,10 @@ void		vector_product_in(t_matrix *a, t_matrix *b, t_matrix *result)
 {
 	if (!a || !b || !result)
 	{
-		dprintf(1, "vector product Error input\n");
 		return ;
 	}
 	if (MIN(a->x * a->y, b->x * b->y) < 3)
 	{
-		dprintf(1, "vector product Error size input");
 		return ;
 	}
 	result->m[X] = (a->m[Y] * b->m[Z]) - (a->m[Z] * b->m[Y]);
@@ -39,7 +37,6 @@ t_matrix	*vector_product_s(t_matrix *a, t_matrix *b, int x, int y)
 
 	if (!a || !b || x * y < 3 || x < 0)
 	{
-		dprintf(1, "vector product Error input\n");
 		return (NULL);
 	}
 	if (MIN(a->x * a->y, b->x * b->y) < 3
@@ -55,7 +52,6 @@ t_matrix	*vector_product(t_matrix *a, t_matrix *b)
 
 	if (!a || !b)
 	{
-		dprintf(1, "vector product Error input\n");
 		return (NULL);
 	}
 	if (MIN(a->x * a->y, b->x * b->y) < 3

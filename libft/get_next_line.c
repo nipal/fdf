@@ -6,7 +6,7 @@
 /*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/05 15:02:25 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/09/27 08:41:29 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/10/23 04:48:44 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,5 +111,5 @@ int			get_next_line(int fd, char **line)
 	*line = str;
 	if (ret < 0)
 		return (-1);
-	return (*line != NULL && ((ret > 0) || (ft_strlen(*line) > 0)));
+	return (*line != NULL && ((ret > 0) && (ft_strlen(*line) > 0)));
 }
