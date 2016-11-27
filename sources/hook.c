@@ -47,14 +47,16 @@ void	loop_hook_begin(t_env *e)
 
 void	actu_anime_torus(t_env *e)
 {
+	int			yolo_compile;
 	static	int		sap = 1;
 	static	double	a = 0.00000015;
 
+	yolo_compile = 0;
 	if (e->key.switch_anime == 0)
 		sap = 0;
 	else if (e->key.switch_anime == 1 && sap == 0 && (e->increm *= -1)
 		&& (sap = 1))
-		;
+		yolo_compile = 0;
 	e->view += (e->key.view == 1 && e->view_sw == 0) ? e->view_sw = 1 : 0;
 	e->view_sw = (e->key.view == 0 && e->view_sw == 1) ? 0 : e->view_sw;
 	e->draw += (e->key.draw == 1 && e->draw_sw == 0) ? e->draw_sw = 1 : 0;
@@ -70,6 +72,7 @@ void	actu_anime_torus(t_env *e)
 	e->phi1 = 2 * M_PI / e->k;
 	e->phi2 = (e->view % 2 == 0) ? 2 * M_PI
 		/ e->k : (M_PI * (1 + e->advence)) / e->k;
+	sap += yolo_compile;
 }
 
 int		loop_hook(t_env *e)

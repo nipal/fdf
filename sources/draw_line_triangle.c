@@ -97,7 +97,7 @@ t_matrix	*init_mat_line2(t_matrix *pt_color, t_matrix *pt3, t_matrix *c3)
 	matrix_scalar_product(diff = matrix_sub(cl_inter, c3), 1 / mat_l->m[NORME]);
 	ft_memmove(mat_l->m + 9, diff->m, sizeof(double) * 3);
 	if (matrix_free(&diff) && matrix_free(&cl_inter) && matrix_free(&pt_inter))
-		;
+		return (mat_l);
 	return (mat_l);
 }
 
@@ -124,7 +124,7 @@ int			draw_triangle(t_env *e, t_matrix *mat_line,
 		if ((mat_line2 = init_mat_line2(print, pt3, c3))
 			&& draw_line(e, mat_line2) > -1 && matrix_free(&mat_line2)
 			&& matrix_free(&org) && (org = print))
-			;
+			i += 0;
 	}
 	matrix_free(&diff);
 	matrix_free(&print);
