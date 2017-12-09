@@ -32,28 +32,44 @@ SRC		= 	main.c \
 
 OBJ		= $(SRC:.c=.o)
 
+LIB_DIR		= -L ../libft -L ../c_maths
+LIB_NAME	=  -lmlx -lc_maths -lft -lm  #-lX11 -lXext
+
+# //////////////// cross platforme
+OS	:=	$(shell uname -s)
+PROC	:= $(shell uname -p)
+
+ifeq "$(OS)"	"Linux"
+  LIB_DIR	+=  -L ../minilibx
+  LIB_NAME	+=  -lX11 -lXext
+  FRAMEWORK	= 
+else ifeq "$(OS)" "Darwin"
+  FRAMEWORK	= -framework OpenGl -framework AppKit
+  LIB_DIR	+=  -L ../minilibx_macos
+endif
+
+# ////////////////
+
+
+
 FLAGS = -Wall -Wextra -Werror -Ofast
-
 FLAGS-DEBUG = -g -Wall -Wextra -Werror
-
 all: $(NAME)
 
 $(NAME): $(OBJ)
-		gcc -o $(NAME) $(FLAGS) $(OBJ) -L ../libft/ -lft \
-		-L ../c_maths -lc_maths \
-		-lmlx -framework OpenGL -framework AppKit
-	#	-L /usr/lib/ -lmlx -lm -lX11 -lXext
+ifeq "$(OS)" "Darwin"
+		@$(CC) $(CFLAGS) -o $(NAME)  $(LIB_DIR)  $(FRAMEWORK) $(LIB_NAME) $(OBJ)
+else ifeq "$(OS)" "Linux"
+		@$(CC) $(CFLAGS) -o $(NAME)  $(LIB_DIR)  $(FRAMEWORK) $(OBJ) $(LIB_NAME)
+endif
 
 
 $(OBJ):
 	gcc -c $(FLAGS) $(SRC) -I ../includes -I ../c_maths# -I /usr/includes/
-
 clean:
 	rm -f $(OBJ)
-
 fclean: clean
 	rm -f $(NAME)
-
 re: fclean all
 
 gdb: fclean
